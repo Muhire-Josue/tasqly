@@ -35,16 +35,23 @@ export default defineConfig([
       },
     },
     plugins: {
-      // Cast to any to avoid TS complaining about extra `configs.flat` shape
       "react-hooks": reactHooks as any,
       "react-native": reactNative as any,
+    },
+    settings: {
+      react: {
+        version: "detect",
+      },
     },
     rules: {
       // React hooks safety
       "react-hooks/rules-of-hooks": "error",
       "react-hooks/exhaustive-deps": "warn",
 
-      // From your earlier config
+      // Modern JSX transform – no need to import React in scope
+      "react/react-in-jsx-scope": "off",
+
+      // From your generated config
       complexity: ["error", 10],
       "no-await-in-loop": "warn",
       "no-eval": "error",

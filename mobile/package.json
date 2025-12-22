@@ -6,7 +6,10 @@
     "start": "expo start",
     "android": "expo start --android",
     "ios": "expo start --ios",
-    "web": "expo start --web"
+    "web": "expo start --web",
+    "lint": "eslint . --ext .ts,.tsx",
+    "typecheck": "tsc --noEmit",
+    "format:check": "prettier \"src/**/*.{ts,tsx,js,jsx,json}\" --check"
   },
   "dependencies": {
     "expo": "~54.0.30",
