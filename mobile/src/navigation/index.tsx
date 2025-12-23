@@ -3,6 +3,7 @@ import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import SplashScreen from "../screens/splash";
 import SignUp from "../screens/auth/signup";
+import SignIn from "../screens/auth/signin";
 
 const Stack = createNativeStackNavigator();
 
@@ -26,6 +27,11 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="signup"
           component={SignUp}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="signin"
+          component={SignIn}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
