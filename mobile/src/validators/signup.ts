@@ -3,7 +3,7 @@ export const validateSignUpForm = (
   email: string,
   password: string,
   confirmPassword: string,
-  agreedToTerms: boolean,
+  agreedToTerms: boolean
 ): string[] => [
   ...validateName(name),
   ...validateEmail(email),
@@ -33,11 +33,14 @@ const validateEmail = (email: string): string[] => {
 
 const validatePassword = (password: string, confirm: string): string[] => {
   const errors: string[] = [];
-  const passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
+  const passwordRegex =
+    /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A-Za-z\d@$!%*?&_-]{8,}$/;
 
   if (!password) errors.push("Password is required");
   else if (!passwordRegex.test(password))
-    errors.push("Password must be 8+ chars, include letter & number");
+    errors.push(
+      "Password must be 8+ characters, include uppercase, digit and symbol"
+    );
 
   if (!confirm) errors.push("Please confirm your password");
   else if (confirm !== password) errors.push("Passwords do not match");
