@@ -2,11 +2,7 @@ name: CI
 
 on:
   push:
-    branches:
-      - "**"
   pull_request:
-    branches:
-      - "**"
 
 jobs:
   build:
@@ -25,13 +21,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          cache: yarn
+          cache-dependency-path: mobile/yarn.lock
 
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Typecheck
-        run: npm run typecheck
+        run: yarn typecheck
 
   quality:
     name: Lint & Format
@@ -50,13 +47,14 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
+          cache: yarn
+          cache-dependency-path: mobile/yarn.lock
 
       - name: Install dependencies
-        run: npm ci
+        run: yarn install --frozen-lockfile
 
       - name: Lint
-        run: npm run lint
+        run: yarn lint
 
       - name: Check formatting
-        run: npm run format:check
+        run: yarn format:check
