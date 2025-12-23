@@ -1,8 +1,10 @@
+import React, { useState } from "react";
 import { View, Text } from "react-native";
 import styles from "./styles";
 import { TextInput } from "react-native-paper";
 
 const SignUp: React.FC = () => {
+  const [hidden, setHidden] = useState<boolean>(true);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create Account</Text>
@@ -24,6 +26,7 @@ const SignUp: React.FC = () => {
           activeUnderlineColor="transparent"
           left={<TextInput.Icon icon="account" />}
         />
+
         <Text style={styles.label}>Email</Text>
         <TextInput
           // value={value}
@@ -41,6 +44,28 @@ const SignUp: React.FC = () => {
           underlineColor="transparent"
           activeUnderlineColor="transparent"
           left={<TextInput.Icon icon="email" />}
+        />
+
+        <Text style={styles.label}>Password</Text>
+
+        <TextInput
+          placeholder="Enter your password"
+          mode="outlined"
+          outlineColor="#CCC9C9"
+          activeOutlineColor="#CCC9C9"
+          style={styles.input}
+          contentStyle={styles.inputContent}
+          secureTextEntry={hidden}
+          autoCapitalize="none"
+          autoComplete="password"
+          textContentType="password"
+          left={<TextInput.Icon icon="lock" />}
+          right={
+            <TextInput.Icon
+              icon={hidden ? "eye-off" : "eye"}
+              onPress={() => setHidden(!hidden)}
+            />
+          }
         />
       </View>
     </View>
