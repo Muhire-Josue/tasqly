@@ -6,7 +6,7 @@ const App: React.FC = () => {
   return (
     <>
       <Navigations />
-      <FlashMessage position="top" duration={4000} />
+      <FlashMessage position="top" duration={4500} />
     </>
   );
 };
