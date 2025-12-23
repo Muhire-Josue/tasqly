@@ -134,7 +134,13 @@ const SignUp: React.FC = () => {
           <Text style={styles.separatorText}>Or sign up with</Text>
           <View style={styles.separatorLine} />
         </View>
-        <Pressable style={styles.googleBtn} onPress={() => {}}>
+        <Pressable
+          onPress={() => {}}
+          style={({ pressed }) => [
+            styles.googleBtn,
+            pressed && styles.googleBtnPressed,
+          ]}
+        >
           <Image source={GoogleLogo} style={styles.googleIcon} />
           <Text style={styles.googleText}>Google</Text>
         </Pressable>

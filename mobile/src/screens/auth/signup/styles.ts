@@ -123,6 +123,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 25,
   },
+  googleBtnPressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.98 }],
+  },
 });
 
 export default styles;
