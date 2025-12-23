@@ -10,21 +10,16 @@ import reactNative from "eslint-plugin-react-native";
 import { defineConfig } from "eslint/config";
 
 export default defineConfig([
-  // 1) Global ignores so ESLint doesn’t crawl junk
   {
     ignores: ["node_modules", "dist", "build", ".expo"],
   },
 
-  // 2) Base JS rules
   js.configs.recommended,
 
-  // 3) TypeScript recommended rules
   ...tseslint.configs.recommended,
 
-  // 4) React recommended rules (flat config)
   reactPlugin.configs.flat.recommended,
 
-  // 5) Project-specific tweaks
   {
     files: ["**/*.{js,mjs,cjs,ts,mts,cts,jsx,tsx}"],
     languageOptions: {
