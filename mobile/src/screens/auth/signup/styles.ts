@@ -28,6 +28,7 @@ const styles = StyleSheet.create({
   input: {
     backgroundColor: "#FFFFFF",
     borderRadius: 15,
+    marginBottom: 16,
   },
   inputContent: {
     paddingVertical: 6,

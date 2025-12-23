@@ -24,6 +24,24 @@ const SignUp: React.FC = () => {
           activeUnderlineColor="transparent"
           left={<TextInput.Icon icon="account" />}
         />
+        <Text style={styles.label}>Email</Text>
+        <TextInput
+          // value={value}
+          // onChangeText={onChangeText}
+          keyboardType="email-address"
+          autoCapitalize="none"
+          autoComplete="email"
+          textContentType="emailAddress"
+          placeholder="Ex: email@example.com"
+          mode="outlined"
+          outlineColor="#CCC9C9"
+          activeOutlineColor="#CCC9C9"
+          style={styles.input}
+          contentStyle={styles.inputContent}
+          underlineColor="transparent"
+          activeUnderlineColor="transparent"
+          left={<TextInput.Icon icon="email" />}
+        />
       </View>
     </View>
   );
