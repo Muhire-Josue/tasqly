@@ -1,7 +1,8 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Index from "../screens/splash";
+import SplashScreen from "../screens/splash";
+import SignUp from "../screens/auth/signup";
 
 const Stack = createNativeStackNavigator();
 
@@ -11,9 +12,10 @@ const Navigation: React.FC = () => {
       <Stack.Navigator>
         <Stack.Screen
           name="splashScreen"
-          component={Index}
+          component={SplashScreen}
           options={{ headerShown: false }}
         />
+        <Stack.Screen name="signup" component={SignUp} />
       </Stack.Navigator>
     </NavigationContainer>
   );
