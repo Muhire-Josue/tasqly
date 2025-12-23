@@ -9,6 +9,7 @@
     "web": "expo start --web",
     "lint": "eslint . --ext .ts,.tsx",
     "typecheck": "tsc --noEmit",
+    "format": "prettier \"src/**/*.{ts,tsx,js,jsx,json}\" --write",
     "format:check": "prettier \"src/**/*.{ts,tsx,js,jsx,json}\" --check"
   },
   "dependencies": {
