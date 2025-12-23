@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import SplashScreen from "../screens/splash";
+import Splash from "../screens/splash";
 import SignUp from "../screens/auth/signup";
 import SignIn from "../screens/auth/signin";
 
@@ -20,8 +20,8 @@ const Navigation: React.FC = () => {
     <NavigationContainer theme={BgColorTheme}>
       <Stack.Navigator>
         <Stack.Screen
-          name="splashScreen"
-          component={SplashScreen}
+          name="splash"
+          component={Splash}
           options={{ headerShown: false }}
         />
         <Stack.Screen
