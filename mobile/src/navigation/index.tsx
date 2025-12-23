@@ -23,10 +23,10 @@ const Navigation: React.FC = () => {
           component={SplashScreen}
           options={{ headerShown: false }}
         />
-        <Stack.Screen 
-        name="signup" 
-        component={SignUp} 
-        options={{ headerShown: false }}
+        <Stack.Screen
+          name="signup"
+          component={SignUp}
+          options={{ headerShown: false }}
         />
       </Stack.Navigator>
     </NavigationContainer>
