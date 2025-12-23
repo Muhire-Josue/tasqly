@@ -1,15 +1,20 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
+import Checkbox from "expo-checkbox";
 import styles from "./styles";
 import { TextInput } from "react-native-paper";
+import { PRIMARY_COLOR } from "../../../theme/colors";
 
 const SignUp: React.FC = () => {
-  const [hidden, setHidden] = useState<boolean>(true);
+  const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
+  const [hiddenConfirmPassword, setHiddenConfirmPassword] =
+    useState<boolean>(true);
+  const [agreed, setAgreed] = useState(true);
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create Account</Text>
       <Text style={styles.subtitle}>
-        Fill your information bellow or register with your social account.
+        Fill your information bellow or register with your google account.
       </Text>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Name</Text>
@@ -55,18 +60,63 @@ const SignUp: React.FC = () => {
           activeOutlineColor="#CCC9C9"
           style={styles.input}
           contentStyle={styles.inputContent}
-          secureTextEntry={hidden}
+          secureTextEntry={hiddenPassword}
           autoCapitalize="none"
           autoComplete="password"
           textContentType="password"
           left={<TextInput.Icon icon="lock" />}
           right={
             <TextInput.Icon
-              icon={hidden ? "eye-off" : "eye"}
-              onPress={() => setHidden(!hidden)}
+              icon={hiddenPassword ? "eye-off" : "eye"}
+              onPress={() => setHiddenPassword(!hiddenPassword)}
             />
           }
         />
+
+        <Text style={styles.label}>Confirm Password</Text>
+
+        <TextInput
+          placeholder="Confirm your password"
+          mode="outlined"
+          outlineColor="#CCC9C9"
+          activeOutlineColor="#CCC9C9"
+          style={styles.input}
+          contentStyle={styles.inputContent}
+          secureTextEntry={hiddenConfirmPassword}
+          autoCapitalize="none"
+          autoComplete="password"
+          textContentType="password"
+          left={<TextInput.Icon icon="lock" />}
+          right={
+            <TextInput.Icon
+              icon={hiddenConfirmPassword ? "eye-off" : "eye"}
+              onPress={() => setHiddenConfirmPassword(!hiddenConfirmPassword)}
+            />
+          }
+        />
+
+        <Pressable
+          style={styles.row}
+          onPress={() => setAgreed((prev) => !prev)}
+        >
+          <Checkbox
+            value={agreed}
+            onValueChange={() => setAgreed((p) => !p)}
+            color={agreed ? PRIMARY_COLOR : undefined}
+          />
+
+          <Text style={styles.text}>
+            Agree with{" "}
+            <Text
+              style={styles.link}
+              onPress={() => {
+                // open terms screen / modal later
+              }}
+            >
+              Terms & Conditions
+            </Text>
+          </Text>
+        </Pressable>
       </View>
     </View>
   );
