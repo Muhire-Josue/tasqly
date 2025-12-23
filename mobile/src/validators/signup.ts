@@ -3,7 +3,7 @@ export const validateSignUpForm = (
   email: string,
   password: string,
   confirmPassword: string,
-  agreedToTerms: boolean
+  agreedToTerms: boolean,
 ): string[] => [
   ...validateName(name),
   ...validateEmail(email),
@@ -39,7 +39,7 @@ const validatePassword = (password: string, confirm: string): string[] => {
   if (!password) errors.push("Password is required");
   else if (!passwordRegex.test(password))
     errors.push(
-      "Password must be 8+ characters, include uppercase, digit and symbol"
+      "Password must be 8+ characters, include uppercase, digit and symbol",
     );
 
   if (!confirm) errors.push("Please confirm your password");

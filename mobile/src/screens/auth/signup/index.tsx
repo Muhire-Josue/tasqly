@@ -7,6 +7,7 @@ import { TextInput } from "react-native-paper";
 import { PRIMARY_COLOR } from "../../../theme/colors";
 import GoogleLogo from "../../../assets/google.png";
 import { validateSignUpForm } from "../../../validators/signup";
+import { useNavigateTo } from "../../../navigation/useNavigateTo";
 
 const SignUp: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
@@ -18,6 +19,8 @@ const SignUp: React.FC = () => {
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [agreed, setAgreed] = useState(false);
+
+  const navigateTo = useNavigateTo();
 
   const handleSignUp = (): void => {
     const errors = validateSignUpForm(
@@ -193,7 +196,7 @@ const SignUp: React.FC = () => {
             <Text
               style={styles.link}
               onPress={() => {
-                // open sign in screen
+                navigateTo("signin");
               }}
             >
               Sign In
