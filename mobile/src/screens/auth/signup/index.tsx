@@ -1,9 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 import Checkbox from "expo-checkbox";
 import styles from "./styles";
 import { TextInput } from "react-native-paper";
 import { PRIMARY_COLOR } from "../../../theme/colors";
+import GoogleLogo from "../../../assets/google.png";
 
 const SignUp: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
@@ -127,6 +128,29 @@ const SignUp: React.FC = () => {
         >
           <Text style={styles.buttonText}>Sign Up</Text>
         </Pressable>
+
+        <View style={styles.separatorWrapper}>
+          <View style={styles.separatorLine} />
+          <Text style={styles.separatorText}>Or sign up with</Text>
+          <View style={styles.separatorLine} />
+        </View>
+        <Pressable style={styles.googleBtn} onPress={() => {}}>
+          <Image source={GoogleLogo} style={styles.googleIcon} />
+          <Text style={styles.googleText}>Google</Text>
+        </Pressable>
+        <View style={styles.rowCenter}>
+          <Text style={styles.text}>
+            Already have an account?{" "}
+            <Text
+              style={styles.link}
+              onPress={() => {
+                // open sign in screen
+              }}
+            >
+              Sign In
+            </Text>
+          </Text>
+        </View>
       </View>
     </View>
   );
