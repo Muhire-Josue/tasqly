@@ -110,12 +110,22 @@ const SignUp: React.FC = () => {
             <Text
               style={styles.link}
               onPress={() => {
-                // open terms screen / modal later
+                // open terms screen
               }}
             >
               Terms & Conditions
             </Text>
           </Text>
+        </Pressable>
+
+        <Pressable
+          style={({ pressed }) => [
+            styles.button,
+            pressed && styles.buttonPressed,
+          ]}
+          onPress={() => {}}
+        >
+          <Text style={styles.buttonText}>Sign Up</Text>
         </Pressable>
       </View>
     </View>

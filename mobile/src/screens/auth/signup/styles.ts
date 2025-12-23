@@ -49,6 +49,31 @@ const styles = StyleSheet.create({
     color: PRIMARY_COLOR,
     textDecorationLine: "underline",
   },
+  button: {
+    marginTop: 20,
+    backgroundColor: PRIMARY_COLOR,
+    paddingVertical: 14,
+    borderRadius: 50,
+    alignItems: "center",
+    width: "100%",
+
+    // shadow
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+
+  buttonPressed: {
+    opacity: 0.8,
+  },
+
+  buttonText: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "600",
+  },
 });
 
 export default styles;
