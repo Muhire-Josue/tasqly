@@ -1,16 +1,55 @@
 import React, { useState } from "react";
 import { View, Text, Pressable, Image } from "react-native";
 import Checkbox from "expo-checkbox";
+import { showMessage } from "react-native-flash-message";
 import styles from "./styles";
 import { TextInput } from "react-native-paper";
 import { PRIMARY_COLOR } from "../../../theme/colors";
 import GoogleLogo from "../../../assets/google.png";
+import { validateSignUpForm } from "../../../validators/signup";
 
 const SignUp: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
   const [hiddenConfirmPassword, setHiddenConfirmPassword] =
     useState<boolean>(true);
-  const [agreed, setAgreed] = useState(true);
+
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [agreed, setAgreed] = useState(false);
+
+  const handleSignUp = (): void => {
+    const errors = validateSignUpForm(
+      name,
+      email,
+      password,
+      confirmPassword,
+      agreed,
+    );
+
+    if (errors.length > 0) {
+      showMessage({
+        message: errors[0],
+        type: "danger",
+        icon: "danger",
+      });
+      return;
+    }
+
+    showMessage({
+      message: "Account created successfully",
+      type: "success",
+      icon: "success",
+    });
+    // hard reset
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setAgreed(false);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Create Account</Text>
@@ -20,8 +59,8 @@ const SignUp: React.FC = () => {
       <View style={styles.wrapper}>
         <Text style={styles.label}>Name</Text>
         <TextInput
-          // value={value}
-          // onChangeText={onChangeText}
+          value={name}
+          onChangeText={setName}
           placeholder="Ex: John Doe"
           mode="outlined"
           outlineColor="#CCC9C9"
@@ -35,8 +74,8 @@ const SignUp: React.FC = () => {
 
         <Text style={styles.label}>Email</Text>
         <TextInput
-          // value={value}
-          // onChangeText={onChangeText}
+          value={email}
+          onChangeText={setEmail}
           keyboardType="email-address"
           autoCapitalize="none"
           autoComplete="email"
@@ -55,6 +94,8 @@ const SignUp: React.FC = () => {
         <Text style={styles.label}>Password</Text>
 
         <TextInput
+          value={password}
+          onChangeText={setPassword}
           placeholder="Enter your password"
           mode="outlined"
           outlineColor="#CCC9C9"
@@ -77,6 +118,8 @@ const SignUp: React.FC = () => {
         <Text style={styles.label}>Confirm Password</Text>
 
         <TextInput
+          value={confirmPassword}
+          onChangeText={setConfirmPassword}
           placeholder="Confirm your password"
           mode="outlined"
           outlineColor="#CCC9C9"
@@ -102,7 +145,7 @@ const SignUp: React.FC = () => {
         >
           <Checkbox
             value={agreed}
-            onValueChange={() => setAgreed((p) => !p)}
+            onValueChange={setAgreed}
             color={agreed ? PRIMARY_COLOR : undefined}
           />
 
@@ -124,7 +167,7 @@ const SignUp: React.FC = () => {
             styles.button,
             pressed && styles.buttonPressed,
           ]}
-          onPress={() => {}}
+          onPress={handleSignUp}
         >
           <Text style={styles.buttonText}>Sign Up</Text>
         </Pressable>
