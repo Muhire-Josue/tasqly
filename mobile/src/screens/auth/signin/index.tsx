@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View, Text, Pressable } from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 import { TextInput } from "react-native-paper";
 import styles from "./styles";
+import GoogleLogo from "../../../assets/google.png";
 
 const SignIn: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState(true);
@@ -71,6 +72,17 @@ const SignIn: React.FC = () => {
           <Text style={styles.separatorText}>Or sign in with</Text>
           <View style={styles.separatorLine} />
         </View>
+
+        <Pressable
+          onPress={() => {}}
+          style={({ pressed }) => [
+            styles.googleBtn,
+            pressed && styles.googleBtnPressed,
+          ]}
+        >
+          <Image source={GoogleLogo} style={styles.googleIcon} />
+          <Text style={styles.googleText}>Google</Text>
+        </Pressable>
       </View>
     </View>
   );

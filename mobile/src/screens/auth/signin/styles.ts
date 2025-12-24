@@ -65,7 +65,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 20,
-    marginTop: 40,
+    marginTop: 35,
+    marginBottom: 35,
   },
 
   separatorLine: {
@@ -78,6 +79,37 @@ const styles = StyleSheet.create({
     marginHorizontal: 10,
     color: "#777",
     fontSize: 14,
+  },
+  googleBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 12,
+    borderRadius: 50,
+    width: "100%",
+
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 6,
+    elevation: 5,
+  },
+
+  googleIcon: {
+    width: 35,
+    height: 35,
+    marginRight: 10,
+  },
+
+  googleText: {
+    fontSize: 16,
+    color: "#000",
+    fontWeight: "600",
+  },
+  googleBtnPressed: {
+    opacity: 0.7,
+    transform: [{ scale: 0.98 }],
   },
 });
 
