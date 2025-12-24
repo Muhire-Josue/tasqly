@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { PRIMARY_COLOR } from "../../../theme/colors";
 const styles = StyleSheet.create({
   container: {
     marginTop: "20%",
@@ -35,6 +36,30 @@ const styles = StyleSheet.create({
   inputContent: {
     paddingVertical: 6,
     height: 48,
+  },
+  button: {
+    marginTop: 20,
+    backgroundColor: PRIMARY_COLOR,
+    paddingVertical: 14,
+    borderRadius: 50,
+    alignItems: "center",
+    width: "100%",
+
+    // shadow
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  buttonPressed: {
+    opacity: 0.8,
+  },
+
+  buttonText: {
+    color: "#fff",
+    fontSize: 20,
+    fontWeight: "600",
   },
 });
 

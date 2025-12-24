@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { TextInput } from "react-native-paper";
 import styles from "./styles";
 
@@ -55,6 +55,16 @@ const SignIn: React.FC = () => {
             />
           }
         />
+
+        <Pressable
+          style={({ pressed }) => [
+            styles.button,
+            pressed && styles.buttonPressed,
+          ]}
+          onPress={() => {}}
+        >
+          <Text style={styles.buttonText}>Sign In</Text>
+        </Pressable>
       </View>
     </View>
   );
