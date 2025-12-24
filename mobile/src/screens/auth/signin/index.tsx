@@ -65,6 +65,12 @@ const SignIn: React.FC = () => {
         >
           <Text style={styles.buttonText}>Sign In</Text>
         </Pressable>
+
+        <View style={styles.separatorWrapper}>
+          <View style={styles.separatorLine} />
+          <Text style={styles.separatorText}>Or sign in with</Text>
+          <View style={styles.separatorLine} />
+        </View>
       </View>
     </View>
   );

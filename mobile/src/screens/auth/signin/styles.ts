@@ -61,6 +61,24 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "600",
   },
+  separatorWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 20,
+    marginTop: 40,
+  },
+
+  separatorLine: {
+    flex: 1,
+    height: 1,
+    backgroundColor: "#BDBDBD",
+  },
+
+  separatorText: {
+    marginHorizontal: 10,
+    color: "#777",
+    fontSize: 14,
+  },
 });
 
 export default styles;
