@@ -10,7 +10,7 @@ import { validateSignUpForm } from "../../../validators/signup";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
 
 const SignUp: React.FC = () => {
-  const [hiddenPassword, setHiddenPassword] = useState<boolean>(true);
+  const [hiddenPassword, setHiddenPassword] = useState(true);
   const [hiddenConfirmPassword, setHiddenConfirmPassword] =
     useState<boolean>(true);
 
@@ -64,7 +64,7 @@ const SignUp: React.FC = () => {
         <TextInput
           value={name}
           onChangeText={setName}
-          placeholder="Ex: John Doe"
+          placeholder="Enter your full name"
           mode="outlined"
           outlineColor="#CCC9C9"
           activeOutlineColor="#CCC9C9"
@@ -83,7 +83,7 @@ const SignUp: React.FC = () => {
           autoCapitalize="none"
           autoComplete="email"
           textContentType="emailAddress"
-          placeholder="Ex: email@example.com"
+          placeholder="Enter your email"
           mode="outlined"
           outlineColor="#CCC9C9"
           activeOutlineColor="#CCC9C9"
