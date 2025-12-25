@@ -85,6 +85,18 @@ const SignIn: React.FC = () => {
         />
 
         <Pressable
+          onPress={() => {}}
+          hitSlop={8}
+          style={({ pressed }) => [
+            styles.forgotPressable,
+            pressed && styles.forgotPressablePressed,
+          ]}
+          //  style={styles.forgotWrapper}
+        >
+          <Text style={styles.forgotText}>Forgot Password?</Text>
+        </Pressable>
+
+        <Pressable
           style={({ pressed }) => [
             styles.button,
             pressed && styles.buttonPressed,

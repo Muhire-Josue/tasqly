@@ -125,6 +125,22 @@ const styles = StyleSheet.create({
     color: PRIMARY_COLOR,
     textDecorationLine: "underline",
   },
+  forgotPressable: {
+    alignSelf: "flex-end",
+    marginTop: 8,
+    marginBottom: 16,
+  },
+
+  forgotPressablePressed: {
+    opacity: 0.6,
+  },
+
+  forgotText: {
+    color: PRIMARY_COLOR,
+    textDecorationLine: "underline",
+    fontSize: 14,
+    fontWeight: "500",
+  },
 });
 
 export default styles;
