@@ -11,7 +11,7 @@ const ResetPassword: React.FC = () => {
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
-  
+
   const navigateTo = useNavigateTo();
 
   const handleResetPassword = (): void => {
@@ -130,7 +130,7 @@ const ResetPassword: React.FC = () => {
             <Text
               style={styles.bottomLink}
               onPress={() => {
-                navigateTo("signin")
+                navigateTo("signin");
               }}
             >
               Sign in
