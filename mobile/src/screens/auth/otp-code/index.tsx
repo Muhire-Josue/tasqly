@@ -1,5 +1,5 @@
 import React, { useRef, useState } from "react";
-import { View, Text, TextInput } from "react-native";
+import { View, Text, TextInput, Pressable } from "react-native";
 import styles from "./styles";
 
 const OtpCode: React.FC = () => {
@@ -37,6 +37,7 @@ const OtpCode: React.FC = () => {
         {otp.map((digit, index) => (
           <TextInput
             key={index}
+            placeholder="-"
             ref={inputs[index]}
             value={digit}
             onChangeText={(value) =>
@@ -48,6 +49,12 @@ const OtpCode: React.FC = () => {
             textAlign="center"
           />
         ))}
+      </View>
+      <View style={styles.resendWrapper}>
+        <Text style={styles.resendLabel}>Didn&apos;t receive the code?</Text>
+        <Pressable style={styles.resendPressable}>
+          <Text style={styles.resendText}>Resend Code</Text>
+        </Pressable>
       </View>
     </View>
   );

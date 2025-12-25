@@ -46,6 +46,69 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     color: "#333",
   },
+  resendWrapper: {
+    marginTop: 24,
+    alignItems: "center",
+  },
+
+  resendLabel: {
+    fontSize: 14,
+    color: "#9A9A9A",
+    marginBottom: 4,
+  },
+
+  resendPressable: {},
+
+  resendPressablePressed: {
+    opacity: 0.7,
+  },
+
+  resendText: {
+    fontSize: 15,
+    color: PRIMARY_COLOR,
+    textDecorationLine: "underline",
+    fontWeight: "500",
+  },
+
+  verifyButton: {
+    marginTop: 24,
+    width: "100%",
+    backgroundColor: PRIMARY_COLOR,
+    borderRadius: 50,
+    paddingVertical: 14,
+    alignItems: "center",
+    justifyContent: "center",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 3 },
+    shadowOpacity: 0.2,
+    shadowRadius: 4,
+    elevation: 4,
+  },
+
+  verifyButtonPressed: {
+    opacity: 0.85,
+  },
+
+  verifyButtonText: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "700",
+  },
+
+  bottomTextWrapper: {
+    marginTop: 24,
+    alignItems: "center",
+  },
+
+  bottomText: {
+    fontSize: 15,
+    color: "#333333",
+  },
+
+  bottomLink: {
+    color: PRIMARY_COLOR,
+    textDecorationLine: "underline",
+  },
 });
 
 export default styles;
