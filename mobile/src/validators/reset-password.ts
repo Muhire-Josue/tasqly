@@ -1,21 +1,15 @@
 import {
   validateConfirmPassword,
   validateEmail,
-  validateName,
   validatePassword,
-  validateTerms,
 } from "./auth-forms";
 
-export const validateSignUpForm = (
-  name: string,
+export const validateResetPasswordForm = (
   email: string,
   password: string,
   confirmPassword: string,
-  agreedToTerms: boolean,
 ): string[] => [
-  ...validateName(name),
   ...validateEmail(email),
   ...validatePassword(password),
   ...validateConfirmPassword(password, confirmPassword),
-  ...validateTerms(agreedToTerms),
 ];
