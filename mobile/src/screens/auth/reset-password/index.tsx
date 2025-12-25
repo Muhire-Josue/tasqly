@@ -1,21 +1,25 @@
 import React, { useState } from "react";
-import { View, Text, Pressable, Image } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { TextInput } from "react-native-paper";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
 import styles from "./styles";
-import GoogleLogo from "../../../assets/google.png";
+import FontAwesome from "@expo/vector-icons/build/FontAwesome";
+import { validateResetPasswordForm } from "../../../validators/reset-password";
 import { showMessage } from "react-native-flash-message";
-import { validateSignInForm } from "../../../validators/signin";
-
-const SignIn: React.FC = () => {
+const ResetPassword: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState(true);
   const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
 
   const navigateTo = useNavigateTo();
 
-  const handleSignIn = (): void => {
-    const errors = validateSignInForm(email, password);
+  const handleResetPassword = (): void => {
+    const errors = validateResetPasswordForm(
+      email,
+      newPassword,
+      confirmNewPassword,
+    );
 
     if (errors.length > 0) {
       showMessage({
@@ -27,19 +31,20 @@ const SignIn: React.FC = () => {
     }
 
     showMessage({
-      message: "Signed in successfully",
+      message: "Password reset successfully",
       type: "success",
       icon: "success",
     });
     // hard reset
     setEmail("");
-    setPassword("");
+    setNewPassword("");
+    setConfirmNewPassword("");
   };
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Sign In</Text>
-      <Text style={styles.subtitle}>Hi! Welcome back 😊</Text>
+      <Text style={styles.title}>Reset Password</Text>
+      <Text style={styles.subtitle}>Reset your password</Text>
       <View style={styles.wrapper}>
         <Text style={styles.label}>Email</Text>
         <TextInput
@@ -60,12 +65,36 @@ const SignIn: React.FC = () => {
           left={<TextInput.Icon icon="email" />}
         />
 
-        <Text style={styles.label}>Password</Text>
+        <Text style={styles.label}>New Password</Text>
 
         <TextInput
-          value={password}
-          onChangeText={setPassword}
-          placeholder="Enter your password"
+          value={newPassword}
+          onChangeText={setNewPassword}
+          placeholder="Enter your new password"
+          mode="outlined"
+          outlineColor="#CCC9C9"
+          activeOutlineColor="#CCC9C9"
+          style={styles.input}
+          contentStyle={styles.inputContent}
+          secureTextEntry={hiddenPassword}
+          autoCapitalize="none"
+          autoComplete="password"
+          textContentType="password"
+          left={<TextInput.Icon icon="lock" />}
+          right={
+            <TextInput.Icon
+              icon={hiddenPassword ? "eye-off" : "eye"}
+              onPress={() => setHiddenPassword(!hiddenPassword)}
+            />
+          }
+        />
+
+        <Text style={styles.label}>Confirm New Password</Text>
+
+        <TextInput
+          value={confirmNewPassword}
+          onChangeText={setConfirmNewPassword}
+          placeholder="Confirm your new password"
           mode="outlined"
           outlineColor="#CCC9C9"
           activeOutlineColor="#CCC9C9"
@@ -85,56 +114,26 @@ const SignIn: React.FC = () => {
         />
 
         <Pressable
-          onPress={() => {
-            navigateTo("reset-password");
-          }}
-          hitSlop={8}
-          style={({ pressed }) => [
-            styles.forgotPressable,
-            pressed && styles.forgotPressablePressed,
-          ]}
-          //  style={styles.forgotWrapper}
-        >
-          <Text style={styles.forgotText}>Forgot Password?</Text>
-        </Pressable>
-
-        <Pressable
           style={({ pressed }) => [
             styles.button,
             pressed && styles.buttonPressed,
           ]}
-          onPress={handleSignIn}
+          onPress={handleResetPassword}
         >
-          <Text style={styles.buttonText}>Sign In</Text>
+          <FontAwesome name="send" size={22} color="#FFFFFF" />
+          <Text style={styles.buttonText}>Reset</Text>
         </Pressable>
 
-        <View style={styles.separatorWrapper}>
-          <View style={styles.separatorLine} />
-          <Text style={styles.separatorText}>Or sign in with</Text>
-          <View style={styles.separatorLine} />
-        </View>
-
-        <Pressable
-          onPress={() => {}}
-          style={({ pressed }) => [
-            styles.googleBtn,
-            pressed && styles.googleBtnPressed,
-          ]}
-        >
-          <Image source={GoogleLogo} style={styles.googleIcon} />
-          <Text style={styles.googleText}>Google</Text>
-        </Pressable>
-
-        <View style={styles.rowCenter}>
-          <Text style={styles.text}>
-            Don&apos;t have an account?{"  "}
+        <View style={styles.bottomTextWrapper}>
+          <Text style={styles.bottomText}>
+            Already have an account?{" "}
             <Text
-              style={styles.link}
+              style={styles.bottomLink}
               onPress={() => {
-                navigateTo("signup");
+                navigateTo("signin");
               }}
             >
-              Sign Up
+              Sign in
             </Text>
           </Text>
         </View>
@@ -142,4 +141,5 @@ const SignIn: React.FC = () => {
     </View>
   );
 };
-export default SignIn;
+
+export default ResetPassword;
