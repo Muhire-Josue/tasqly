@@ -39,6 +39,7 @@ const ResetPassword: React.FC = () => {
     setEmail("");
     setNewPassword("");
     setConfirmNewPassword("");
+    navigateTo("otp-code");
   };
 
   return (
