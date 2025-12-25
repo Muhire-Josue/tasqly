@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Pressable, Image } from "react-native";
 import { TextInput } from "react-native-paper";
+import { useNavigateTo } from "../../../navigation/useNavigateTo";
 import styles from "./styles";
 import GoogleLogo from "../../../assets/google.png";
 
@@ -8,6 +9,8 @@ const SignIn: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState(true);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
+  const navigateTo = useNavigateTo();
 
   return (
     <View style={styles.container}>
@@ -83,6 +86,20 @@ const SignIn: React.FC = () => {
           <Image source={GoogleLogo} style={styles.googleIcon} />
           <Text style={styles.googleText}>Google</Text>
         </Pressable>
+
+        <View style={styles.rowCenter}>
+          <Text style={styles.text}>
+            Don&apos;t have an account?{"  "}
+            <Text
+              style={styles.link}
+              onPress={() => {
+                navigateTo("signup");
+              }}
+            >
+              Sign Up
+            </Text>
+          </Text>
+        </View>
       </View>
     </View>
   );

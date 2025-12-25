@@ -111,6 +111,21 @@ const styles = StyleSheet.create({
     opacity: 0.7,
     transform: [{ scale: 0.98 }],
   },
+  rowCenter: {
+    flexDirection: "row",
+    justifyContent: "center",
+    marginTop: 25,
+    marginBottom: 25,
+  },
+  text: {
+    fontSize: 14,
+    color: "#000",
+    marginLeft: 10,
+  },
+  link: {
+    color: PRIMARY_COLOR,
+    textDecorationLine: "underline",
+  },
 });
 
 export default styles;
