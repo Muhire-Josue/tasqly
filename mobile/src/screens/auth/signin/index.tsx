@@ -4,6 +4,8 @@ import { TextInput } from "react-native-paper";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
 import styles from "./styles";
 import GoogleLogo from "../../../assets/google.png";
+import { showMessage } from "react-native-flash-message";
+import { validateSignInForm } from "../../../validators/signin";
 
 const SignIn: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState(true);
@@ -11,6 +13,28 @@ const SignIn: React.FC = () => {
   const [password, setPassword] = useState("");
 
   const navigateTo = useNavigateTo();
+
+  const handleSignIn = (): void => {
+    const errors = validateSignInForm(email, password);
+
+    if (errors.length > 0) {
+      showMessage({
+        message: errors[0],
+        type: "danger",
+        icon: "danger",
+      });
+      return;
+    }
+
+    showMessage({
+      message: "Signed in successfully",
+      type: "success",
+      icon: "success",
+    });
+    // hard reset
+    setEmail("");
+    setPassword("");
+  };
 
   return (
     <View style={styles.container}>
@@ -65,7 +89,7 @@ const SignIn: React.FC = () => {
             styles.button,
             pressed && styles.buttonPressed,
           ]}
-          onPress={() => {}}
+          onPress={handleSignIn}
         >
           <Text style={styles.buttonText}>Sign In</Text>
         </Pressable>
