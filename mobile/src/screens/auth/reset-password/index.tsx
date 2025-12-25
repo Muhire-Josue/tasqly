@@ -3,11 +3,41 @@ import { View, Text, Pressable } from "react-native";
 import { TextInput } from "react-native-paper";
 import styles from "./styles";
 import FontAwesome from "@expo/vector-icons/build/FontAwesome";
+import { validateResetPasswordForm } from "../../../validators/reset-password";
+import { showMessage } from "react-native-flash-message";
 const ResetPassword: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState(true);
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+
+  const handleResetPassword = (): void => {
+    const errors = validateResetPasswordForm(
+      email,
+      newPassword,
+      confirmNewPassword,
+    );
+
+    if (errors.length > 0) {
+      showMessage({
+        message: errors[0],
+        type: "danger",
+        icon: "danger",
+      });
+      return;
+    }
+
+    showMessage({
+      message: "Password reset successfully",
+      type: "success",
+      icon: "success",
+    });
+    // hard reset
+    setEmail("");
+    setNewPassword("");
+    setConfirmNewPassword("");
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Reset Password</Text>
@@ -85,9 +115,7 @@ const ResetPassword: React.FC = () => {
             styles.button,
             pressed && styles.buttonPressed,
           ]}
-          onPress={() => {
-            // TODO: send action
-          }}
+          onPress={handleResetPassword}
         >
           <FontAwesome name="send" size={22} color="#FFFFFF" />
           <Text style={styles.buttonText}>Reset</Text>
