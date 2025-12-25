@@ -7,11 +7,18 @@ const styles = StyleSheet.create({
     paddingTop: 40,
     paddingHorizontal: 24,
   },
+
   headerRow: {
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 18,
+  },
+
+  userRow: {
+    flexDirection: "row",
+    alignItems: "center",
     gap: 12,
-    marginBottom: 20,
   },
 
   avatar: {
@@ -23,6 +30,34 @@ const styles = StyleSheet.create({
   greetingText: {
     fontSize: 22,
     color: "#000",
+  },
+
+  addButton: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    borderWidth: 2,
+    borderColor: "#000",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  addButtonPressed: {
+    opacity: 0.6,
+  },
+
+  homeRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginBottom: 20,
+    marginLeft: 10,
+  },
+
+  homeText: {
+    fontSize: 20,
+    color: "#000",
+    fontWeight: "500",
   },
 });
 

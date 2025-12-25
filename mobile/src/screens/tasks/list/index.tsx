@@ -1,5 +1,7 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import FontAwesome from "@expo/vector-icons/build/FontAwesome";
+import Ionicons from "@expo/vector-icons/build/Ionicons";
+import { View, Text, Image, Pressable } from "react-native";
 import styles from "./styles";
 import ben from "../../../assets/ben.jpg";
 
@@ -7,9 +9,23 @@ const TaskList: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.headerRow}>
-        <Image source={ben} style={styles.avatar} />
+        <View style={styles.userRow}>
+          <Image source={ben} style={styles.avatar} />
+          <Text style={styles.greetingText}>Hi John</Text>
+        </View>
 
-        <Text style={styles.greetingText}>Hi John</Text>
+        <Pressable
+          style={({ pressed }) => [
+            styles.addButton,
+            pressed && styles.addButtonPressed,
+          ]}
+        >
+          <Ionicons name="add" size={36} color="#000" />
+        </Pressable>
+      </View>
+      <View style={styles.homeRow}>
+        <FontAwesome name="home" size={30} color="#000" />
+        <Text style={styles.homeText}>The Smith&apos;s Home</Text>
       </View>
     </View>
   );
