@@ -63,6 +63,21 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontWeight: "700",
   },
+  bottomTextWrapper: {
+    marginTop: 22,
+    alignItems: "center",
+  },
+
+  bottomText: {
+    fontSize: 15,
+    color: "#333",
+  },
+
+  bottomLink: {
+    color: PRIMARY_COLOR,
+    textDecorationLine: "underline",
+    // fontWeight: "500",
+  },
 });
 
 export default styles;

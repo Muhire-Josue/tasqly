@@ -120,6 +120,21 @@ const ResetPassword: React.FC = () => {
           <FontAwesome name="send" size={22} color="#FFFFFF" />
           <Text style={styles.buttonText}>Reset</Text>
         </Pressable>
+
+        <View style={styles.bottomTextWrapper}>
+          <Text style={styles.bottomText}>
+            Already have an account?{" "}
+            <Text
+              style={styles.bottomLink}
+              onPress={() => {
+                // navigation goes here
+                // navigateTo("signin")
+              }}
+            >
+              Sign in
+            </Text>
+          </Text>
+        </View>
       </View>
     </View>
   );
