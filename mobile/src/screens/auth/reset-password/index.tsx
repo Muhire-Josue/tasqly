@@ -4,7 +4,10 @@ import { TextInput } from "react-native-paper";
 import styles from "./styles";
 import FontAwesome from "@expo/vector-icons/build/FontAwesome";
 const ResetPassword: React.FC = () => {
+  const [hiddenPassword, setHiddenPassword] = useState(true);
   const [email, setEmail] = useState("");
+  const [newPassword, setNewPassword] = useState("");
+  const [confirmNewPassword, setConfirmNewPassword] = useState("");
   return (
     <View style={styles.container}>
       <Text style={styles.title}>Reset Password</Text>
@@ -29,6 +32,54 @@ const ResetPassword: React.FC = () => {
           left={<TextInput.Icon icon="email" />}
         />
 
+        <Text style={styles.label}>New Password</Text>
+
+        <TextInput
+          value={newPassword}
+          onChangeText={setNewPassword}
+          placeholder="Enter your new password"
+          mode="outlined"
+          outlineColor="#CCC9C9"
+          activeOutlineColor="#CCC9C9"
+          style={styles.input}
+          contentStyle={styles.inputContent}
+          secureTextEntry={hiddenPassword}
+          autoCapitalize="none"
+          autoComplete="password"
+          textContentType="password"
+          left={<TextInput.Icon icon="lock" />}
+          right={
+            <TextInput.Icon
+              icon={hiddenPassword ? "eye-off" : "eye"}
+              onPress={() => setHiddenPassword(!hiddenPassword)}
+            />
+          }
+        />
+
+        <Text style={styles.label}>Confirm New Password</Text>
+
+        <TextInput
+          value={confirmNewPassword}
+          onChangeText={setConfirmNewPassword}
+          placeholder="Confirm your new password"
+          mode="outlined"
+          outlineColor="#CCC9C9"
+          activeOutlineColor="#CCC9C9"
+          style={styles.input}
+          contentStyle={styles.inputContent}
+          secureTextEntry={hiddenPassword}
+          autoCapitalize="none"
+          autoComplete="password"
+          textContentType="password"
+          left={<TextInput.Icon icon="lock" />}
+          right={
+            <TextInput.Icon
+              icon={hiddenPassword ? "eye-off" : "eye"}
+              onPress={() => setHiddenPassword(!hiddenPassword)}
+            />
+          }
+        />
+
         <Pressable
           style={({ pressed }) => [
             styles.button,
@@ -39,7 +90,7 @@ const ResetPassword: React.FC = () => {
           }}
         >
           <FontAwesome name="send" size={22} color="#FFFFFF" />
-          <Text style={styles.buttonText}>Send</Text>
+          <Text style={styles.buttonText}>Reset</Text>
         </Pressable>
       </View>
     </View>
