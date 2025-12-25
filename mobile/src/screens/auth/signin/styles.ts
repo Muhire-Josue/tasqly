@@ -65,8 +65,8 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 20,
-    marginTop: 30,
-    marginBottom: 30,
+    marginTop: 25,
+    marginBottom: 25,
   },
 
   separatorLine: {
