@@ -1,9 +1,12 @@
 import React, { useRef, useState } from "react";
 import { View, Text, TextInput, Pressable } from "react-native";
 import styles from "./styles";
+import { useNavigateTo } from "../../../navigation/useNavigateTo";
 
 const OtpCode: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
+
+  const navigateTo = useNavigateTo();
 
   const inputs = [
     useRef<TextInput>(null),
@@ -55,6 +58,33 @@ const OtpCode: React.FC = () => {
         <Pressable style={styles.resendPressable}>
           <Text style={styles.resendText}>Resend Code</Text>
         </Pressable>
+      </View>
+      <Pressable
+        style={({ pressed }) => [
+          styles.verifyButton,
+          pressed && styles.verifyButtonPressed,
+        ]}
+        onPress={() => {
+          // TODO: verify OTP using otp.join("")
+        }}
+      >
+        <Text style={styles.verifyButtonText}>Verify</Text>
+      </Pressable>
+
+      {/* ===== Already have an account? Sign in ===== */}
+      <View style={styles.bottomTextWrapper}>
+        <Text style={styles.bottomText}>
+          Already have an account?{" "}
+          <Text
+            style={styles.bottomLink}
+            onPress={() => {
+              // TODO: navigate to Sign In
+              navigateTo("signin");
+            }}
+          >
+            Sign in
+          </Text>
+        </Text>
       </View>
     </View>
   );
