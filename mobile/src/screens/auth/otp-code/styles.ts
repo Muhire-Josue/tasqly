@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   },
 
   verifyButton: {
-    marginTop: 24,
+    marginTop: "18%",
     width: "100%",
     backgroundColor: PRIMARY_COLOR,
     borderRadius: 50,
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
 
   bottomTextWrapper: {
-    marginTop: 24,
+    marginTop: 40,
     alignItems: "center",
   },
 
@@ -108,6 +108,7 @@ const styles = StyleSheet.create({
   bottomLink: {
     color: PRIMARY_COLOR,
     textDecorationLine: "underline",
+    marginBottom: "40%",
   },
 });
 
