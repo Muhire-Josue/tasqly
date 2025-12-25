@@ -5,6 +5,7 @@ import Splash from "../screens/splash";
 import SignUp from "../screens/auth/signup";
 import SignIn from "../screens/auth/signin";
 import ResetPassword from "../screens/auth/reset-password";
+import TaskList from "../screens/tasks/list";
 
 const Stack = createNativeStackNavigator();
 
@@ -38,6 +39,11 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="reset-password"
           component={ResetPassword}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="task-list"
+          component={TaskList}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
