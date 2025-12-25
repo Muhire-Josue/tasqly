@@ -4,10 +4,11 @@ import { TextInput } from "react-native-paper";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
 import styles from "./styles";
 import FontAwesome from "@expo/vector-icons/build/FontAwesome";
-import { validateResetPasswordForm } from "../../../validators/reset-password";
-import { showMessage } from "react-native-flash-message";
+// import { validateResetPasswordForm } from "../../../validators/reset-password";
+// import { showMessage } from "react-native-flash-message";
 const ResetPassword: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState(true);
+  const [hiddenConfirmPassword, setHiddenConfirmPassword] = useState(true);
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -15,30 +16,31 @@ const ResetPassword: React.FC = () => {
   const navigateTo = useNavigateTo();
 
   const handleResetPassword = (): void => {
-    const errors = validateResetPasswordForm(
-      email,
-      newPassword,
-      confirmNewPassword,
-    );
+    // const errors = validateResetPasswordForm(
+    //   email,
+    //   newPassword,
+    //   confirmNewPassword,
+    // );
 
-    if (errors.length > 0) {
-      showMessage({
-        message: errors[0],
-        type: "danger",
-        icon: "danger",
-      });
-      return;
-    }
+    // if (errors.length > 0) {
+    //   showMessage({
+    //     message: errors[0],
+    //     type: "danger",
+    //     icon: "danger",
+    //   });
+    //   return;
+    // }
 
-    showMessage({
-      message: "Password reset successfully",
-      type: "success",
-      icon: "success",
-    });
-    // hard reset
-    setEmail("");
-    setNewPassword("");
-    setConfirmNewPassword("");
+    // showMessage({
+    //   message: "Password reset successfully",
+    //   type: "success",
+    //   icon: "success",
+    // });
+    // // hard reset
+    // setEmail("");
+    // setNewPassword("");
+    // setConfirmNewPassword("");
+    navigateTo("otp-code");
   };
 
   return (
@@ -100,15 +102,15 @@ const ResetPassword: React.FC = () => {
           activeOutlineColor="#CCC9C9"
           style={styles.input}
           contentStyle={styles.inputContent}
-          secureTextEntry={hiddenPassword}
+          secureTextEntry={hiddenConfirmPassword}
           autoCapitalize="none"
           autoComplete="password"
           textContentType="password"
           left={<TextInput.Icon icon="lock" />}
           right={
             <TextInput.Icon
-              icon={hiddenPassword ? "eye-off" : "eye"}
-              onPress={() => setHiddenPassword(!hiddenPassword)}
+              icon={hiddenConfirmPassword ? "eye-off" : "eye"}
+              onPress={() => setHiddenConfirmPassword(!hiddenConfirmPassword)}
             />
           }
         />
