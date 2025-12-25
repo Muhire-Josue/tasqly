@@ -85,7 +85,9 @@ const SignIn: React.FC = () => {
         />
 
         <Pressable
-          onPress={() => {}}
+          onPress={() => {
+            navigateTo("reset-password");
+          }}
           hitSlop={8}
           style={({ pressed }) => [
             styles.forgotPressable,
