@@ -5,7 +5,7 @@ import { FontAwesome5 } from "@expo/vector-icons";
 import Spinner from "../../components/common/Spinner";
 import { useNavigateTo } from "../../navigation/useNavigateTo";
 
-const Splash: React.FC = () => {
+const Index: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const navigateTo = useNavigateTo();
   setTimeout(() => {
@@ -25,4 +25,4 @@ const Splash: React.FC = () => {
   );
 };
 
-export default Splash;
+export default Index;
