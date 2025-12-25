@@ -14,6 +14,6 @@ export const validateSignUpForm = (
 ): string[] => [
   ...validateName(name),
   ...validateEmail(email),
-  ...validatePassword(password, confirmPassword),
+  ...validatePassword(password),
   ...validateTerms(agreedToTerms),
 ];

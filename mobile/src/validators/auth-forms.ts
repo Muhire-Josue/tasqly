@@ -18,10 +18,7 @@ export const validateEmail = (email: string): string[] => {
   return errors;
 };
 
-export const validatePassword = (
-  password: string,
-  confirm: string,
-): string[] => {
+export const validatePassword = (password: string): string[] => {
   const errors: string[] = [];
   const passwordRegex =
     /^(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&_-])[A-Za-z\d@$!%*?&_-]{8,}$/;
@@ -32,9 +29,17 @@ export const validatePassword = (
       "Password must be 8+ characters, include uppercase, digit and symbol",
     );
 
+  return errors;
+};
+
+export const validateConfirmPassword = (
+  password: string,
+  confirm: string,
+): string[] => {
+  const errors: string[] = [];
+
   if (!confirm) errors.push("Please confirm your password");
   else if (confirm !== password) errors.push("Passwords do not match");
-
   return errors;
 };
 
