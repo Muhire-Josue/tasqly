@@ -39,28 +39,29 @@ const styles = StyleSheet.create({
     height: 48,
   },
   button: {
-    marginTop: 20,
-    backgroundColor: PRIMARY_COLOR,
-    paddingVertical: 14,
-    borderRadius: 50,
-    alignItems: "center",
+    marginTop: 24,
     width: "100%",
-
-    // shadow
+    backgroundColor: PRIMARY_COLOR,
+    borderRadius: 50,
+    paddingVertical: 14,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
     shadowColor: "#000",
-    shadowOffset: { width: 0, height: 4 },
+    shadowOffset: { width: 0, height: 3 },
     shadowOpacity: 0.2,
     shadowRadius: 4,
-    elevation: 5,
+    elevation: 4,
   },
   buttonPressed: {
     opacity: 0.8,
   },
 
   buttonText: {
-    color: "#fff",
-    fontSize: 20,
-    fontWeight: "600",
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "700",
   },
 });
 

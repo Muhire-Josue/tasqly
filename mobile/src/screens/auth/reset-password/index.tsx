@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, Pressable } from "react-native";
 import { TextInput } from "react-native-paper";
 import styles from "./styles";
+import FontAwesome from "@expo/vector-icons/build/FontAwesome";
 const ResetPassword: React.FC = () => {
   const [email, setEmail] = useState("");
   return (
@@ -27,6 +28,19 @@ const ResetPassword: React.FC = () => {
           activeUnderlineColor="transparent"
           left={<TextInput.Icon icon="email" />}
         />
+
+        <Pressable
+          style={({ pressed }) => [
+            styles.button,
+            pressed && styles.buttonPressed,
+          ]}
+          onPress={() => {
+            // TODO: send action
+          }}
+        >
+          <FontAwesome name="send" size={22} color="#FFFFFF" />
+          <Text style={styles.buttonText}>Send</Text>
+        </Pressable>
       </View>
     </View>
   );
