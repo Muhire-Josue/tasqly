@@ -8,6 +8,7 @@ import { validateResetPasswordForm } from "../../../validators/reset-password";
 import { showMessage } from "react-native-flash-message";
 const ResetPassword: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState(true);
+  const [hiddenConfirmPassword, setHiddenConfirmPassword] = useState(true);
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
@@ -101,15 +102,15 @@ const ResetPassword: React.FC = () => {
           activeOutlineColor="#CCC9C9"
           style={styles.input}
           contentStyle={styles.inputContent}
-          secureTextEntry={hiddenPassword}
+          secureTextEntry={hiddenConfirmPassword}
           autoCapitalize="none"
           autoComplete="password"
           textContentType="password"
           left={<TextInput.Icon icon="lock" />}
           right={
             <TextInput.Icon
-              icon={hiddenPassword ? "eye-off" : "eye"}
-              onPress={() => setHiddenPassword(!hiddenPassword)}
+              icon={hiddenConfirmPassword ? "eye-off" : "eye"}
+              onPress={() => setHiddenConfirmPassword(!hiddenConfirmPassword)}
             />
           }
         />
