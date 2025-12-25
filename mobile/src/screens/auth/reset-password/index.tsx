@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { TextInput } from "react-native-paper";
+import { useNavigateTo } from "../../../navigation/useNavigateTo";
 import styles from "./styles";
 import FontAwesome from "@expo/vector-icons/build/FontAwesome";
 import { validateResetPasswordForm } from "../../../validators/reset-password";
@@ -10,6 +11,8 @@ const ResetPassword: React.FC = () => {
   const [email, setEmail] = useState("");
   const [newPassword, setNewPassword] = useState("");
   const [confirmNewPassword, setConfirmNewPassword] = useState("");
+  
+  const navigateTo = useNavigateTo();
 
   const handleResetPassword = (): void => {
     const errors = validateResetPasswordForm(
@@ -127,8 +130,7 @@ const ResetPassword: React.FC = () => {
             <Text
               style={styles.bottomLink}
               onPress={() => {
-                // navigation goes here
-                // navigateTo("signin")
+                navigateTo("signin")
               }}
             >
               Sign in

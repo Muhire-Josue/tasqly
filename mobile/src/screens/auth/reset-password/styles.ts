@@ -76,7 +76,6 @@ const styles = StyleSheet.create({
   bottomLink: {
     color: PRIMARY_COLOR,
     textDecorationLine: "underline",
-    // fontWeight: "500",
   },
 });
 
