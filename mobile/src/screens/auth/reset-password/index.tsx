@@ -4,8 +4,8 @@ import { TextInput } from "react-native-paper";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
 import styles from "./styles";
 import FontAwesome from "@expo/vector-icons/build/FontAwesome";
-import { validateResetPasswordForm } from "../../../validators/reset-password";
-import { showMessage } from "react-native-flash-message";
+// import { validateResetPasswordForm } from "../../../validators/reset-password";
+// import { showMessage } from "react-native-flash-message";
 const ResetPassword: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState(true);
   const [hiddenConfirmPassword, setHiddenConfirmPassword] = useState(true);
@@ -16,30 +16,30 @@ const ResetPassword: React.FC = () => {
   const navigateTo = useNavigateTo();
 
   const handleResetPassword = (): void => {
-    const errors = validateResetPasswordForm(
-      email,
-      newPassword,
-      confirmNewPassword,
-    );
+    // const errors = validateResetPasswordForm(
+    //   email,
+    //   newPassword,
+    //   confirmNewPassword,
+    // );
 
-    if (errors.length > 0) {
-      showMessage({
-        message: errors[0],
-        type: "danger",
-        icon: "danger",
-      });
-      return;
-    }
+    // if (errors.length > 0) {
+    //   showMessage({
+    //     message: errors[0],
+    //     type: "danger",
+    //     icon: "danger",
+    //   });
+    //   return;
+    // }
 
-    showMessage({
-      message: "Password reset successfully",
-      type: "success",
-      icon: "success",
-    });
-    // hard reset
-    setEmail("");
-    setNewPassword("");
-    setConfirmNewPassword("");
+    // showMessage({
+    //   message: "Password reset successfully",
+    //   type: "success",
+    //   icon: "success",
+    // });
+    // // hard reset
+    // setEmail("");
+    // setNewPassword("");
+    // setConfirmNewPassword("");
     navigateTo("otp-code");
   };
 
