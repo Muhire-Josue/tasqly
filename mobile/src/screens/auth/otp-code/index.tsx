@@ -2,6 +2,8 @@ import React, { useRef, useState } from "react";
 import { View, Text, TextInput, Pressable } from "react-native";
 import styles from "./styles";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
+import { validateOtp } from "../../../validators/otp";
+import { showMessage } from "react-native-flash-message";
 
 const OtpCode: React.FC = () => {
   const [otp, setOtp] = useState<string[]>(["", "", "", ""]);
@@ -29,6 +31,26 @@ const OtpCode: React.FC = () => {
     if (!value && index > 0) {
       inputs[index - 1].current?.focus();
     }
+  };
+
+  const handleVerify = () => {
+    const errors = validateOtp(otp);
+
+    if (errors.length > 0) {
+      showMessage({
+        message: errors[0],
+        type: "danger",
+        icon: "danger",
+      });
+      return;
+    }
+
+    // Success — later call API
+    showMessage({
+      message: "OTP verified successfully",
+      type: "success",
+      icon: "success",
+    });
   };
 
   return (
@@ -64,9 +86,7 @@ const OtpCode: React.FC = () => {
           styles.verifyButton,
           pressed && styles.verifyButtonPressed,
         ]}
-        onPress={() => {
-          // TODO: verify OTP using otp.join("")
-        }}
+        onPress={handleVerify}
       >
         <Text style={styles.verifyButtonText}>Verify</Text>
       </Pressable>
@@ -78,7 +98,6 @@ const OtpCode: React.FC = () => {
           <Text
             style={styles.bottomLink}
             onPress={() => {
-              // TODO: navigate to Sign In
               navigateTo("signin");
             }}
           >
