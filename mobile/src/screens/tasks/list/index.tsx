@@ -4,6 +4,7 @@ import Ionicons from "@expo/vector-icons/build/Ionicons";
 import { View, Text, Image, Pressable } from "react-native";
 import styles from "./styles";
 import ben from "../../../assets/ben.jpg";
+import Stats from "../../../components/common/Stats";
 
 const TaskList: React.FC = () => {
   return (
@@ -27,6 +28,7 @@ const TaskList: React.FC = () => {
         <FontAwesome name="home" size={30} color="#000" />
         <Text style={styles.homeText}>The Smith&apos;s Home</Text>
       </View>
+      <Stats />
     </View>
   );
 };
