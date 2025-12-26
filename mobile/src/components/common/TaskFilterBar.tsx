@@ -35,7 +35,7 @@ const TaskFilterBar: React.FC<TaskFilterBarProps> = ({ style }) => {
     setSelectedStatuses((prev) =>
       prev.includes(value)
         ? (prev.filter((s) => s !== value) as Status[])
-        : [...prev, value]
+        : [...prev, value],
     );
   };
 
