@@ -2,6 +2,11 @@ import React from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { View, Text } from "react-native";
 import styles from "../style/stats";
+import {
+  PRIMARY_COLOR_GREEN,
+  PRIMARY_COLOR_RED,
+  PRIMARY_COLOR_YELLOW,
+} from "../../theme/colors";
 
 const Stats: React.FC = () => {
   return (
@@ -9,7 +14,7 @@ const Stats: React.FC = () => {
       {/* Pending */}
       <View style={styles.statBox}>
         <View style={styles.rowCenter}>
-          <FontAwesome5 name="clock" size={20} color="#FFD166" />
+          <FontAwesome5 name="clock" size={20} color={PRIMARY_COLOR_YELLOW} />
           <Text style={styles.statLabel}> Pending</Text>
         </View>
         <Text style={styles.statValue}>26</Text>
@@ -18,7 +23,11 @@ const Stats: React.FC = () => {
       {/* Rejected */}
       <View style={styles.statBox}>
         <View style={styles.rowCenter}>
-          <FontAwesome5 name="times-circle" size={20} color="#E63946" />
+          <FontAwesome5
+            name="times-circle"
+            size={20}
+            color={PRIMARY_COLOR_RED}
+          />
           <Text style={styles.statLabel}> Rejected</Text>
         </View>
         <Text style={styles.statValue}>13</Text>
@@ -27,7 +36,11 @@ const Stats: React.FC = () => {
       {/* Completed */}
       <View style={styles.statBox}>
         <View style={styles.rowCenter}>
-          <FontAwesome5 name="check-circle" size={20} color="#32DE84" />
+          <FontAwesome5
+            name="check-circle"
+            size={20}
+            color={PRIMARY_COLOR_GREEN}
+          />
           <Text style={styles.statLabel}> Completed</Text>
         </View>
         <Text style={styles.statValue}>55</Text>
