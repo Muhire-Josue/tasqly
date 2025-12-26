@@ -1,9 +1,12 @@
+// src/components/style/taskFilterBar.ts
 import { StyleSheet } from "react-native";
 import { PRIMARY_COLOR } from "../../theme/colors";
 
 const styles = StyleSheet.create({
   wrapper: {
     marginTop: 18,
+    // important: this view is only as tall as its content
+    // so overlay is limited to this vertical region
     position: "relative",
   },
 
@@ -83,6 +86,7 @@ const styles = StyleSheet.create({
   optionText: {
     fontSize: 16,
     color: "#000",
+    fontWeight: "500",
   },
 });
 

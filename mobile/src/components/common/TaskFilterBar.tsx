@@ -41,10 +41,12 @@ const TaskFilterBar: React.FC<TaskFilterBarProps> = ({ style }) => {
 
   return (
     <View style={[styles.wrapper, style]}>
+      {/* Row with chips + icon (we measure this to know where to place dropdown) */}
       <View
         style={styles.filterRow}
         onLayout={(e) => {
           const { y, height } = e.nativeEvent.layout;
+          // dropdown just below the row
           setMenuTop(y + height + 8);
         }}
       >
@@ -97,8 +99,10 @@ const TaskFilterBar: React.FC<TaskFilterBarProps> = ({ style }) => {
         </Pressable>
       </View>
 
+      {/* Overlay + dropdown */}
       {showMenu && menuTop !== null && (
         <View style={styles.overlay}>
+          {/* Backdrop — tap outside dropdown to close */}
           <Pressable
             style={StyleSheet.absoluteFill}
             onPress={() => setShowMenu(false)}
