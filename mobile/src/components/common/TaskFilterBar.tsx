@@ -10,7 +10,7 @@ import {
 import Checkbox from "expo-checkbox";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "../style/taskFilterBar";
-import { PRIMARY_COLOR } from "../../theme/colors";
+import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 
 type Scope = "all" | "mine";
 type Status = "Pending" | "Completed" | "Rejected";
@@ -114,7 +114,7 @@ const TaskFilterBar: React.FC<TaskFilterBarProps> = ({ style }) => {
                 <Checkbox
                   value={selectedStatuses.includes(item)}
                   onValueChange={() => toggleStatus(item)}
-                  color={PRIMARY_COLOR}
+                  color={PRIMARY_COLOR_BLUE}
                 />
                 <Text style={styles.optionText}>{item}</Text>
               </View>

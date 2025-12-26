@@ -4,7 +4,7 @@ import Checkbox from "expo-checkbox";
 import { showMessage } from "react-native-flash-message";
 import styles from "./styles";
 import { TextInput } from "react-native-paper";
-import { PRIMARY_COLOR } from "../../../theme/colors";
+import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import GoogleLogo from "../../../assets/google.png";
 import { validateSignUpForm } from "../../../validators/signup";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
@@ -149,7 +149,7 @@ const SignUp: React.FC = () => {
           <Checkbox
             value={agreed}
             onValueChange={setAgreed}
-            color={agreed ? PRIMARY_COLOR : undefined}
+            color={agreed ? PRIMARY_COLOR_BLUE : undefined}
           />
 
           <Text style={styles.text}>

@@ -1,6 +1,6 @@
 // src/components/style/taskFilterBar.ts
 import { StyleSheet } from "react-native";
-import { PRIMARY_COLOR } from "../../theme/colors";
+import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
 
   filterChipActive: {
-    backgroundColor: PRIMARY_COLOR,
+    backgroundColor: PRIMARY_COLOR_BLUE,
   },
 
   filterChipPressed: {

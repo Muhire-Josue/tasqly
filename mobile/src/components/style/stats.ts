@@ -1,9 +1,9 @@
 import { StyleSheet } from "react-native";
-import { PRIMARY_COLOR } from "../../theme/colors";
+import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: PRIMARY_COLOR,
+    backgroundColor: PRIMARY_COLOR_BLUE,
     borderRadius: 20,
     paddingVertical: 18,
     paddingHorizontal: 12,
