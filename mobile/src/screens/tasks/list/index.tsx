@@ -12,6 +12,7 @@ import BenAvatar from "../../../assets/ben.jpg";
 import MichealAvatar from "../../../assets/michael.jpg";
 import VinceAvatar from "../../../assets/vince.jpg";
 import wellingtonAvatar from "../../../assets/wellington.jpg";
+import BottomTabBar from "../../../components/common/BottomTabBar";
 const TaskList: React.FC = () => {
   type TaskStatus = "Pending" | "Completed" | "Rejected";
 
@@ -500,6 +501,7 @@ const TaskList: React.FC = () => {
           />
         </View>
       </View>
+      <BottomTabBar />
     </SafeAreaView>
   );
 };
