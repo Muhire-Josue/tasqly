@@ -44,7 +44,7 @@ const BottomTabBar: React.FC = () => {
             <View style={styles.iconWrapper}>
               <Ionicons
                 name={icon}
-                size={28}
+                size={30}
                 color={isActive ? PRIMARY_COLOR_BLUE : "#000"}
               />
               {badge !== undefined && badge > 0 && (

@@ -417,7 +417,10 @@ const TaskList: React.FC = () => {
   ];
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#e7fafeff" }}>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "#e7fafeff" }}
+      edges={["top", "left", "right"]}
+    >
       <View style={styles.container}>
         <HeaderInfo />
         <Stats />
@@ -501,7 +504,9 @@ const TaskList: React.FC = () => {
           />
         </View>
       </View>
-      <BottomTabBar />
+      <SafeAreaView edges={["bottom"]} style={{ backgroundColor: "#FFFFFF" }}>
+        <BottomTabBar />
+      </SafeAreaView>
     </SafeAreaView>
   );
 };
