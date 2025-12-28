@@ -103,6 +103,9 @@ const styles = StyleSheet.create({
     height: 40,
     borderRadius: 20,
   },
+  listHeader: {
+    marginBottom: 20,
+  },
 });
 
 export default styles;
