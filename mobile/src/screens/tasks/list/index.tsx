@@ -1,6 +1,6 @@
 import React from "react";
 import { View, Text, Image, ImageSourcePropType } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
 import FontAwesome5 from "@expo/vector-icons/build/FontAwesome5";
 import { FlatList } from "react-native";
 import styles from "./styles";
@@ -13,6 +13,7 @@ import MichealAvatar from "../../../assets/michael.jpg";
 import VinceAvatar from "../../../assets/vince.jpg";
 import wellingtonAvatar from "../../../assets/wellington.jpg";
 import BottomTabBar from "../../../components/common/BottomTabBar";
+import { TAB_BAR_HEIGHT } from "../../../theme/sizes";
 const TaskList: React.FC = () => {
   type TaskStatus = "Pending" | "Completed" | "Rejected";
 
@@ -416,6 +417,8 @@ const TaskList: React.FC = () => {
     },
   ];
 
+  const insets = useSafeAreaInsets();
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#e7fafeff" }}
@@ -499,7 +502,9 @@ const TaskList: React.FC = () => {
               </View>
             )}
             ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
-            contentContainerStyle={{ paddingBottom: 40 }}
+            contentContainerStyle={{
+              paddingBottom: TAB_BAR_HEIGHT + insets.bottom
+            }}
             showsVerticalScrollIndicator={false}
           />
         </View>
