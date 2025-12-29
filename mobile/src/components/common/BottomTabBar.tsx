@@ -1,4 +1,3 @@
-// src/components/common/BottomTabBar.tsx
 import React, { useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
