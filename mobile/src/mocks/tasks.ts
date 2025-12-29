@@ -1,4 +1,4 @@
-import {TaskCard} from "../types/tasks";
+import { TaskCard } from "../types/tasks";
 import BenAvatar from "../assets/ben.jpg";
 import MichealAvatar from "../assets/michael.jpg";
 import VinceAvatar from "../assets/vince.jpg";

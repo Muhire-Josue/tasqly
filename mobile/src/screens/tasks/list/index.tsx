@@ -9,16 +9,14 @@ import {
   StyleSheet,
   Modal,
 } from "react-native";
-import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import { SafeAreaView } from "react-native-safe-area-context";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Checkbox from "expo-checkbox";
 
 import styles from "./styles";
 import HeaderInfo from "../../../components/common/HeaderInfo";
 import Stats from "../../../components/common/Stats";
-import TaskFilterBar, {
-  Scope,
-} from "../../../components/common/TaskFilterBar";
+import TaskFilterBar, { Scope } from "../../../components/common/TaskFilterBar";
 import BottomTabBar from "../../../components/common/BottomTabBar";
 
 import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../../theme/colors";
@@ -28,7 +26,6 @@ import MOCK_TASKS from "../../../mocks/tasks";
 const STATUSES: TaskStatus[] = ["Pending", "Completed", "Rejected"];
 
 const TaskList: React.FC = () => {
-  const insets = useSafeAreaInsets();
 
   const [scope, setScope] = useState<Scope>("all");
   const [selectedStatuses, setSelectedStatuses] = useState<TaskStatus[]>([
@@ -105,7 +102,10 @@ const TaskList: React.FC = () => {
   );
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#e7fafeff" }}>
+    <SafeAreaView
+      style={{ flex: 1, backgroundColor: "#e7fafeff" }}
+      edges={["top", "left", "right"]}
+    >
       <View style={styles.container}>
         <View style={styles.taskList}>
           <FlatList
@@ -114,47 +114,42 @@ const TaskList: React.FC = () => {
             renderItem={renderTask}
             ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
             contentContainerStyle={{
-              paddingBottom: insets.bottom + 80,
+              paddingBottom: 16, 
             }}
             ListHeaderComponent={
-        <View style={styles.listHeader}>
-          <HeaderInfo />
-          <Stats />
-          <TaskFilterBar
-            scope={scope}
-            onScopeChange={setScope}
-            selectedStatuses={selectedStatuses}
-            onToggleStatus={toggleStatus}
-            onFilterIconMeasured={handleFilterIconMeasured}
-          />
-        </View>
-      }
+              <View style={styles.listHeader}>
+                <HeaderInfo />
+                <Stats />
+                <TaskFilterBar
+                  scope={scope}
+                  onScopeChange={setScope}
+                  selectedStatuses={selectedStatuses}
+                  onToggleStatus={toggleStatus}
+                  onFilterIconMeasured={handleFilterIconMeasured}
+                />
+              </View>
+            }
             showsVerticalScrollIndicator={false}
           />
         </View>
-
-        <BottomTabBar />
       </View>
 
-      {/* Dropdown using core RN Modal */}
+      {/* Dropdown Modal stays the same */}
       <Modal
         visible={menuVisible}
         transparent
         animationType="fade"
         onRequestClose={() => setMenuVisible(false)}
       >
-        {/* backdrop */}
         <Pressable
           style={StyleSheet.absoluteFill}
           onPress={() => setMenuVisible(false)}
         />
-
-        {/* dropdown */}
         {menuTop !== null && (
           <View
             style={[
               styles.dropdown,
-              { top: menuTop, right: 24 }, // right padding matches screen padding
+              { top: menuTop, right: 24 },
             ]}
           >
             {STATUSES.map((status) => (
@@ -170,6 +165,8 @@ const TaskList: React.FC = () => {
           </View>
         )}
       </Modal>
+
+      <BottomTabBar />
     </SafeAreaView>
   );
 };

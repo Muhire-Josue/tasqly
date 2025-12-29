@@ -11,26 +11,32 @@ const styles = StyleSheet.create({
     borderTopColor: "#DDD",
     justifyContent: "space-between",
   },
+
   tabItem: {
-    flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    minWidth: 70,
   },
+
   tabItemPressed: {
     opacity: 0.7,
   },
+
   iconWrapper: {
     position: "relative",
-    marginBottom: 4,
+    marginBottom: 2,
   },
+
   label: {
-    fontSize: 14,
+    fontSize: 13,
     color: "#000",
   },
+
   labelActive: {
     color: PRIMARY_COLOR_BLUE,
     fontWeight: "600",
   },
+
   badge: {
     position: "absolute",
     top: -6,
@@ -43,6 +49,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     paddingHorizontal: 4,
   },
+
   badgeText: {
     color: "#FFFFFF",
     fontSize: 11,

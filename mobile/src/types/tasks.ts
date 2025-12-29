@@ -14,4 +14,3 @@ export type TaskCard = {
   assigneeLabel: string;
   avatar: ImageSourcePropType;
 };
-

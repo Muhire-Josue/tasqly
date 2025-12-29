@@ -1,6 +1,8 @@
+// src/components/common/BottomTabBar.tsx
 import React, { useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
+import { useSafeAreaInsets } from "react-native-safe-area-context"; // ⬅️ new
 import styles from "../style/bottomTabBar";
 import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 
@@ -25,8 +27,15 @@ const TABS: {
 
 const BottomTabBar: React.FC = () => {
   const [activeTab, setActiveTab] = useState<TabKey>("tasks");
+  const insets = useSafeAreaInsets();
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        { paddingBottom: insets.bottom || 8 }, // ⬅️ pushes bar down to safe edge
+      ]}
+    >
       {TABS.map(({ key, label, icon, badge }) => {
         const isActive = activeTab === key;
 
@@ -37,9 +46,7 @@ const BottomTabBar: React.FC = () => {
               styles.tabItem,
               pressed && styles.tabItemPressed,
             ]}
-            onPress={() => {
-              setActiveTab(key);
-            }}
+            onPress={() => setActiveTab(key)}
           >
             <View style={styles.iconWrapper}>
               <Ionicons
