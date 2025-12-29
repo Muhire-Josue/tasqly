@@ -10,7 +10,7 @@ type TabKey = "tasks" | "repair" | "notifications" | "profile";
 
 type TabConfig =
   | {
-      key: Exclude<TabKey, "profile">; // tasks, repair, notifications
+      key: Exclude<TabKey, "profile">;
       label: string;
       icon: keyof typeof FontAwesome6.glyphMap;
       badge?: number;
