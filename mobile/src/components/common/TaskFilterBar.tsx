@@ -24,7 +24,6 @@ const TaskFilterBar: React.FC<TaskFilterBarProps> = ({
   const iconRef = useRef<View>(null);
 
   const handleFilterPress = () => {
-    // measure in window coords so it matches <Modal> coordinate system
     iconRef.current?.measureInWindow((_x, y, _w, h) => {
       onFilterIconMeasured(y, h);
     });
@@ -69,7 +68,6 @@ const TaskFilterBar: React.FC<TaskFilterBarProps> = ({
           </Pressable>
         </View>
 
-        {/* icon wrapper so we can attach the ref */}
         <View ref={iconRef}>
           <Pressable style={styles.filterIcon} onPress={handleFilterPress}>
             <Ionicons name="filter-outline" size={30} color="#000" />
