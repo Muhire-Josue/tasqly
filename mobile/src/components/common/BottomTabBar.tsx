@@ -1,28 +1,45 @@
 // src/components/common/BottomTabBar.tsx
 import React, { useState } from "react";
 import { View, Text, Pressable } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "../style/bottomTabBar";
 import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 
 type TabKey = "tasks" | "repair" | "notifications" | "profile";
 
-const TABS: {
-  key: TabKey;
-  label: string;
-  icon: keyof typeof Ionicons.glyphMap;
-  badge?: number;
-}[] = [
-  { key: "tasks", label: "Tasks", icon: "list-outline" },
-  { key: "repair", label: "Repair", icon: "hammer-outline" },
+type TabConfig =
+  | {
+      key: Exclude<TabKey, "profile">; // tasks, repair, notifications
+      label: string;
+      icon: keyof typeof FontAwesome6.glyphMap;
+      badge?: number;
+      library: "fa6";
+    }
+  | {
+      key: "profile";
+      label: string;
+      icon: keyof typeof Ionicons.glyphMap;
+      badge?: number;
+      library: "ion";
+    };
+
+const TABS: TabConfig[] = [
+  { key: "tasks", label: "Tasks", icon: "list-check", library: "fa6" },
+  { key: "repair", label: "Repair", icon: "hammer", library: "fa6" },
   {
     key: "notifications",
     label: "Notifications",
-    icon: "notifications-outline",
+    icon: "bell",
     badge: 9,
+    library: "fa6",
   },
-  { key: "profile", label: "Profile", icon: "person-circle" },
+  {
+    key: "profile",
+    label: "Profile",
+    icon: "person-circle",
+    library: "ion",
+  },
 ];
 
 const BottomTabBar: React.FC = () => {
@@ -30,13 +47,8 @@ const BottomTabBar: React.FC = () => {
   const insets = useSafeAreaInsets();
 
   return (
-    <View
-      style={[
-        styles.container,
-        { paddingBottom: insets.bottom || 8 },
-      ]}
-    >
-      {TABS.map(({ key, label, icon, badge }) => {
+    <View style={[styles.container, { paddingBottom: insets.bottom || 8 }]}>
+      {TABS.map(({ key, label, icon, badge, library }) => {
         const isActive = activeTab === key;
 
         return (
@@ -49,17 +61,27 @@ const BottomTabBar: React.FC = () => {
             onPress={() => setActiveTab(key)}
           >
             <View style={styles.iconWrapper}>
-              <Ionicons
-                name={icon}
-                size={36}
-                color={isActive ? PRIMARY_COLOR_BLUE : "#000"}
-              />
+              {library === "fa6" ? (
+                <FontAwesome6
+                  name={icon}
+                  size={35}
+                  color={isActive ? PRIMARY_COLOR_BLUE : "#000"}
+                />
+              ) : (
+                <Ionicons
+                  name={icon}
+                  size={35}
+                  color={isActive ? PRIMARY_COLOR_BLUE : "#000"}
+                />
+              )}
+
               {badge !== undefined && badge > 0 && (
                 <View style={styles.badge}>
                   <Text style={styles.badgeText}>{badge}</Text>
                 </View>
               )}
             </View>
+
             <Text style={[styles.label, isActive && styles.labelActive]}>
               {label}
             </Text>

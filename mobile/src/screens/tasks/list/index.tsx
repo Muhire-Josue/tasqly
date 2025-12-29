@@ -26,7 +26,6 @@ import MOCK_TASKS from "../../../mocks/tasks";
 const STATUSES: TaskStatus[] = ["Pending", "Completed", "Rejected"];
 
 const TaskList: React.FC = () => {
-
   const [scope, setScope] = useState<Scope>("all");
   const [selectedStatuses, setSelectedStatuses] = useState<TaskStatus[]>([
     "Pending",
@@ -41,7 +40,7 @@ const TaskList: React.FC = () => {
     setSelectedStatuses((prev) =>
       prev.includes(value)
         ? (prev.filter((s) => s !== value) as TaskStatus[])
-        : [...prev, value]
+        : [...prev, value],
     );
   };
 
@@ -114,7 +113,7 @@ const TaskList: React.FC = () => {
             renderItem={renderTask}
             ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
             contentContainerStyle={{
-              paddingBottom: 16, 
+              paddingBottom: 16,
             }}
             ListHeaderComponent={
               <View style={styles.listHeader}>
@@ -146,12 +145,7 @@ const TaskList: React.FC = () => {
           onPress={() => setMenuVisible(false)}
         />
         {menuTop !== null && (
-          <View
-            style={[
-              styles.dropdown,
-              { top: menuTop, right: 24 },
-            ]}
-          >
+          <View style={[styles.dropdown, { top: menuTop, right: 24 }]}>
             {STATUSES.map((status) => (
               <View key={status} style={styles.optionRow}>
                 <Checkbox
