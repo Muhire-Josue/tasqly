@@ -1,4 +1,3 @@
-// src/screens/tasks/list/TaskList.tsx
 import React, { useState } from "react";
 import {
   View,
@@ -45,7 +44,6 @@ const TaskList: React.FC = () => {
   };
 
   const handleFilterIconMeasured = (pageY: number, height: number) => {
-    // place dropdown a few px under the icon
     setMenuTop(pageY + height + 6);
     setMenuVisible(true);
   };
