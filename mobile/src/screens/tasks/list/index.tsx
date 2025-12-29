@@ -2,14 +2,12 @@ import React, { useState } from "react";
 import {
   View,
   Text,
-  Image,
   FlatList,
   Pressable,
   StyleSheet,
   Modal,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import Checkbox from "expo-checkbox";
 
 import styles from "./styles";
@@ -18,9 +16,10 @@ import Stats from "../../../components/common/Stats";
 import TaskFilterBar, { Scope } from "../../../components/common/TaskFilterBar";
 import BottomTabBar from "../../../components/common/BottomTabBar";
 
-import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../../theme/colors";
-import { TaskCard, TaskStatus } from "../../../types/tasks";
+import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
+import { TaskStatus } from "../../../types/tasks";
 import MOCK_TASKS from "../../../mocks/tasks";
+import Card from "../../../components/common/Card";
 
 const STATUSES: TaskStatus[] = ["Pending", "Completed", "Rejected"];
 
@@ -48,56 +47,6 @@ const TaskList: React.FC = () => {
     setMenuVisible(true);
   };
 
-  const renderTask = ({ item }: { item: TaskCard }) => (
-    <View style={styles.taskCard}>
-      <View
-        style={[styles.taskSideStrip, { backgroundColor: item.sideColor }]}
-      />
-
-      <View style={styles.taskCardInner}>
-        <View style={styles.taskHeaderRow}>
-          <Text style={styles.taskTitle}>{item.title}</Text>
-          <View
-            style={[styles.statusPill, { backgroundColor: item.statusColor }]}
-          >
-            <Text style={styles.statusPillText}>{item.status}</Text>
-          </View>
-        </View>
-
-        <View style={styles.taskMetaRow}>
-          <View>
-            <View style={styles.metaRow}>
-              <FontAwesome5
-                name="calendar-alt"
-                size={16}
-                color={item.dateColor}
-              />
-              <Text style={[styles.dateText, { color: item.dateColor }]}>
-                {item.dateLabel}
-              </Text>
-            </View>
-
-            {item.urgent && (
-              <View style={styles.metaRow}>
-                <FontAwesome5
-                  name="exclamation-circle"
-                  size={16}
-                  color={PRIMARY_COLOR_RED}
-                />
-                <Text style={styles.urgentText}>Urgent</Text>
-              </View>
-            )}
-          </View>
-
-          <View style={styles.assigneeBlock}>
-            <Image source={item.avatar} style={styles.assigneeAvatar} />
-            <Text style={styles.assigneeLabel}>{item.assigneeLabel}</Text>
-          </View>
-        </View>
-      </View>
-    </View>
-  );
-
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#e7fafeff" }}
@@ -108,7 +57,7 @@ const TaskList: React.FC = () => {
           <FlatList
             data={MOCK_TASKS}
             keyExtractor={(item) => item.id}
-            renderItem={renderTask}
+            renderItem={({ item }) => <Card item={item} />}
             ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
             contentContainerStyle={{
               paddingBottom: 16,
