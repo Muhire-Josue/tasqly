@@ -6,6 +6,7 @@ import SignUp from "../screens/auth/signup";
 import SignIn from "../screens/auth/signin";
 import ResetPassword from "../screens/auth/reset-password";
 import TaskList from "../screens/tasks/list";
+import OtpCode from "../screens/auth/otp-code";
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,8 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="task-list"
           component={TaskList}
+          name="otp-code"
+          component={OtpCode}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
