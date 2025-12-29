@@ -1,8 +1,8 @@
 import { ImageSourcePropType } from "react-native";
 
-type TaskStatus = "Pending" | "Completed" | "Rejected";
+export type TaskStatus = "Pending" | "Completed" | "Rejected";
 
-type TaskCard = {
+export type TaskCard = {
   id: string;
   title: string;
   status: TaskStatus;
@@ -15,4 +15,3 @@ type TaskCard = {
   avatar: ImageSourcePropType;
 };
 
-export default TaskCard;

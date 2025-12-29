@@ -1,119 +1,173 @@
-import React from "react";
-import { View, Text, Image } from "react-native";
+// src/screens/tasks/list/TaskList.tsx
+import React, { useState } from "react";
 import {
-  SafeAreaView,
-  useSafeAreaInsets,
-} from "react-native-safe-area-context";
-import FontAwesome5 from "@expo/vector-icons/build/FontAwesome5";
-import { FlatList } from "react-native";
-import styles from "./styles";
-import Stats from "../../../components/common/Stats";
-import HeaderInfo from "../../../components/common/HeaderInfo";
-import TaskFilterBar from "../../../components/common/TaskFilterBar";
+  View,
+  Text,
+  Image,
+  FlatList,
+  Pressable,
+  StyleSheet,
+  Modal,
+} from "react-native";
+import { SafeAreaView, useSafeAreaInsets } from "react-native-safe-area-context";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import Checkbox from "expo-checkbox";
 
+import styles from "./styles";
+import HeaderInfo from "../../../components/common/HeaderInfo";
+import Stats from "../../../components/common/Stats";
+import TaskFilterBar, {
+  Scope,
+} from "../../../components/common/TaskFilterBar";
 import BottomTabBar from "../../../components/common/BottomTabBar";
-import { TAB_BAR_HEIGHT } from "../../../theme/sizes";
-import TaskCard from "../../../types/tasks";
+
+import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
+import { TaskCard, TaskStatus } from "../../../types/tasks";
 import MOCK_TASKS from "../../../mocks/tasks";
+
+const STATUSES: TaskStatus[] = ["Pending", "Completed", "Rejected"];
+
 const TaskList: React.FC = () => {
   const insets = useSafeAreaInsets();
 
+  const [scope, setScope] = useState<Scope>("all");
+  const [selectedStatuses, setSelectedStatuses] = useState<TaskStatus[]>([
+    "Pending",
+    "Completed",
+    "Rejected",
+  ]);
+
+  const [menuVisible, setMenuVisible] = useState(false);
+  const [menuTop, setMenuTop] = useState<number | null>(null);
+
+  const toggleStatus = (value: TaskStatus) => {
+    setSelectedStatuses((prev) =>
+      prev.includes(value)
+        ? (prev.filter((s) => s !== value) as TaskStatus[])
+        : [...prev, value]
+    );
+  };
+
+  const handleFilterIconMeasured = (pageY: number, height: number) => {
+    // place dropdown a few px under the icon
+    setMenuTop(pageY + height + 6);
+    setMenuVisible(true);
+  };
+
+  const renderTask = ({ item }: { item: TaskCard }) => (
+    <View style={styles.taskCard}>
+      <View
+        style={[styles.taskSideStrip, { backgroundColor: item.sideColor }]}
+      />
+
+      <View style={styles.taskCardInner}>
+        <View style={styles.taskHeaderRow}>
+          <Text style={styles.taskTitle}>{item.title}</Text>
+          <View
+            style={[styles.statusPill, { backgroundColor: item.statusColor }]}
+          >
+            <Text style={styles.statusPillText}>{item.status}</Text>
+          </View>
+        </View>
+
+        <View style={styles.taskMetaRow}>
+          <View>
+            <View style={styles.metaRow}>
+              <FontAwesome5
+                name="calendar-alt"
+                size={16}
+                color={item.dateColor}
+              />
+              <Text style={[styles.dateText, { color: item.dateColor }]}>
+                {item.dateLabel}
+              </Text>
+            </View>
+
+            {item.urgent && (
+              <View style={styles.metaRow}>
+                <FontAwesome5
+                  name="exclamation-circle"
+                  size={16}
+                  color="#D62828"
+                />
+                <Text style={styles.urgentText}>Urgent</Text>
+              </View>
+            )}
+          </View>
+
+          <View style={styles.assigneeBlock}>
+            <Image source={item.avatar} style={styles.assigneeAvatar} />
+            <Text style={styles.assigneeLabel}>{item.assigneeLabel}</Text>
+          </View>
+        </View>
+      </View>
+    </View>
+  );
+
   return (
-    <SafeAreaView
-      style={{ flex: 1, backgroundColor: "#e7fafeff" }}
-      edges={["top", "left", "right"]}
-    >
+    <SafeAreaView style={{ flex: 1, backgroundColor: "#e7fafeff" }}>
       <View style={styles.container}>
+        <HeaderInfo />
+        <Stats />
+
+        <TaskFilterBar
+          scope={scope}
+          onScopeChange={setScope}
+          selectedStatuses={selectedStatuses}
+          onToggleStatus={toggleStatus}
+          onFilterIconMeasured={handleFilterIconMeasured}
+        />
+
         <View style={styles.taskList}>
           <FlatList
             data={MOCK_TASKS}
             keyExtractor={(item) => item.id}
-            ListHeaderComponent={
-              <View style={styles.listHeader}>
-                <HeaderInfo />
-                <Stats />
-                <TaskFilterBar />
-              </View>
-            }
-            renderItem={({ item }: { item: TaskCard }) => (
-              <View key={item.id} style={styles.taskCard}>
-                <View
-                  style={[
-                    styles.taskSideStrip,
-                    { backgroundColor: item.sideColor },
-                  ]}
-                />
-
-                {/* Card content */}
-                <View style={styles.taskCardInner}>
-                  {/* Title + status pill */}
-                  <View style={styles.taskHeaderRow}>
-                    <Text style={styles.taskTitle}>{item.title}</Text>
-
-                    <View
-                      style={[
-                        styles.statusPill,
-                        { backgroundColor: item.statusColor },
-                      ]}
-                    >
-                      <Text style={styles.statusPillText}>{item.status}</Text>
-                    </View>
-                  </View>
-
-                  {/* Date / urgency / assignee */}
-                  <View style={styles.taskMetaRow}>
-                    <View>
-                      {/* Date row */}
-                      <View style={styles.metaRow}>
-                        <FontAwesome5
-                          name="calendar-alt"
-                          size={16}
-                          color={item.dateColor}
-                        />
-                        <Text
-                          style={[styles.dateText, { color: item.dateColor }]}
-                        >
-                          {item.dateLabel}
-                        </Text>
-                      </View>
-
-                      {item.urgent && (
-                        <View style={styles.metaRow}>
-                          <FontAwesome5
-                            name="exclamation-circle"
-                            size={16}
-                            color="#D62828"
-                          />
-                          <Text style={styles.urgentText}>Urgent</Text>
-                        </View>
-                      )}
-                    </View>
-
-                    {/* Assignee */}
-                    <View style={styles.assigneeBlock}>
-                      <Image
-                        source={item.avatar}
-                        style={styles.assigneeAvatar}
-                      />
-                      <Text style={styles.assigneeLabel}>
-                        {item.assigneeLabel}
-                      </Text>
-                    </View>
-                  </View>
-                </View>
-              </View>
-            )}
+            renderItem={renderTask}
             ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
             contentContainerStyle={{
-              paddingBottom: TAB_BAR_HEIGHT + insets.bottom,
+              paddingBottom: insets.bottom + 80,
             }}
             showsVerticalScrollIndicator={false}
           />
         </View>
-      </View>
-      <SafeAreaView edges={["bottom"]} style={{ backgroundColor: "#FFFFFF" }}>
+
         <BottomTabBar />
-      </SafeAreaView>
+      </View>
+
+      {/* Dropdown using core RN Modal */}
+      <Modal
+        visible={menuVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={() => setMenuVisible(false)}
+      >
+        {/* backdrop */}
+        <Pressable
+          style={StyleSheet.absoluteFill}
+          onPress={() => setMenuVisible(false)}
+        />
+
+        {/* dropdown */}
+        {menuTop !== null && (
+          <View
+            style={[
+              styles.dropdown,
+              { top: menuTop, right: 24 }, // right padding matches screen padding
+            ]}
+          >
+            {STATUSES.map((status) => (
+              <View key={status} style={styles.optionRow}>
+                <Checkbox
+                  value={selectedStatuses.includes(status)}
+                  onValueChange={() => toggleStatus(status)}
+                  color={PRIMARY_COLOR_BLUE}
+                />
+                <Text style={styles.optionText}>{status}</Text>
+              </View>
+            ))}
+          </View>
+        )}
+      </Modal>
     </SafeAreaView>
   );
 };

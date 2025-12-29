@@ -38,6 +38,30 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
   },
 
+  dropdown: {
+    position: "absolute",
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 12,
+    paddingHorizontal: 16,
+    borderRadius: 18,
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 6,
+  },
+  optionRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    paddingVertical: 6,
+  },
+  optionText: {
+    fontSize: 16,
+    color: "#000",
+    fontWeight: "500",
+  },
+
   taskHeaderRow: {
     flexDirection: "row",
     alignItems: "center",

@@ -1,62 +1,44 @@
-import React, { useState } from "react";
-import {
-  View,
-  Text,
-  Pressable,
-  StyleSheet,
-  StyleProp,
-  ViewStyle,
-} from "react-native";
-import Checkbox from "expo-checkbox";
+// src/components/common/TaskFilterBar.tsx
+import React, { useRef } from "react";
+import { View, Text, Pressable } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import styles from "../style/taskFilterBar";
-import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
+import { TaskStatus } from "../../types/tasks";
 
-type Scope = "all" | "mine";
-type Status = "Pending" | "Completed" | "Rejected";
+export type Scope = "all" | "mine";
 
-const STATUSES: Status[] = ["Pending", "Completed", "Rejected"];
-
-interface TaskFilterBarProps {
-  style?: StyleProp<ViewStyle>;
+export interface TaskFilterBarProps {
+  scope: Scope;
+  onScopeChange: (scope: Scope) => void;
+  selectedStatuses: TaskStatus[];
+  onToggleStatus: (status: TaskStatus) => void;
+  // NEW: let parent know where the icon is on screen
+  onFilterIconMeasured: (pageY: number, height: number) => void;
 }
 
-const TaskFilterBar: React.FC<TaskFilterBarProps> = ({ style }) => {
-  const [scope, setScope] = useState<Scope>("all");
-  const [showMenu, setShowMenu] = useState(false);
-  const [menuTop, setMenuTop] = useState<number | null>(null);
-  const [selectedStatuses, setSelectedStatuses] = useState<Status[]>([
-    "Pending",
-    "Completed",
-    "Rejected",
-  ]);
+const TaskFilterBar: React.FC<TaskFilterBarProps> = ({
+  scope,
+  onScopeChange,
+  onFilterIconMeasured,
+}) => {
+  const iconRef = useRef<View>(null);
 
-  const toggleStatus = (value: Status) => {
-    setSelectedStatuses((prev) =>
-      prev.includes(value)
-        ? (prev.filter((s) => s !== value) as Status[])
-        : [...prev, value],
-    );
+  const handleFilterPress = () => {
+    // measure in window coords so it matches <Modal> coordinate system
+    iconRef.current?.measureInWindow((_x, y, _w, h) => {
+      onFilterIconMeasured(y, h);
+    });
   };
 
   return (
-    <View style={[styles.wrapper, style]}>
-      {/* Row with chips + icon (we measure this to know where to place dropdown) */}
-      <View
-        style={styles.filterRow}
-        onLayout={(e) => {
-          const { y, height } = e.nativeEvent.layout;
-          // dropdown just below the row
-          setMenuTop(y + height + 8);
-        }}
-      >
+    <View style={styles.wrapper}>
+      <View style={styles.filterRow}>
         <View style={styles.filterChips}>
           <Pressable
-            onPress={() => setScope("all")}
-            style={({ pressed }) => [
+            onPress={() => onScopeChange("all")}
+            style={[
               styles.filterChip,
               scope === "all" && styles.filterChipActive,
-              pressed && styles.filterChipPressed,
             ]}
           >
             <Text
@@ -70,11 +52,10 @@ const TaskFilterBar: React.FC<TaskFilterBarProps> = ({ style }) => {
           </Pressable>
 
           <Pressable
-            onPress={() => setScope("mine")}
-            style={({ pressed }) => [
+            onPress={() => onScopeChange("mine")}
+            style={[
               styles.filterChip,
               scope === "mine" && styles.filterChipActive,
-              pressed && styles.filterChipPressed,
             ]}
           >
             <Text
@@ -88,40 +69,13 @@ const TaskFilterBar: React.FC<TaskFilterBarProps> = ({ style }) => {
           </Pressable>
         </View>
 
-        <Pressable
-          style={({ pressed }) => [
-            styles.filterIcon,
-            pressed && { opacity: 0.6 },
-          ]}
-          onPress={() => setShowMenu((p) => !p)}
-        >
-          <Ionicons name="filter-outline" size={30} color="#000" />
-        </Pressable>
-      </View>
-
-      {/* Overlay + dropdown */}
-      {showMenu && menuTop !== null && (
-        <View style={styles.overlay}>
-          {/* Backdrop — tap outside dropdown to close */}
-          <Pressable
-            style={StyleSheet.absoluteFill}
-            onPress={() => setShowMenu(false)}
-          />
-
-          <View style={[styles.dropdown, { top: menuTop }]}>
-            {STATUSES.map((item) => (
-              <View key={item} style={styles.optionRow}>
-                <Checkbox
-                  value={selectedStatuses.includes(item)}
-                  onValueChange={() => toggleStatus(item)}
-                  color={PRIMARY_COLOR_BLUE}
-                />
-                <Text style={styles.optionText}>{item}</Text>
-              </View>
-            ))}
-          </View>
+        {/* icon wrapper so we can attach the ref */}
+        <View ref={iconRef}>
+          <Pressable style={styles.filterIcon} onPress={handleFilterPress}>
+            <Ionicons name="filter-outline" size={30} color="#000" />
+          </Pressable>
         </View>
-      )}
+      </View>
     </View>
   );
 };
