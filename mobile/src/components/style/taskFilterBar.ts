@@ -43,6 +43,36 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "500",
   },
+  calendarBackdrop: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.25)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  calendarCard: {
+    width: "90%",
+    borderRadius: 18,
+    backgroundColor: "#FFFFFF",
+    padding: 16,
+  },
+
+  calendarActions: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    marginTop: 8,
+  },
+
+  calendarActionText: {
+    fontSize: 16,
+    color: PRIMARY_COLOR_BLUE,
+    fontWeight: "600",
+  },
+  rightIconsRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 4,
+  },
 });
 
 export default styles;
