@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { PRIMARY_COLOR_RED } from "../../../theme/colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
 
   urgentText: {
     fontSize: 14,
-    color: "#D62828",
+    color: PRIMARY_COLOR_RED,
     fontWeight: "600",
   },
 

@@ -21,7 +21,7 @@ import TaskFilterBar, {
 } from "../../../components/common/TaskFilterBar";
 import BottomTabBar from "../../../components/common/BottomTabBar";
 
-import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
+import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../../theme/colors";
 import { TaskCard, TaskStatus } from "../../../types/tasks";
 import MOCK_TASKS from "../../../mocks/tasks";
 
@@ -88,7 +88,7 @@ const TaskList: React.FC = () => {
                 <FontAwesome5
                   name="exclamation-circle"
                   size={16}
-                  color="#D62828"
+                  color={PRIMARY_COLOR_RED}
                 />
                 <Text style={styles.urgentText}>Urgent</Text>
               </View>
