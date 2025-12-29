@@ -1,4 +1,3 @@
-// src/components/common/TaskFilterBar.tsx
 import React, { useRef, useState } from "react";
 import { View, Text, Pressable, Modal } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -6,6 +5,7 @@ import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Calendar } from "react-native-calendars";
 import styles from "../style/taskFilterBar";
 import { TaskStatus } from "../../types/tasks";
+import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 
 export type Scope = "all" | "mine";
 
@@ -14,7 +14,6 @@ export interface TaskFilterBarProps {
   onScopeChange: (scope: Scope) => void;
   selectedStatuses: TaskStatus[];
   onToggleStatus: (status: TaskStatus) => void;
-  // used by the parent to position the status dropdown
   onFilterIconMeasured: (pageY: number, height: number) => void;
 }
 
@@ -25,7 +24,6 @@ const TaskFilterBar: React.FC<TaskFilterBarProps> = ({
 }) => {
   const iconRef = useRef<View>(null);
 
-  // calendar state (YYYY-MM-DD strings)
   const [calendarVisible, setCalendarVisible] = useState(false);
   const [startDate, setStartDate] = useState<string | null>(null);
   const [endDate, setEndDate] = useState<string | null>(null);
@@ -47,14 +45,12 @@ const TaskFilterBar: React.FC<TaskFilterBarProps> = ({
   const handleDayPress = (day: { dateString: string }) => {
     const date = day.dateString;
 
-    // 1) first tap or re-starting a range
     if (!startDate || (startDate && endDate)) {
       setStartDate(date);
       setEndDate(null);
       return;
     }
 
-    // 2) second tap – finish the range (ensure end >= start)
     if (startDate && !endDate) {
       if (date < startDate) {
         setEndDate(startDate);
@@ -65,24 +61,22 @@ const TaskFilterBar: React.FC<TaskFilterBarProps> = ({
     }
   };
 
-  // build marked dates for react-native-calendars
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const markedDates: Record<string, any> = {};
   if (startDate) {
     markedDates[startDate] = {
       startingDay: true,
-      color: "#007AFF",
+      color: PRIMARY_COLOR_BLUE,
       textColor: "#FFFFFF",
     };
   }
   if (endDate) {
     markedDates[endDate] = {
       endingDay: true,
-      color: "#007AFF",
+      color: PRIMARY_COLOR_BLUE,
       textColor: "#FFFFFF",
     };
 
-    // fill intermediate days
     const current = new Date(startDate!);
     const end = new Date(endDate);
     current.setDate(current.getDate() + 1);
@@ -161,7 +155,6 @@ const TaskFilterBar: React.FC<TaskFilterBarProps> = ({
         <Pressable style={styles.calendarBackdrop} onPress={closeCalendar}>
           <Pressable
             style={styles.calendarCard}
-            // stop propagation so taps inside the card don't close the modal
             onPress={(e) => e.stopPropagation()}
           >
             <Calendar
