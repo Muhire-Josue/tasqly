@@ -107,17 +107,6 @@ const TaskList: React.FC = () => {
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#e7fafeff" }}>
       <View style={styles.container}>
-        <HeaderInfo />
-        <Stats />
-
-        <TaskFilterBar
-          scope={scope}
-          onScopeChange={setScope}
-          selectedStatuses={selectedStatuses}
-          onToggleStatus={toggleStatus}
-          onFilterIconMeasured={handleFilterIconMeasured}
-        />
-
         <View style={styles.taskList}>
           <FlatList
             data={MOCK_TASKS}
@@ -127,6 +116,19 @@ const TaskList: React.FC = () => {
             contentContainerStyle={{
               paddingBottom: insets.bottom + 80,
             }}
+            ListHeaderComponent={
+        <View style={styles.listHeader}>
+          <HeaderInfo />
+          <Stats />
+          <TaskFilterBar
+            scope={scope}
+            onScopeChange={setScope}
+            selectedStatuses={selectedStatuses}
+            onToggleStatus={toggleStatus}
+            onFilterIconMeasured={handleFilterIconMeasured}
+          />
+        </View>
+      }
             showsVerticalScrollIndicator={false}
           />
         </View>
