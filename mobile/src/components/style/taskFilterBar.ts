@@ -1,4 +1,3 @@
-// taskFilterBar.ts
 import { StyleSheet } from "react-native";
 import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 
