@@ -3,8 +3,10 @@ import { View, Text, Image, Pressable } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
 import styles from "../style/headerInfo";
 import ben from "../../assets/ben.jpg";
+import { useNavigateTo } from "../../navigation/useNavigateTo";
 
 const HeaderInfo: React.FC = () => {
+  const navigateTo = useNavigateTo();
   return (
     <>
       <View style={styles.headerRow}>
@@ -18,7 +20,7 @@ const HeaderInfo: React.FC = () => {
             styles.addButton,
             pressed && styles.addButtonPressed,
           ]}
-          onPress={() => {}}
+          onPress={() => navigateTo("create-task")}
         >
           <Ionicons name="add" size={36} color="#000" />
         </Pressable>
