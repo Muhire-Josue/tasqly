@@ -45,6 +45,9 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="task-list"
           component={TaskList}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="otp-code"
           component={OtpCode}
           options={{ headerShown: false }}

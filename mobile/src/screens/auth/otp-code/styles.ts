@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { PRIMARY_COLOR } from "../../../theme/colors";
+import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
   },
   emailTitle: {
     fontSize: 16,
-    color: PRIMARY_COLOR,
+    color: PRIMARY_COLOR_BLUE,
     marginBottom: 20,
     textAlign: "center",
   },
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
 
   resendText: {
     fontSize: 15,
-    color: PRIMARY_COLOR,
+    color: PRIMARY_COLOR_BLUE,
     textDecorationLine: "underline",
     fontWeight: "500",
   },
@@ -73,7 +73,7 @@ const styles = StyleSheet.create({
   verifyButton: {
     marginTop: "18%",
     width: "100%",
-    backgroundColor: PRIMARY_COLOR,
+    backgroundColor: PRIMARY_COLOR_BLUE,
     borderRadius: 50,
     paddingVertical: 14,
     alignItems: "center",
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
   },
 
   bottomLink: {
-    color: PRIMARY_COLOR,
+    color: PRIMARY_COLOR_BLUE,
     textDecorationLine: "underline",
     marginBottom: "40%",
   },
