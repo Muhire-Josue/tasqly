@@ -6,10 +6,35 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
 import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import BottomTabBar from "../../../components/common/BottomTabBar";
+import { TaskStatus } from "../../../types/tasks";
 
 const CreateTaskScreen: React.FC = () => {
+  const STATUS_META: Record<
+    TaskStatus,
+    { label: string; icon: keyof typeof Ionicons.glyphMap; color: string }
+  > = {
+    Pending: {
+      label: "Pending",
+      icon: "time-outline",
+      color: "#F4A11A",
+    },
+    Completed: {
+      label: "Completed",
+      icon: "checkmark-circle-outline",
+      color: "#3CCB79",
+    },
+    Rejected: {
+      label: "Rejected",
+      icon: "close-circle-outline",
+      color: "#D62828",
+    },
+  };
+
   const [title, setTitle] = useState("");
   const [isUrgent, setIsUrgent] = useState(false);
+
+  const [status, setStatus] = useState<TaskStatus>("Pending");
+  const [showStatusMenu, setShowStatusMenu] = useState(false);
   const handleCancel = () => {
     // navigate back or close modal
     // navigation.goBack();
@@ -55,6 +80,37 @@ const CreateTaskScreen: React.FC = () => {
                 color={isUrgent ? PRIMARY_COLOR_BLUE : undefined}
               />
               <Text style={styles.urgentLabel}>This Task Is Urgent</Text>
+            </View>
+            <View style={styles.statusDropdownWrapper}>
+              <Pressable
+                style={styles.statusSelector}
+                onPress={() => setShowStatusMenu((prev) => !prev)}
+              >
+                {/* left chevron icon */}
+                <Ionicons name="chevron-down" size={22} color="#000" />
+                <Text style={styles.statusSelectorText}>
+                  {STATUS_META[status].label}
+                </Text>
+              </Pressable>
+
+              {showStatusMenu && (
+                <View style={styles.statusDropdownMenu}>
+                  {(Object.keys(STATUS_META) as TaskStatus[]).map((option) => (
+                    <Pressable
+                      key={option}
+                      style={styles.statusOptionRow}
+                      onPress={() => {
+                        setStatus(option);
+                        setShowStatusMenu(false);
+                      }}
+                    >
+                      <Text style={styles.statusOptionText}>
+                        {STATUS_META[option].label}
+                      </Text>
+                    </Pressable>
+                  ))}
+                </View>
+              )}
             </View>
           </View>
         </View>

@@ -3,7 +3,6 @@ import { PRIMARY_COLOR_RED } from "../../../theme/colors";
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    // backgroundColor: "#FFFFFF",
   },
   container: {
     flex: 1,
@@ -64,6 +63,76 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#111",
     fontWeight: "500",
+  },
+  statusDropdownWrapper: {
+    flex: 1,
+    marginTop: 16,
+    // position: "relative",
+  },
+
+  statusSelector: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#E0E0E0",
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+  },
+
+  statusSelectorText: {
+    fontSize: 18,
+    marginLeft: 12,
+    color: "#000",
+  },
+
+  statusDropdownMenu: {
+    position: "absolute",
+    top: "100%",
+    left: 0,
+    right: 0,
+    marginTop: 6,
+    borderRadius: 18,
+    backgroundColor: "#FFFFFF",
+    paddingVertical: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 6,
+  },
+
+  statusOptionRow: {
+    paddingVertical: 8,
+    paddingHorizontal: 18,
+  },
+
+  statusOptionText: {
+    fontSize: 18,
+    color: "#000",
+  },
+
+  statusSummaryRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 16,
+  },
+
+  statusSummaryLabel: {
+    fontSize: 16,
+    color: "#8A8A8A",
+    marginRight: 6,
+  },
+
+  statusSummaryValue: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  statusSummaryText: {
+    fontSize: 16,
+    color: "#000",
   },
 });
 
