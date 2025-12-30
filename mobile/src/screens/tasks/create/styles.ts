@@ -3,6 +3,7 @@ import { PRIMARY_COLOR_RED } from "../../../theme/colors";
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
+    // backgroundColor: "#FFFFFF",
   },
   container: {
     flex: 1,
@@ -66,25 +67,26 @@ const styles = StyleSheet.create({
   },
   statusDropdownWrapper: {
     flex: 1,
-    marginTop: 16,
-    // position: "relative",
+    position: "relative",
+    zIndex: 10,
   },
 
   statusSelector: {
     flexDirection: "row",
     alignItems: "center",
+    // justifyContent: "space-between",
     borderRadius: 14,
     borderWidth: 1,
-    borderColor: "#E0E0E0",
-    backgroundColor: "#FFFFFF",
-    paddingHorizontal: 18,
+    borderColor: "#DDD",
+    paddingHorizontal: 16,
     paddingVertical: 12,
+    backgroundColor: "#FFFFFF",
   },
 
   statusSelectorText: {
     fontSize: 18,
-    marginLeft: 12,
     color: "#000",
+    marginLeft: 12,
   },
 
   statusDropdownMenu: {
@@ -92,20 +94,21 @@ const styles = StyleSheet.create({
     top: "100%",
     left: 0,
     right: 0,
-    marginTop: 6,
-    borderRadius: 18,
+    marginTop: 8,
     backgroundColor: "#FFFFFF",
-    paddingVertical: 12,
+    borderRadius: 18,
+    paddingVertical: 8,
     shadowColor: "#000",
     shadowOpacity: 0.18,
     shadowRadius: 8,
     shadowOffset: { width: 0, height: 4 },
     elevation: 6,
+    zIndex: 20, 
   },
 
   statusOptionRow: {
-    paddingVertical: 8,
-    paddingHorizontal: 18,
+    paddingHorizontal: 16,
+    paddingVertical: 10,
   },
 
   statusOptionText: {
@@ -116,13 +119,13 @@ const styles = StyleSheet.create({
   statusSummaryRow: {
     flexDirection: "row",
     alignItems: "center",
-    marginTop: 16,
+    marginTop: 12,
   },
 
   statusSummaryLabel: {
     fontSize: 16,
-    color: "#8A8A8A",
-    marginRight: 6,
+    color: "#888",
+    marginRight: 4,
   },
 
   statusSummaryValue: {
@@ -134,6 +137,12 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#000",
   },
+  statusRow: {
+    flexDirection: "row",
+    marginTop: 16,
+    gap: 16, // or columnGap if you prefer, or remove if older RN
+  },
+
 });
 
 export default styles;

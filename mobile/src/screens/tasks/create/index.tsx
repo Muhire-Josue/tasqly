@@ -4,7 +4,7 @@ import Checkbox from "expo-checkbox";
 import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import styles from "./styles";
-import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
+import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_GREEN, PRIMARY_COLOR_RED, PRIMARY_COLOR_YELLOW } from "../../../theme/colors";
 import BottomTabBar from "../../../components/common/BottomTabBar";
 import { TaskStatus } from "../../../types/tasks";
 
@@ -16,17 +16,17 @@ const CreateTaskScreen: React.FC = () => {
     Pending: {
       label: "Pending",
       icon: "time-outline",
-      color: "#F4A11A",
+      color: PRIMARY_COLOR_YELLOW,
     },
     Completed: {
       label: "Completed",
       icon: "checkmark-circle-outline",
-      color: "#3CCB79",
+      color: PRIMARY_COLOR_GREEN,
     },
     Rejected: {
       label: "Rejected",
       icon: "close-circle-outline",
-      color: "#D62828",
+      color: PRIMARY_COLOR_RED,
     },
   };
 
@@ -81,36 +81,58 @@ const CreateTaskScreen: React.FC = () => {
               />
               <Text style={styles.urgentLabel}>This Task Is Urgent</Text>
             </View>
-            <View style={styles.statusDropdownWrapper}>
-              <Pressable
-                style={styles.statusSelector}
-                onPress={() => setShowStatusMenu((prev) => !prev)}
-              >
-                {/* left chevron icon */}
-                <Ionicons name="chevron-down" size={22} color="#000" />
-                <Text style={styles.statusSelectorText}>
+
+            <View style={styles.statusRow}>
+              <View style={styles.statusDropdownWrapper}>
+                <Pressable
+                  style={styles.statusSelector}
+                  onPress={() => setShowStatusMenu((prev) => !prev)}
+                >
+                  <Ionicons name="chevron-down" size={22} color="#000" />
+                  <Text style={styles.statusSelectorText}>
+                    {STATUS_META[status].label}
+                  </Text>
+                </Pressable>
+
+                {showStatusMenu && (
+                  <View style={styles.statusDropdownMenu}>
+                    {(Object.keys(STATUS_META) as TaskStatus[]).map(
+                      (option) => (
+                        <Pressable
+                          key={option}
+                          style={styles.statusOptionRow}
+                          onPress={() => {
+                            setStatus(option);
+                            setShowStatusMenu(false);
+                          }}
+                        >
+                          <Text style={styles.statusOptionText}>
+                            {STATUS_META[option].label}
+                          </Text>
+                        </Pressable>
+                      )
+                    )}
+                  </View>
+                )}
+              </View>
+
+              {/* spacer for the right half (future: Frequency dropdown) */}
+              <View style={{ flex: 1 }} />
+            </View>
+
+            <View style={styles.statusSummaryRow}>
+              <Text style={styles.statusSummaryLabel}>Status:</Text>
+              <View style={styles.statusSummaryValue}>
+                <Ionicons
+                  name={STATUS_META[status].icon}
+                  size={18}
+                  color={STATUS_META[status].color}
+                  style={{ marginRight: 6 }}
+                />
+                <Text style={styles.statusSummaryText}>
                   {STATUS_META[status].label}
                 </Text>
-              </Pressable>
-
-              {showStatusMenu && (
-                <View style={styles.statusDropdownMenu}>
-                  {(Object.keys(STATUS_META) as TaskStatus[]).map((option) => (
-                    <Pressable
-                      key={option}
-                      style={styles.statusOptionRow}
-                      onPress={() => {
-                        setStatus(option);
-                        setShowStatusMenu(false);
-                      }}
-                    >
-                      <Text style={styles.statusOptionText}>
-                        {STATUS_META[option].label}
-                      </Text>
-                    </Pressable>
-                  ))}
-                </View>
-              )}
+              </View>
             </View>
           </View>
         </View>
