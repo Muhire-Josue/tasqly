@@ -5,8 +5,9 @@ import Splash from "../screens/splash";
 import SignUp from "../screens/auth/signup";
 import SignIn from "../screens/auth/signin";
 import ResetPassword from "../screens/auth/reset-password";
-import TaskList from "../screens/tasks/list";
 import OtpCode from "../screens/auth/otp-code";
+import TaskList from "../screens/tasks/list";
+import CreateTask from "../screens/tasks/create";
 
 const Stack = createNativeStackNavigator();
 
@@ -43,13 +44,18 @@ const Navigation: React.FC = () => {
           options={{ headerShown: false }}
         />
         <Stack.Screen
+          name="otp-code"
+          component={OtpCode}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
           name="task-list"
           component={TaskList}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="otp-code"
-          component={OtpCode}
+          name="create-task"
+          component={CreateTask}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
