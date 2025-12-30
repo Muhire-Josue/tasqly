@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { PRIMARY_COLOR } from "../../../theme/colors";
+import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 
 const styles = StyleSheet.create({
   container: {
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   button: {
     marginTop: 24,
     width: "100%",
-    backgroundColor: PRIMARY_COLOR,
+    backgroundColor: PRIMARY_COLOR_BLUE,
     borderRadius: 50,
     paddingVertical: 14,
     flexDirection: "row",
@@ -74,7 +74,7 @@ const styles = StyleSheet.create({
   },
 
   bottomLink: {
-    color: PRIMARY_COLOR,
+    color: PRIMARY_COLOR_BLUE,
     textDecorationLine: "underline",
   },
 });

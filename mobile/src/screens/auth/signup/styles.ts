@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { PRIMARY_COLOR } from "../../../theme/colors";
+import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 const styles = StyleSheet.create({
   container: {
     marginTop: "10%",
@@ -46,12 +46,12 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   link: {
-    color: PRIMARY_COLOR,
+    color: PRIMARY_COLOR_BLUE,
     textDecorationLine: "underline",
   },
   button: {
     marginTop: 20,
-    backgroundColor: PRIMARY_COLOR,
+    backgroundColor: PRIMARY_COLOR_BLUE,
     paddingVertical: 14,
     borderRadius: 50,
     alignItems: "center",
