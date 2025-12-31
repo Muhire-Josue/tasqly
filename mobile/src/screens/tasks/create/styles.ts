@@ -398,7 +398,7 @@ const styles = StyleSheet.create({
   assigneeSummaryLabel: {
     fontSize: 16,
     color: "#888",
-    marginRight: 4,
+    marginRight: 8,
   },
 
   assigneeSummaryValue: {
