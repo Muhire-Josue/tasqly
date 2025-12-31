@@ -352,7 +352,6 @@ const CreateTask: React.FC = () => {
                   </View>
                 </View>
               )}
-              {/* Assignee picker modal */}
               <Modal
                 visible={showAssigneeModal}
                 transparent
