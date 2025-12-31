@@ -2,9 +2,16 @@ import React, { useState } from "react";
 import { View, Text, Pressable, TextInput } from "react-native";
 import Checkbox from "expo-checkbox";
 import { Ionicons } from "@expo/vector-icons";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
 import styles from "./styles";
-import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_GREEN, PRIMARY_COLOR_RED, PRIMARY_COLOR_YELLOW } from "../../../theme/colors";
+import {
+  PRIMARY_COLOR_BLUE,
+  PRIMARY_COLOR_GREEN,
+  PRIMARY_COLOR_RED,
+  PRIMARY_COLOR_YELLOW,
+} from "../../../theme/colors";
 import BottomTabBar from "../../../components/common/BottomTabBar";
 import { TaskStatus } from "../../../types/tasks";
 
@@ -35,6 +42,42 @@ const CreateTaskScreen: React.FC = () => {
 
   const [status, setStatus] = useState<TaskStatus>("Pending");
   const [showStatusMenu, setShowStatusMenu] = useState(false);
+  const [dueDate, setDueDate] = useState<Date | null>(null);
+
+  const formatDueDate = (date: Date) => {
+    const day = date.getDate();
+    const month = date.toLocaleString("en-US", { month: "long" });
+    const year = date.getFullYear();
+
+    const getSuffix = (d: number) => {
+      if (d >= 11 && d <= 13) return "th";
+      switch (d % 10) {
+        case 1:
+          return "st";
+        case 2:
+          return "nd";
+        case 3:
+          return "rd";
+        default:
+          return "th";
+      }
+    };
+
+    return `${day}${getSuffix(day)} ${month} ${year}`;
+  };
+
+  const handlePickDate = () => {
+    DateTimePickerAndroid.open({
+      value: dueDate ?? new Date(),
+      mode: "date",
+      is24Hour: false,
+      onChange: (_event, selectedDate) => {
+        if (selectedDate) {
+          setDueDate(selectedDate);
+        }
+      },
+    });
+  };
   const handleCancel = () => {
     // navigate back or close modal
     // navigation.goBack();
@@ -110,13 +153,12 @@ const CreateTaskScreen: React.FC = () => {
                             {STATUS_META[option].label}
                           </Text>
                         </Pressable>
-                      )
+                      ),
                     )}
                   </View>
                 )}
               </View>
 
-              {/* spacer for the right half (future: Frequency dropdown) */}
               <View style={{ flex: 1 }} />
             </View>
 
@@ -133,6 +175,28 @@ const CreateTaskScreen: React.FC = () => {
                   {STATUS_META[status].label}
                 </Text>
               </View>
+            </View>
+            <View style={styles.dateRow}>
+              <View style={styles.dateButtonWrapper}>
+                <Pressable style={styles.dateButton} onPress={handlePickDate}>
+                  <FontAwesome5
+                    name="calendar-alt"
+                    size={20}
+                    color="#FFFFFF"
+                    style={{ marginRight: 8 }}
+                  />
+                  <Text style={styles.dateButtonText}>Pick a Date</Text>
+                </Pressable>
+              </View>
+
+              <View style={{ flex: 1 }} />
+            </View>
+
+            <View style={styles.dueDateRow}>
+              <Text style={styles.dueDateLabel}>Due Date:</Text>
+              <Text style={styles.dueDateValue}>
+                {dueDate ? formatDueDate(dueDate) : "—"}
+              </Text>
             </View>
           </View>
         </View>

@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { PRIMARY_COLOR_RED } from "../../../theme/colors";
+import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../../theme/colors";
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     shadowRadius: 8,
     shadowOffset: { width: 0, height: 4 },
     elevation: 6,
-    zIndex: 20, 
+    zIndex: 20,
   },
 
   statusOptionRow: {
@@ -140,9 +140,51 @@ const styles = StyleSheet.create({
   statusRow: {
     flexDirection: "row",
     marginTop: 16,
-    gap: 16, // or columnGap if you prefer, or remove if older RN
+    gap: 16,
   },
 
+  dateRow: {
+    flexDirection: "row",
+    marginTop: 16,
+    gap: 16,
+  },
+
+  dateButtonWrapper: {
+    flex: 1,
+  },
+
+  dateButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    paddingVertical: 12,
+    borderRadius: 14,
+  },
+
+  dateButtonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+
+  dueDateRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 12,
+  },
+
+  dueDateLabel: {
+    fontSize: 16,
+    color: "#888",
+    marginRight: 4,
+  },
+
+  dueDateValue: {
+    fontSize: 16,
+    color: "#000",
+    fontWeight: "500",
+  },
 });
 
 export default styles;
