@@ -147,6 +147,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginTop: 16,
     gap: 16,
+    alignItems: "flex-start",
   },
 
   dateButtonWrapper: {
@@ -232,17 +233,17 @@ const styles = StyleSheet.create({
   frequencySelector: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
     borderRadius: 14,
     borderWidth: 1,
     borderColor: "#DDD",
     paddingHorizontal: 16,
-    paddingVertical: 12,
+    paddingVertical: 14,
     backgroundColor: "#FFFFFF",
   },
   frequencySelectorText: {
     fontSize: 18,
     color: "#000",
+    marginLeft: 12,
   },
   frequencyDropdownMenu: {
     position: "absolute",

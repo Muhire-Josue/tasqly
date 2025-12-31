@@ -183,6 +183,7 @@ const CreateTask: React.FC = () => {
                 </Text>
               </View>
             </View>
+            {/* Pick date (left) + Frequency (right) */}
             <View style={styles.dateRow}>
               <View style={styles.dateButtonWrapper}>
                 <Pressable style={styles.dateButton} onPress={handlePickDate}>
@@ -196,7 +197,40 @@ const CreateTask: React.FC = () => {
                 </Pressable>
               </View>
 
-              <View style={{ flex: 1 }} />
+              <View style={styles.frequencyWrapper}>
+                <Text style={styles.frequencyLabel}>Frequency</Text>
+
+                <View style={styles.frequencyDropdownWrapper}>
+                  <Pressable
+                    style={styles.frequencySelector}
+                    onPress={() => setShowFrequencyMenu((prev) => !prev)}
+                  >
+                    <Ionicons name="chevron-down" size={20} color="#000" />
+                    <Text style={styles.frequencySelectorText}>
+                      {frequency}
+                    </Text>
+                  </Pressable>
+
+                  {showFrequencyMenu && (
+                    <View style={styles.frequencyDropdownMenu}>
+                      {FREQUENCIES.map((option) => (
+                        <Pressable
+                          key={option}
+                          style={styles.frequencyOptionRow}
+                          onPress={() => {
+                            setFrequency(option);
+                            setShowFrequencyMenu(false);
+                          }}
+                        >
+                          <Text style={styles.frequencyOptionText}>
+                            {option}
+                          </Text>
+                        </Pressable>
+                      ))}
+                    </View>
+                  )}
+                </View>
+              </View>
             </View>
 
             <View style={styles.dueDateRow}>
@@ -204,36 +238,6 @@ const CreateTask: React.FC = () => {
               <Text style={styles.dueDateValue}>
                 {dueDate ? formatDueDateLabel(dueDate) : "—"}
               </Text>
-            </View>
-            <View style={styles.frequencyWrapper}>
-              <Text style={styles.frequencyLabel}>Frequency</Text>
-
-              <View style={styles.frequencyDropdownWrapper}>
-                <Pressable
-                  style={styles.frequencySelector}
-                  onPress={() => setShowFrequencyMenu((prev) => !prev)}
-                >
-                  <Ionicons name="chevron-down" size={20} color="#000" />
-                  <Text style={styles.frequencySelectorText}>{frequency}</Text>
-                </Pressable>
-
-                {showFrequencyMenu && (
-                  <View style={styles.frequencyDropdownMenu}>
-                    {FREQUENCIES.map((option) => (
-                      <Pressable
-                        key={option}
-                        style={styles.frequencyOptionRow}
-                        onPress={() => {
-                          setFrequency(option);
-                          setShowFrequencyMenu(false);
-                        }}
-                      >
-                        <Text style={styles.frequencyOptionText}>{option}</Text>
-                      </Pressable>
-                    ))}
-                  </View>
-                )}
-              </View>
             </View>
             <Modal
               visible={showCalendar}
