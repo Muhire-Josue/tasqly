@@ -216,6 +216,73 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#111",
   },
+  frequencyWrapper: {
+    flex: 1,
+  },
+  frequencyLabel: {
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#111",
+    marginBottom: 6,
+  },
+  frequencyDropdownWrapper: {
+    position: "relative",
+    zIndex: 10,
+  },
+  frequencySelector: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#DDD",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: "#FFFFFF",
+  },
+  frequencySelectorText: {
+    fontSize: 18,
+    color: "#000",
+  },
+  frequencyDropdownMenu: {
+    position: "absolute",
+    top: "100%",
+    left: 0,
+    right: 0,
+    marginTop: 8,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 18,
+    paddingVertical: 8,
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 6,
+    zIndex: 20,
+  },
+  frequencyOptionRow: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+  frequencyOptionText: {
+    fontSize: 18,
+    color: "#000",
+  },
+
+  frequencySummaryRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 10,
+  },
+  frequencySummaryLabel: {
+    fontSize: 16,
+    color: "#888",
+    marginRight: 4,
+  },
+  frequencySummaryText: {
+    fontSize: 16,
+    color: "#000",
+  },
 });
 
 export default styles;

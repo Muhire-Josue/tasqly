@@ -39,6 +39,19 @@ const CreateTask: React.FC = () => {
     },
   };
 
+  type Frequency = "None" | "Daily" | "Weekly" | "Bi-weekly" | "Monthly";
+
+  const FREQUENCIES: Frequency[] = [
+    "None",
+    "Daily",
+    "Weekly",
+    "Bi-weekly",
+    "Monthly",
+  ];
+
+  const [frequency, setFrequency] = useState<Frequency>("None");
+  const [showFrequencyMenu, setShowFrequencyMenu] = useState(false);
+
   const [title, setTitle] = useState("");
   const [isUrgent, setIsUrgent] = useState(false);
 
@@ -191,6 +204,36 @@ const CreateTask: React.FC = () => {
               <Text style={styles.dueDateValue}>
                 {dueDate ? formatDueDateLabel(dueDate) : "—"}
               </Text>
+            </View>
+            <View style={styles.frequencyWrapper}>
+              <Text style={styles.frequencyLabel}>Frequency</Text>
+
+              <View style={styles.frequencyDropdownWrapper}>
+                <Pressable
+                  style={styles.frequencySelector}
+                  onPress={() => setShowFrequencyMenu((prev) => !prev)}
+                >
+                  <Ionicons name="chevron-down" size={20} color="#000" />
+                  <Text style={styles.frequencySelectorText}>{frequency}</Text>
+                </Pressable>
+
+                {showFrequencyMenu && (
+                  <View style={styles.frequencyDropdownMenu}>
+                    {FREQUENCIES.map((option) => (
+                      <Pressable
+                        key={option}
+                        style={styles.frequencyOptionRow}
+                        onPress={() => {
+                          setFrequency(option);
+                          setShowFrequencyMenu(false);
+                        }}
+                      >
+                        <Text style={styles.frequencyOptionText}>{option}</Text>
+                      </Pressable>
+                    ))}
+                  </View>
+                )}
+              </View>
             </View>
             <Modal
               visible={showCalendar}
