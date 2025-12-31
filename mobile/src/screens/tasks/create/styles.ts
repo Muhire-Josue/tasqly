@@ -158,14 +158,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     backgroundColor: PRIMARY_COLOR_BLUE,
-    paddingVertical: 12,
-    borderRadius: 14,
+    paddingVertical: 14,
+    borderRadius: 6,
   },
 
   dateButtonText: {
     color: "#FFFFFF",
     fontSize: 16,
-    fontWeight: "600",
   },
 
   dueDateRow: {

@@ -52,7 +52,6 @@ const CreateTask: React.FC = () => {
   };
 
   const formatDueDateLabel = (isoDate: string): string => {
-    // isoDate is "YYYY-MM-DD"
     const [year, month, day] = isoDate.split("-").map(Number);
     const date = new Date(year, month - 1, day);
 
