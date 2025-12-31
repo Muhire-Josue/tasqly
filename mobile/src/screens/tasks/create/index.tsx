@@ -160,7 +160,7 @@ const CreateTask: React.FC = () => {
                             {STATUS_META[option].label}
                           </Text>
                         </Pressable>
-                      ),
+                      )
                     )}
                   </View>
                 )}
@@ -168,23 +168,22 @@ const CreateTask: React.FC = () => {
 
               <View style={{ flex: 1 }} />
             </View>
-
-            <View style={styles.statusSummaryRow}>
-              <Text style={styles.statusSummaryLabel}>Status:</Text>
-              <View style={styles.statusSummaryValue}>
-                <Ionicons
-                  name={STATUS_META[status].icon}
-                  size={18}
-                  color={STATUS_META[status].color}
-                  style={{ marginRight: 6 }}
-                />
-                <Text style={styles.statusSummaryText}>
-                  {STATUS_META[status].label}
-                </Text>
+            <View style={styles.statusFrequencyHeaderRow}>
+              <View style={styles.statusSummaryLeft}>
+                <Text style={styles.statusSummaryLabel}>Status:</Text>
+                <View style={styles.statusSummaryValue}>
+                  <Ionicons
+                    name={STATUS_META[status].icon}
+                    size={18}
+                    color={STATUS_META[status].color}
+                    style={{ marginRight: 6 }}
+                  />
+                  <Text style={styles.statusSummaryText}>
+                    {STATUS_META[status].label}
+                  </Text>
+                </View>
               </View>
             </View>
-            {/* Header row just for the "Frequency" label on the right */}
-            {/* Row: Pick Date + Frequency */}
             <View style={styles.dateRow}>
               {/* Pick Date Button */}
               <View style={styles.dateButtonWrapper}>
@@ -201,8 +200,6 @@ const CreateTask: React.FC = () => {
 
               {/* Frequency Column */}
               <View style={styles.frequencyWrapper}>
-                <Text style={styles.frequencyLabel}>Frequency</Text>
-
                 <View style={styles.frequencyDropdownWrapper}>
                   <Pressable
                     style={styles.frequencySelector}
@@ -233,8 +230,6 @@ const CreateTask: React.FC = () => {
                     </View>
                   )}
                 </View>
-
-                <Text style={styles.frequencySummaryText}>{frequency}</Text>
               </View>
             </View>
 

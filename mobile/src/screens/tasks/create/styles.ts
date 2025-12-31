@@ -74,8 +74,6 @@ const styles = StyleSheet.create({
   statusSelector: {
     flexDirection: "row",
     alignItems: "center",
-    // justifyContent: "space-between",
-    borderRadius: 14,
     borderWidth: 1,
     borderColor: "#DDD",
     paddingHorizontal: 16,
@@ -160,12 +158,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
 
-  dueDateRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 12,
-  },
-
   dueDateLabel: {
     fontSize: 16,
     color: "#888",
@@ -230,16 +222,10 @@ const styles = StyleSheet.create({
   frequencySummaryLabel: {
     fontSize: 16,
     color: "#888",
-    marginRight: 4,
   },
   frequencySummaryText: {
     fontSize: 16,
     color: "#000",
-  },
-  dateRow: {
-    flexDirection: "row",
-    gap: 16,
-    alignItems: "center",
   },
 
   frequencyWrapper: {
@@ -250,7 +236,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "500",
     color: "#111",
-    marginBottom: 8,
+    marginBottom: 0,
   },
 
   frequencySelector: {
@@ -262,14 +248,14 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
     backgroundColor: "#FFFFFF",
-    width: "100%", // ⬅ make dropdown fill its column
+    width: "100%",
   },
 
   frequencySelectorText: {
     fontSize: 18,
     color: "#000",
     marginLeft: 12,
-    flexShrink: 0, // ⬅ prevent wrapping like "Week\nly"
+    flexShrink: 0,
   },
   dateHeaderRow: {
     flexDirection: "row",
@@ -282,7 +268,7 @@ const styles = StyleSheet.create({
     top: "100%",
     left: 0,
     right: 0,
-    width: "100%", // match selector width
+    width: "100%",
     marginTop: 8,
     backgroundColor: "#FFFFFF",
     borderRadius: 18,
@@ -293,6 +279,43 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     elevation: 6,
     zIndex: 20,
+  },
+  statusFrequencyHeaderRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 12,
+    marginBottom: 4,
+  },
+
+  statusSummaryLeft: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  frequencyHeaderRight: {
+    flex: 1,
+    alignItems: "flex-start",
+  },
+
+  dateRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 16,
+  },
+
+  dateColumn: {
+    flex: 1,
+  },
+
+  frequencyColumn: {
+    flex: 1,
+  },
+  dueDateRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 12,
   },
 });
 
