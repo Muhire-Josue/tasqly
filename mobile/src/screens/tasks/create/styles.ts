@@ -490,6 +490,22 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#111",
   },
+  assigneeHeaderRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+  },
+
+  rotationWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+  },
+
+  rotationLabel: {
+    fontSize: 16,
+    color: "#111",
+  },
 });
 
 export default styles;

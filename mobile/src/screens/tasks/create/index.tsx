@@ -7,6 +7,7 @@ import {
   Modal,
   Image,
   ScrollView,
+  Switch,
 } from "react-native";
 import Checkbox from "expo-checkbox";
 import { Ionicons } from "@expo/vector-icons";
@@ -69,7 +70,7 @@ const CreateTask: React.FC = () => {
   const [dueDate, setDueDate] = useState<string | null>(null);
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedAssignee, setSelectedAssignee] = useState<Member | null>(null);
-  //   const [showAssigneeMenu, setShowAssigneeMenu] = useState(false);
+  const [assigneeRotationEnabled, setAssigneeRotationEnabled] = useState(false);
   const [showAssigneeModal, setShowAssigneeModal] = useState(false);
 
   const handlePickDate = () => {
@@ -292,19 +293,39 @@ const CreateTask: React.FC = () => {
               </View>
             </Modal>
             <View style={styles.assigneeSection}>
-              <View style={styles.assigneeButtonWrapper}>
-                <Pressable
-                  style={styles.assigneeButton}
-                  onPress={() => setShowAssigneeModal(true)}
-                >
-                  <Ionicons
-                    name="person-add-outline"
-                    size={20}
-                    color="#FFFFFF"
-                    style={{ marginRight: 8 }}
+              <View style={styles.assigneeHeaderRow}>
+                <View style={styles.assigneeButtonWrapper}>
+                  <Pressable
+                    style={styles.assigneeButton}
+                    onPress={() => setShowAssigneeModal(true)}
+                  >
+                    <Ionicons
+                      name="person-add-outline"
+                      size={20}
+                      color="#FFFFFF"
+                      style={{ marginRight: 8 }}
+                    />
+                    <Text style={styles.assigneeButtonText}>Add Assignee</Text>
+                  </Pressable>
+                </View>
+
+                <View style={styles.rotationWrapper}>
+                  <Switch
+                    value={assigneeRotationEnabled}
+                    onValueChange={setAssigneeRotationEnabled}
+                    disabled={frequency === "None"}
+                    trackColor={{ false: "#D1D5DB", true: PRIMARY_COLOR_BLUE }}
+                    thumbColor="#FFFFFF"
                   />
-                  <Text style={styles.assigneeButtonText}>Add Assignee</Text>
-                </Pressable>
+                  <Text
+                    style={[
+                      styles.rotationLabel,
+                      frequency === "None" && { color: "#B3B3B3" }, // dim label when disabled
+                    ]}
+                  >
+                    Assignee Rotation
+                  </Text>
+                </View>
               </View>
 
               {/* Currently selected assignee (optional) */}
