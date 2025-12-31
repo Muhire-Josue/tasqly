@@ -6,7 +6,6 @@ import {
   TextInput,
   Modal,
   Image,
-  ImageSourcePropType,
   ScrollView,
 } from "react-native";
 import Checkbox from "expo-checkbox";
@@ -24,70 +23,7 @@ import {
 import BottomTabBar from "../../../components/common/BottomTabBar";
 import { TaskStatus } from "../../../types/tasks";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
-
-import Ben from "../../../assets/ben.jpg";
-import Micheal from "../../../assets/michael.jpg";
-import Vince from "../../../assets/vince.jpg";
-import Well from "../../../assets/wellington.jpg";
-
-type Member = {
-  id: string;
-  name: string;
-  avatar?: ImageSourcePropType;
-};
-
-const MEMBERS: Member[] = [
-  {
-    id: "1",
-    name: "Henry Smith",
-    avatar: Ben,
-  },
-  {
-    id: "2",
-    name: "Jane Smith",
-    avatar: Micheal,
-  },
-  {
-    id: "3",
-    name: "Johnson Smith",
-    // no avatar -> will show placeholder
-  },
-  {
-    id: "4",
-    name: "Diego Smith",
-    avatar: Well,
-  },
-  {
-    id: "5",
-    name: "Valerie Smith",
-    avatar: Vince,
-  },
-  {
-    id: "6",
-    name: "Henry Smith",
-    avatar: Ben,
-  },
-  {
-    id: "7",
-    name: "Jane Smith",
-    avatar: Micheal,
-  },
-  {
-    id: "8",
-    name: "Johnson Smith",
-    // no avatar -> will show placeholder
-  },
-  {
-    id: "9",
-    name: "Diego Smith",
-    avatar: Well,
-  },
-  {
-    id: "10",
-    name: "Valerie Smith",
-    avatar: Vince,
-  },
-];
+import { Member, MEMBERS_MOCK } from "../../../mocks/members";
 
 const CreateTask: React.FC = () => {
   const navigate = useNavigateTo();
@@ -410,7 +346,7 @@ const CreateTask: React.FC = () => {
                       showsVerticalScrollIndicator={false}
                       bounces={false}
                     >
-                      {MEMBERS.map((member) => (
+                      {MEMBERS_MOCK.map((member) => (
                         <Pressable
                           key={member.id}
                           style={styles.assigneeRow}
