@@ -18,7 +18,7 @@ import {
   PRIMARY_COLOR_BLUE,
   PRIMARY_COLOR_GREEN,
   PRIMARY_COLOR_RED,
-  PRIMARY_COLOR_YELLOW,
+  PRIMARY_COLOR_GRAY,
 } from "../../../theme/colors";
 import BottomTabBar from "../../../components/common/BottomTabBar";
 import { TaskStatus } from "../../../types/tasks";
@@ -34,7 +34,7 @@ const CreateTask: React.FC = () => {
     Pending: {
       label: "Pending",
       icon: "time-outline",
-      color: PRIMARY_COLOR_YELLOW,
+      color: PRIMARY_COLOR_GRAY,
     },
     Completed: {
       label: "Completed",
@@ -61,7 +61,7 @@ const CreateTask: React.FC = () => {
   const [frequency, setFrequency] = useState<Frequency>("None");
   const [showFrequencyMenu, setShowFrequencyMenu] = useState(false);
 
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState<string | null>(null);
   const [isUrgent, setIsUrgent] = useState(false);
 
   const [status, setStatus] = useState<TaskStatus>("Pending");
@@ -100,6 +100,12 @@ const CreateTask: React.FC = () => {
 
   const handleCancel = () => {
     navigate("task-list");
+    // reset state variables
+    setTitle(null);
+    setIsUrgent(false);
+    setStatus("Pending");
+    setDueDate(null);
+    setSelectedAssignee(null);
   };
 
   return (
@@ -128,7 +134,7 @@ const CreateTask: React.FC = () => {
           <View style={styles.formSection}>
             <Text style={styles.label}>Title</Text>
             <TextInput
-              value={title}
+              value={title ? title : ""}
               onChangeText={setTitle}
               placeholder="Ex: Groceries"
               placeholderTextColor="#A0A0A0"
