@@ -466,12 +466,15 @@ const styles = StyleSheet.create({
   },
 
   assigneeAvatar: {
-    width: 36,
-    height: 36,
-    borderRadius: 24,
-    overflow: "hidden",
-    marginRight: 12,
-  },
+  width: 36,
+  height: 36,
+  borderRadius: 18,
+  overflow: "hidden",
+  marginRight: 12,
+  backgroundColor: "#F1F1F1",
+  justifyContent: "center",
+  alignItems: "center",
+},
 
   assigneeAvatarPlaceholder: {
     width: 36,
