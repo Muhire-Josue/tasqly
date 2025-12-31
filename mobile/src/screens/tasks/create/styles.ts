@@ -454,7 +454,6 @@ const styles = StyleSheet.create({
   assigneeHeaderRow: {
     flexDirection: "row",
     alignItems: "center",
-    // justifyContent: "space-between",
   },
 
   rotationWrapper: {
