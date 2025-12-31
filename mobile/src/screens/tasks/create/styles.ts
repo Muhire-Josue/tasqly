@@ -142,14 +142,6 @@ const styles = StyleSheet.create({
     marginTop: 16,
     gap: 16,
   },
-
-  dateRow: {
-    flexDirection: "row",
-    marginTop: 16,
-    gap: 16,
-    alignItems: "flex-start",
-  },
-
   dateButtonWrapper: {
     flex: 1,
   },
@@ -217,15 +209,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: "#111",
   },
-  frequencyWrapper: {
-    flex: 1,
-  },
-  frequencyLabel: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: "#111",
-    marginBottom: 6,
-  },
   frequencyDropdownWrapper: {
     position: "relative",
     zIndex: 10,
@@ -283,6 +266,28 @@ const styles = StyleSheet.create({
   frequencySummaryText: {
     fontSize: 16,
     color: "#000",
+  },
+  dateRow: {
+    flexDirection: "row",
+    gap: 16,
+    alignItems: "center",
+  },
+
+  frequencyWrapper: {
+    flex: 1,
+  },
+
+  frequencyLabel: {
+    flex: 1,
+    fontSize: 16,
+    fontWeight: "500",
+    color: "#111",
+    textAlign: "right",
+  },
+  dateHeaderRow: {
+    flexDirection: "row",
+    marginTop: 16,
+    marginBottom: 4,
   },
 });
 

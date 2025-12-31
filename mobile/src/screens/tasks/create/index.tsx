@@ -183,7 +183,13 @@ const CreateTask: React.FC = () => {
                 </Text>
               </View>
             </View>
-            {/* Pick date (left) + Frequency (right) */}
+            {/* Header row just for the "Frequency" label on the right */}
+            <View style={styles.dateHeaderRow}>
+              <View style={{ flex: 1 }} />
+              <Text style={styles.frequencyLabel}>Frequency</Text>
+            </View>
+
+            {/* Pick date (left) + Frequency dropdown (right) */}
             <View style={styles.dateRow}>
               <View style={styles.dateButtonWrapper}>
                 <Pressable style={styles.dateButton} onPress={handlePickDate}>
@@ -198,8 +204,6 @@ const CreateTask: React.FC = () => {
               </View>
 
               <View style={styles.frequencyWrapper}>
-                <Text style={styles.frequencyLabel}>Frequency</Text>
-
                 <View style={styles.frequencyDropdownWrapper}>
                   <Pressable
                     style={styles.frequencySelector}
