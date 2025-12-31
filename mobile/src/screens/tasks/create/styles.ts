@@ -3,7 +3,6 @@ import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../../theme/colors";
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    // backgroundColor: "#FFFFFF",
   },
   container: {
     flex: 1,
