@@ -320,7 +320,7 @@ const CreateTask: React.FC = () => {
                   <Text
                     style={[
                       styles.rotationLabel,
-                      frequency === "None" && { color: "#B3B3B3" }, // dim label when disabled
+                      frequency === "None" && { color: "#B3B3B3" },
                     ]}
                   >
                     Assignee Rotation
@@ -328,7 +328,6 @@ const CreateTask: React.FC = () => {
                 </View>
               </View>
 
-              {/* Currently selected assignee (optional) */}
               {selectedAssignee && (
                 <View style={styles.assigneeSummaryRow}>
                   <Text style={styles.assigneeSummaryLabel}>Assigned to:</Text>

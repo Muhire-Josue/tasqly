@@ -323,7 +323,7 @@ const styles = StyleSheet.create({
   },
 
   assigneeButtonWrapper: {
-    alignSelf: "flex-start",
+    flexShrink: 0,
   },
 
   assigneeButton: {
@@ -341,44 +341,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "500",
   },
-
-  // assigneeDropdownMenu: {
-  //   position: "absolute",
-  //   top: 48,              // just under the button
-  //   left: 0,
-  //   right: undefined,
-  //   minWidth: 260,
-  //   backgroundColor: "#FFFFFF",
-  //   borderRadius: 18,
-  //   marginTop: 8,
-  //   paddingVertical: 8,
-  //   shadowColor: "#000",
-  //   shadowOpacity: 0.18,
-  //   shadowRadius: 8,
-  //   shadowOffset: { width: 0, height: 4 },
-  //   elevation: 6,
-  //   zIndex: 30,
-  //   maxHeight: 320,
-  // },
-
-  // assigneeRow: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   paddingHorizontal: 16,
-  //   paddingVertical: 10,
-  // },
-
-  // assigneeAvatar: {
-  //   width: 40,
-  //   height: 40,
-  //   borderRadius: 20,
-  //   overflow: "hidden",
-  //   backgroundColor: "#EEE",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   marginRight: 12,
-  // },
-
   assigneeAvatarImage: {
     width: "100%",
     height: "100%",
@@ -493,18 +455,21 @@ const styles = StyleSheet.create({
   assigneeHeaderRow: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "space-between",
+    // justifyContent: "space-between",
   },
 
   rotationWrapper: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 8,
+    marginLeft: 16,
+    flexShrink: 1,
   },
 
   rotationLabel: {
     fontSize: 16,
     color: "#111",
+    marginLeft: 8,
+    flexShrink: 1,
   },
 });
 
