@@ -216,7 +216,6 @@ const CreateTask: React.FC = () => {
                 </Pressable>
               </View>
 
-              {/* Frequency Column */}
               <View style={styles.frequencyWrapper}>
                 <View style={styles.frequencyDropdownWrapper}>
                   <Pressable
