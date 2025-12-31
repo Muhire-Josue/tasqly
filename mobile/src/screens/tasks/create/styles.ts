@@ -317,6 +317,176 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginTop: 12,
   },
+  assigneeSection: {
+    marginTop: 16,
+    position: "relative",
+  },
+
+  assigneeButtonWrapper: {
+    alignSelf: "flex-start",
+  },
+
+  assigneeButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+  },
+
+  assigneeButtonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "500",
+  },
+
+  // assigneeDropdownMenu: {
+  //   position: "absolute",
+  //   top: 48,              // just under the button
+  //   left: 0,
+  //   right: undefined,
+  //   minWidth: 260,
+  //   backgroundColor: "#FFFFFF",
+  //   borderRadius: 18,
+  //   marginTop: 8,
+  //   paddingVertical: 8,
+  //   shadowColor: "#000",
+  //   shadowOpacity: 0.18,
+  //   shadowRadius: 8,
+  //   shadowOffset: { width: 0, height: 4 },
+  //   elevation: 6,
+  //   zIndex: 30,
+  //   maxHeight: 320,
+  // },
+
+  // assigneeRow: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   paddingHorizontal: 16,
+  //   paddingVertical: 10,
+  // },
+
+  // assigneeAvatar: {
+  //   width: 40,
+  //   height: 40,
+  //   borderRadius: 20,
+  //   overflow: "hidden",
+  //   backgroundColor: "#EEE",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  //   marginRight: 12,
+  // },
+
+  assigneeAvatarImage: {
+    width: "100%",
+    height: "100%",
+  },
+
+  assigneeNameText: {
+    fontSize: 16,
+    color: "#000",
+  },
+
+  assigneeSummaryRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 8,
+  },
+
+  assigneeSummaryLabel: {
+    fontSize: 16,
+    color: "#888",
+    marginRight: 4,
+  },
+
+  assigneeSummaryValue: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+
+  assigneeSummaryName: {
+    fontSize: 16,
+    color: "#000",
+  },
+  addAssigneeButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    paddingVertical: 14,
+    borderRadius: 8,
+  },
+
+  addAssigneeText: {
+    color: "#FFFFFF",
+    fontSize: 18,
+    fontWeight: "600",
+  },
+
+  assigneeOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.25)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  assigneeCard: {
+    width: "90%",
+    maxHeight: "70%",
+    borderRadius: 24,
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 8,
+  },
+
+  assigneeHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+
+  assigneeTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#111",
+  },
+
+  assigneeRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+  },
+
+  assigneeAvatar: {
+    width: 36,
+    height: 36,
+    borderRadius: 24,
+    overflow: "hidden",
+    marginRight: 12,
+  },
+
+  assigneeAvatarPlaceholder: {
+    width: 36,
+    height: 36,
+    borderRadius: 24,
+    marginRight: 16,
+    backgroundColor: "#F1F1F1",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  assigneeName: {
+    fontSize: 18,
+    color: "#111",
+  },
 });
 
 export default styles;

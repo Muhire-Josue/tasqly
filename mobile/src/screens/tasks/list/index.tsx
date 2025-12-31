@@ -80,7 +80,6 @@ const TaskList: React.FC = () => {
         </View>
       </View>
 
-      {/* Dropdown Modal stays the same */}
       <Modal
         visible={menuVisible}
         transparent
