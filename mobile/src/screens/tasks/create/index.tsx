@@ -184,13 +184,9 @@ const CreateTask: React.FC = () => {
               </View>
             </View>
             {/* Header row just for the "Frequency" label on the right */}
-            <View style={styles.dateHeaderRow}>
-              <View style={{ flex: 1 }} />
-              <Text style={styles.frequencyLabel}>Frequency</Text>
-            </View>
-
-            {/* Pick date (left) + Frequency dropdown (right) */}
+            {/* Row: Pick Date + Frequency */}
             <View style={styles.dateRow}>
+              {/* Pick Date Button */}
               <View style={styles.dateButtonWrapper}>
                 <Pressable style={styles.dateButton} onPress={handlePickDate}>
                   <FontAwesome5
@@ -203,37 +199,57 @@ const CreateTask: React.FC = () => {
                 </Pressable>
               </View>
 
+              {/* Frequency Column */}
               <View style={styles.frequencyWrapper}>
-                <View style={styles.frequencyDropdownWrapper}>
-                  <Pressable
-                    style={styles.frequencySelector}
-                    onPress={() => setShowFrequencyMenu((prev) => !prev)}
-                  >
-                    <Ionicons name="chevron-down" size={20} color="#000" />
-                    <Text style={styles.frequencySelectorText}>
-                      {frequency}
-                    </Text>
-                  </Pressable>
+                {/* Label + Dropdown inline */}
+                <View
+                  style={{
+                    flexDirection: "row",
+                    alignItems: "center",
+                    marginBottom: 4,
+                  }}
+                >
+                  <Text style={styles.frequencyLabel}>Frequency</Text>
 
-                  {showFrequencyMenu && (
-                    <View style={styles.frequencyDropdownMenu}>
-                      {FREQUENCIES.map((option) => (
-                        <Pressable
-                          key={option}
-                          style={styles.frequencyOptionRow}
-                          onPress={() => {
-                            setFrequency(option);
-                            setShowFrequencyMenu(false);
-                          }}
-                        >
-                          <Text style={styles.frequencyOptionText}>
-                            {option}
-                          </Text>
-                        </Pressable>
-                      ))}
-                    </View>
-                  )}
+                  <View
+                    style={[
+                      styles.frequencyDropdownWrapper,
+                      { flex: 1, marginLeft: 8 },
+                    ]}
+                  >
+                    <Pressable
+                      style={styles.frequencySelector}
+                      onPress={() => setShowFrequencyMenu((prev) => !prev)}
+                    >
+                      <Ionicons name="chevron-down" size={20} color="#000" />
+                      <Text style={styles.frequencySelectorText}>
+                        {frequency}
+                      </Text>
+                    </Pressable>
+
+                    {showFrequencyMenu && (
+                      <View style={styles.frequencyDropdownMenu}>
+                        {FREQUENCIES.map((option) => (
+                          <Pressable
+                            key={option}
+                            style={styles.frequencyOptionRow}
+                            onPress={() => {
+                              setFrequency(option);
+                              setShowFrequencyMenu(false);
+                            }}
+                          >
+                            <Text style={styles.frequencyOptionText}>
+                              {option}
+                            </Text>
+                          </Pressable>
+                        ))}
+                      </View>
+                    )}
+                  </View>
                 </View>
+
+                {/* Selected frequency under dropdown */}
+                <Text style={styles.frequencySummaryText}>{frequency}</Text>
               </View>
             </View>
 
