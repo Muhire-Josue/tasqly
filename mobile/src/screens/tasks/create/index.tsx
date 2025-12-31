@@ -201,54 +201,39 @@ const CreateTask: React.FC = () => {
 
               {/* Frequency Column */}
               <View style={styles.frequencyWrapper}>
-                {/* Label + Dropdown inline */}
-                <View
-                  style={{
-                    flexDirection: "row",
-                    alignItems: "center",
-                    marginBottom: 4,
-                  }}
-                >
-                  <Text style={styles.frequencyLabel}>Frequency</Text>
+                <Text style={styles.frequencyLabel}>Frequency</Text>
 
-                  <View
-                    style={[
-                      styles.frequencyDropdownWrapper,
-                      { flex: 1, marginLeft: 8 },
-                    ]}
+                <View style={styles.frequencyDropdownWrapper}>
+                  <Pressable
+                    style={styles.frequencySelector}
+                    onPress={() => setShowFrequencyMenu((prev) => !prev)}
                   >
-                    <Pressable
-                      style={styles.frequencySelector}
-                      onPress={() => setShowFrequencyMenu((prev) => !prev)}
-                    >
-                      <Ionicons name="chevron-down" size={20} color="#000" />
-                      <Text style={styles.frequencySelectorText}>
-                        {frequency}
-                      </Text>
-                    </Pressable>
+                    <Ionicons name="chevron-down" size={20} color="#000" />
+                    <Text style={styles.frequencySelectorText}>
+                      {frequency}
+                    </Text>
+                  </Pressable>
 
-                    {showFrequencyMenu && (
-                      <View style={styles.frequencyDropdownMenu}>
-                        {FREQUENCIES.map((option) => (
-                          <Pressable
-                            key={option}
-                            style={styles.frequencyOptionRow}
-                            onPress={() => {
-                              setFrequency(option);
-                              setShowFrequencyMenu(false);
-                            }}
-                          >
-                            <Text style={styles.frequencyOptionText}>
-                              {option}
-                            </Text>
-                          </Pressable>
-                        ))}
-                      </View>
-                    )}
-                  </View>
+                  {showFrequencyMenu && (
+                    <View style={styles.frequencyDropdownMenu}>
+                      {FREQUENCIES.map((option) => (
+                        <Pressable
+                          key={option}
+                          style={styles.frequencyOptionRow}
+                          onPress={() => {
+                            setFrequency(option);
+                            setShowFrequencyMenu(false);
+                          }}
+                        >
+                          <Text style={styles.frequencyOptionText}>
+                            {option}
+                          </Text>
+                        </Pressable>
+                      ))}
+                    </View>
+                  )}
                 </View>
 
-                {/* Selected frequency under dropdown */}
                 <Text style={styles.frequencySummaryText}>{frequency}</Text>
               </View>
             </View>

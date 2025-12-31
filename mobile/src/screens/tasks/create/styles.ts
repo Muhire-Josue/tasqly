@@ -213,37 +213,6 @@ const styles = StyleSheet.create({
     position: "relative",
     zIndex: 10,
   },
-  frequencySelector: {
-    flexDirection: "row",
-    alignItems: "center",
-    borderRadius: 14,
-    borderWidth: 1,
-    borderColor: "#DDD",
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-    backgroundColor: "#FFFFFF",
-  },
-  frequencySelectorText: {
-    fontSize: 18,
-    color: "#000",
-    marginLeft: 12,
-  },
-  frequencyDropdownMenu: {
-    position: "absolute",
-    top: "100%",
-    left: 0,
-    right: 0,
-    marginTop: 8,
-    backgroundColor: "#FFFFFF",
-    borderRadius: 18,
-    paddingVertical: 8,
-    shadowColor: "#000",
-    shadowOpacity: 0.18,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 6,
-    zIndex: 20,
-  },
   frequencyOptionRow: {
     paddingHorizontal: 16,
     paddingVertical: 10,
@@ -278,16 +247,52 @@ const styles = StyleSheet.create({
   },
 
   frequencyLabel: {
-    flex: 1,
     fontSize: 16,
     fontWeight: "500",
     color: "#111",
-    textAlign: "right",
+    marginBottom: 8,
+  },
+
+  frequencySelector: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#DDD",
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    backgroundColor: "#FFFFFF",
+    width: "100%", // ⬅ make dropdown fill its column
+  },
+
+  frequencySelectorText: {
+    fontSize: 18,
+    color: "#000",
+    marginLeft: 12,
+    flexShrink: 0, // ⬅ prevent wrapping like "Week\nly"
   },
   dateHeaderRow: {
     flexDirection: "row",
     marginTop: 16,
     marginBottom: 4,
+  },
+
+  frequencyDropdownMenu: {
+    position: "absolute",
+    top: "100%",
+    left: 0,
+    right: 0,
+    width: "100%", // match selector width
+    marginTop: 8,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 18,
+    paddingVertical: 8,
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 6,
+    zIndex: 20,
   },
 });
 
