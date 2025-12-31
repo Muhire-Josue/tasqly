@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { View, Text, Pressable, TextInput } from "react-native";
+import { View, Text, Pressable, TextInput, Modal } from "react-native";
 import Checkbox from "expo-checkbox";
 import { Ionicons } from "@expo/vector-icons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { DateTimePickerAndroid } from "@react-native-community/datetimepicker";
+import { Calendar } from "react-native-calendars";
 import styles from "./styles";
 import {
   PRIMARY_COLOR_BLUE,
@@ -14,8 +14,10 @@ import {
 } from "../../../theme/colors";
 import BottomTabBar from "../../../components/common/BottomTabBar";
 import { TaskStatus } from "../../../types/tasks";
+import { useNavigateTo } from "../../../navigation/useNavigateTo";
 
-const CreateTaskScreen: React.FC = () => {
+const CreateTask: React.FC = () => {
+  const navigate = useNavigateTo();
   const STATUS_META: Record<
     TaskStatus,
     { label: string; icon: keyof typeof Ionicons.glyphMap; color: string }
@@ -42,45 +44,38 @@ const CreateTaskScreen: React.FC = () => {
 
   const [status, setStatus] = useState<TaskStatus>("Pending");
   const [showStatusMenu, setShowStatusMenu] = useState(false);
-  const [dueDate, setDueDate] = useState<Date | null>(null);
-
-  const formatDueDate = (date: Date) => {
-    const day = date.getDate();
-    const month = date.toLocaleString("en-US", { month: "long" });
-    const year = date.getFullYear();
-
-    const getSuffix = (d: number) => {
-      if (d >= 11 && d <= 13) return "th";
-      switch (d % 10) {
-        case 1:
-          return "st";
-        case 2:
-          return "nd";
-        case 3:
-          return "rd";
-        default:
-          return "th";
-      }
-    };
-
-    return `${day}${getSuffix(day)} ${month} ${year}`;
-  };
+  const [dueDate, setDueDate] = useState<string | null>(null);
+  const [showCalendar, setShowCalendar] = useState(false);
 
   const handlePickDate = () => {
-    DateTimePickerAndroid.open({
-      value: dueDate ?? new Date(),
-      mode: "date",
-      is24Hour: false,
-      onChange: (_event, selectedDate) => {
-        if (selectedDate) {
-          setDueDate(selectedDate);
-        }
-      },
-    });
+    setShowCalendar(true);
   };
+
+  const formatDueDateLabel = (isoDate: string): string => {
+    // isoDate is "YYYY-MM-DD"
+    const [year, month, day] = isoDate.split("-").map(Number);
+    const date = new Date(year, month - 1, day);
+
+    const d = date.getDate();
+    const monthName = date.toLocaleString("en-US", { month: "long" });
+    const y = date.getFullYear();
+
+    const suffix =
+      d >= 11 && d <= 13
+        ? "th"
+        : d % 10 === 1
+          ? "st"
+          : d % 10 === 2
+            ? "nd"
+            : d % 10 === 3
+              ? "rd"
+              : "th";
+
+    return `${d}${suffix} ${monthName} ${y}`;
+  };
+
   const handleCancel = () => {
-    // navigate back or close modal
-    // navigation.goBack();
+    navigate("task-list");
   };
 
   return (
@@ -195,9 +190,44 @@ const CreateTaskScreen: React.FC = () => {
             <View style={styles.dueDateRow}>
               <Text style={styles.dueDateLabel}>Due Date:</Text>
               <Text style={styles.dueDateValue}>
-                {dueDate ? formatDueDate(dueDate) : "—"}
+                {dueDate ? formatDueDateLabel(dueDate) : "—"}
               </Text>
             </View>
+            <Modal
+              visible={showCalendar}
+              transparent
+              animationType="fade"
+              onRequestClose={() => setShowCalendar(false)}
+            >
+              <View style={styles.calendarOverlay}>
+                <View style={styles.calendarCard}>
+                  <Calendar
+                    onDayPress={(day) => {
+                      setDueDate(day.dateString);
+                      setShowCalendar(false);
+                    }}
+                    markedDates={
+                      dueDate
+                        ? {
+                            [dueDate]: {
+                              selected: true,
+                              selectedColor: PRIMARY_COLOR_BLUE,
+                              selectedTextColor: "#FFFFFF",
+                            },
+                          }
+                        : undefined
+                    }
+                  />
+
+                  <Pressable
+                    style={styles.calendarCloseButton}
+                    onPress={() => setShowCalendar(false)}
+                  >
+                    <Text style={styles.calendarCloseText}>Close</Text>
+                  </Pressable>
+                </View>
+              </View>
+            </Modal>
           </View>
         </View>
       </SafeAreaView>
@@ -206,4 +236,4 @@ const CreateTaskScreen: React.FC = () => {
   );
 };
 
-export default CreateTaskScreen;
+export default CreateTask;

@@ -185,6 +185,38 @@ const styles = StyleSheet.create({
     color: "#000",
     fontWeight: "500",
   },
+  calendarOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.25)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  calendarCard: {
+    width: "90%",
+    borderRadius: 18,
+    backgroundColor: "#FFFFFF",
+    padding: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 8,
+  },
+
+  calendarCloseButton: {
+    marginTop: 8,
+    alignSelf: "flex-end",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 999,
+    backgroundColor: "#EFEFEF",
+  },
+
+  calendarCloseText: {
+    fontSize: 14,
+    color: "#111",
+  },
 });
 
 export default styles;
