@@ -13,6 +13,7 @@ import { Calendar } from "react-native-calendars";
 import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { showMessage } from "react-native-flash-message";
 import {
   PRIMARY_COLOR_BLUE,
   PRIMARY_COLOR_GRAY,
@@ -23,6 +24,7 @@ import { TaskStatus } from "../../types/tasks";
 import { Member, MEMBERS_MOCK } from "../../mocks/members";
 import styles from "../style/create";
 import { useNavigateTo } from "../../navigation/useNavigateTo";
+import { validateCreateForm } from "../../validators/create";
 
 interface CreateProps {
   header: string;
@@ -111,6 +113,37 @@ const Create: React.FC<CreateProps> = ({ header }) => {
     setStatus("Pending");
     setDueDate(null);
     setSelectedAssignee(null);
+  };
+  const handleCreate = () => {
+    const errors = validateCreateForm(
+      title ? title : "",
+      dueDate,
+      selectedAssignee,
+      description,
+    );
+
+    if (errors.length > 0) {
+      showMessage({
+        message: errors[0],
+        type: "danger",
+        icon: "danger",
+      });
+      return;
+    }
+    showMessage({
+      message: "Task created successfully",
+      type: "success",
+      icon: "success",
+    });
+
+    // Optional: reset form
+    setTitle("");
+    setDescription("");
+    setDueDate(null);
+    setSelectedAssignee(null);
+    setFrequency("None");
+    setIsUrgent(false);
+    setStatus("Pending");
   };
 
   return (
@@ -410,12 +443,7 @@ const Create: React.FC<CreateProps> = ({ header }) => {
         />
 
         <View style={styles.createButtonWrapper}>
-          <Pressable
-            style={styles.createButton}
-            onPress={() => {
-              /* Handle create task action */
-            }}
-          >
+          <Pressable style={styles.createButton} onPress={handleCreate}>
             <Ionicons
               name="add"
               size={28}
