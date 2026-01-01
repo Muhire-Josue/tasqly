@@ -18,7 +18,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     marginBottom: 24,
   },
-  
+
   headerSideSpacer: {
     width: EDIT_BUTTON_WIDTH,
   },

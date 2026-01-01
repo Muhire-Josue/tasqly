@@ -30,11 +30,7 @@ const TaskDetails: React.FC = () => {
           {/* Left spacer to keep title perfectly centered */}
           <View style={styles.headerSideSpacer} />
 
-          <Text
-            style={styles.title}
-            numberOfLines={2}
-            ellipsizeMode="tail"
-          >
+          <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
             {taskTitle}
           </Text>
 
@@ -57,7 +53,6 @@ const TaskDetails: React.FC = () => {
         </View>
 
         {/* TODO: rest of task details body goes here */}
-
       </View>
     </SafeAreaView>
   );
