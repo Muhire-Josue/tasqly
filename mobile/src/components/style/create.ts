@@ -3,7 +3,6 @@ import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../theme/colors";
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     paddingHorizontal: 24,
     paddingTop: 16,
   },
