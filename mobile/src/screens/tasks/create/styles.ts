@@ -4,8 +4,17 @@ const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
   },
-  container: {
+  scroll: {
     flex: 1,
+  },
+
+  scrollContent: {
+    paddingHorizontal: 24,
+    paddingTop: 16,
+    paddingBottom: 140,
+  },
+  container: {
+    // flex: 1,
     paddingHorizontal: 24,
     paddingTop: 16,
   },
@@ -41,6 +50,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
     color: "#111",
     marginBottom: 8,
+    marginTop: 10,
   },
   textInput: {
     borderWidth: 1.5,
@@ -468,6 +478,44 @@ const styles = StyleSheet.create({
     color: "#111",
     marginLeft: 8,
     flexShrink: 1,
+  },
+  descriptionInput: {
+    borderWidth: 1.5,
+    borderColor: "#E5E7EB",
+    borderRadius: 18,
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 16,
+    paddingVertical: 26,
+    fontSize: 16,
+    color: "#000",
+    marginTop: 8,
+    marginBottom: 20,
+    minHeight: 120,
+  },
+
+  createButtonWrapper: {
+    marginTop: 8,
+    marginBottom: 35, // leaves room above BottomTabBar
+  },
+
+  createButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    paddingVertical: 16,
+    borderRadius: 999, // pill shape
+    shadowColor: "#000",
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 4,
+  },
+
+  createButtonText: {
+    color: "#FFFFFF",
+    fontSize: 20,
+    fontWeight: "700",
   },
 });
 
