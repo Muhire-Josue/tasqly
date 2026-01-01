@@ -8,6 +8,7 @@ import ResetPassword from "../screens/auth/reset-password";
 import OtpCode from "../screens/auth/otp-code";
 import TaskList from "../screens/tasks/list";
 import CreateTask from "../screens/tasks/create";
+import TaskDetails from "../screens/tasks/details";
 
 const Stack = createNativeStackNavigator();
 
@@ -56,6 +57,11 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="create-task"
           component={CreateTask}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="task-details"
+          component={TaskDetails}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
