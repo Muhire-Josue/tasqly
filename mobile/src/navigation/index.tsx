@@ -1,6 +1,7 @@
 import React from "react";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
+
 import Splash from "../screens/splash";
 import SignUp from "../screens/auth/signup";
 import SignIn from "../screens/auth/signin";
@@ -10,7 +11,9 @@ import TaskList from "../screens/tasks/list";
 import CreateTask from "../screens/tasks/create";
 import TaskDetails from "../screens/tasks/details";
 
-const Stack = createNativeStackNavigator();
+import { RootStackParamList } from "../types/navigation";
+
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
 const BgColorTheme = {
   ...DefaultTheme,
