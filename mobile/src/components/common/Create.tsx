@@ -117,7 +117,6 @@ const Create: React.FC<CreateProps> = ({ header }) => {
     <View style={styles.container}>
       <View style={styles.headerRow}>
         <Text style={styles.title}>{header}</Text>
-        {/* <Text style={styles.title}>Create a Task</Text> */}
 
         <Pressable
           style={({ pressed }) => [
@@ -398,7 +397,6 @@ const Create: React.FC<CreateProps> = ({ header }) => {
             </View>
           </Modal>
         </View>
-        {/* Description */}
         <Text style={styles.label}>Description</Text>
         <TextInput
           value={description}
@@ -411,7 +409,6 @@ const Create: React.FC<CreateProps> = ({ header }) => {
           textAlignVertical="top"
         />
 
-        {/* Create button */}
         <View style={styles.createButtonWrapper}>
           <Pressable
             style={styles.createButton}
