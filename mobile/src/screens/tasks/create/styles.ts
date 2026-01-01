@@ -11,7 +11,7 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: 24,
     paddingTop: 16,
-    paddingBottom: 140,
+    // paddingBottom: 140,
   },
   container: {
     // flex: 1,
@@ -495,7 +495,6 @@ const styles = StyleSheet.create({
 
   createButtonWrapper: {
     marginTop: 8,
-    marginBottom: 35, // leaves room above BottomTabBar
   },
 
   createButton: {

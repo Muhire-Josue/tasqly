@@ -185,7 +185,7 @@ const CreateTask: React.FC = () => {
                               {STATUS_META[option].label}
                             </Text>
                           </Pressable>
-                        )
+                        ),
                       )}
                     </View>
                   )}
