@@ -492,7 +492,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     backgroundColor: PRIMARY_COLOR_BLUE,
     paddingVertical: 16,
-    borderRadius: 999, // pill shape
+    borderRadius: 999,
     shadowColor: "#000",
     shadowOpacity: 0.15,
     shadowRadius: 8,
