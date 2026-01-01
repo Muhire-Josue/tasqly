@@ -24,7 +24,11 @@ import { Member, MEMBERS_MOCK } from "../../mocks/members";
 import styles from "../style/create";
 import { useNavigateTo } from "../../navigation/useNavigateTo";
 
-const Create: React.FC = () => {
+interface CreateProps {
+  header: string;
+}
+
+const Create: React.FC<CreateProps> = ({ header }) => {
   const navigate = useNavigateTo();
 
   const STATUS_META: Record<
@@ -112,7 +116,8 @@ const Create: React.FC = () => {
   return (
     <View style={styles.container}>
       <View style={styles.headerRow}>
-        <Text style={styles.title}>Create a Task</Text>
+        <Text style={styles.title}>{header}</Text>
+        {/* <Text style={styles.title}>Create a Task</Text> */}
 
         <Pressable
           style={({ pressed }) => [
@@ -398,7 +403,7 @@ const Create: React.FC = () => {
         <TextInput
           value={description}
           onChangeText={setDescription}
-          placeholder="Add any extra details for this task..."
+          placeholder="Add a description for this task..."
           placeholderTextColor="#A0A0A0"
           style={styles.descriptionInput}
           multiline

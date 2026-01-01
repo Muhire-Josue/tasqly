@@ -14,7 +14,7 @@ const CreateTask: React.FC = () => {
           contentContainerStyle={styles.scrollContent}
           keyboardShouldPersistTaps="handled"
         >
-          <Create />
+          <Create header="Create a Task" />
         </ScrollView>
       </SafeAreaView>
       <BottomTabBar />
