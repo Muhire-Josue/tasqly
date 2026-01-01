@@ -107,7 +107,6 @@ const Create: React.FC<CreateProps> = ({ header }) => {
 
   const handleCancel = () => {
     navigate("task-list");
-    // reset state variables
     setTitle(null);
     setIsUrgent(false);
     setStatus("Pending");
@@ -136,7 +135,6 @@ const Create: React.FC<CreateProps> = ({ header }) => {
       icon: "success",
     });
 
-    // Optional: reset form
     setTitle("");
     setDescription("");
     setDueDate(null);
