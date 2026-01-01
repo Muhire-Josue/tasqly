@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import styles from "../style/card";
 import { TaskCard } from "../../types/tasks";
@@ -7,11 +7,18 @@ import { PRIMARY_COLOR_RED } from "../../theme/colors";
 
 interface CardProps {
   item: TaskCard;
+  onPress?: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ item }: { item: TaskCard }) => {
+const Card: React.FC<CardProps> = ({ item, onPress }) => {
   return (
-    <View style={styles.taskCard}>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [
+        styles.taskCard,
+        pressed && { opacity: 0.9, transform: [{ scale: 0.99 }] },
+      ]}
+    >
       <View
         style={[styles.taskSideStrip, { backgroundColor: item.sideColor }]}
       />
@@ -57,7 +64,7 @@ const Card: React.FC<CardProps> = ({ item }: { item: TaskCard }) => {
           </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 
