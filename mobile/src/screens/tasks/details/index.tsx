@@ -1,6 +1,6 @@
 // TaskDetails.tsx
 import React, { useState } from "react";
-import { View, Text, Pressable, Modal } from "react-native";
+import { View, Text, Pressable, Modal, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { useRoute } from "@react-navigation/native";
@@ -29,7 +29,7 @@ const TaskDetails: React.FC = () => {
   };
 
   const handleConfirmDelete = () => {
-    // TODO: call delete API / update store, then navigate back
+    // TODO: delete in backend / store, then navigate back
     setShowDeleteModal(false);
   };
 
@@ -82,7 +82,51 @@ const TaskDetails: React.FC = () => {
           </Pressable>
         </View>
 
-        {/* TODO: rest of details body */}
+        {/* Row 3 – Responsible & Deadline */}
+        <View style={styles.infoRow}>
+          {/* Responsible */}
+          <View style={styles.infoColumn}>
+            <View style={styles.infoLabelRow}>
+              <FontAwesome5
+                name="user-friends"
+                size={18}
+                color="#111"
+                style={styles.infoLabelIcon}
+              />
+              <Text style={styles.infoLabelText}>Responsible :</Text>
+            </View>
+
+            <View style={styles.responsibleValueRow}>
+              {task?.avatar ? (
+                <Image source={task.avatar} style={styles.responsibleAvatar} />
+              ) : (
+                <View style={styles.responsibleAvatarPlaceholder}>
+                  <FontAwesome5 name="user" size={16} color="#9CA3AF" />
+                </View>
+              )}
+              <Text style={styles.responsibleName}>
+                {task?.assigneeLabel ?? "Unassigned"}
+              </Text>
+            </View>
+          </View>
+
+          {/* Deadline */}
+          <View style={styles.infoColumn}>
+            <View style={styles.infoLabelRow}>
+              <FontAwesome5
+                name="calendar-alt"
+                size={18}
+                color="#111"
+                style={styles.infoLabelIcon}
+              />
+              <Text style={styles.infoLabelText}>Deadline :</Text>
+            </View>
+
+            <Text style={styles.deadlineText}>
+              {task?.dateLabel ?? "No deadline"}
+            </Text>
+          </View>
+        </View>
       </View>
 
       {/* Delete confirmation modal */}

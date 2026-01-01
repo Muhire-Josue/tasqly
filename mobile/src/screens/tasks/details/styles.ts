@@ -12,7 +12,6 @@ const styles = StyleSheet.create({
     paddingTop: 16,
   },
 
-  // Row that just holds the title, centered
   headerRow: {
     marginTop: 8,
     alignItems: "center",
@@ -29,7 +28,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
   },
 
-  // Row for Delete (left) & Edit (right)
+  // Delete / Edit row
   actionRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -37,25 +36,15 @@ const styles = StyleSheet.create({
     marginBottom: 24,
   },
 
-  actionButtonBase: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
-    borderRadius: 12,
-    minWidth: 130,
-  },
-
   deleteButton: {
     backgroundColor: PRIMARY_COLOR_RED,
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: 12,
+    paddingHorizontal: 22,
     borderRadius: 12,
-    minWidth: 130,
+    minWidth: 140,
   },
 
   editButton: {
@@ -63,10 +52,10 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingVertical: 12,
+    paddingHorizontal: 22,
     borderRadius: 12,
-    minWidth: 130,
+    minWidth: 140,
   },
 
   actionButtonPressed: {
@@ -89,7 +78,73 @@ const styles = StyleSheet.create({
     fontWeight: "600",
   },
 
-  // Modal styles
+  /* --- Responsible / Deadline section --- */
+
+  infoRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "flex-start",
+    marginTop: 28,
+  },
+
+  infoColumn: {
+    flex: 1,
+  },
+
+  infoLabelRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginBottom: 6,
+  },
+
+  infoLabelIcon: {
+    marginRight: 6,
+  },
+
+  infoLabelText: {
+    fontSize: 16,
+    color: "#6B7280", // grey label
+    fontWeight: "500",
+  },
+
+  responsibleValueRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 4,
+  },
+
+  responsibleAvatar: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 10,
+  },
+
+  responsibleAvatarPlaceholder: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    marginRight: 10,
+    backgroundColor: "#E5E7EB",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  responsibleName: {
+    fontSize: 16,
+    color: "#111827",
+    // fontWeight: "600",
+  },
+
+  deadlineText: {
+    marginTop: 4,
+    fontSize: 16,
+    color: "#111827",
+    fontWeight: "600",
+  },
+
+  /* --- Modal styles (unchanged) --- */
+
   modalOverlay: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.35)",
