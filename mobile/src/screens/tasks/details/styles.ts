@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
 
   infoLabelText: {
     fontSize: 16,
-    color: "#6B7280", // grey label
+    color: "#6B7280",
     fontWeight: "500",
   },
 
@@ -211,60 +211,6 @@ const styles = StyleSheet.create({
     color: "#FFFFFF",
     fontWeight: "600",
   },
-  //   metaSection: {
-  //   marginTop: 20,
-  // },
-
-  // statusUrgentRow: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   justifyContent: "space-between",
-  // },
-
-  // statusLeft: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   flexShrink: 1,
-  //   paddingRight: 12,
-  // },
-
-  // metaLabel: {
-  //   fontSize: 18,
-  //   color: "#8A8A8A",
-  //   marginRight: 8,
-  // },
-
-  // metaValue: {
-  //   fontSize: 18,
-  //   color: "#000",
-  //   fontWeight: "700",
-  //   marginRight: 8,
-  // },
-
-  // statusIcon: {
-  //   marginTop: 1,
-  // },
-
-  // urgentPill: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   backgroundColor: "#D06A63",
-  //   paddingHorizontal: 18,
-  //   paddingVertical: 10,
-  //   borderRadius: 999,
-  // },
-
-  // urgentText: {
-  //   color: "#FFFFFF",
-  //   fontSize: 18,
-  //   fontWeight: "600",
-  // },
-
-  // commentsRow: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   marginTop: 18,
-  // },
   metaSection: {
     marginTop: 20,
   },
