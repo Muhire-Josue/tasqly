@@ -1,5 +1,4 @@
 /* eslint-disable complexity */
-// TaskDetails.tsx
 import React, { useState } from "react";
 import { View, Text, Pressable, Modal, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
@@ -11,6 +10,7 @@ import MOCK_TASKS from "../../../mocks/tasks";
 import styles from "./styles";
 import BottomTabBar from "../../../components/common/BottomTabBar";
 import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
+import { STATUS_META } from "../../../mocks/statusMeta";
 
 type TaskDetailsRoute = RouteProp<RootStackParamList, "task-details">;
 
@@ -21,11 +21,23 @@ const TaskDetails: React.FC = () => {
   const task = MOCK_TASKS.find((t) => t.id === taskId);
   const taskTitle = task?.title ?? "Task not found";
 
-  const statusLabel = task?.status ?? "Pending";
+//   const statusLabel = task?.status ?? "Pending";
   const isUrgent = !!task?.urgent;
   const commentsCount = task?.commentsCount ?? 7;
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
+
+  if (!task) {
+    return (
+      <SafeAreaView style={styles.safeArea}>
+        <View style={styles.container}>
+          <Text style={styles.title}>Task not found</Text>
+        </View>
+      </SafeAreaView>
+    );
+  }
+
+  const statusMeta = STATUS_META[task?.status ?? "Pending"];
 
   const handleEditPress = () => {
     // TODO: navigate to edit screen
@@ -141,13 +153,15 @@ const TaskDetails: React.FC = () => {
           <View style={styles.metaSection}>
             {/* Row: Status (left) + Urgent pill (right) */}
             <View style={styles.statusUrgentRow}>
-              <View style={styles.statusLeft}>
-                <Text style={styles.metaLabel}>Status :</Text>
-                <Text style={styles.metaValue}>{statusLabel}</Text>
-                <Ionicons
-                  name="time-outline"
-                  size={18}
-                  color="#111"
+              <View style={styles.statusRow}>
+                <Text style={styles.statusLabel}>Status:</Text>
+
+                <Text style={styles.statusValue}>{statusMeta.label}</Text>
+
+                <FontAwesome5
+                  name={statusMeta.icon}
+                  size={20}
+                  color={statusMeta.color}
                   style={styles.statusIcon}
                 />
               </View>

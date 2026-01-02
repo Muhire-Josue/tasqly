@@ -295,9 +295,9 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
 
-  statusIcon: {
-    marginTop: 1,
-  },
+  // statusIcon: {
+  //   marginTop: 1,
+  // },
 
   urgentPill: {
     flexDirection: "row",
@@ -326,6 +326,28 @@ const styles = StyleSheet.create({
     textDecorationLine: "underline",
     fontWeight: "500",
   },
+  statusRow: {
+  flexDirection: "row",
+  alignItems: "center",
+  marginTop: 12,
+},
+
+statusLabel: {
+  fontSize: 16,
+  color: "#888",
+  marginRight: 6,
+},
+
+statusValue: {
+  fontSize: 16,
+  fontWeight: "600",
+  color: "#000",
+  marginRight: 8,
+},
+
+statusIcon: {
+  marginTop: 1,
+},
 });
 
 export default styles;

@@ -5,7 +5,7 @@ export type TaskStatus = "Pending" | "Completed" | "Rejected";
 export type TaskCard = {
   id: string;
   title: string;
-  status: TaskStatus;
+  status: TaskStatus | undefined;
   dueDate: string;
   sideColor: string;
   statusColor: string;
