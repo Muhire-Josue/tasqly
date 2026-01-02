@@ -34,7 +34,8 @@ const Card: React.FC<CardProps> = ({ item, onPress }) => {
         </View>
 
         <View style={styles.taskMetaRow}>
-          <View>
+          {/* LEFT: date column */}
+          <View style={styles.dateColumn}>
             <View style={styles.metaRow}>
               <FontAwesome5
                 name="calendar-alt"
@@ -58,9 +59,16 @@ const Card: React.FC<CardProps> = ({ item, onPress }) => {
             )}
           </View>
 
-          <View style={styles.assigneeBlock}>
+          {/* RIGHT: assignee column */}
+          <View style={styles.assigneeColumn}>
             <Image source={item.avatar} style={styles.assigneeAvatar} />
-            <Text style={styles.assigneeLabel}>{item.assigneeLabel}</Text>
+            <Text
+              style={styles.assigneeLabel}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {item.assigneeLabel}
+            </Text>
           </View>
         </View>
       </View>

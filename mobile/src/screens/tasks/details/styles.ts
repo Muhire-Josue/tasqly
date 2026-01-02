@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
 
   infoRow: {
     flexDirection: "row",
-    justifyContent: "space-between",
     alignItems: "flex-start",
     marginTop: 28,
+    gap: 16,
   },
 
   infoColumn: {
@@ -133,7 +133,8 @@ const styles = StyleSheet.create({
   responsibleName: {
     fontSize: 16,
     color: "#111827",
-    // fontWeight: "600",
+    fontWeight: "600",
+    flexShrink: 1,
   },
 
   deadlineText: {
@@ -141,6 +142,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#111827",
     fontWeight: "600",
+    textAlign: "right",
   },
 
   /* --- Modal styles (unchanged) --- */

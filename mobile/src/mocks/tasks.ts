@@ -15,7 +15,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -27,7 +27,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: true,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: MichealAvatar,
   },
   {
@@ -39,7 +39,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assigneeLabel: "Created by Mike",
+    assigneeLabel: "Assigned Mike",
     avatar: VinceAvatar,
   },
   {
@@ -51,7 +51,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: true,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: wellingtonAvatar,
   },
   {
@@ -63,7 +63,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -75,7 +75,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: MichealAvatar,
   },
   {
@@ -87,7 +87,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: true,
-    assigneeLabel: "Created by Mike",
+    assigneeLabel: "Assigned Mike",
     avatar: VinceAvatar,
   },
   {
@@ -99,7 +99,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: wellingtonAvatar,
   },
   {
@@ -111,7 +111,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: true,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -123,7 +123,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: MichealAvatar,
   },
 
@@ -136,7 +136,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assigneeLabel: "Created by Mike",
+    assigneeLabel: "Assigned Mike",
     avatar: VinceAvatar,
   },
   {
@@ -148,7 +148,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: wellingtonAvatar,
   },
   {
@@ -160,7 +160,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -172,7 +172,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: true,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: MichealAvatar,
   },
   {
@@ -184,7 +184,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assigneeLabel: "Created by Mike",
+    assigneeLabel: "Assigned Mike",
     avatar: VinceAvatar,
   },
   {
@@ -196,7 +196,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: wellingtonAvatar,
   },
   {
@@ -208,7 +208,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -220,7 +220,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: true,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: MichealAvatar,
   },
   {
@@ -232,7 +232,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assigneeLabel: "Created by Mike",
+    assigneeLabel: "Assigned Mike",
     avatar: VinceAvatar,
   },
   {
@@ -244,7 +244,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: wellingtonAvatar,
   },
 
@@ -258,7 +258,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: MichealAvatar,
   },
   {
@@ -270,7 +270,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -282,7 +282,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assigneeLabel: "Created by Mike",
+    assigneeLabel: "Assigned Mike",
     avatar: VinceAvatar,
   },
   {
@@ -294,7 +294,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: wellingtonAvatar,
   },
   {
@@ -306,7 +306,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: true,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -318,7 +318,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: MichealAvatar,
   },
   {
@@ -330,7 +330,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: true,
-    assigneeLabel: "Created by Mike",
+    assigneeLabel: "Assigned Mike",
     avatar: VinceAvatar,
   },
   {
@@ -342,7 +342,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: wellingtonAvatar,
   },
   {
@@ -354,7 +354,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: true,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -366,7 +366,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assigneeLabel: "Created by Mike",
+    assigneeLabel: "Assigned Mike",
     avatar: VinceAvatar,
   },
 
@@ -379,7 +379,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: MichealAvatar,
   },
   {
@@ -391,7 +391,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -403,7 +403,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assigneeLabel: "Created by Mike",
+    assigneeLabel: "Assigned Mike",
     avatar: VinceAvatar,
   },
   {
@@ -415,7 +415,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: wellingtonAvatar,
   },
   {
@@ -427,7 +427,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -439,7 +439,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: true,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: MichealAvatar,
   },
   {
@@ -451,7 +451,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assigneeLabel: "Created by Mike",
+    assigneeLabel: "Assigned Mike",
     avatar: VinceAvatar,
   },
   {
@@ -463,7 +463,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: wellingtonAvatar,
   },
   {
@@ -475,7 +475,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -487,7 +487,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: MichealAvatar,
   },
 
@@ -501,7 +501,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: true,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -513,7 +513,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: true,
-    assigneeLabel: "Created by Mike",
+    assigneeLabel: "Assigned Mike",
     avatar: VinceAvatar,
   },
   {
@@ -525,7 +525,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: MichealAvatar,
   },
   {
@@ -537,7 +537,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: wellingtonAvatar,
   },
   {
@@ -549,7 +549,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: true,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -561,7 +561,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assigneeLabel: "Created by Mike",
+    assigneeLabel: "Assigned Mike",
     avatar: VinceAvatar,
   },
   {
@@ -573,7 +573,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -585,7 +585,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: MichealAvatar,
   },
   {
@@ -597,7 +597,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assigneeLabel: "Assigned to Jane",
+    assigneeLabel: "Assigned to Jane Smithson",
     avatar: BenAvatar,
   },
   {
@@ -609,7 +609,7 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assigneeLabel: "Assigned to Johnson",
+    assigneeLabel: "Assigned to Johnson Smithson",
     avatar: wellingtonAvatar,
   },
 ];
