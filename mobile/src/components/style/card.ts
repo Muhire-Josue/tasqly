@@ -107,6 +107,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: PRIMARY_COLOR_RED,
     marginLeft: 4,
+    marginTop: 10,
   },
 
   assigneeColumn: {
