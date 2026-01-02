@@ -110,7 +110,7 @@ const TaskDetails: React.FC = () => {
                   </View>
                 )}
                 <Text style={styles.responsibleName}>
-                  {task?.assigneeLabel ?? "Unassigned"}
+                  {task?.assignee ?? "Unassigned"}
                 </Text>
               </View>
             </View>
@@ -128,7 +128,7 @@ const TaskDetails: React.FC = () => {
               </View>
 
               <Text style={styles.deadlineText}>
-                {task?.dateLabel ?? "No deadline"}
+                {task?.dueDate ?? "No deadline"}
               </Text>
             </View>
           </View>

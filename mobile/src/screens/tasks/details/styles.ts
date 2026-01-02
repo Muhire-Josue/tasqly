@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: "#111827",
     fontWeight: "600",
-    textAlign: "right",
+    textAlign: "left",
   },
 
   /* --- Modal styles (unchanged) --- */

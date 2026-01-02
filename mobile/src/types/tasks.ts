@@ -6,11 +6,11 @@ export type TaskCard = {
   id: string;
   title: string;
   status: TaskStatus;
-  dateLabel: string;
+  dueDate: string;
   sideColor: string;
   statusColor: string;
   dateColor: string;
   urgent?: boolean;
-  assigneeLabel: string;
+  assignee: string;
   avatar: ImageSourcePropType;
 };
