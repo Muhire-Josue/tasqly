@@ -14,4 +14,5 @@ export type TaskCard = {
   assignee: string;
   avatar: ImageSourcePropType;
   commentsCount: number | null;
+  description: string;
 };

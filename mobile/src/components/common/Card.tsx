@@ -43,7 +43,7 @@ const Card: React.FC<CardProps> = ({ item, onPress }) => {
                 color={item.dateColor}
               />
               <Text style={[styles.dateText, { color: item.dateColor }]}>
-                {item.dateLabel}
+                {item.dueDate}
               </Text>
             </View>
 
@@ -67,7 +67,7 @@ const Card: React.FC<CardProps> = ({ item, onPress }) => {
               numberOfLines={1}
               ellipsizeMode="tail"
             >
-              {item.assigneeLabel}
+              {item.assignee}
             </Text>
           </View>
         </View>

@@ -327,27 +327,92 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   statusRow: {
-  flexDirection: "row",
-  alignItems: "center",
-  marginTop: 12,
-},
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 12,
+  },
 
-statusLabel: {
-  fontSize: 16,
-  color: "#888",
-  marginRight: 6,
-},
+  statusLabel: {
+    fontSize: 16,
+    color: "#888",
+    marginRight: 6,
+  },
 
-statusValue: {
-  fontSize: 16,
-  fontWeight: "600",
-  color: "#000",
-  marginRight: 8,
-},
+  statusValue: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#000",
+    marginRight: 8,
+  },
 
-statusIcon: {
-  marginTop: 1,
-},
+  statusIcon: {
+    marginTop: 1,
+  },
+  scrollContent: {
+    paddingBottom: 120, // keeps content above bottom tab bar
+  },
+
+  descriptionSection: {
+    marginTop: 26,
+  },
+
+  descriptionLabel: {
+    fontSize: 18,
+    color: "#8A8A8A",
+    fontWeight: "500",
+    marginBottom: 12,
+  },
+
+  descriptionBox: {
+    borderWidth: 1,
+    borderColor: "#D7D7D7",
+    borderRadius: 16,
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 18,
+    paddingVertical: 16,
+    minHeight: 180,
+  },
+
+  descriptionText: {
+    fontSize: 18,
+    color: "#000",
+    lineHeight: 30,
+  },
+
+  completeButton: {
+    marginTop: 28,
+    alignSelf: "center",
+    width: "92%",
+    backgroundColor: "#000000",
+    borderRadius: 999,
+    paddingVertical: 18,
+    paddingHorizontal: 18,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+
+    // shadow
+    shadowColor: "#000",
+    shadowOpacity: 0.22,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 8,
+  },
+
+  completeButtonPressed: {
+    opacity: 0.92,
+    transform: [{ scale: 0.99 }],
+  },
+
+  completeIcon: {
+    marginRight: 14,
+  },
+
+  completeText: {
+    color: "#FFFFFF",
+    fontSize: 26,
+    fontWeight: "500",
+  },
 });
 
 export default styles;

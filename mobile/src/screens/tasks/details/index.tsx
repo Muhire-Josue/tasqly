@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 import React, { useState } from "react";
-import { View, Text, Pressable, Modal, Image } from "react-native";
+import { View, Text, Pressable, Modal, Image, ScrollView } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import { useRoute } from "@react-navigation/native";
@@ -21,7 +21,7 @@ const TaskDetails: React.FC = () => {
   const task = MOCK_TASKS.find((t) => t.id === taskId);
   const taskTitle = task?.title ?? "Task not found";
 
-//   const statusLabel = task?.status ?? "Pending";
+  //   const statusLabel = task?.status ?? "Pending";
   const isUrgent = !!task?.urgent;
   const commentsCount = task?.commentsCount ?? 7;
 
@@ -56,151 +56,184 @@ const TaskDetails: React.FC = () => {
     setShowDeleteModal(false);
   };
 
+  const handleMarkComplete = () => {
+    // TODO: update status to Completed (later backend)
+  };
+
   return (
     <>
       <SafeAreaView style={styles.safeArea}>
-        <View style={styles.container}>
-          {/* Row 1 – centered title */}
-          <View style={styles.headerRow}>
-            <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
-              {taskTitle}
-            </Text>
-          </View>
+        <ScrollView
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <View style={styles.container}>
+            {/* Row 1 – centered title */}
+            <View style={styles.headerRow}>
+              <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
+                {taskTitle}
+              </Text>
+            </View>
 
-          {/* Row 2 – Delete (left) & Edit (right) */}
-          <View style={styles.actionRow}>
-            <Pressable
-              style={({ pressed }) => [
-                styles.deleteButton,
-                pressed && styles.actionButtonPressed,
-              ]}
-              onPress={handleDeletePress}
-            >
-              <FontAwesome5
-                name="trash-alt"
-                size={18}
-                color="#FFFFFF"
-                style={styles.actionIcon}
-              />
-              <Text style={styles.deleteText}>Delete</Text>
-            </Pressable>
-
-            <Pressable
-              style={({ pressed }) => [
-                styles.editButton,
-                pressed && styles.actionButtonPressed,
-              ]}
-              onPress={handleEditPress}
-            >
-              <FontAwesome5
-                name="pen"
-                size={18}
-                color="#FFFFFF"
-                style={styles.actionIcon}
-              />
-              <Text style={styles.editText}>Edit</Text>
-            </Pressable>
-          </View>
-
-          {/* Row 3 – Responsible & Deadline */}
-          <View style={styles.infoRow}>
-            {/* Responsible */}
-            <View style={styles.infoColumn}>
-              <View style={styles.infoLabelRow}>
+            {/* Row 2 – Delete (left) & Edit (right) */}
+            <View style={styles.actionRow}>
+              <Pressable
+                style={({ pressed }) => [
+                  styles.deleteButton,
+                  pressed && styles.actionButtonPressed,
+                ]}
+                onPress={handleDeletePress}
+              >
                 <FontAwesome5
-                  name="user-friends"
+                  name="trash-alt"
                   size={18}
-                  color="#111"
-                  style={styles.infoLabelIcon}
+                  color="#FFFFFF"
+                  style={styles.actionIcon}
                 />
-                <Text style={styles.infoLabelText}>Responsible :</Text>
+                <Text style={styles.deleteText}>Delete</Text>
+              </Pressable>
+
+              <Pressable
+                style={({ pressed }) => [
+                  styles.editButton,
+                  pressed && styles.actionButtonPressed,
+                ]}
+                onPress={handleEditPress}
+              >
+                <FontAwesome5
+                  name="pen"
+                  size={18}
+                  color="#FFFFFF"
+                  style={styles.actionIcon}
+                />
+                <Text style={styles.editText}>Edit</Text>
+              </Pressable>
+            </View>
+
+            {/* Row 3 – Responsible & Deadline */}
+            <View style={styles.infoRow}>
+              {/* Responsible */}
+              <View style={styles.infoColumn}>
+                <View style={styles.infoLabelRow}>
+                  <FontAwesome5
+                    name="user-friends"
+                    size={18}
+                    color="#111"
+                    style={styles.infoLabelIcon}
+                  />
+                  <Text style={styles.infoLabelText}>Responsible :</Text>
+                </View>
+
+                <View style={styles.responsibleValueRow}>
+                  {task?.avatar ? (
+                    <Image
+                      source={task.avatar}
+                      style={styles.responsibleAvatar}
+                    />
+                  ) : (
+                    <View style={styles.responsibleAvatarPlaceholder}>
+                      <FontAwesome5 name="user" size={16} color="#9CA3AF" />
+                    </View>
+                  )}
+                  <Text style={styles.responsibleName}>
+                    {task?.assignee ?? "Unassigned"}
+                  </Text>
+                </View>
               </View>
 
-              <View style={styles.responsibleValueRow}>
-                {task?.avatar ? (
-                  <Image
-                    source={task.avatar}
-                    style={styles.responsibleAvatar}
+              {/* Deadline */}
+              <View style={styles.infoColumn}>
+                <View style={styles.infoLabelRow}>
+                  <FontAwesome5
+                    name="calendar-alt"
+                    size={18}
+                    color="#111"
+                    style={styles.infoLabelIcon}
                   />
-                ) : (
-                  <View style={styles.responsibleAvatarPlaceholder}>
-                    <FontAwesome5 name="user" size={16} color="#9CA3AF" />
-                  </View>
-                )}
-                <Text style={styles.responsibleName}>
-                  {task?.assignee ?? "Unassigned"}
+                  <Text style={styles.infoLabelText}>Deadline :</Text>
+                </View>
+
+                <Text style={styles.deadlineText}>
+                  {task?.dueDate ?? "No deadline"}
                 </Text>
               </View>
             </View>
+            <View style={styles.metaSection}>
+              {/* Row: Status (left) + Urgent pill (right) */}
+              <View style={styles.statusUrgentRow}>
+                <View style={styles.statusRow}>
+                  <Text style={styles.statusLabel}>Status:</Text>
 
-            {/* Deadline */}
-            <View style={styles.infoColumn}>
-              <View style={styles.infoLabelRow}>
-                <FontAwesome5
-                  name="calendar-alt"
-                  size={18}
-                  color="#111"
-                  style={styles.infoLabelIcon}
-                />
-                <Text style={styles.infoLabelText}>Deadline :</Text>
-              </View>
+                  <Text style={styles.statusValue}>{statusMeta.label}</Text>
 
-              <Text style={styles.deadlineText}>
-                {task?.dueDate ?? "No deadline"}
-              </Text>
-            </View>
-          </View>
-          <View style={styles.metaSection}>
-            {/* Row: Status (left) + Urgent pill (right) */}
-            <View style={styles.statusUrgentRow}>
-              <View style={styles.statusRow}>
-                <Text style={styles.statusLabel}>Status:</Text>
-
-                <Text style={styles.statusValue}>{statusMeta.label}</Text>
-
-                <FontAwesome5
-                  name={statusMeta.icon}
-                  size={20}
-                  color={statusMeta.color}
-                  style={styles.statusIcon}
-                />
-              </View>
-
-              {isUrgent && (
-                <View style={styles.urgentPill}>
-                  <Ionicons
-                    name="warning-outline"
-                    size={18}
-                    color="#FFFFFF"
-                    style={{ marginRight: 8 }}
+                  <FontAwesome5
+                    name={statusMeta.icon}
+                    size={20}
+                    color={statusMeta.color}
+                    style={styles.statusIcon}
                   />
-                  <Text style={styles.urgentText}>Urgent</Text>
                 </View>
-              )}
-            </View>
 
-            {/* Row: Comments link */}
+                {isUrgent && (
+                  <View style={styles.urgentPill}>
+                    <Ionicons
+                      name="warning-outline"
+                      size={18}
+                      color="#FFFFFF"
+                      style={{ marginRight: 8 }}
+                    />
+                    <Text style={styles.urgentText}>Urgent</Text>
+                  </View>
+                )}
+              </View>
+
+              {/* Row: Comments link */}
+              <Pressable
+                style={({ pressed }) => [
+                  styles.commentsRow,
+                  pressed && { opacity: 0.8 },
+                ]}
+                onPress={() => {
+                  // TODO: navigate to comments screen later
+                }}
+              >
+                <Ionicons
+                  name="chatbox-ellipses-outline"
+                  size={26}
+                  color={PRIMARY_COLOR_BLUE}
+                  style={{ marginRight: 10 }}
+                />
+                <Text style={styles.commentsLink}>
+                  Comments ({commentsCount})
+                </Text>
+              </Pressable>
+            </View>
+            <View style={styles.descriptionSection}>
+              <Text style={styles.descriptionLabel}>Description :</Text>
+
+              <View style={styles.descriptionBox}>
+                <Text style={styles.descriptionText}>
+                  {task.description.trim() ? task.description : "—"}
+                </Text>
+              </View>
+            </View>
             <Pressable
               style={({ pressed }) => [
-                styles.commentsRow,
-                pressed && { opacity: 0.8 },
+                styles.completeButton,
+                pressed && styles.completeButtonPressed,
               ]}
-              onPress={() => {
-                // TODO: navigate to comments screen later
-              }}
+              onPress={handleMarkComplete}
             >
-              <Ionicons
-                name="chatbox-ellipses-outline"
+              <FontAwesome5
+                name="check-circle"
                 size={26}
-                color={PRIMARY_COLOR_BLUE}
-                style={{ marginRight: 10 }}
+                color="#FFFFFF"
+                style={styles.completeIcon}
               />
-              <Text style={styles.commentsLink}>
-                Comments ({commentsCount})
-              </Text>
+              <Text style={styles.completeText}>Mark as Complete</Text>
             </Pressable>
           </View>
-        </View>
+        </ScrollView>
 
         {/* Delete confirmation modal */}
         <Modal
