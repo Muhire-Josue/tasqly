@@ -51,45 +51,15 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     marginTop: 4,
   },
-  // metaRow: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   gap: 8,
-  //   marginTop: 4,
-  // },
-  // dateText: {
-  //   fontSize: 14,
-  // },
-  // urgentText: {
-  //   fontSize: 14,
-  //   color: PRIMARY_COLOR_RED,
-  //   fontWeight: "600",
-  // },
   assigneeBlock: {
     alignItems: "flex-end",
     gap: 8,
   },
-  // assigneeAvatar: {
-  //   width: 40,
-  //   height: 40,
-  //   borderRadius: 20,
-  // },
   listHeader: {
     marginBottom: 20,
   },
-  // assigneeLabel: {
-  //   fontSize: 14,
-  //   color: "#777",
-  // },
-  //   taskMetaRow: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   marginTop: 12,
-  //   gap: 12,
-  // },
-
   dateColumn: {
-    flex: 1, // owns the left half
+    flex: 1,
   },
 
   metaRow: {
@@ -114,7 +84,7 @@ const styles = StyleSheet.create({
     flexShrink: 0,
     flexDirection: "row",
     alignItems: "center",
-    maxWidth: "45%", // prevents it from eating the whole row
+    maxWidth: "45%",
     justifyContent: "flex-end",
   },
 
@@ -128,7 +98,7 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     fontSize: 14,
     color: "#6B7280",
-    flexShrink: 1, // allow truncation
+    flexShrink: 1,
   },
 });
 
