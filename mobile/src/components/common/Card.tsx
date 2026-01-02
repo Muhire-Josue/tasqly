@@ -34,7 +34,6 @@ const Card: React.FC<CardProps> = ({ item, onPress }) => {
         </View>
 
         <View style={styles.taskMetaRow}>
-          {/* LEFT: date column */}
           <View style={styles.dateColumn}>
             <View style={styles.metaRow}>
               <FontAwesome5
@@ -59,7 +58,6 @@ const Card: React.FC<CardProps> = ({ item, onPress }) => {
             )}
           </View>
 
-          {/* RIGHT: assignee column */}
           <View style={styles.assigneeColumn}>
             <Image source={item.avatar} style={styles.assigneeAvatar} />
             <Text
