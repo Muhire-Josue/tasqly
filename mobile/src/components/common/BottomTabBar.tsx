@@ -4,6 +4,7 @@ import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
 import styles from "../style/bottomTabBar";
 import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
+import { useNavigateTo } from "../../navigation/useNavigateTo";
 
 type TabKey = "tasks" | "repair" | "notifications" | "profile";
 
@@ -42,6 +43,7 @@ const TABS: TabConfig[] = [
 ];
 
 const BottomTabBar: React.FC = () => {
+  const navigateTo = useNavigateTo();
   const [activeTab, setActiveTab] = useState<TabKey>("tasks");
   const insets = useSafeAreaInsets();
 
@@ -57,7 +59,30 @@ const BottomTabBar: React.FC = () => {
               styles.tabItem,
               pressed && styles.tabItemPressed,
             ]}
-            onPress={() => setActiveTab(key)}
+            onPress={() => {
+              setActiveTab(key);
+
+              switch (key) {
+                case "tasks":
+                  navigateTo("task-list");
+                  break;
+
+                case "repair":
+                  // navigateTo("repair"); // when you have it
+                  navigateTo("task-list"); // placeholder
+                  break;
+
+                case "notifications":
+                  // navigateTo("notifications"); // when you have it
+                  navigateTo("task-list"); // placeholder
+                  break;
+
+                case "profile":
+                  // navigateTo("profile"); // when you have it
+                  navigateTo("task-list"); // placeholder
+                  break;
+              }
+            }}
           >
             <View style={styles.iconWrapper}>
               {library === "fa6" ? (

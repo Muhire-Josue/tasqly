@@ -51,35 +51,54 @@ const styles = StyleSheet.create({
     alignItems: "flex-end",
     marginTop: 4,
   },
-  metaRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 8,
-    marginTop: 4,
-  },
-  dateText: {
-    fontSize: 14,
-  },
-  urgentText: {
-    fontSize: 14,
-    color: PRIMARY_COLOR_RED,
-    fontWeight: "600",
-  },
   assigneeBlock: {
     alignItems: "flex-end",
     gap: 8,
   },
-  assigneeAvatar: {
-    width: 40,
-    height: 40,
-    borderRadius: 20,
-  },
   listHeader: {
     marginBottom: 20,
   },
-  assigneeLabel: {
+  dateColumn: {
+    flex: 1,
+  },
+
+  metaRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 6,
+  },
+
+  dateText: {
     fontSize: 14,
-    color: "#777",
+    fontWeight: "500",
+  },
+
+  urgentText: {
+    fontSize: 14,
+    color: PRIMARY_COLOR_RED,
+    marginLeft: 4,
+    marginTop: 10,
+  },
+
+  assigneeColumn: {
+    flexShrink: 0,
+    flexDirection: "row",
+    alignItems: "center",
+    maxWidth: "45%",
+    justifyContent: "flex-end",
+  },
+
+  assigneeAvatar: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+  },
+
+  assigneeLabel: {
+    marginLeft: 8,
+    fontSize: 14,
+    color: "#6B7280",
+    flexShrink: 1,
   },
 });
 

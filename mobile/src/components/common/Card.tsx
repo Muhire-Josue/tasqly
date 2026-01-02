@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, Image } from "react-native";
+import { View, Text, Image, Pressable } from "react-native";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import styles from "../style/card";
 import { TaskCard } from "../../types/tasks";
@@ -7,11 +7,18 @@ import { PRIMARY_COLOR_RED } from "../../theme/colors";
 
 interface CardProps {
   item: TaskCard;
+  onPress?: () => void;
 }
 
-const Card: React.FC<CardProps> = ({ item }: { item: TaskCard }) => {
+const Card: React.FC<CardProps> = ({ item, onPress }) => {
   return (
-    <View style={styles.taskCard}>
+    <Pressable
+      onPress={onPress}
+      style={({ pressed }) => [
+        styles.taskCard,
+        pressed && { opacity: 0.9, transform: [{ scale: 0.99 }] },
+      ]}
+    >
       <View
         style={[styles.taskSideStrip, { backgroundColor: item.sideColor }]}
       />
@@ -27,7 +34,7 @@ const Card: React.FC<CardProps> = ({ item }: { item: TaskCard }) => {
         </View>
 
         <View style={styles.taskMetaRow}>
-          <View>
+          <View style={styles.dateColumn}>
             <View style={styles.metaRow}>
               <FontAwesome5
                 name="calendar-alt"
@@ -35,7 +42,7 @@ const Card: React.FC<CardProps> = ({ item }: { item: TaskCard }) => {
                 color={item.dateColor}
               />
               <Text style={[styles.dateText, { color: item.dateColor }]}>
-                {item.dateLabel}
+                {item.dueDate}
               </Text>
             </View>
 
@@ -51,13 +58,19 @@ const Card: React.FC<CardProps> = ({ item }: { item: TaskCard }) => {
             )}
           </View>
 
-          <View style={styles.assigneeBlock}>
+          <View style={styles.assigneeColumn}>
             <Image source={item.avatar} style={styles.assigneeAvatar} />
-            <Text style={styles.assigneeLabel}>{item.assigneeLabel}</Text>
+            <Text
+              style={styles.assigneeLabel}
+              numberOfLines={1}
+              ellipsizeMode="tail"
+            >
+              {item.assignee}
+            </Text>
           </View>
         </View>
       </View>
-    </View>
+    </Pressable>
   );
 };
 

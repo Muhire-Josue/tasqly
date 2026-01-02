@@ -5,12 +5,14 @@ export type TaskStatus = "Pending" | "Completed" | "Rejected";
 export type TaskCard = {
   id: string;
   title: string;
-  status: TaskStatus;
-  dateLabel: string;
+  status: TaskStatus | undefined;
+  dueDate: string;
   sideColor: string;
   statusColor: string;
   dateColor: string;
   urgent?: boolean;
-  assigneeLabel: string;
+  assignee: string;
   avatar: ImageSourcePropType;
+  commentsCount: number | null;
+  description: string;
 };

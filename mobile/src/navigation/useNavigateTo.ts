@@ -1,11 +1,11 @@
-import { type ParamListBase, useNavigation } from "@react-navigation/native";
-import { type StackNavigationProp } from "@react-navigation/stack";
+import { useNavigation } from "@react-navigation/native";
+import type { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import type { RootStackParamList } from "../types/navigation";
+
+type AppNavigation = NativeStackNavigationProp<RootStackParamList>;
 
 export const useNavigateTo = () => {
-  const navigation = useNavigation<StackNavigationProp<ParamListBase>>();
-  const navigateTo = (screen: string): void => {
-    navigation.navigate(screen);
-  };
+  const navigation = useNavigation<AppNavigation>();
 
-  return navigateTo;
+  return navigation.navigate as AppNavigation["navigate"];
 };

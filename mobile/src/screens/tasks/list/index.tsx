@@ -20,10 +20,12 @@ import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import { TaskStatus } from "../../../types/tasks";
 import MOCK_TASKS from "../../../mocks/tasks";
 import Card from "../../../components/common/Card";
+import { useNavigateTo } from "../../../navigation/useNavigateTo";
 
 const STATUSES: TaskStatus[] = ["Pending", "Completed", "Rejected"];
 
 const TaskList: React.FC = () => {
+  const navigateTo = useNavigateTo();
   const [scope, setScope] = useState<Scope>("all");
   const [selectedStatuses, setSelectedStatuses] = useState<TaskStatus[]>([
     "Pending",
@@ -57,7 +59,16 @@ const TaskList: React.FC = () => {
           <FlatList
             data={MOCK_TASKS}
             keyExtractor={(item) => item.id}
-            renderItem={({ item }) => <Card item={item} />}
+            renderItem={({ item }) => (
+              <Card
+                item={item}
+                onPress={() =>
+                  navigateTo("task-details", {
+                    taskId: item.id,
+                  })
+                }
+              />
+            )}
             ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
             contentContainerStyle={{
               paddingBottom: 16,
