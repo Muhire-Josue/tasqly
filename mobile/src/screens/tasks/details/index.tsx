@@ -1,14 +1,16 @@
+/* eslint-disable complexity */
 // TaskDetails.tsx
 import React, { useState } from "react";
 import { View, Text, Pressable, Modal, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { FontAwesome5 } from "@expo/vector-icons";
+import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import { useRoute } from "@react-navigation/native";
 import type { RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../../../types/navigation";
 import MOCK_TASKS from "../../../mocks/tasks";
 import styles from "./styles";
 import BottomTabBar from "../../../components/common/BottomTabBar";
+import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 
 type TaskDetailsRoute = RouteProp<RootStackParamList, "task-details">;
 
@@ -18,6 +20,10 @@ const TaskDetails: React.FC = () => {
 
   const task = MOCK_TASKS.find((t) => t.id === taskId);
   const taskTitle = task?.title ?? "Task not found";
+
+  const statusLabel = task?.status ?? "Pending";
+  const isUrgent = !!task?.urgent;
+  const commentsCount = task?.commentsCount ?? 7;
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -131,6 +137,54 @@ const TaskDetails: React.FC = () => {
                 {task?.dueDate ?? "No deadline"}
               </Text>
             </View>
+          </View>
+          <View style={styles.metaSection}>
+            {/* Row: Status (left) + Urgent pill (right) */}
+            <View style={styles.statusUrgentRow}>
+              <View style={styles.statusLeft}>
+                <Text style={styles.metaLabel}>Status :</Text>
+                <Text style={styles.metaValue}>{statusLabel}</Text>
+                <Ionicons
+                  name="time-outline"
+                  size={18}
+                  color="#111"
+                  style={styles.statusIcon}
+                />
+              </View>
+
+              {isUrgent && (
+                <View style={styles.urgentPill}>
+                  <Ionicons
+                    name="warning-outline"
+                    size={18}
+                    color="#FFFFFF"
+                    style={{ marginRight: 8 }}
+                  />
+                  <Text style={styles.urgentText}>Urgent</Text>
+                </View>
+              )}
+            </View>
+
+            {/* Row: Comments link */}
+            <Pressable
+              style={({ pressed }) => [
+                styles.commentsRow,
+                pressed && { opacity: 0.8 },
+              ]}
+              onPress={() => {
+                // TODO: navigate to comments screen later
+              }}
+            >
+              <Ionicons
+                name="chatbox-ellipses-outline"
+                size={26}
+                color={PRIMARY_COLOR_BLUE}
+                style={{ marginRight: 10 }}
+              />
+              <Text style={styles.commentsLink}>
+                Comments ({commentsCount})
+              </Text>
+            </Pressable>
           </View>
         </View>
 

@@ -17,6 +17,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "2",
@@ -29,6 +30,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: true,
     assignee: "Johnson Smithson",
     avatar: MichealAvatar,
+    commentsCount: null,
   },
   {
     id: "3",
@@ -41,6 +43,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Assigned Mike",
     avatar: VinceAvatar,
+    commentsCount: null,
   },
   {
     id: "4",
@@ -53,6 +56,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: true,
     assignee: "Johnson Smithson",
     avatar: wellingtonAvatar,
+    commentsCount: null,
   },
   {
     id: "5",
@@ -65,6 +69,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "6",
@@ -77,6 +82,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: MichealAvatar,
+    commentsCount: null,
   },
   {
     id: "7",
@@ -89,6 +95,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: true,
     assignee: "Assigned Mike",
     avatar: VinceAvatar,
+    commentsCount: null,
   },
   {
     id: "8",
@@ -101,6 +108,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: wellingtonAvatar,
+    commentsCount: null,
   },
   {
     id: "9",
@@ -113,6 +121,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: true,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "10",
@@ -125,6 +134,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: MichealAvatar,
+    commentsCount: null,
   },
 
   {
@@ -138,6 +148,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Assigned Mike",
     avatar: VinceAvatar,
+    commentsCount: null,
   },
   {
     id: "12",
@@ -150,6 +161,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: wellingtonAvatar,
+    commentsCount: null,
   },
   {
     id: "13",
@@ -162,6 +174,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "14",
@@ -174,6 +187,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: true,
     assignee: "Johnson Smithson",
     avatar: MichealAvatar,
+    commentsCount: null,
   },
   {
     id: "15",
@@ -186,6 +200,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Assigned Mike",
     avatar: VinceAvatar,
+    commentsCount: null,
   },
   {
     id: "16",
@@ -198,6 +213,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: wellingtonAvatar,
+    commentsCount: null,
   },
   {
     id: "17",
@@ -210,6 +226,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "18",
@@ -222,6 +239,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: true,
     assignee: "Johnson Smithson",
     avatar: MichealAvatar,
+    commentsCount: null,
   },
   {
     id: "19",
@@ -234,6 +252,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Assigned Mike",
     avatar: VinceAvatar,
+    commentsCount: null,
   },
   {
     id: "20",
@@ -246,6 +265,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: wellingtonAvatar,
+    commentsCount: null,
   },
 
   // Repeats mixed with people for realism
@@ -260,6 +280,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: MichealAvatar,
+    commentsCount: null,
   },
   {
     id: "22",
@@ -272,6 +293,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "23",
@@ -284,6 +306,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Assigned Mike",
     avatar: VinceAvatar,
+    commentsCount: null,
   },
   {
     id: "24",
@@ -296,6 +319,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: wellingtonAvatar,
+    commentsCount: null,
   },
   {
     id: "25",
@@ -308,6 +332,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: true,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "26",
@@ -320,6 +345,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: MichealAvatar,
+    commentsCount: null,
   },
   {
     id: "27",
@@ -332,6 +358,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: true,
     assignee: "Assigned Mike",
     avatar: VinceAvatar,
+    commentsCount: null,
   },
   {
     id: "28",
@@ -344,6 +371,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: wellingtonAvatar,
+    commentsCount: null,
   },
   {
     id: "29",
@@ -356,6 +384,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: true,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "30",
@@ -368,6 +397,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Assigned Mike",
     avatar: VinceAvatar,
+    commentsCount: null,
   },
 
   {
@@ -381,6 +411,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: MichealAvatar,
+    commentsCount: null,
   },
   {
     id: "32",
@@ -393,6 +424,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "33",
@@ -405,6 +437,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Assigned Mike",
     avatar: VinceAvatar,
+    commentsCount: null,
   },
   {
     id: "34",
@@ -417,6 +450,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: wellingtonAvatar,
+    commentsCount: null,
   },
   {
     id: "35",
@@ -429,6 +463,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "36",
@@ -441,6 +476,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: true,
     assignee: "Johnson Smithson",
     avatar: MichealAvatar,
+    commentsCount: null,
   },
   {
     id: "37",
@@ -453,6 +489,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Assigned Mike",
     avatar: VinceAvatar,
+    commentsCount: null,
   },
   {
     id: "38",
@@ -465,6 +502,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: wellingtonAvatar,
+    commentsCount: null,
   },
   {
     id: "39",
@@ -477,6 +515,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "40",
@@ -489,6 +528,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: MichealAvatar,
+    commentsCount: null,
   },
 
   // Final 10
@@ -503,6 +543,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: true,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "42",
@@ -515,6 +556,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: true,
     assignee: "Assigned Mike",
     avatar: VinceAvatar,
+    commentsCount: null,
   },
   {
     id: "43",
@@ -527,6 +569,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: MichealAvatar,
+    commentsCount: null,
   },
   {
     id: "44",
@@ -539,6 +582,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: wellingtonAvatar,
+    commentsCount: null,
   },
   {
     id: "45",
@@ -551,6 +595,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: true,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "46",
@@ -563,6 +608,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Assigned Mike",
     avatar: VinceAvatar,
+    commentsCount: null,
   },
   {
     id: "47",
@@ -575,6 +621,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "48",
@@ -587,6 +634,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: MichealAvatar,
+    commentsCount: null,
   },
   {
     id: "49",
@@ -599,6 +647,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Jane Smithson",
     avatar: BenAvatar,
+    commentsCount: null,
   },
   {
     id: "50",
@@ -611,6 +660,7 @@ const MOCK_TASKS: TaskCard[] = [
     urgent: false,
     assignee: "Johnson Smithson",
     avatar: wellingtonAvatar,
+    commentsCount: null,
   },
 ];
 

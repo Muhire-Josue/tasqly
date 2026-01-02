@@ -13,4 +13,5 @@ export type TaskCard = {
   urgent?: boolean;
   assignee: string;
   avatar: ImageSourcePropType;
+  commentsCount: number | null;
 };
