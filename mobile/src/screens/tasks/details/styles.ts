@@ -349,7 +349,7 @@ const styles = StyleSheet.create({
     marginTop: 1,
   },
   scrollContent: {
-    paddingBottom: 120, // keeps content above bottom tab bar
+    // paddingBottom: 120, // keeps content above bottom tab bar
   },
 
   descriptionSection: {
