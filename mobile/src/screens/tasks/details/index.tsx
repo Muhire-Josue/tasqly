@@ -68,14 +68,12 @@ const TaskDetails: React.FC = () => {
           showsVerticalScrollIndicator={false}
         >
           <View style={styles.container}>
-            {/* Row 1 – centered title */}
             <View style={styles.headerRow}>
               <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
                 {taskTitle}
               </Text>
             </View>
 
-            {/* Row 2 – Delete (left) & Edit (right) */}
             <View style={styles.actionRow}>
               <Pressable
                 style={({ pressed }) => [
@@ -110,9 +108,7 @@ const TaskDetails: React.FC = () => {
               </Pressable>
             </View>
 
-            {/* Row 3 – Responsible & Deadline */}
             <View style={styles.infoRow}>
-              {/* Responsible */}
               <View style={styles.infoColumn}>
                 <View style={styles.infoLabelRow}>
                   <FontAwesome5
@@ -141,7 +137,6 @@ const TaskDetails: React.FC = () => {
                 </View>
               </View>
 
-              {/* Deadline */}
               <View style={styles.infoColumn}>
                 <View style={styles.infoLabelRow}>
                   <FontAwesome5
@@ -159,7 +154,6 @@ const TaskDetails: React.FC = () => {
               </View>
             </View>
             <View style={styles.metaSection}>
-              {/* Row: Status (left) + Urgent pill (right) */}
               <View style={styles.statusUrgentRow}>
                 <View style={styles.statusRow}>
                   <Text style={styles.statusLabel}>Status:</Text>
@@ -187,7 +181,6 @@ const TaskDetails: React.FC = () => {
                 )}
               </View>
 
-              {/* Row: Comments link */}
               <Pressable
                 style={({ pressed }) => [
                   styles.commentsRow,
@@ -235,7 +228,6 @@ const TaskDetails: React.FC = () => {
           </View>
         </ScrollView>
 
-        {/* Delete confirmation modal */}
         <Modal
           visible={showDeleteModal}
           transparent
