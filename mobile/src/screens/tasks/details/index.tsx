@@ -95,7 +95,7 @@ const TaskDetails: React.FC = () => {
                   pressed && styles.actionButtonPressed,
                 ]}
                 onPress={() => {
-                  navigateTo("edit-task", { taskId });
+                  navigateTo("edit-task", { taskId, header: "Edit Task" });
                 }}
               >
                 <FontAwesome5
