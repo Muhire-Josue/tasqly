@@ -14,17 +14,13 @@ import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { showMessage } from "react-native-flash-message";
-import {
-  PRIMARY_COLOR_BLUE,
-  PRIMARY_COLOR_GRAY,
-  PRIMARY_COLOR_GREEN,
-  PRIMARY_COLOR_RED,
-} from "../../theme/colors";
-import { TaskStatus } from "../../types/tasks";
+import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
+import { Frequency, TaskStatus } from "../../types/tasks";
 import { Member, MEMBERS_MOCK } from "../../mocks/members";
 import styles from "../style/create";
 import { useNavigateTo } from "../../navigation/useNavigateTo";
 import { validateCreateForm } from "../../validators/create";
+import { STATUS_META } from "../../mocks/statusMeta";
 
 interface CreateProps {
   header: string;
@@ -32,29 +28,6 @@ interface CreateProps {
 
 const Create: React.FC<CreateProps> = ({ header }) => {
   const navigate = useNavigateTo();
-
-  const STATUS_META: Record<
-    TaskStatus,
-    { label: string; icon: keyof typeof Ionicons.glyphMap; color: string }
-  > = {
-    Pending: {
-      label: "Pending",
-      icon: "time-outline",
-      color: PRIMARY_COLOR_GRAY,
-    },
-    Completed: {
-      label: "Completed",
-      icon: "checkmark-circle-outline",
-      color: PRIMARY_COLOR_GREEN,
-    },
-    Rejected: {
-      label: "Rejected",
-      icon: "close-circle-outline",
-      color: PRIMARY_COLOR_RED,
-    },
-  };
-
-  type Frequency = "None" | "Daily" | "Weekly" | "Bi-weekly" | "Monthly";
 
   const FREQUENCIES: Frequency[] = [
     "None",

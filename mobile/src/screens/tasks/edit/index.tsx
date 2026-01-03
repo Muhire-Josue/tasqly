@@ -1,9 +1,10 @@
 /* eslint-disable complexity */
 import { RouteProp, useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
-import { View, Text, Pressable, TextInput } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { View, Text, Pressable, TextInput, Modal } from "react-native";
+import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
+import { Calendar } from "react-native-calendars";
 import Checkbox from "expo-checkbox";
 import { RootStackParamList } from "../../../types/navigation";
 import MOCK_TASKS from "../../../mocks/tasks";
@@ -11,10 +12,18 @@ import styles from "./styles";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
 import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import BottomTabBar from "../../../components/common/BottomTabBar";
-import { TaskStatus } from "../../../types/tasks";
+import { Frequency, TaskStatus } from "../../../types/tasks";
 import { STATUS_META } from "../../../mocks/statusMeta";
 
 type TaskDetailsRoute = RouteProp<RootStackParamList, "edit-task">;
+
+const FREQUENCIES: Frequency[] = [
+  "None",
+  "Daily",
+  "Weekly",
+  "Bi-weekly",
+  "Monthly",
+];
 
 const EditTask: React.FC = () => {
   const navigateTo = useNavigateTo();
@@ -34,9 +43,13 @@ const EditTask: React.FC = () => {
   const [status, setStatus] = useState<TaskStatus | null>(
     task?.status ?? "Pending",
   );
+  const [frequency, setFrequency] = useState<Frequency | null>(
+    task?.frequency ?? null,
+  );
+  const [showFrequencyMenu, setShowFrequencyMenu] = useState(false);
   const [showStatusMenu, setShowStatusMenu] = useState(false);
-  // const [dueDate, setDueDate] = useState<string | null>(null);
-  // const [showCalendar, setShowCalendar] = useState(false);
+  const [dueDate, setDueDate] = useState<string | null>(task?.dueDate ?? null);
+  const [showCalendar, setShowCalendar] = useState(false);
   // const [selectedAssignee, setSelectedAssignee] = useState<Member | null>(null);
   // const [assigneeRotationEnabled, setAssigneeRotationEnabled] = useState(false);
   // const [showAssigneeModal, setShowAssigneeModal] = useState(false);
@@ -47,8 +60,11 @@ const EditTask: React.FC = () => {
     setTitle(null);
     setIsUrgent(false);
     setStatus("Pending");
-    // setDueDate(null);
+    setDueDate(null);
     // setSelectedAssignee(null);
+  };
+  const handlePickDate = () => {
+    setShowCalendar(true);
   };
 
   return (
@@ -145,6 +161,91 @@ const EditTask: React.FC = () => {
                 </View>
               </View>
             </View>
+            <View style={styles.dateRow}>
+              <View style={styles.dateButtonWrapper}>
+                <Pressable style={styles.dateButton} onPress={handlePickDate}>
+                  <FontAwesome5
+                    name="calendar-alt"
+                    size={20}
+                    color="#FFFFFF"
+                    style={{ marginRight: 8 }}
+                  />
+                  <Text style={styles.dateButtonText}>Pick a Date</Text>
+                </Pressable>
+              </View>
+
+              <View style={styles.frequencyWrapper}>
+                <View style={styles.frequencyDropdownWrapper}>
+                  <Pressable
+                    style={styles.frequencySelector}
+                    onPress={() => setShowFrequencyMenu((prev) => !prev)}
+                  >
+                    <Ionicons name="chevron-down" size={20} color="#000" />
+                    <Text style={styles.frequencySelectorText}>
+                      {frequency}
+                    </Text>
+                  </Pressable>
+
+                  {showFrequencyMenu && (
+                    <View style={styles.frequencyDropdownMenu}>
+                      {FREQUENCIES.map((option) => (
+                        <Pressable
+                          key={option}
+                          style={styles.frequencyOptionRow}
+                          onPress={() => {
+                            setFrequency(option);
+                            setShowFrequencyMenu(false);
+                          }}
+                        >
+                          <Text style={styles.frequencyOptionText}>
+                            {frequency ?? "None"}
+                          </Text>
+                        </Pressable>
+                      ))}
+                    </View>
+                  )}
+                </View>
+              </View>
+            </View>
+            <View style={styles.dueDateRow}>
+              <Text style={styles.dueDateLabel}>Due Date:</Text>
+              <Text style={styles.dueDateValue}>{dueDate}</Text>
+            </View>
+            <Modal
+              visible={showCalendar}
+              transparent
+              animationType="fade"
+              onRequestClose={() => setShowCalendar(false)}
+            >
+              <View style={styles.calendarOverlay}>
+                <View style={styles.calendarCard}>
+                  <Calendar
+                    onDayPress={(day) => {
+                      setDueDate(day.dateString);
+                      setShowCalendar(false);
+                    }}
+                    markedDates={
+                      dueDate
+                        ? {
+                            [dueDate]: {
+                              selected: true,
+                              selectedColor: PRIMARY_COLOR_BLUE,
+                              selectedTextColor: "#FFFFFF",
+                            },
+                          }
+                        : undefined
+                    }
+                  />
+
+                  <Pressable
+                    style={styles.calendarCloseButton}
+                    onPress={() => setShowCalendar(false)}
+                  >
+                    <Text style={styles.calendarCloseText}>Close</Text>
+                  </Pressable>
+                </View>
+              </View>
+            </Modal>
           </View>
         </View>
       </SafeAreaView>

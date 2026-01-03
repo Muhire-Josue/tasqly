@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { PRIMARY_COLOR_RED } from "../../../theme/colors";
+import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../../theme/colors";
 
 const style = StyleSheet.create({
   container: {
@@ -132,6 +132,120 @@ const style = StyleSheet.create({
   statusSummaryText: {
     fontSize: 16,
     color: "#000",
+  },
+  dateRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    gap: 16,
+  },
+  dateButtonWrapper: {
+    flex: 1,
+  },
+  dateButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    paddingVertical: 14,
+    borderRadius: 6,
+  },
+  dateButtonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+  },
+  frequencyWrapper: {
+    flex: 1,
+  },
+  frequencyDropdownWrapper: {
+    position: "relative",
+    zIndex: 10,
+  },
+  frequencySelector: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#DDD",
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+    backgroundColor: "#FFFFFF",
+    width: "100%",
+  },
+  frequencySelectorText: {
+    fontSize: 18,
+    color: "#000",
+    marginLeft: 12,
+    flexShrink: 0,
+  },
+  frequencyDropdownMenu: {
+    position: "absolute",
+    top: "100%",
+    left: 0,
+    right: 0,
+    width: "100%",
+    marginTop: 8,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 18,
+    paddingVertical: 8,
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 6,
+    zIndex: 20,
+  },
+  frequencyOptionRow: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+  frequencyOptionText: {
+    fontSize: 18,
+    color: "#000",
+  },
+  dueDateRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 12,
+  },
+  dueDateLabel: {
+    fontSize: 16,
+    color: "#888",
+    marginRight: 4,
+  },
+  dueDateValue: {
+    fontSize: 16,
+    color: "#000",
+    fontWeight: "500",
+  },
+  calendarOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.25)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  calendarCloseButton: {
+    marginTop: 8,
+    alignSelf: "flex-end",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 999,
+    backgroundColor: "#EFEFEF",
+  },
+  calendarCloseText: {
+    fontSize: 14,
+    color: "#111",
+  },
+  calendarCard: {
+    width: "90%",
+    borderRadius: 18,
+    backgroundColor: "#FFFFFF",
+    padding: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 8,
   },
 });
 

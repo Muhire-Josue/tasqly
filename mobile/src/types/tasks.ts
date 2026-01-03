@@ -2,6 +2,8 @@ import { ImageSourcePropType } from "react-native";
 
 export type TaskStatus = "Pending" | "Completed" | "Rejected";
 
+export type Frequency = "None" | "Daily" | "Weekly" | "Bi-weekly" | "Monthly";
+
 export type TaskCard = {
   id: string;
   title: string;
@@ -15,4 +17,5 @@ export type TaskCard = {
   avatar: ImageSourcePropType;
   commentsCount: number | null;
   description: string;
+  frequency: Frequency;
 };
