@@ -160,7 +160,7 @@ const TaskDetails: React.FC = () => {
 
                   <Text style={styles.statusValue}>{statusMeta.label}</Text>
 
-                  <FontAwesome5
+                  <Ionicons
                     name={statusMeta.icon}
                     size={20}
                     color={statusMeta.color}
