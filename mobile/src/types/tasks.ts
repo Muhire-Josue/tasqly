@@ -14,7 +14,7 @@ export type TaskCard = {
   dateColor: string;
   urgent?: boolean;
   assignee: string;
-  avatar: ImageSourcePropType;
+  avatar?: ImageSourcePropType;
   commentsCount: number | null;
   description: string;
   frequency: Frequency;
