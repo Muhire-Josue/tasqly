@@ -70,7 +70,7 @@ const EditTask: React.FC = () => {
     task?.assigneeRotationEnabled,
   );
   const [showAssigneeModal, setShowAssigneeModal] = useState(false);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(task?.description);
 
   const handleCancel = () => {
     navigateTo("task-list");
@@ -90,7 +90,7 @@ const EditTask: React.FC = () => {
       title ? title : "",
       dueDate,
       selectedAssignee,
-      description,
+      description ?? "",
     );
 
     if (errors.length > 0) {
