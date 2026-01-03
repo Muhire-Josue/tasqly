@@ -129,6 +129,22 @@ const EditTask: React.FC = () => {
 
               <View style={{ flex: 1 }} />
             </View>
+            <View style={styles.statusFrequencyHeaderRow}>
+              <View style={styles.statusSummaryLeft}>
+                <Text style={styles.statusSummaryLabel}>Status:</Text>
+                <View style={styles.statusSummaryValue}>
+                  <Ionicons
+                    name={STATUS_META[status ?? "Pending"].icon}
+                    size={18}
+                    color={STATUS_META[status ?? "Pending"].color}
+                    style={{ marginRight: 6 }}
+                  />
+                  <Text style={styles.statusSummaryText}>
+                    {STATUS_META[status ?? "Pending"].label}
+                  </Text>
+                </View>
+              </View>
+            </View>
           </View>
         </View>
       </SafeAreaView>

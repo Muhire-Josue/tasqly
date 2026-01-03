@@ -109,6 +109,30 @@ const style = StyleSheet.create({
     fontSize: 18,
     color: "#000",
   },
+  statusFrequencyHeaderRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 12,
+    marginBottom: 4,
+  },
+  statusSummaryLeft: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  statusSummaryLabel: {
+    fontSize: 16,
+    color: "#888",
+    marginRight: 4,
+  },
+  statusSummaryValue: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  statusSummaryText: {
+    fontSize: 16,
+    color: "#000",
+  },
 });
 
 export default style;
