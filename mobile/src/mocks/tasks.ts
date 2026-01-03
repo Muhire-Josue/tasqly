@@ -47,6 +47,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("1"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "2",
@@ -62,6 +63,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("2"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "3",
@@ -72,11 +74,12 @@ const TASKS_BASE: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
+    assignee: "Mike Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("3"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "4",
@@ -92,6 +95,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("4"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "5",
@@ -107,6 +111,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("5"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "6",
@@ -122,6 +127,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("6"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "7",
@@ -132,11 +138,12 @@ const TASKS_BASE: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: true,
-    assignee: "Assigned Mike",
+    assignee: "Mike Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("7"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "8",
@@ -152,6 +159,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("8"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "9",
@@ -167,6 +175,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("9"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "10",
@@ -182,6 +191,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("10"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "11",
@@ -192,11 +202,12 @@ const TASKS_BASE: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
+    assignee: "Mike Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("11"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "12",
@@ -212,6 +223,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("12"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "13",
@@ -227,6 +239,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("13"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "14",
@@ -242,6 +255,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("14"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "15",
@@ -252,11 +266,12 @@ const TASKS_BASE: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
+    assignee: "Mike Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("15"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "16",
@@ -272,6 +287,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("16"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "17",
@@ -287,6 +303,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("17"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "18",
@@ -302,6 +319,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("18"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "19",
@@ -312,11 +330,12 @@ const TASKS_BASE: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
+    assignee: "Mike Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("19"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "20",
@@ -332,6 +351,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("20"),
+    assigneeRotationEnabled: false,
   },
 
   // Repeats mixed with people for realism
@@ -349,6 +369,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("21"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "22",
@@ -364,6 +385,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("22"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "23",
@@ -374,11 +396,12 @@ const TASKS_BASE: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
+    assignee: "Mike Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("23"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "24",
@@ -394,6 +417,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("24"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "25",
@@ -409,6 +433,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("25"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "26",
@@ -424,6 +449,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("26"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "27",
@@ -434,11 +460,12 @@ const TASKS_BASE: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: true,
-    assignee: "Assigned Mike",
+    assignee: "Mike Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("27"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "28",
@@ -454,6 +481,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("28"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "29",
@@ -469,6 +497,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("29"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "30",
@@ -479,11 +508,12 @@ const TASKS_BASE: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
+    assignee: "Mike Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("30"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "31",
@@ -499,6 +529,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("31"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "32",
@@ -514,6 +545,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("32"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "33",
@@ -524,11 +556,12 @@ const TASKS_BASE: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
+    assignee: "Mike Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("33"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "34",
@@ -544,6 +577,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("34"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "35",
@@ -559,6 +593,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("35"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "36",
@@ -574,6 +609,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("36"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "37",
@@ -584,11 +620,12 @@ const TASKS_BASE: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
+    assignee: "Mike Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("37"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "38",
@@ -604,6 +641,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("38"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "39",
@@ -619,6 +657,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("39"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "40",
@@ -634,6 +673,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("40"),
+    assigneeRotationEnabled: false,
   },
 
   // Final 10
@@ -651,6 +691,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("41"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "42",
@@ -661,11 +702,12 @@ const TASKS_BASE: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: true,
-    assignee: "Assigned Mike",
+    assignee: "Mike Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("42"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "43",
@@ -681,6 +723,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("43"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "44",
@@ -696,6 +739,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("44"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "45",
@@ -711,6 +755,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("45"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "46",
@@ -721,11 +766,12 @@ const TASKS_BASE: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
+    assignee: "Mike Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("46"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "47",
@@ -741,6 +787,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("47"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "48",
@@ -756,6 +803,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("48"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "49",
@@ -771,6 +819,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("49"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "50",
@@ -786,6 +835,7 @@ const TASKS_BASE: TaskCard[] = [
     commentsCount: null,
     description: LOREM,
     frequency: pickFrequency("50"),
+    assigneeRotationEnabled: true,
   },
 ];
 

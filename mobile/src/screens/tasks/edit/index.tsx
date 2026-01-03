@@ -1,7 +1,16 @@
 /* eslint-disable complexity */
 import { RouteProp, useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
-import { View, Text, Pressable, TextInput, Modal } from "react-native";
+import {
+  View,
+  Text,
+  Pressable,
+  TextInput,
+  Modal,
+  Switch,
+  ScrollView,
+  Image,
+} from "react-native";
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Calendar } from "react-native-calendars";
@@ -14,6 +23,7 @@ import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import BottomTabBar from "../../../components/common/BottomTabBar";
 import { Frequency, TaskStatus } from "../../../types/tasks";
 import { STATUS_META } from "../../../mocks/statusMeta";
+import { Member, MEMBERS_MOCK } from "../../../mocks/members";
 
 type TaskDetailsRoute = RouteProp<RootStackParamList, "edit-task">;
 
@@ -32,6 +42,7 @@ const EditTask: React.FC = () => {
   const { header, taskId } = route.params;
 
   const task = MOCK_TASKS.find((t) => t.id === taskId);
+  const currentMember = MEMBERS_MOCK.find((m) => m.name === task?.assignee);
 
   const [title, setTitle] = useState<string | null>(
     task?.title ?? "Task not found",
@@ -50,9 +61,13 @@ const EditTask: React.FC = () => {
   const [showStatusMenu, setShowStatusMenu] = useState(false);
   const [dueDate, setDueDate] = useState<string | null>(task?.dueDate ?? null);
   const [showCalendar, setShowCalendar] = useState(false);
-  // const [selectedAssignee, setSelectedAssignee] = useState<Member | null>(null);
-  // const [assigneeRotationEnabled, setAssigneeRotationEnabled] = useState(false);
-  // const [showAssigneeModal, setShowAssigneeModal] = useState(false);
+  const [selectedAssignee, setSelectedAssignee] = useState<Member | null>(
+    currentMember ?? null,
+  );
+  const [assigneeRotationEnabled, setAssigneeRotationEnabled] = useState(
+    task?.assigneeRotationEnabled,
+  );
+  const [showAssigneeModal, setShowAssigneeModal] = useState(false);
   // const [description, setDescription] = useState("");
 
   const handleCancel = () => {
@@ -246,6 +261,119 @@ const EditTask: React.FC = () => {
                 </View>
               </View>
             </Modal>
+            <View style={styles.assigneeSection}>
+              <View style={styles.assigneeHeaderRow}>
+                <View style={styles.assigneeButtonWrapper}>
+                  <Pressable
+                    style={styles.assigneeButton}
+                    // onPress={() => setShowAssigneeModal(true)}
+                  >
+                    <Ionicons
+                      name="person-add-outline"
+                      size={20}
+                      color="#FFFFFF"
+                      style={{ marginRight: 8 }}
+                    />
+                    <Text style={styles.assigneeButtonText}>Add Assignee</Text>
+                  </Pressable>
+                </View>
+
+                <View style={styles.rotationWrapper}>
+                  <Switch
+                    value={assigneeRotationEnabled}
+                    onValueChange={setAssigneeRotationEnabled}
+                    disabled={frequency === "None"}
+                    trackColor={{
+                      false: "#D1D5DB",
+                      true: PRIMARY_COLOR_BLUE,
+                    }}
+                    thumbColor="#FFFFFF"
+                  />
+                  <Text
+                    style={[
+                      styles.rotationLabel,
+                      frequency === "None" && { color: "#B3B3B3" },
+                    ]}
+                  >
+                    Assignee Rotation
+                  </Text>
+                </View>
+              </View>
+              {selectedAssignee && (
+                <View style={styles.assigneeSummaryRow}>
+                  <Text style={styles.assigneeSummaryLabel}>Assigned to:</Text>
+                  <View style={styles.assigneeSummaryValue}>
+                    <View style={styles.assigneeAvatar}>
+                      {selectedAssignee.avatar ? (
+                        <Image
+                          source={selectedAssignee.avatar}
+                          style={styles.assigneeAvatarImage}
+                        />
+                      ) : (
+                        <Ionicons
+                          name="person-outline"
+                          size={20}
+                          color="#888"
+                        />
+                      )}
+                    </View>
+                    <Text style={styles.assigneeSummaryName}>
+                      {selectedAssignee.name}
+                    </Text>
+                  </View>
+                </View>
+              )}
+              <Modal
+                visible={showAssigneeModal}
+                transparent
+                animationType="fade"
+                onRequestClose={() => setShowAssigneeModal(false)}
+              >
+                <View style={styles.assigneeOverlay}>
+                  <View style={styles.assigneeCard}>
+                    <View style={styles.assigneeHeader}>
+                      <Text style={styles.assigneeTitle}>Select Assignee</Text>
+                      <Pressable onPress={() => setShowAssigneeModal(false)}>
+                        <Ionicons name="close" size={22} color="#111" />
+                      </Pressable>
+                    </View>
+
+                    <ScrollView
+                      showsVerticalScrollIndicator={false}
+                      bounces={false}
+                    >
+                      {MEMBERS_MOCK.map((member) => (
+                        <Pressable
+                          key={member.id}
+                          style={styles.assigneeRow}
+                          onPress={() => {
+                            setSelectedAssignee(member);
+                            setShowAssigneeModal(false);
+                          }}
+                        >
+                          {member.avatar ? (
+                            <Image
+                              source={member.avatar}
+                              style={styles.assigneeAvatar}
+                            />
+                          ) : (
+                            <View style={styles.assigneeAvatarPlaceholder}>
+                              <Ionicons
+                                name="person-outline"
+                                size={18}
+                                color="#9CA3AF"
+                              />
+                            </View>
+                          )}
+
+                          <Text style={styles.assigneeName}>{member.name}</Text>
+                        </Pressable>
+                      ))}
+                    </ScrollView>
+                  </View>
+                </View>
+              </Modal>
+            </View>
           </View>
         </View>
       </SafeAreaView>

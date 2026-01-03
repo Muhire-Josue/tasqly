@@ -13,52 +13,52 @@ export type Member = {
 export const MEMBERS_MOCK: Member[] = [
   {
     id: "1",
-    name: "Henry Smith",
+    name: "Henry Smithson",
     avatar: Ben,
   },
   {
     id: "2",
-    name: "Jane Smith",
+    name: "Jane Smithson",
     avatar: Micheal,
   },
   {
     id: "3",
-    name: "Johnson Smith",
+    name: "Johnson Smithson",
     // no avatar -> will show placeholder
   },
   {
     id: "4",
-    name: "Diego Smith",
+    name: "Diego Smithson",
     avatar: Well,
   },
   {
     id: "5",
-    name: "Valerie Smith",
+    name: "Valerie Smithson",
     avatar: Vince,
   },
   {
     id: "6",
-    name: "Henry Smith",
+    name: "Henry Smithson",
     avatar: Ben,
   },
   {
     id: "7",
-    name: "Jane Smith",
+    name: "Jane Smithson",
     avatar: Micheal,
   },
   {
     id: "8",
-    name: "Johnson Smith",
+    name: "Johnson Smithson",
     // no avatar -> will show placeholder
   },
   {
     id: "9",
-    name: "Diego Smith",
+    name: "Diego Smithson",
     avatar: Well,
   },
   {
     id: "10",
-    name: "Valerie Smith",
+    name: "Valerie Smithson",
     avatar: Vince,
   },
 ];

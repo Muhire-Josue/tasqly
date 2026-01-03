@@ -18,4 +18,5 @@ export type TaskCard = {
   commentsCount: number | null;
   description: string;
   frequency: Frequency;
+  assigneeRotationEnabled: boolean;
 };

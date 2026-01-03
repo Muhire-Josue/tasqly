@@ -247,6 +247,123 @@ const style = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     elevation: 8,
   },
+  assigneeSection: {
+    marginTop: 16,
+    position: "relative",
+  },
+  assigneeHeaderRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  assigneeButtonWrapper: {
+    flexShrink: 0,
+  },
+  assigneeButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    paddingVertical: 14,
+    paddingHorizontal: 20,
+    borderRadius: 8,
+  },
+  assigneeButtonText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  rotationWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 16,
+    flexShrink: 1,
+  },
+  rotationLabel: {
+    fontSize: 16,
+    color: "#111",
+    marginLeft: 8,
+    flexShrink: 1,
+  },
+  assigneeSummaryRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginTop: 8,
+  },
+  assigneeSummaryLabel: {
+    fontSize: 16,
+    color: "#888",
+    marginRight: 8,
+  },
+  assigneeSummaryValue: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
+  assigneeAvatar: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    overflow: "hidden",
+    marginRight: 12,
+    backgroundColor: "#F1F1F1",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  assigneeAvatarImage: {
+    width: "100%",
+    height: "100%",
+  },
+  assigneeSummaryName: {
+    fontSize: 16,
+    color: "#000",
+  },
+  assigneeOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.25)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  assigneeCard: {
+    width: "90%",
+    maxHeight: "70%",
+    borderRadius: 24,
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 8,
+  },
+  assigneeHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 8,
+  },
+  assigneeTitle: {
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#111",
+  },
+  assigneeRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 10,
+  },
+  assigneeAvatarPlaceholder: {
+    width: 36,
+    height: 36,
+    borderRadius: 24,
+    marginRight: 16,
+    backgroundColor: "#F1F1F1",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  assigneeName: {
+    fontSize: 18,
+    color: "#111",
+  },
 });
 
 export default style;
