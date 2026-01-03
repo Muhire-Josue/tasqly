@@ -61,6 +61,54 @@ const style = StyleSheet.create({
     color: "#111",
     fontWeight: "500",
   },
+  statusRow: {
+    flexDirection: "row",
+    marginTop: 16,
+    gap: 16,
+  },
+  statusDropdownWrapper: {
+    flex: 1,
+    position: "relative",
+    zIndex: 10,
+  },
+  statusSelector: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "#DDD",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    backgroundColor: "#FFFFFF",
+  },
+  statusSelectorText: {
+    fontSize: 18,
+    color: "#000",
+    marginLeft: 12,
+  },
+  statusDropdownMenu: {
+    position: "absolute",
+    top: "100%",
+    left: 0,
+    right: 0,
+    marginTop: 8,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 18,
+    paddingVertical: 8,
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 6,
+    zIndex: 20,
+  },
+  statusOptionRow: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
+  },
+  statusOptionText: {
+    fontSize: 18,
+    color: "#000",
+  },
 });
 
 export default style;

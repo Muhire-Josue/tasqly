@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { RouteProp, useRoute } from "@react-navigation/native";
 import React, { useState } from "react";
 import { View, Text, Pressable, TextInput } from "react-native";
@@ -10,6 +11,8 @@ import styles from "./styles";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
 import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import BottomTabBar from "../../../components/common/BottomTabBar";
+import { TaskStatus } from "../../../types/tasks";
+import { STATUS_META } from "../../../mocks/statusMeta";
 
 type TaskDetailsRoute = RouteProp<RootStackParamList, "edit-task">;
 
@@ -28,8 +31,10 @@ const EditTask: React.FC = () => {
     task?.urgent ?? false,
   );
 
-  // const [status, setStatus] = useState<TaskStatus>("Pending");
-  // const [showStatusMenu, setShowStatusMenu] = useState(false);
+  const [status, setStatus] = useState<TaskStatus | null>(
+    task?.status ?? "Pending",
+  );
+  const [showStatusMenu, setShowStatusMenu] = useState(false);
   // const [dueDate, setDueDate] = useState<string | null>(null);
   // const [showCalendar, setShowCalendar] = useState(false);
   // const [selectedAssignee, setSelectedAssignee] = useState<Member | null>(null);
@@ -40,8 +45,8 @@ const EditTask: React.FC = () => {
   const handleCancel = () => {
     navigateTo("task-list");
     setTitle(null);
-    // setIsUrgent(false);
-    // setStatus("Pending");
+    setIsUrgent(false);
+    setStatus("Pending");
     // setDueDate(null);
     // setSelectedAssignee(null);
   };
@@ -86,6 +91,43 @@ const EditTask: React.FC = () => {
                 color={isUrgent ? PRIMARY_COLOR_BLUE : undefined}
               />
               <Text style={styles.urgentLabel}>This Task Is Urgent</Text>
+            </View>
+
+            <View style={styles.statusRow}>
+              <View style={styles.statusDropdownWrapper}>
+                <Pressable
+                  style={styles.statusSelector}
+                  onPress={() => setShowStatusMenu((prev) => !prev)}
+                >
+                  <Ionicons name="chevron-down" size={22} color="#000" />
+                  <Text style={styles.statusSelectorText}>
+                    {STATUS_META[status ?? "Pending"].label}
+                  </Text>
+                </Pressable>
+
+                {showStatusMenu && (
+                  <View style={styles.statusDropdownMenu}>
+                    {(Object.keys(STATUS_META) as TaskStatus[]).map(
+                      (option) => (
+                        <Pressable
+                          key={option}
+                          style={styles.statusOptionRow}
+                          onPress={() => {
+                            setStatus(option);
+                            setShowStatusMenu(false);
+                          }}
+                        >
+                          <Text style={styles.statusOptionText}>
+                            {STATUS_META[option].label}
+                          </Text>
+                        </Pressable>
+                      ),
+                    )}
+                  </View>
+                )}
+              </View>
+
+              <View style={{ flex: 1 }} />
             </View>
           </View>
         </View>
