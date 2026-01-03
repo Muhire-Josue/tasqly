@@ -51,6 +51,16 @@ const style = StyleSheet.create({
     color: "#000",
     marginBottom: 20,
   },
+  urgentRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+  urgentLabel: {
+    fontSize: 16,
+    color: "#111",
+    fontWeight: "500",
+  },
 });
 
 export default style;
