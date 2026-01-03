@@ -10,6 +10,7 @@ import OtpCode from "../screens/auth/otp-code";
 import TaskList from "../screens/tasks/list";
 import CreateTask from "../screens/tasks/create";
 import TaskDetails from "../screens/tasks/details";
+import EditTask from "../screens/tasks/edit";
 
 import { RootStackParamList } from "../types/navigation";
 
@@ -65,6 +66,11 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="task-details"
           component={TaskDetails}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="edit-task"
+          component={EditTask}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
