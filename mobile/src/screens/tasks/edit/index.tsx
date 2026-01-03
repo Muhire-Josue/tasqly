@@ -24,6 +24,8 @@ import BottomTabBar from "../../../components/common/BottomTabBar";
 import { Frequency, TaskStatus } from "../../../types/tasks";
 import { STATUS_META } from "../../../mocks/statusMeta";
 import { Member, MEMBERS_MOCK } from "../../../mocks/members";
+import { validateCreateForm } from "../../../validators/create";
+import { showMessage } from "react-native-flash-message";
 
 type TaskDetailsRoute = RouteProp<RootStackParamList, "edit-task">;
 
@@ -68,7 +70,7 @@ const EditTask: React.FC = () => {
     task?.assigneeRotationEnabled,
   );
   const [showAssigneeModal, setShowAssigneeModal] = useState(false);
-  // const [description, setDescription] = useState("");
+  const [description, setDescription] = useState("");
 
   const handleCancel = () => {
     navigateTo("task-list");
@@ -76,10 +78,42 @@ const EditTask: React.FC = () => {
     setIsUrgent(false);
     setStatus("Pending");
     setDueDate(null);
-    // setSelectedAssignee(null);
+    setSelectedAssignee(null);
   };
+
   const handlePickDate = () => {
     setShowCalendar(true);
+  };
+
+  const handleCreate = () => {
+    const errors = validateCreateForm(
+      title ? title : "",
+      dueDate,
+      selectedAssignee,
+      description,
+    );
+
+    if (errors.length > 0) {
+      showMessage({
+        message: errors[0],
+        type: "danger",
+        icon: "danger",
+      });
+      return;
+    }
+    showMessage({
+      message: "Task created successfully",
+      type: "success",
+      icon: "success",
+    });
+
+    setTitle("");
+    setDescription("");
+    setDueDate(null);
+    setSelectedAssignee(null);
+    setFrequency("None");
+    setIsUrgent(false);
+    setStatus("Pending");
   };
 
   return (
@@ -373,6 +407,29 @@ const EditTask: React.FC = () => {
                   </View>
                 </View>
               </Modal>
+            </View>
+            <Text style={styles.label}>Description</Text>
+            <TextInput
+              value={description}
+              onChangeText={setDescription}
+              placeholder="Add a description for this task..."
+              placeholderTextColor="#A0A0A0"
+              style={styles.descriptionInput}
+              multiline
+              numberOfLines={4}
+              textAlignVertical="top"
+            />
+
+            <View style={styles.createButtonWrapper}>
+              <Pressable style={styles.createButton} onPress={handleCreate}>
+                <Ionicons
+                  name="add"
+                  size={28}
+                  color="#FFFFFF"
+                  style={{ marginRight: 10 }}
+                />
+                <Text style={styles.createButtonText}>Create</Text>
+              </Pressable>
             </View>
           </View>
         </View>

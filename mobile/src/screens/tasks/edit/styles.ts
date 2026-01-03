@@ -364,6 +364,40 @@ const style = StyleSheet.create({
     fontSize: 18,
     color: "#111",
   },
+  descriptionInput: {
+    borderWidth: 1.5,
+    borderColor: "#E5E7EB",
+    borderRadius: 18,
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 16,
+    paddingVertical: 20,
+    fontSize: 16,
+    color: "#000",
+    marginTop: 8,
+    marginBottom: 20,
+    minHeight: 120,
+  },
+  createButtonWrapper: {
+    marginTop: 8,
+  },
+  createButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    paddingVertical: 16,
+    borderRadius: 999,
+    shadowColor: "#000",
+    shadowOpacity: 0.15,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 4,
+  },
+  createButtonText: {
+    color: "#FFFFFF",
+    fontSize: 20,
+    fontWeight: "700",
+  },
 });
 
 export default style;
