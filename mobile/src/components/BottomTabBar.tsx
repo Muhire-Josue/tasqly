@@ -76,8 +76,7 @@ const BottomTabBar: React.FC = () => {
                   break;
 
                 case "profile":
-                  // navigateTo("profile"); // when you have it
-                  navigateTo("task-list"); // placeholder
+                  navigateTo("task-list");
                   break;
               }
             }}
