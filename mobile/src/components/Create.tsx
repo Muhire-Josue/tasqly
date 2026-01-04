@@ -14,13 +14,13 @@ import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { showMessage } from "react-native-flash-message";
-import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
-import { Frequency, TaskStatus } from "../../types/tasks";
-import { Member, MEMBERS_MOCK } from "../../mocks/members";
-import styles from "../style/create";
-import { useNavigateTo } from "../../navigation/useNavigateTo";
-import { validateCreateForm } from "../../validators/create";
-import { STATUS_META } from "../../mocks/statusMeta";
+import { PRIMARY_COLOR_BLUE } from "../theme/colors";
+import { Frequency, TaskStatus } from "../types/tasks";
+import { Member, MEMBERS_MOCK } from "../mocks/members";
+import styles from "./style/create";
+import { useNavigateTo } from "../navigation/useNavigateTo";
+import { validateCreateForm } from "../validators/create";
+import { STATUS_META } from "../mocks/statusMeta";
 
 interface CreateProps {
   header: string;

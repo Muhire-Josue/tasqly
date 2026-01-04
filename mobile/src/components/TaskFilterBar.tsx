@@ -3,9 +3,9 @@ import { View, Text, Pressable, Modal } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Calendar } from "react-native-calendars";
-import styles from "../style/taskFilterBar";
-import { TaskStatus } from "../../types/tasks";
-import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
+import styles from "./style/taskFilterBar";
+import { TaskStatus } from "../types/tasks";
+import { PRIMARY_COLOR_BLUE } from "../theme/colors";
 
 export type Scope = "all" | "mine";
 

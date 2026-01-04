@@ -8,7 +8,7 @@ import type { RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../../../types/navigation";
 import MOCK_TASKS from "../../../mocks/tasks";
 import styles from "./styles";
-import BottomTabBar from "../../../components/common/BottomTabBar";
+import BottomTabBar from "../../../components/BottomTabBar";
 import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import { STATUS_META } from "../../../mocks/statusMeta";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";

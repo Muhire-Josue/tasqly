@@ -20,7 +20,7 @@ import MOCK_TASKS from "../../../mocks/tasks";
 import styles from "./styles";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
 import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
-import BottomTabBar from "../../../components/common/BottomTabBar";
+import BottomTabBar from "../../../components/BottomTabBar";
 import { Frequency, TaskStatus } from "../../../types/tasks";
 import { STATUS_META } from "../../../mocks/statusMeta";
 import { Member, MEMBERS_MOCK } from "../../../mocks/members";
