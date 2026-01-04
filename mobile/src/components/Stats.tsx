@@ -1,12 +1,12 @@
 import React from "react";
 import { FontAwesome5 } from "@expo/vector-icons";
 import { View, Text } from "react-native";
-import styles from "../style/stats";
+import styles from "./style/stats";
 import {
   PRIMARY_COLOR_GREEN,
   PRIMARY_COLOR_RED,
   PRIMARY_COLOR_YELLOW,
-} from "../../theme/colors";
+} from "../theme/colors";
 
 const Stats: React.FC = () => {
   return (

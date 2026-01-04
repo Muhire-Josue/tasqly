@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import { Ionicons, FontAwesome } from "@expo/vector-icons";
-import styles from "../style/headerInfo";
+import styles from "./style/headerInfo";
 import ben from "../../assets/ben.jpg";
-import { useNavigateTo } from "../../navigation/useNavigateTo";
+import { useNavigateTo } from "../navigation/useNavigateTo";
 
 const HeaderInfo: React.FC = () => {
   const navigateTo = useNavigateTo();

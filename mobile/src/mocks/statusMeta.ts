@@ -4,28 +4,25 @@ import {
   PRIMARY_COLOR_RED,
 } from "../theme/colors";
 import { TaskStatus } from "../types/tasks";
+import { Ionicons } from "@expo/vector-icons";
 
 export const STATUS_META: Record<
   TaskStatus,
-  {
-    label: string;
-    icon: "check-circle" | "times-circle" | "clock";
-    color: string;
-  }
+  { label: string; icon: keyof typeof Ionicons.glyphMap; color: string }
 > = {
   Pending: {
     label: "Pending",
-    icon: "clock",
+    icon: "time-outline",
     color: PRIMARY_COLOR_YELLOW,
   },
   Completed: {
     label: "Completed",
-    icon: "check-circle",
+    icon: "checkmark-circle-outline",
     color: PRIMARY_COLOR_GREEN,
   },
   Rejected: {
     label: "Rejected",
-    icon: "times-circle",
+    icon: "close-circle-outline",
     color: PRIMARY_COLOR_RED,
   },
 };

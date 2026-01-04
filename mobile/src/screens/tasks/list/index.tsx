@@ -11,15 +11,15 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import Checkbox from "expo-checkbox";
 
 import styles from "./styles";
-import HeaderInfo from "../../../components/common/HeaderInfo";
-import Stats from "../../../components/common/Stats";
-import TaskFilterBar, { Scope } from "../../../components/common/TaskFilterBar";
-import BottomTabBar from "../../../components/common/BottomTabBar";
+import HeaderInfo from "../../../components/HeaderInfo";
+import Stats from "../../../components/Stats";
+import TaskFilterBar, { Scope } from "../../../components/TaskFilterBar";
+import BottomTabBar from "../../../components/BottomTabBar";
 
 import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import { TaskStatus } from "../../../types/tasks";
 import MOCK_TASKS from "../../../mocks/tasks";
-import Card from "../../../components/common/Card";
+import Card from "../../../components/Card";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
 
 const STATUSES: TaskStatus[] = ["Pending", "Completed", "Rejected"];
