@@ -436,9 +436,9 @@ const EditTask: React.FC = () => {
 
                 <View style={styles.createButtonWrapper}>
                   <Pressable style={styles.createButton} onPress={handleCreate}>
-                    <Ionicons
-                      name="add"
-                      size={28}
+                    <FontAwesome5
+                      name="pen"
+                      size={18}
                       color="#FFFFFF"
                       style={{ marginRight: 10 }}
                     />
