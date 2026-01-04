@@ -108,14 +108,6 @@ const EditTask: React.FC = () => {
       type: "success",
       icon: "success",
     });
-
-    setTitle("");
-    setDescription("");
-    setDueDate(null);
-    setSelectedAssignee(null);
-    setFrequency("None");
-    setIsUrgent(false);
-    setStatus("Pending");
   };
 
   return (
