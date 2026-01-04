@@ -1,5 +1,5 @@
 /* eslint-disable complexity */
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { TaskCard } from "../types/tasks";
 import {
   View,
@@ -68,13 +68,13 @@ const Edit: React.FC<EditProp> = ({ task, reset }) => {
     setShowCalendar(true);
   };
 
-  if (reset) {
+  useEffect(() => {
     setTitle(null);
     setIsUrgent(false);
     setStatus("Pending");
     setDueDate(null);
     setSelectedAssignee(null);
-  }
+  }, [reset]);
 
   const handleCreate = () => {
     const errors = validateCreateForm(
