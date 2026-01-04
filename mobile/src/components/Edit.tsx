@@ -39,27 +39,27 @@ const Edit: React.FC<EditProp> = ({ task, reset }) => {
   const currentMember = MEMBERS_MOCK.find((m) => m.name === task?.assignee);
 
   const [title, setTitle] = useState<string | null>(
-    task?.title ?? "Task not found",
+    task?.title ?? "Task not found"
   );
   const [isUrgent, setIsUrgent] = useState<boolean | null>(
-    task?.urgent ?? false,
+    task?.urgent ?? false
   );
 
   const [status, setStatus] = useState<TaskStatus | null>(
-    task?.status ?? "Pending",
+    task?.status ?? "Pending"
   );
   const [frequency, setFrequency] = useState<Frequency | null>(
-    task?.frequency ?? null,
+    task?.frequency ?? null
   );
   const [showFrequencyMenu, setShowFrequencyMenu] = useState(false);
   const [showStatusMenu, setShowStatusMenu] = useState(false);
   const [dueDate, setDueDate] = useState<string | null>(task?.dueDate ?? null);
   const [showCalendar, setShowCalendar] = useState(false);
   const [selectedAssignee, setSelectedAssignee] = useState<Member | null>(
-    currentMember ?? null,
+    currentMember ?? null
   );
   const [assigneeRotationEnabled, setAssigneeRotationEnabled] = useState(
-    task?.assigneeRotationEnabled,
+    task?.assigneeRotationEnabled
   );
   const [showAssigneeModal, setShowAssigneeModal] = useState(false);
   const [description, setDescription] = useState(task?.description);
@@ -69,11 +69,13 @@ const Edit: React.FC<EditProp> = ({ task, reset }) => {
   };
 
   useEffect(() => {
-    setTitle(null);
-    setIsUrgent(false);
-    setStatus("Pending");
-    setDueDate(null);
-    setSelectedAssignee(null);
+    if (reset) {
+      setTitle(null);
+      setIsUrgent(false);
+      setStatus("Pending");
+      setDueDate(null);
+      setSelectedAssignee(null);
+    }
   }, [reset]);
 
   const handleCreate = () => {
@@ -81,7 +83,7 @@ const Edit: React.FC<EditProp> = ({ task, reset }) => {
       title ? title : "",
       dueDate,
       selectedAssignee,
-      description ?? "",
+      description ?? ""
     );
 
     if (errors.length > 0) {
