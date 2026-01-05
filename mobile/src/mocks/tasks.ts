@@ -33,13 +33,6 @@ const shuffle = <T>(arr: T[]): T[] => {
   return copy;
 };
 
-// Members list mapping (exactly as provided):
-// 1) Henry Smithson -> BenAvatar
-// 2) Jane Smithson -> MichealAvatar
-// 3) Johnson Smithson -> no avatar (placeholder)
-// 4) Diego Smithson -> wellingtonAvatar
-// 5) Valerie Smithson -> VinceAvatar
-
 const TASKS_BASE: CardType[] = [
   {
     id: "1",
