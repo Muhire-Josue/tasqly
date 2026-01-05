@@ -12,6 +12,7 @@ import TaskList from "../screens/tasks/list";
 import CreateTask from "../screens/tasks/create";
 import TaskDetails from "../screens/tasks/details";
 import EditTask from "../screens/tasks/edit";
+import RepairDetails from "../screens/repairs/details";
 
 import RepairList from "../screens/repairs/list";
 
@@ -79,6 +80,11 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="repair-list"
           component={RepairList}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="repair-details"
+          component={RepairDetails}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

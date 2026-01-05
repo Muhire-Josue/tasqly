@@ -60,8 +60,8 @@ const RepairList: React.FC = () => {
               <Card
                 item={item}
                 onPress={() =>
-                  navigateTo("task-details", {
-                    taskId: item.id,
+                  navigateTo("repair-details", {
+                    repairId: item.id,
                   })
                 }
               />
