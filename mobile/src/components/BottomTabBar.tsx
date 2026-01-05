@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { View, Text, Pressable } from "react-native";
 import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import styles from "../style/bottomTabBar";
-import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
-import { useNavigateTo } from "../../navigation/useNavigateTo";
+import styles from "./style/bottomTabBar";
+import { PRIMARY_COLOR_BLUE } from "../theme/colors";
+import { useNavigateTo } from "../navigation/useNavigateTo";
 
 type TabKey = "tasks" | "repair" | "notifications" | "profile";
 
@@ -68,18 +68,15 @@ const BottomTabBar: React.FC = () => {
                   break;
 
                 case "repair":
-                  // navigateTo("repair"); // when you have it
-                  navigateTo("task-list"); // placeholder
+                  navigateTo("task-list");
                   break;
 
                 case "notifications":
-                  // navigateTo("notifications"); // when you have it
-                  navigateTo("task-list"); // placeholder
+                  navigateTo("task-list");
                   break;
 
                 case "profile":
-                  // navigateTo("profile"); // when you have it
-                  navigateTo("task-list"); // placeholder
+                  navigateTo("task-list");
                   break;
               }
             }}

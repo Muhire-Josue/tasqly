@@ -1,9 +1,9 @@
 import React from "react";
 import { View, Text, Image, Pressable } from "react-native";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
-import styles from "../style/card";
-import { TaskCard } from "../../types/tasks";
-import { PRIMARY_COLOR_RED } from "../../theme/colors";
+import styles from "./style/card";
+import { TaskCard } from "../types/tasks";
+import { PRIMARY_COLOR_RED } from "../theme/colors";
 
 interface CardProps {
   item: TaskCard;

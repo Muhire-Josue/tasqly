@@ -2,7 +2,7 @@ import { useState } from "react";
 import { View, Text } from "react-native";
 import styles from "./style";
 import { FontAwesome5 } from "@expo/vector-icons";
-import Spinner from "../../components/common/Spinner";
+import Spinner from "../../components/Spinner";
 import { useNavigateTo } from "../../navigation/useNavigateTo";
 
 const Index: React.FC = () => {

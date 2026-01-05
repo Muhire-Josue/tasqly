@@ -1,124 +1,89 @@
-import React, { useState } from "react";
+/* eslint-disable complexity */
+import React, { useEffect, useState } from "react";
+import { TaskCard } from "../types/tasks";
 import {
   View,
   Text,
   Pressable,
   TextInput,
   Modal,
-  Image,
-  ScrollView,
   Switch,
+  ScrollView,
+  Image,
 } from "react-native";
+import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import { Calendar } from "react-native-calendars";
-import { Ionicons } from "@expo/vector-icons";
 import Checkbox from "expo-checkbox";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import styles from "./style/edit";
+import { PRIMARY_COLOR_BLUE } from "../theme/colors";
+import { Frequency, TaskStatus } from "../types/tasks";
+import { STATUS_META } from "../mocks/statusMeta";
+import { Member, MEMBERS_MOCK } from "../mocks/members";
+import { validateCreateForm } from "../validators/create";
 import { showMessage } from "react-native-flash-message";
-import {
-  PRIMARY_COLOR_BLUE,
-  PRIMARY_COLOR_GRAY,
-  PRIMARY_COLOR_GREEN,
-  PRIMARY_COLOR_RED,
-} from "../../theme/colors";
-import { TaskStatus } from "../../types/tasks";
-import { Member, MEMBERS_MOCK } from "../../mocks/members";
-import styles from "../style/create";
-import { useNavigateTo } from "../../navigation/useNavigateTo";
-import { validateCreateForm } from "../../validators/create";
 
-interface CreateProps {
-  header: string;
+const FREQUENCIES: Frequency[] = [
+  "None",
+  "Daily",
+  "Weekly",
+  "Bi-weekly",
+  "Monthly",
+];
+
+interface EditProp {
+  task: TaskCard | undefined;
+  reset: boolean;
 }
 
-const Create: React.FC<CreateProps> = ({ header }) => {
-  const navigate = useNavigateTo();
+const Edit: React.FC<EditProp> = ({ task, reset }) => {
+  const currentMember = MEMBERS_MOCK.find((m) => m.name === task?.assignee);
 
-  const STATUS_META: Record<
-    TaskStatus,
-    { label: string; icon: keyof typeof Ionicons.glyphMap; color: string }
-  > = {
-    Pending: {
-      label: "Pending",
-      icon: "time-outline",
-      color: PRIMARY_COLOR_GRAY,
-    },
-    Completed: {
-      label: "Completed",
-      icon: "checkmark-circle-outline",
-      color: PRIMARY_COLOR_GREEN,
-    },
-    Rejected: {
-      label: "Rejected",
-      icon: "close-circle-outline",
-      color: PRIMARY_COLOR_RED,
-    },
-  };
+  const [title, setTitle] = useState<string | null>(
+    task?.title ?? "Task not found",
+  );
+  const [isUrgent, setIsUrgent] = useState<boolean | null>(
+    task?.urgent ?? false,
+  );
 
-  type Frequency = "None" | "Daily" | "Weekly" | "Bi-weekly" | "Monthly";
-
-  const FREQUENCIES: Frequency[] = [
-    "None",
-    "Daily",
-    "Weekly",
-    "Bi-weekly",
-    "Monthly",
-  ];
-
-  const [frequency, setFrequency] = useState<Frequency>("None");
+  const [status, setStatus] = useState<TaskStatus | null>(
+    task?.status ?? "Pending",
+  );
+  const [frequency, setFrequency] = useState<Frequency | null>(
+    task?.frequency ?? null,
+  );
   const [showFrequencyMenu, setShowFrequencyMenu] = useState(false);
-
-  const [title, setTitle] = useState<string | null>(null);
-  const [isUrgent, setIsUrgent] = useState(false);
-
-  const [status, setStatus] = useState<TaskStatus>("Pending");
   const [showStatusMenu, setShowStatusMenu] = useState(false);
-  const [dueDate, setDueDate] = useState<string | null>(null);
+  const [dueDate, setDueDate] = useState<string | null>(task?.dueDate ?? null);
   const [showCalendar, setShowCalendar] = useState(false);
-  const [selectedAssignee, setSelectedAssignee] = useState<Member | null>(null);
-  const [assigneeRotationEnabled, setAssigneeRotationEnabled] = useState(false);
+  const [selectedAssignee, setSelectedAssignee] = useState<Member | null>(
+    currentMember ?? null,
+  );
+  const [assigneeRotationEnabled, setAssigneeRotationEnabled] = useState(
+    task?.assigneeRotationEnabled,
+  );
   const [showAssigneeModal, setShowAssigneeModal] = useState(false);
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(task?.description);
 
   const handlePickDate = () => {
     setShowCalendar(true);
   };
 
-  const formatDueDateLabel = (isoDate: string): string => {
-    const [year, month, day] = isoDate.split("-").map(Number);
-    const date = new Date(year, month - 1, day);
+  useEffect(() => {
+    if (reset) {
+      setTitle(null);
+      setIsUrgent(false);
+      setStatus("Pending");
+      setDueDate(null);
+      setSelectedAssignee(null);
+    }
+  }, [reset]);
 
-    const d = date.getDate();
-    const monthName = date.toLocaleString("en-US", { month: "long" });
-    const y = date.getFullYear();
-
-    const suffix =
-      d >= 11 && d <= 13
-        ? "th"
-        : d % 10 === 1
-          ? "st"
-          : d % 10 === 2
-            ? "nd"
-            : d % 10 === 3
-              ? "rd"
-              : "th";
-
-    return `${d}${suffix} ${monthName} ${y}`;
-  };
-
-  const handleCancel = () => {
-    navigate("task-list");
-    setTitle(null);
-    setIsUrgent(false);
-    setStatus("Pending");
-    setDueDate(null);
-    setSelectedAssignee(null);
-  };
   const handleCreate = () => {
     const errors = validateCreateForm(
       title ? title : "",
       dueDate,
       selectedAssignee,
-      description,
+      description ?? "",
     );
 
     if (errors.length > 0) {
@@ -134,37 +99,10 @@ const Create: React.FC<CreateProps> = ({ header }) => {
       type: "success",
       icon: "success",
     });
-
-    setTitle("");
-    setDescription("");
-    setDueDate(null);
-    setSelectedAssignee(null);
-    setFrequency("None");
-    setIsUrgent(false);
-    setStatus("Pending");
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.headerRow}>
-        <Text style={styles.title}>{header}</Text>
-
-        <Pressable
-          style={({ pressed }) => [
-            styles.cancelButton,
-            pressed && { opacity: 0.9 },
-          ]}
-          onPress={handleCancel}
-        >
-          <Ionicons
-            name="close-circle-outline"
-            size={30}
-            color="#FFFFFF"
-            style={{ marginRight: 6 }}
-          />
-          <Text style={styles.cancelText}>Cancel</Text>
-        </Pressable>
-      </View>
+    <>
       <View style={styles.formSection}>
         <Text style={styles.label}>Title</Text>
         <TextInput
@@ -177,7 +115,7 @@ const Create: React.FC<CreateProps> = ({ header }) => {
 
         <View style={styles.urgentRow}>
           <Checkbox
-            value={isUrgent}
+            value={isUrgent ?? false}
             onValueChange={setIsUrgent}
             color={isUrgent ? PRIMARY_COLOR_BLUE : undefined}
           />
@@ -192,7 +130,7 @@ const Create: React.FC<CreateProps> = ({ header }) => {
             >
               <Ionicons name="chevron-down" size={22} color="#000" />
               <Text style={styles.statusSelectorText}>
-                {STATUS_META[status].label}
+                {STATUS_META[status ?? "Pending"].label}
               </Text>
             </Pressable>
 
@@ -223,13 +161,13 @@ const Create: React.FC<CreateProps> = ({ header }) => {
             <Text style={styles.statusSummaryLabel}>Status:</Text>
             <View style={styles.statusSummaryValue}>
               <Ionicons
-                name={STATUS_META[status].icon}
+                name={STATUS_META[status ?? "Pending"].icon}
                 size={18}
-                color={STATUS_META[status].color}
+                color={STATUS_META[status ?? "Pending"].color}
                 style={{ marginRight: 6 }}
               />
               <Text style={styles.statusSummaryText}>
-                {STATUS_META[status].label}
+                {STATUS_META[status ?? "Pending"].label}
               </Text>
             </View>
           </View>
@@ -268,7 +206,9 @@ const Create: React.FC<CreateProps> = ({ header }) => {
                         setShowFrequencyMenu(false);
                       }}
                     >
-                      <Text style={styles.frequencyOptionText}>{option}</Text>
+                      <Text style={styles.frequencyOptionText}>
+                        {frequency ?? "None"}
+                      </Text>
                     </Pressable>
                   ))}
                 </View>
@@ -276,12 +216,9 @@ const Create: React.FC<CreateProps> = ({ header }) => {
             </View>
           </View>
         </View>
-
         <View style={styles.dueDateRow}>
           <Text style={styles.dueDateLabel}>Due Date:</Text>
-          <Text style={styles.dueDateValue}>
-            {dueDate ? formatDueDateLabel(dueDate) : "—"}
-          </Text>
+          <Text style={styles.dueDateValue}>{dueDate}</Text>
         </View>
         <Modal
           visible={showCalendar}
@@ -356,7 +293,6 @@ const Create: React.FC<CreateProps> = ({ header }) => {
               </Text>
             </View>
           </View>
-
           {selectedAssignee && (
             <View style={styles.assigneeSummaryRow}>
               <Text style={styles.assigneeSummaryLabel}>Assigned to:</Text>
@@ -442,18 +378,18 @@ const Create: React.FC<CreateProps> = ({ header }) => {
 
         <View style={styles.createButtonWrapper}>
           <Pressable style={styles.createButton} onPress={handleCreate}>
-            <Ionicons
-              name="add"
-              size={28}
+            <FontAwesome5
+              name="pen"
+              size={18}
               color="#FFFFFF"
               style={{ marginRight: 10 }}
             />
-            <Text style={styles.createButtonText}>Create</Text>
+            <Text style={styles.createButtonText}>Update</Text>
           </Pressable>
         </View>
       </View>
-    </View>
+    </>
   );
 };
 
-export default Create;
+export default Edit;

@@ -1,7 +1,31 @@
 import { StyleSheet } from "react-native";
-import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
+import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../theme/colors";
 
-const styles = StyleSheet.create({
+const style = StyleSheet.create({
+  headerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    marginBottom: 24,
+  },
+  cancelButton: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: PRIMARY_COLOR_RED,
+    paddingHorizontal: 16,
+    paddingVertical: 6,
+    borderRadius: 999,
+  },
+  cancelText: {
+    color: "#FFFFFF",
+    fontSize: 16,
+    fontWeight: "600",
+  },
+  title: {
+    fontSize: 28,
+    fontWeight: "600",
+    color: "#000000",
+  },
   formSection: {
     flexShrink: 0,
   },
@@ -23,7 +47,6 @@ const styles = StyleSheet.create({
     color: "#000",
     marginBottom: 20,
   },
-
   urgentRow: {
     flexDirection: "row",
     alignItems: "center",
@@ -34,12 +57,16 @@ const styles = StyleSheet.create({
     color: "#111",
     fontWeight: "500",
   },
+  statusRow: {
+    flexDirection: "row",
+    marginTop: 16,
+    gap: 16,
+  },
   statusDropdownWrapper: {
     flex: 1,
     position: "relative",
     zIndex: 10,
   },
-
   statusSelector: {
     flexDirection: "row",
     alignItems: "center",
@@ -49,13 +76,11 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
     backgroundColor: "#FFFFFF",
   },
-
   statusSelectorText: {
     fontSize: 18,
     color: "#000",
     marginLeft: 12,
   },
-
   statusDropdownMenu: {
     position: "absolute",
     top: "100%",
@@ -72,47 +97,47 @@ const styles = StyleSheet.create({
     elevation: 6,
     zIndex: 20,
   },
-
   statusOptionRow: {
     paddingHorizontal: 16,
     paddingVertical: 10,
   },
-
   statusOptionText: {
     fontSize: 18,
     color: "#000",
   },
-
-  statusSummaryRow: {
+  statusFrequencyHeaderRow: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 12,
+    marginBottom: 4,
   },
-
+  statusSummaryLeft: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+  },
   statusSummaryLabel: {
     fontSize: 16,
     color: "#888",
     marginRight: 4,
   },
-
   statusSummaryValue: {
     flexDirection: "row",
     alignItems: "center",
   },
-
   statusSummaryText: {
     fontSize: 16,
     color: "#000",
   },
-  statusRow: {
+  dateRow: {
     flexDirection: "row",
-    marginTop: 16,
+    justifyContent: "space-between",
+    alignItems: "center",
     gap: 16,
   },
   dateButtonWrapper: {
     flex: 1,
   },
-
   dateButton: {
     flexDirection: "row",
     alignItems: "center",
@@ -121,93 +146,17 @@ const styles = StyleSheet.create({
     paddingVertical: 14,
     borderRadius: 6,
   },
-
   dateButtonText: {
     color: "#FFFFFF",
     fontSize: 16,
   },
-
-  dueDateLabel: {
-    fontSize: 16,
-    color: "#888",
-    marginRight: 4,
-  },
-
-  dueDateValue: {
-    fontSize: 16,
-    color: "#000",
-    fontWeight: "500",
-  },
-  calendarOverlay: {
+  frequencyWrapper: {
     flex: 1,
-    backgroundColor: "rgba(0,0,0,0.25)",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  calendarCard: {
-    width: "90%",
-    borderRadius: 18,
-    backgroundColor: "#FFFFFF",
-    padding: 12,
-    shadowColor: "#000",
-    shadowOpacity: 0.18,
-    shadowRadius: 8,
-    shadowOffset: { width: 0, height: 4 },
-    elevation: 8,
-  },
-
-  calendarCloseButton: {
-    marginTop: 8,
-    alignSelf: "flex-end",
-    paddingHorizontal: 12,
-    paddingVertical: 6,
-    borderRadius: 999,
-    backgroundColor: "#EFEFEF",
-  },
-
-  calendarCloseText: {
-    fontSize: 14,
-    color: "#111",
   },
   frequencyDropdownWrapper: {
     position: "relative",
     zIndex: 10,
   },
-  frequencyOptionRow: {
-    paddingHorizontal: 16,
-    paddingVertical: 10,
-  },
-  frequencyOptionText: {
-    fontSize: 18,
-    color: "#000",
-  },
-
-  frequencySummaryRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 10,
-  },
-  frequencySummaryLabel: {
-    fontSize: 16,
-    color: "#888",
-  },
-  frequencySummaryText: {
-    fontSize: 16,
-    color: "#000",
-  },
-
-  frequencyWrapper: {
-    flex: 1,
-  },
-
-  frequencyLabel: {
-    fontSize: 16,
-    fontWeight: "500",
-    color: "#111",
-    marginBottom: 0,
-  },
-
   frequencySelector: {
     flexDirection: "row",
     alignItems: "center",
@@ -219,19 +168,12 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFFFFF",
     width: "100%",
   },
-
   frequencySelectorText: {
     fontSize: 18,
     color: "#000",
     marginLeft: 12,
     flexShrink: 0,
   },
-  dateHeaderRow: {
-    flexDirection: "row",
-    marginTop: 16,
-    marginBottom: 4,
-  },
-
   frequencyDropdownMenu: {
     position: "absolute",
     top: "100%",
@@ -249,52 +191,69 @@ const styles = StyleSheet.create({
     elevation: 6,
     zIndex: 20,
   },
-  statusFrequencyHeaderRow: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginTop: 12,
-    marginBottom: 4,
+  frequencyOptionRow: {
+    paddingHorizontal: 16,
+    paddingVertical: 10,
   },
-
-  statusSummaryLeft: {
-    flex: 1,
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
-  frequencyHeaderRight: {
-    flex: 1,
-    alignItems: "flex-start",
-  },
-
-  dateRow: {
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    gap: 16,
-  },
-
-  dateColumn: {
-    flex: 1,
-  },
-
-  frequencyColumn: {
-    flex: 1,
+  frequencyOptionText: {
+    fontSize: 18,
+    color: "#000",
   },
   dueDateRow: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 12,
   },
+  dueDateLabel: {
+    fontSize: 16,
+    color: "#888",
+    marginRight: 4,
+  },
+  dueDateValue: {
+    fontSize: 16,
+    color: "#000",
+    fontWeight: "500",
+  },
+  calendarOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.25)",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  calendarCloseButton: {
+    marginTop: 8,
+    alignSelf: "flex-end",
+    paddingHorizontal: 12,
+    paddingVertical: 6,
+    borderRadius: 999,
+    backgroundColor: "#EFEFEF",
+  },
+  calendarCloseText: {
+    fontSize: 14,
+    color: "#111",
+  },
+  calendarCard: {
+    width: "90%",
+    borderRadius: 18,
+    backgroundColor: "#FFFFFF",
+    padding: 12,
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 8,
+    shadowOffset: { width: 0, height: 4 },
+    elevation: 8,
+  },
   assigneeSection: {
     marginTop: 16,
     position: "relative",
   },
-
+  assigneeHeaderRow: {
+    flexDirection: "row",
+    alignItems: "center",
+  },
   assigneeButtonWrapper: {
     flexShrink: 0,
   },
-
   assigneeButton: {
     flexDirection: "row",
     alignItems: "center",
@@ -304,65 +263,61 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     borderRadius: 8,
   },
-
   assigneeButtonText: {
     color: "#FFFFFF",
     fontSize: 16,
     fontWeight: "500",
   },
-  assigneeAvatarImage: {
-    width: "100%",
-    height: "100%",
+  rotationWrapper: {
+    flexDirection: "row",
+    alignItems: "center",
+    marginLeft: 16,
+    flexShrink: 1,
   },
-
-  assigneeNameText: {
+  rotationLabel: {
     fontSize: 16,
-    color: "#000",
+    color: "#111",
+    marginLeft: 8,
+    flexShrink: 1,
   },
-
   assigneeSummaryRow: {
     flexDirection: "row",
     alignItems: "center",
     marginTop: 8,
   },
-
   assigneeSummaryLabel: {
     fontSize: 16,
     color: "#888",
     marginRight: 8,
   },
-
   assigneeSummaryValue: {
     flexDirection: "row",
     alignItems: "center",
   },
-
+  assigneeAvatar: {
+    width: 36,
+    height: 36,
+    borderRadius: 18,
+    overflow: "hidden",
+    marginRight: 12,
+    backgroundColor: "#F1F1F1",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  assigneeAvatarImage: {
+    width: "100%",
+    height: "100%",
+  },
   assigneeSummaryName: {
     fontSize: 16,
     color: "#000",
   },
-  addAssigneeButton: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    backgroundColor: PRIMARY_COLOR_BLUE,
-    paddingVertical: 14,
-    borderRadius: 8,
-  },
-
-  addAssigneeText: {
-    color: "#FFFFFF",
-    fontSize: 18,
-    fontWeight: "600",
-  },
-
   assigneeOverlay: {
     flex: 1,
     backgroundColor: "rgba(0,0,0,0.25)",
     justifyContent: "center",
     alignItems: "center",
   },
-
   assigneeCard: {
     width: "90%",
     maxHeight: "70%",
@@ -376,37 +331,22 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     elevation: 8,
   },
-
   assigneeHeader: {
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "space-between",
     marginBottom: 8,
   },
-
   assigneeTitle: {
     fontSize: 18,
     fontWeight: "600",
     color: "#111",
   },
-
   assigneeRow: {
     flexDirection: "row",
     alignItems: "center",
     paddingVertical: 10,
   },
-
-  assigneeAvatar: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
-    overflow: "hidden",
-    marginRight: 12,
-    backgroundColor: "#F1F1F1",
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
   assigneeAvatarPlaceholder: {
     width: 36,
     height: 36,
@@ -416,28 +356,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-
   assigneeName: {
     fontSize: 18,
     color: "#111",
-  },
-  assigneeHeaderRow: {
-    flexDirection: "row",
-    alignItems: "center",
-  },
-
-  rotationWrapper: {
-    flexDirection: "row",
-    alignItems: "center",
-    marginLeft: 16,
-    flexShrink: 1,
-  },
-
-  rotationLabel: {
-    fontSize: 16,
-    color: "#111",
-    marginLeft: 8,
-    flexShrink: 1,
   },
   descriptionInput: {
     borderWidth: 1.5,
@@ -452,11 +373,9 @@ const styles = StyleSheet.create({
     marginBottom: 20,
     minHeight: 120,
   },
-
   createButtonWrapper: {
     marginTop: 8,
   },
-
   createButton: {
     flexDirection: "row",
     alignItems: "center",
@@ -470,7 +389,6 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     elevation: 4,
   },
-
   createButtonText: {
     color: "#FFFFFF",
     fontSize: 20,
@@ -478,4 +396,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default styles;
+export default style;

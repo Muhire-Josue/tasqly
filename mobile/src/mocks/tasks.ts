@@ -1,11 +1,46 @@
-import { TaskCard } from "../types/tasks";
-import BenAvatar from "../assets/ben.jpg";
-import MichealAvatar from "../assets/michael.jpg";
-import VinceAvatar from "../assets/vince.jpg";
-import wellingtonAvatar from "../assets/wellington.jpg";
+// mocks/tasks.ts
+import { TaskCard, Frequency } from "../types/tasks";
+import BenAvatar from "../assets/ben.jpg"; // Henry
+import MichealAvatar from "../assets/michael.jpg"; // Jane
+import VinceAvatar from "../assets/vince.jpg"; // Valerie
+import wellingtonAvatar from "../assets/wellington.jpg"; // Diego
+import Johnson from "../assets/johnson.jpg"; // Diego
 import { PRIMARY_COLOR_RED } from "../theme/colors";
 
-const MOCK_TASKS: TaskCard[] = [
+const LOREM =
+  "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.";
+
+const FREQUENCIES: Frequency[] = [
+  "None",
+  "Daily",
+  "Weekly",
+  "Bi-weekly",
+  "Monthly",
+];
+
+const pickFrequency = (id: string): Frequency => {
+  const n = Number(id);
+  if (Number.isNaN(n)) return "None";
+  return FREQUENCIES[n % FREQUENCIES.length];
+};
+
+const shuffle = <T>(arr: T[]): T[] => {
+  const copy = [...arr];
+  for (let i = copy.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [copy[i], copy[j]] = [copy[j], copy[i]];
+  }
+  return copy;
+};
+
+// Members list mapping (exactly as provided):
+// 1) Henry Smithson -> BenAvatar
+// 2) Jane Smithson -> MichealAvatar
+// 3) Johnson Smithson -> no avatar (placeholder)
+// 4) Diego Smithson -> wellingtonAvatar
+// 5) Valerie Smithson -> VinceAvatar
+
+const TASKS_BASE: TaskCard[] = [
   {
     id: "1",
     title: "Take out plastic trash",
@@ -16,10 +51,11 @@ const MOCK_TASKS: TaskCard[] = [
     dateColor: "#F4A11A",
     urgent: false,
     assignee: "Jane Smithson",
-    avatar: BenAvatar,
+    avatar: MichealAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("1"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "2",
@@ -30,11 +66,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: true,
-    assignee: "Johnson Smithson",
-    avatar: MichealAvatar,
+    assignee: "Henry Smithson",
+    avatar: BenAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("2"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "3",
@@ -45,11 +82,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
+    assignee: "Valerie Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("3"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "4",
@@ -60,11 +98,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: true,
-    assignee: "Johnson Smithson",
+    assignee: "Diego Smithson",
     avatar: wellingtonAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("4"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "5",
@@ -75,11 +114,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assignee: "Jane Smithson",
-    avatar: BenAvatar,
+    assignee: "Johnson Smithson",
+    avatar: Johnson,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("5"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "6",
@@ -90,11 +130,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
+    assignee: "Jane Smithson",
     avatar: MichealAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("6"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "7",
@@ -105,11 +146,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: true,
-    assignee: "Assigned Mike",
+    assignee: "Valerie Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("7"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "8",
@@ -120,11 +162,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
+    assignee: "Diego Smithson",
     avatar: wellingtonAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("8"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "9",
@@ -135,11 +178,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: true,
-    assignee: "Jane Smithson",
+    assignee: "Henry Smithson",
     avatar: BenAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("9"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "10",
@@ -151,12 +195,12 @@ const MOCK_TASKS: TaskCard[] = [
     dateColor: "#3CCB79",
     urgent: false,
     assignee: "Johnson Smithson",
-    avatar: MichealAvatar,
+    avatar: Johnson,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("10"),
+    assigneeRotationEnabled: false,
   },
-
   {
     id: "11",
     title: "Fix broken chair",
@@ -166,11 +210,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
-    avatar: VinceAvatar,
+    assignee: "Diego Smithson",
+    avatar: wellingtonAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("11"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "12",
@@ -181,11 +226,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
-    avatar: wellingtonAvatar,
+    assignee: "Valerie Smithson",
+    avatar: VinceAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("12"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "13",
@@ -196,11 +242,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assignee: "Jane Smithson",
+    assignee: "Henry Smithson",
     avatar: BenAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("13"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "14",
@@ -211,11 +258,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: true,
-    assignee: "Johnson Smithson",
+    assignee: "Jane Smithson",
     avatar: MichealAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("14"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "15",
@@ -226,11 +274,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
-    avatar: VinceAvatar,
+    assignee: "Johnson Smithson",
+    avatar: Johnson,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("15"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "16",
@@ -241,11 +290,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
+    assignee: "Diego Smithson",
     avatar: wellingtonAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("16"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "17",
@@ -256,11 +306,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assignee: "Jane Smithson",
-    avatar: BenAvatar,
+    assignee: "Valerie Smithson",
+    avatar: VinceAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("17"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "18",
@@ -271,11 +322,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: true,
-    assignee: "Johnson Smithson",
-    avatar: MichealAvatar,
+    assignee: "Henry Smithson",
+    avatar: BenAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("18"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "19",
@@ -286,11 +338,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
-    avatar: VinceAvatar,
+    assignee: "Jane Smithson",
+    avatar: MichealAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("19"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "20",
@@ -302,10 +355,11 @@ const MOCK_TASKS: TaskCard[] = [
     dateColor: "#3CCB79",
     urgent: false,
     assignee: "Johnson Smithson",
-    avatar: wellingtonAvatar,
+    avatar: Johnson,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("20"),
+    assigneeRotationEnabled: false,
   },
 
   // Repeats mixed with people for realism
@@ -318,11 +372,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assignee: "Johnson Smithson",
-    avatar: MichealAvatar,
+    assignee: "Diego Smithson",
+    avatar: wellingtonAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("21"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "22",
@@ -333,11 +388,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Jane Smithson",
-    avatar: BenAvatar,
+    assignee: "Valerie Smithson",
+    avatar: VinceAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("22"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "23",
@@ -348,11 +404,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
-    avatar: VinceAvatar,
+    assignee: "Henry Smithson",
+    avatar: BenAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("23"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "24",
@@ -363,11 +420,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
-    avatar: wellingtonAvatar,
+    assignee: "Jane Smithson",
+    avatar: MichealAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("24"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "25",
@@ -378,11 +436,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: true,
-    assignee: "Jane Smithson",
-    avatar: BenAvatar,
+    assignee: "Johnson Smithson",
+    avatar: Johnson,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("25"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "26",
@@ -393,11 +452,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
-    avatar: MichealAvatar,
+    assignee: "Diego Smithson",
+    avatar: wellingtonAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("26"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "27",
@@ -408,11 +468,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: true,
-    assignee: "Assigned Mike",
+    assignee: "Valerie Smithson",
     avatar: VinceAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("27"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "28",
@@ -423,11 +484,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
-    avatar: wellingtonAvatar,
+    assignee: "Henry Smithson",
+    avatar: BenAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("28"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "29",
@@ -438,11 +500,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: true,
-    assignee: "Jane Smithson",
-    avatar: BenAvatar,
+    assignee: "Johnson Smithson",
+    avatar: Johnson,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("29"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "30",
@@ -453,13 +516,13 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
-    avatar: VinceAvatar,
+    assignee: "Jane Smithson",
+    avatar: MichealAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("30"),
+    assigneeRotationEnabled: false,
   },
-
   {
     id: "31",
     title: "Clean the living room",
@@ -469,11 +532,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
-    avatar: MichealAvatar,
+    assignee: "Diego Smithson",
+    avatar: wellingtonAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("31"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "32",
@@ -484,11 +548,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assignee: "Jane Smithson",
+    assignee: "Henry Smithson",
     avatar: BenAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("32"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "33",
@@ -499,11 +564,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
-    avatar: VinceAvatar,
+    assignee: "Johnson Smithson",
+    avatar: Johnson,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("33"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "34",
@@ -514,11 +580,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
-    avatar: wellingtonAvatar,
+    assignee: "Valerie Smithson",
+    avatar: VinceAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("34"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "35",
@@ -530,10 +597,11 @@ const MOCK_TASKS: TaskCard[] = [
     dateColor: "#F4A11A",
     urgent: false,
     assignee: "Jane Smithson",
-    avatar: BenAvatar,
+    avatar: MichealAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("35"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "36",
@@ -544,11 +612,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: true,
-    assignee: "Johnson Smithson",
-    avatar: MichealAvatar,
+    assignee: "Henry Smithson",
+    avatar: BenAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("36"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "37",
@@ -559,11 +628,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
-    avatar: VinceAvatar,
+    assignee: "Diego Smithson",
+    avatar: wellingtonAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("37"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "38",
@@ -575,10 +645,11 @@ const MOCK_TASKS: TaskCard[] = [
     dateColor: "#3CCB79",
     urgent: false,
     assignee: "Johnson Smithson",
-    avatar: wellingtonAvatar,
+    avatar: Johnson,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("38"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "39",
@@ -589,11 +660,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assignee: "Jane Smithson",
-    avatar: BenAvatar,
+    assignee: "Valerie Smithson",
+    avatar: VinceAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("39"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "40",
@@ -604,11 +676,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
+    assignee: "Jane Smithson",
     avatar: MichealAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("40"),
+    assigneeRotationEnabled: false,
   },
 
   // Final 10
@@ -621,11 +694,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: true,
-    assignee: "Jane Smithson",
+    assignee: "Henry Smithson",
     avatar: BenAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("41"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "42",
@@ -636,11 +710,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: true,
-    assignee: "Assigned Mike",
-    avatar: VinceAvatar,
+    assignee: "Johnson Smithson",
+    avatar: Johnson,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("42"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "43",
@@ -651,11 +726,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
-    avatar: MichealAvatar,
+    assignee: "Diego Smithson",
+    avatar: wellingtonAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("43"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "44",
@@ -666,11 +742,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
-    avatar: wellingtonAvatar,
+    assignee: "Valerie Smithson",
+    avatar: VinceAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("44"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "45",
@@ -682,10 +759,11 @@ const MOCK_TASKS: TaskCard[] = [
     dateColor: "#3CCB79",
     urgent: true,
     assignee: "Jane Smithson",
-    avatar: BenAvatar,
+    avatar: MichealAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("45"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "46",
@@ -696,11 +774,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: PRIMARY_COLOR_RED,
     dateColor: PRIMARY_COLOR_RED,
     urgent: false,
-    assignee: "Assigned Mike",
-    avatar: VinceAvatar,
+    assignee: "Henry Smithson",
+    avatar: BenAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("46"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "47",
@@ -711,11 +790,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assignee: "Jane Smithson",
-    avatar: BenAvatar,
+    assignee: "Johnson Smithson",
+    avatar: Johnson,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("47"),
+    assigneeRotationEnabled: true,
   },
   {
     id: "48",
@@ -726,11 +806,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
-    avatar: MichealAvatar,
+    assignee: "Diego Smithson",
+    avatar: wellingtonAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("48"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "49",
@@ -741,11 +822,12 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#F4A11A",
     dateColor: "#F4A11A",
     urgent: false,
-    assignee: "Jane Smithson",
-    avatar: BenAvatar,
+    assignee: "Valerie Smithson",
+    avatar: VinceAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("49"),
+    assigneeRotationEnabled: false,
   },
   {
     id: "50",
@@ -756,12 +838,15 @@ const MOCK_TASKS: TaskCard[] = [
     statusColor: "#3CCB79",
     dateColor: "#3CCB79",
     urgent: false,
-    assignee: "Johnson Smithson",
-    avatar: wellingtonAvatar,
+    assignee: "Jane Smithson",
+    avatar: MichealAvatar,
     commentsCount: null,
-    description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
+    description: LOREM,
+    frequency: pickFrequency("50"),
+    assigneeRotationEnabled: true,
   },
 ];
+
+const MOCK_TASKS: TaskCard[] = shuffle(TASKS_BASE);
 
 export default MOCK_TASKS;

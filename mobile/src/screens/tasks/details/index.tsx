@@ -8,20 +8,22 @@ import type { RouteProp } from "@react-navigation/native";
 import { RootStackParamList } from "../../../types/navigation";
 import MOCK_TASKS from "../../../mocks/tasks";
 import styles from "./styles";
-import BottomTabBar from "../../../components/common/BottomTabBar";
+import BottomTabBar from "../../../components/BottomTabBar";
 import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import { STATUS_META } from "../../../mocks/statusMeta";
+import { useNavigateTo } from "../../../navigation/useNavigateTo";
 
 type TaskDetailsRoute = RouteProp<RootStackParamList, "task-details">;
 
 const TaskDetails: React.FC = () => {
+  const navigateTo = useNavigateTo();
+
   const route = useRoute<TaskDetailsRoute>();
   const { taskId } = route.params;
 
   const task = MOCK_TASKS.find((t) => t.id === taskId);
   const taskTitle = task?.title ?? "Task not found";
 
-  //   const statusLabel = task?.status ?? "Pending";
   const isUrgent = !!task?.urgent;
   const commentsCount = task?.commentsCount ?? 7;
 
@@ -38,10 +40,6 @@ const TaskDetails: React.FC = () => {
   }
 
   const statusMeta = STATUS_META[task?.status ?? "Pending"];
-
-  const handleEditPress = () => {
-    // TODO: navigate to edit screen
-  };
 
   const handleDeletePress = () => {
     setShowDeleteModal(true);
@@ -96,7 +94,9 @@ const TaskDetails: React.FC = () => {
                   styles.editButton,
                   pressed && styles.actionButtonPressed,
                 ]}
-                onPress={handleEditPress}
+                onPress={() => {
+                  navigateTo("edit-task", { taskId, header: "Edit Task" });
+                }}
               >
                 <FontAwesome5
                   name="pen"
@@ -160,7 +160,7 @@ const TaskDetails: React.FC = () => {
 
                   <Text style={styles.statusValue}>{statusMeta.label}</Text>
 
-                  <FontAwesome5
+                  <Ionicons
                     name={statusMeta.icon}
                     size={20}
                     color={statusMeta.color}
