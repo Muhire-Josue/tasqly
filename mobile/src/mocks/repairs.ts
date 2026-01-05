@@ -1,4 +1,3 @@
-// mocks/repairs.ts
 import { TaskCard, Frequency, TaskStatus } from "../types/tasks";
 import { PRIMARY_COLOR_RED } from "../theme/colors";
 import LandLord from "../assets/landlord.jpg";

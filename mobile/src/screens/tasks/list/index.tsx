@@ -17,17 +17,17 @@ import TaskFilterBar, { Scope } from "../../../components/TaskFilterBar";
 import BottomTabBar from "../../../components/BottomTabBar";
 
 import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
-import { TaskStatus } from "../../../types/tasks";
+import { Status } from "../../../types/tasks";
 import MOCK_TASKS from "../../../mocks/tasks";
 import Card from "../../../components/Card";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
 
-const STATUSES: TaskStatus[] = ["Pending", "Completed", "Rejected"];
+const STATUSES: Status[] = ["Pending", "Completed", "Rejected"];
 
 const TaskList: React.FC = () => {
   const navigateTo = useNavigateTo();
   const [scope, setScope] = useState<Scope>("all");
-  const [selectedStatuses, setSelectedStatuses] = useState<TaskStatus[]>([
+  const [selectedStatuses, setSelectedStatuses] = useState<Status[]>([
     "Pending",
     "Completed",
     "Rejected",
@@ -36,10 +36,10 @@ const TaskList: React.FC = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuTop, setMenuTop] = useState<number | null>(null);
 
-  const toggleStatus = (value: TaskStatus) => {
+  const toggleStatus = (value: Status) => {
     setSelectedStatuses((prev) =>
       prev.includes(value)
-        ? (prev.filter((s) => s !== value) as TaskStatus[])
+        ? (prev.filter((s) => s !== value) as Status[])
         : [...prev, value],
     );
   };
