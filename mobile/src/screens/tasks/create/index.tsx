@@ -5,19 +5,30 @@ import styles from "./styles";
 import BottomTabBar from "../../../components/BottomTabBar";
 import Create from "../../../components/Create";
 import { Ionicons } from "@expo/vector-icons";
+import { useNavigateTo } from "../../../navigation/useNavigateTo";
+
+const TAB_BAR_HEIGHT = 64; // adjust to your BottomTabBar height
 
 const CreateTask: React.FC = () => {
+  const navigate = useNavigateTo();
   const [reset, setReset] = useState(false);
+
   const handleCancel = () => {
+    navigate("task-list");
     setReset(true);
   };
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.safeArea}>
+    <SafeAreaView style={{ flex: 1 }}>
+      <View style={{ flex: 1 }}>
         <ScrollView
-          style={styles.scroll}
-          contentContainerStyle={styles.scrollContent}
+          style={{ flex: 1 }}
+          contentContainerStyle={{
+            paddingHorizontal: 24,
+            paddingTop: 16,
+            paddingBottom: TAB_BAR_HEIGHT + 24,
+          }}
+          showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
           <View style={styles.headerRow}>
@@ -39,11 +50,15 @@ const CreateTask: React.FC = () => {
               <Text style={styles.cancelText}>Cancel</Text>
             </Pressable>
           </View>
+
           <Create reset={reset} />
         </ScrollView>
-      </SafeAreaView>
-      <BottomTabBar />
-    </View>
+
+        <View style={{ position: "absolute", left: 0, right: 0, bottom: 0 }}>
+          <BottomTabBar />
+        </View>
+      </View>
+    </SafeAreaView>
   );
 };
 

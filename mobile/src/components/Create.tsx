@@ -18,7 +18,6 @@ import { PRIMARY_COLOR_BLUE } from "../theme/colors";
 import { Frequency, TaskStatus } from "../types/tasks";
 import { Member, MEMBERS_MOCK } from "../mocks/members";
 import styles from "./style/create";
-import { useNavigateTo } from "../navigation/useNavigateTo";
 import { validateCreateForm } from "../validators/create";
 import { STATUS_META } from "../mocks/statusMeta";
 
@@ -27,8 +26,6 @@ interface CreateProps {
 }
 
 const Create: React.FC<CreateProps> = ({ reset }) => {
-  const navigate = useNavigateTo();
-
   const FREQUENCIES: Frequency[] = [
     "None",
     "Daily",
@@ -85,9 +82,8 @@ const Create: React.FC<CreateProps> = ({ reset }) => {
       setStatus("Pending");
       setDueDate(null);
       setSelectedAssignee(null);
-      navigate("task-list");
     }
-  }, [reset, navigate]);
+  }, [reset]);
 
   const handleCreate = () => {
     const errors = validateCreateForm(
@@ -405,8 +401,6 @@ const Create: React.FC<CreateProps> = ({ reset }) => {
         </Pressable>
       </View>
     </View>
-    // <View style={styles.container}>
-    // </View>
   );
 };
 
