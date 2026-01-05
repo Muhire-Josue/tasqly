@@ -1,5 +1,6 @@
 import { StyleSheet } from "react-native";
 import { PRIMARY_COLOR_RED } from "../../../theme/colors";
+const TAB_BAR_HEIGHT = 64; // adjust to your BottomTabBar height
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
@@ -18,10 +19,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
 
-  scrollContent: {
-    paddingHorizontal: 24,
-    paddingTop: 16,
-  },
+  // scrollContent: {
+  //   paddingHorizontal: 24,
+  //   paddingTop: 16,
+  // },
   cancelButton: {
     flexDirection: "row",
     alignItems: "center",
@@ -45,6 +46,11 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
     bottom: 0,
+  },
+  scrollContent: {
+    paddingHorizontal: 24,
+    paddingTop: 16,
+    paddingBottom: TAB_BAR_HEIGHT + 24,
   },
 });
 

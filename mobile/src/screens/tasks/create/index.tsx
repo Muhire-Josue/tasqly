@@ -7,8 +7,6 @@ import Create from "../../../components/Create";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
 
-const TAB_BAR_HEIGHT = 64; // adjust to your BottomTabBar height
-
 const CreateTask: React.FC = () => {
   const navigate = useNavigateTo();
   const [reset, setReset] = useState(false);
@@ -23,11 +21,7 @@ const CreateTask: React.FC = () => {
       <View style={{ flex: 1 }}>
         <ScrollView
           style={{ flex: 1 }}
-          contentContainerStyle={{
-            paddingHorizontal: 24,
-            paddingTop: 16,
-            paddingBottom: TAB_BAR_HEIGHT + 24,
-          }}
+          contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
           keyboardShouldPersistTaps="handled"
         >
