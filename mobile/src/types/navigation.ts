@@ -8,4 +8,5 @@ export type RootStackParamList = {
   "create-task": undefined;
   "task-details": { taskId: string };
   "edit-task": { taskId: string; header: string };
+  "repair-list": undefined;
 };
