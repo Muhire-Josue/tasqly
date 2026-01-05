@@ -18,11 +18,6 @@ const styles = StyleSheet.create({
   scroll: {
     flex: 1,
   },
-
-  // scrollContent: {
-  //   paddingHorizontal: 24,
-  //   paddingTop: 16,
-  // },
   cancelButton: {
     flexDirection: "row",
     alignItems: "center",
