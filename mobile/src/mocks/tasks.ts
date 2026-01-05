@@ -1,10 +1,10 @@
 // mocks/tasks.ts
 import { CardType, Frequency } from "../types/tasks";
-import BenAvatar from "../assets/ben.jpg"; // Henry
-import MichealAvatar from "../assets/michael.jpg"; // Jane
-import VinceAvatar from "../assets/vince.jpg"; // Valerie
-import wellingtonAvatar from "../assets/wellington.jpg"; // Diego
-import Johnson from "../assets/johnson.jpg"; // Diego
+import BenAvatar from "../assets/ben.jpg";
+import MichealAvatar from "../assets/michael.jpg";
+import VinceAvatar from "../assets/vince.jpg";
+import wellingtonAvatar from "../assets/wellington.jpg";
+import Johnson from "../assets/johnson.jpg";
 import { PRIMARY_COLOR_RED } from "../theme/colors";
 
 const LOREM =
