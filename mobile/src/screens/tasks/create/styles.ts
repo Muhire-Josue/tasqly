@@ -1,6 +1,5 @@
 import { StyleSheet } from "react-native";
 import { PRIMARY_COLOR_RED } from "../../../theme/colors";
-const TAB_BAR_HEIGHT = 64; // adjust to your BottomTabBar height
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 24,
@@ -45,7 +44,6 @@ const styles = StyleSheet.create({
   scrollContent: {
     paddingHorizontal: 24,
     paddingTop: 16,
-    paddingBottom: TAB_BAR_HEIGHT + 24,
   },
 });
 

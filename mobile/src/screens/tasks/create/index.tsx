@@ -17,42 +17,41 @@ const CreateTask: React.FC = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
-      <View style={{ flex: 1 }}>
-        <ScrollView
-          style={{ flex: 1 }}
-          contentContainerStyle={styles.scrollContent}
-          showsVerticalScrollIndicator={false}
-          keyboardShouldPersistTaps="handled"
-        >
-          <View style={styles.headerRow}>
-            <Text style={styles.title}>Create a Task</Text>
+    <>
+      <SafeAreaView style={{ flex: 1 }}>
+        <View style={{ flex: 1 }}>
+          <ScrollView
+            style={{ flex: 1 }}
+            contentContainerStyle={styles.scrollContent}
+            showsVerticalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+          >
+            <View style={styles.headerRow}>
+              <Text style={styles.title}>Create a Task</Text>
 
-            <Pressable
-              style={({ pressed }) => [
-                styles.cancelButton,
-                pressed && { opacity: 0.9 },
-              ]}
-              onPress={handleCancel}
-            >
-              <Ionicons
-                name="close-circle-outline"
-                size={30}
-                color="#FFFFFF"
-                style={{ marginRight: 6 }}
-              />
-              <Text style={styles.cancelText}>Cancel</Text>
-            </Pressable>
-          </View>
+              <Pressable
+                style={({ pressed }) => [
+                  styles.cancelButton,
+                  pressed && { opacity: 0.9 },
+                ]}
+                onPress={handleCancel}
+              >
+                <Ionicons
+                  name="close-circle-outline"
+                  size={30}
+                  color="#FFFFFF"
+                  style={{ marginRight: 6 }}
+                />
+                <Text style={styles.cancelText}>Cancel</Text>
+              </Pressable>
+            </View>
 
-          <Create reset={reset} />
-        </ScrollView>
-
-        <View style={styles.bottomTab}>
-          <BottomTabBar />
+            <Create reset={reset} />
+          </ScrollView>
         </View>
-      </View>
-    </SafeAreaView>
+      </SafeAreaView>
+      <BottomTabBar />
+    </>
   );
 };
 
