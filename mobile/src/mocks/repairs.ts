@@ -1,4 +1,4 @@
-import { TaskCard, Frequency, TaskStatus } from "../types/tasks";
+import { CardType, Frequency, Status } from "../types/tasks";
 import { PRIMARY_COLOR_RED } from "../theme/colors";
 import LandLord from "../assets/landlord.jpg";
 
@@ -15,9 +15,9 @@ const FREQUENCIES: Frequency[] = [
   "Monthly",
 ];
 
-const STATUSES: TaskStatus[] = ["Pending", "Completed", "Rejected"];
+const STATUSES: Status[] = ["Pending", "Completed", "Rejected"];
 
-const colorForStatus = (status: TaskStatus) => {
+const colorForStatus = (status: Status) => {
   if (status === "Pending") return "#F4A11A";
   if (status === "Completed") return "#3CCB79";
   return PRIMARY_COLOR_RED;
@@ -52,10 +52,10 @@ const repairTitles = [
   "Replace bathroom fan",
 ];
 
-const MOCK_REPAIRS: TaskCard[] = Array.from({ length: 50 }).map((_, idx) => {
+const MOCK_REPAIRS: CardType[] = Array.from({ length: 50 }).map((_, idx) => {
   const id = String(idx + 1);
 
-  const status: TaskStatus = STATUSES[idx % STATUSES.length];
+  const status: Status = STATUSES[idx % STATUSES.length];
   const color = colorForStatus(status);
 
   return {

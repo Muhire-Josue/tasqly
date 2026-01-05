@@ -1,5 +1,5 @@
 // mocks/tasks.ts
-import { TaskCard, Frequency } from "../types/tasks";
+import { CardType, Frequency } from "../types/tasks";
 import BenAvatar from "../assets/ben.jpg"; // Henry
 import MichealAvatar from "../assets/michael.jpg"; // Jane
 import VinceAvatar from "../assets/vince.jpg"; // Valerie
@@ -40,7 +40,7 @@ const shuffle = <T>(arr: T[]): T[] => {
 // 4) Diego Smithson -> wellingtonAvatar
 // 5) Valerie Smithson -> VinceAvatar
 
-const TASKS_BASE: TaskCard[] = [
+const TASKS_BASE: CardType[] = [
   {
     id: "1",
     title: "Take out plastic trash",
@@ -847,6 +847,6 @@ const TASKS_BASE: TaskCard[] = [
   },
 ];
 
-const MOCK_TASKS: TaskCard[] = shuffle(TASKS_BASE);
+const MOCK_TASKS: CardType[] = shuffle(TASKS_BASE);
 
 export default MOCK_TASKS;

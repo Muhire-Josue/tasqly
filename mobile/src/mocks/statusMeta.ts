@@ -3,11 +3,11 @@ import {
   PRIMARY_COLOR_GREEN,
   PRIMARY_COLOR_RED,
 } from "../theme/colors";
-import { TaskStatus } from "../types/tasks";
+import { Status } from "../types/tasks";
 import { Ionicons } from "@expo/vector-icons";
 
 export const STATUS_META: Record<
-  TaskStatus,
+  Status,
   { label: string; icon: keyof typeof Ionicons.glyphMap; color: string }
 > = {
   Pending: {

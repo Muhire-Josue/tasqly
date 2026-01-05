@@ -1,6 +1,6 @@
 /* eslint-disable complexity */
 import React, { useEffect, useState } from "react";
-import { TaskCard } from "../types/tasks";
+import { CardType } from "../types/tasks";
 import {
   View,
   Text,
@@ -16,7 +16,7 @@ import { Calendar } from "react-native-calendars";
 import Checkbox from "expo-checkbox";
 import styles from "./style/edit";
 import { PRIMARY_COLOR_BLUE } from "../theme/colors";
-import { Frequency, TaskStatus } from "../types/tasks";
+import { Frequency, Status } from "../types/tasks";
 import { STATUS_META } from "../mocks/statusMeta";
 import { Member, MEMBERS_MOCK } from "../mocks/members";
 import { validateCreateForm } from "../validators/create";
@@ -31,7 +31,7 @@ const FREQUENCIES: Frequency[] = [
 ];
 
 interface EditProp {
-  task: TaskCard | undefined;
+  task: CardType | undefined;
   reset: boolean;
 }
 
@@ -45,7 +45,7 @@ const Edit: React.FC<EditProp> = ({ task, reset }) => {
     task?.urgent ?? false,
   );
 
-  const [status, setStatus] = useState<TaskStatus | null>(
+  const [status, setStatus] = useState<Status | null>(
     task?.status ?? "Pending",
   );
   const [frequency, setFrequency] = useState<Frequency | null>(
@@ -136,7 +136,7 @@ const Edit: React.FC<EditProp> = ({ task, reset }) => {
 
             {showStatusMenu && (
               <View style={styles.statusDropdownMenu}>
-                {(Object.keys(STATUS_META) as TaskStatus[]).map((option) => (
+                {(Object.keys(STATUS_META) as Status[]).map((option) => (
                   <Pressable
                     key={option}
                     style={styles.statusOptionRow}

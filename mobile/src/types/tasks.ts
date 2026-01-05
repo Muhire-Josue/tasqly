@@ -4,7 +4,7 @@ export type Status = "Pending" | "Completed" | "Rejected";
 
 export type Frequency = "None" | "Daily" | "Weekly" | "Bi-weekly" | "Monthly";
 
-export type Card = {
+export type CardType = {
   id: string;
   title: string;
   status: Status | undefined;

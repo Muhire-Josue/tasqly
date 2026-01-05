@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { Calendar } from "react-native-calendars";
 import styles from "./style/taskFilterBar";
-import { TaskStatus } from "../types/tasks";
+import { Status } from "../types/tasks";
 import { PRIMARY_COLOR_BLUE } from "../theme/colors";
 
 export type Scope = "all" | "mine";
@@ -12,8 +12,8 @@ export type Scope = "all" | "mine";
 export interface TaskFilterBarProps {
   scope: Scope;
   onScopeChange: (scope: Scope) => void;
-  selectedStatuses: TaskStatus[];
-  onToggleStatus: (status: TaskStatus) => void;
+  selectedStatuses: Status[];
+  onToggleStatus: (status: Status) => void;
   onFilterIconMeasured: (pageY: number, height: number) => void;
 }
 

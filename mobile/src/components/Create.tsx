@@ -15,7 +15,7 @@ import Checkbox from "expo-checkbox";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import { showMessage } from "react-native-flash-message";
 import { PRIMARY_COLOR_BLUE } from "../theme/colors";
-import { Frequency, TaskStatus } from "../types/tasks";
+import { Frequency, Status } from "../types/tasks";
 import { Member, MEMBERS_MOCK } from "../mocks/members";
 import styles from "./style/create";
 import { validateCreateForm } from "../validators/create";
@@ -40,7 +40,7 @@ const Create: React.FC<CreateProps> = ({ reset }) => {
   const [title, setTitle] = useState<string | null>(null);
   const [isUrgent, setIsUrgent] = useState(false);
 
-  const [status, setStatus] = useState<TaskStatus>("Pending");
+  const [status, setStatus] = useState<Status>("Pending");
   const [showStatusMenu, setShowStatusMenu] = useState(false);
   const [dueDate, setDueDate] = useState<string | null>(null);
   const [showCalendar, setShowCalendar] = useState(false);
@@ -150,7 +150,7 @@ const Create: React.FC<CreateProps> = ({ reset }) => {
 
           {showStatusMenu && (
             <View style={styles.statusDropdownMenu}>
-              {(Object.keys(STATUS_META) as TaskStatus[]).map((option) => (
+              {(Object.keys(STATUS_META) as Status[]).map((option) => (
                 <Pressable
                   key={option}
                   style={styles.statusOptionRow}
