@@ -54,7 +54,7 @@ const CreateTask: React.FC = () => {
           <Create reset={reset} />
         </ScrollView>
 
-        <View style={{ position: "absolute", left: 0, right: 0, bottom: 0 }}>
+        <View style={styles.bottomTab}>
           <BottomTabBar />
         </View>
       </View>
