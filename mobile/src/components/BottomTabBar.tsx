@@ -68,7 +68,7 @@ const BottomTabBar: React.FC = () => {
                   break;
 
                 case "repair":
-                  navigateTo("task-list");
+                  navigateTo("repair-list");
                   break;
 
                 case "notifications":
