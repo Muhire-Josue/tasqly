@@ -9,7 +9,7 @@ import { useNavigateTo } from "../navigation/useNavigateTo";
 type TabKey = "tasks" | "repair" | "notifications" | "profile";
 
 interface BottomTabBarProps {
-  activeTab: TabKey; // ✅ keep it consistent with TabKey
+  activeTab: TabKey;
 }
 
 type TabConfig =
