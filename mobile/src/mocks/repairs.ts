@@ -1,11 +1,15 @@
 import { CardType, Frequency, Status } from "../types/tasks";
 import { PRIMARY_COLOR_RED } from "../theme/colors";
-import LandLord from "../assets/landlord.jpg";
+import { MEMBERS_MOCK } from "./members";
 
 const LOREM =
   "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s...";
 
-const LANDLORD = "Johnson Smithson";
+const LANDLORD = MEMBERS_MOCK.find((m) => m.id === "11") ?? {
+  id: "11",
+  name: "Landlord",
+  avatar: undefined,
+};
 
 const FREQUENCIES: Frequency[] = [
   "None",
@@ -67,8 +71,8 @@ const MOCK_REPAIRS: CardType[] = Array.from({ length: 50 }).map((_, idx) => {
     statusColor: color,
     dateColor: color,
     urgent: idx % 4 === 0,
-    assignee: LANDLORD,
-    avatar: LandLord,
+    assignee: LANDLORD.name,
+    avatar: LANDLORD.avatar,
     commentsCount: idx % 3 === 0 ? 2 : null,
     description: LOREM,
     frequency: pickFrequency(id),
