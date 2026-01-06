@@ -14,6 +14,7 @@ import TaskDetails from "../screens/tasks/details";
 import EditTask from "../screens/tasks/edit";
 import RepairDetails from "../screens/repairs/details";
 import CreateRepair from "../screens/repairs/create";
+import EditRepair from "../screens/repairs/edit";
 
 import RepairList from "../screens/repairs/list";
 
@@ -91,6 +92,11 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="repair-details"
           component={RepairDetails}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="edit-repair"
+          component={EditRepair}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
