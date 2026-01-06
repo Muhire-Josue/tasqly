@@ -40,7 +40,7 @@ const styles = StyleSheet.create({
   },
 
   message: {
-    fontSize: 22,
+    fontSize: 15,
     color: "#111",
     lineHeight: 28,
   },
@@ -51,8 +51,8 @@ const styles = StyleSheet.create({
   },
 
   time: {
-    marginTop: 10,
-    fontSize: 20,
+    marginTop: 4,
+    fontSize: 13,
     color: "#111",
   },
 
