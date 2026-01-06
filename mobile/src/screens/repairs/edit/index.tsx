@@ -25,7 +25,7 @@ const EditRepair: React.FC = () => {
 
   const handleCancel = () => {
     setReset(true);
-    navigateTo("task-list");
+    navigateTo("repair-list");
   };
 
   return (
