@@ -75,7 +75,7 @@ const TaskList: React.FC = () => {
             }}
             ListHeaderComponent={
               <View style={styles.listHeader}>
-                <HeaderInfo />
+                <HeaderInfo type={"task"} />
                 <Stats />
                 <TaskFilterBar
                   scope={scope}

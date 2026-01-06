@@ -11,4 +11,5 @@ export type RootStackParamList = {
   "repair-list": undefined;
   "repair-details": { repairId: string };
   "edit-repair": { repairId: string; header: string };
+  "create-repair": undefined;
 };

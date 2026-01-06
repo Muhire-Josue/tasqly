@@ -72,7 +72,7 @@ const RepairList: React.FC = () => {
             }}
             ListHeaderComponent={
               <View style={styles.listHeader}>
-                <HeaderInfo />
+                <HeaderInfo type={"repair"} />
                 <Stats />
                 <TaskFilterBar
                   scope={scope}
