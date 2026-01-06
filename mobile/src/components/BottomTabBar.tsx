@@ -63,7 +63,6 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
               pressed && styles.tabItemPressed,
             ]}
             onPress={() => {
-
               switch (key) {
                 case "tasks":
                   navigateTo("task-list");
