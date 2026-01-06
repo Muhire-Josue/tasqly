@@ -63,7 +63,6 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
               pressed && styles.tabItemPressed,
             ]}
             onPress={() => {
-              // ✅ no setActiveTab here (parent controls activeTab)
 
               switch (key) {
                 case "tasks":
