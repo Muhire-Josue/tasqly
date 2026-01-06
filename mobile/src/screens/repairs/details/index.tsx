@@ -1,45 +1,30 @@
 /* eslint-disable complexity */
 import React, { useState } from "react";
-import { View, Text, Pressable, Modal, Image, ScrollView } from "react-native";
+import { ScrollView, View, Text, Pressable, Image, Modal } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
-import { useRoute } from "@react-navigation/native";
-import type { RouteProp } from "@react-navigation/native";
-import { RootStackParamList } from "../../../types/navigation";
-import MOCK_TASKS from "../../../mocks/tasks";
+import { RouteProp, useRoute } from "@react-navigation/native";
+import { FontAwesome5, Ionicons } from "@expo/vector-icons";
 import styles from "./styles";
-import BottomTabBar from "../../../components/BottomTabBar";
-import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
-import { STATUS_META } from "../../../mocks/statusMeta";
+import MOCK_REPAIRS from "../../../mocks/repairs";
+import { RootStackParamList } from "../../../types/navigation";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
+import { STATUS_META } from "../../../mocks/statusMeta";
+import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
+import BottomTabBar from "../../../components/BottomTabBar";
 
-type TaskDetailsRoute = RouteProp<RootStackParamList, "task-details">;
+type TaskDetailsRoute = RouteProp<RootStackParamList, "repair-details">;
 
-const TaskDetails: React.FC = () => {
-  const navigateTo = useNavigateTo();
-
+const RepairDetails: React.FC = () => {
   const route = useRoute<TaskDetailsRoute>();
-  const { taskId } = route.params;
-
-  const task = MOCK_TASKS.find((t) => t.id === taskId);
-  const taskTitle = task?.title ?? "Task not found";
-
-  const isUrgent = !!task?.urgent;
-  const commentsCount = task?.commentsCount ?? 7;
-
+  const navigateTo = useNavigateTo();
+  const { repairId } = route.params;
+  const repair = MOCK_REPAIRS.find((R) => R.id === repairId);
+  const repairTitle = repair?.title ?? "Task not found";
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
-  if (!task) {
-    return (
-      <SafeAreaView style={styles.safeArea}>
-        <View style={styles.container}>
-          <Text style={styles.title}>Task not found</Text>
-        </View>
-      </SafeAreaView>
-    );
-  }
-
-  const statusMeta = STATUS_META[task?.status ?? "Pending"];
+  const statusMeta = STATUS_META[repair?.status ?? "Pending"];
+  const isUrgent = !!repair?.urgent;
+  const commentsCount = repair?.commentsCount ?? 7;
 
   const handleDeletePress = () => {
     setShowDeleteModal(true);
@@ -57,7 +42,6 @@ const TaskDetails: React.FC = () => {
   const handleMarkComplete = () => {
     // TODO: update status to Completed (later backend)
   };
-
   return (
     <>
       <SafeAreaView style={styles.safeArea}>
@@ -68,10 +52,9 @@ const TaskDetails: React.FC = () => {
           <View style={styles.container}>
             <View style={styles.headerRow}>
               <Text style={styles.title} numberOfLines={2} ellipsizeMode="tail">
-                {taskTitle}
+                {repairTitle}
               </Text>
             </View>
-
             <View style={styles.actionRow}>
               <Pressable
                 style={({ pressed }) => [
@@ -95,7 +78,7 @@ const TaskDetails: React.FC = () => {
                   pressed && styles.actionButtonPressed,
                 ]}
                 onPress={() => {
-                  navigateTo("edit-task", { taskId, header: "Edit Task" });
+                  navigateTo("edit-repair", { repairId, header: "Edit Task" });
                 }}
               >
                 <FontAwesome5
@@ -107,7 +90,6 @@ const TaskDetails: React.FC = () => {
                 <Text style={styles.editText}>Edit</Text>
               </Pressable>
             </View>
-
             <View style={styles.infoRow}>
               <View style={styles.infoColumn}>
                 <View style={styles.infoLabelRow}>
@@ -121,9 +103,9 @@ const TaskDetails: React.FC = () => {
                 </View>
 
                 <View style={styles.responsibleValueRow}>
-                  {task?.avatar ? (
+                  {repair?.avatar ? (
                     <Image
-                      source={task.avatar}
+                      source={repair.avatar}
                       style={styles.responsibleAvatar}
                     />
                   ) : (
@@ -132,7 +114,7 @@ const TaskDetails: React.FC = () => {
                     </View>
                   )}
                   <Text style={styles.responsibleName}>
-                    {task?.assignee ?? "Unassigned"}
+                    {repair?.assignee ?? "Unassigned"}
                   </Text>
                 </View>
               </View>
@@ -149,7 +131,7 @@ const TaskDetails: React.FC = () => {
                 </View>
 
                 <Text style={styles.deadlineText}>
-                  {task?.dueDate ?? "No deadline"}
+                  {repair?.dueDate ?? "No deadline"}
                 </Text>
               </View>
             </View>
@@ -206,7 +188,7 @@ const TaskDetails: React.FC = () => {
 
               <View style={styles.descriptionBox}>
                 <Text style={styles.descriptionText}>
-                  {task.description.trim() ? task.description : "—"}
+                  {repair?.description.trim() ? repair?.description : "—"}
                 </Text>
               </View>
             </View>
@@ -227,7 +209,6 @@ const TaskDetails: React.FC = () => {
             </Pressable>
           </View>
         </ScrollView>
-
         <Modal
           visible={showDeleteModal}
           transparent
@@ -238,7 +219,7 @@ const TaskDetails: React.FC = () => {
             <View style={styles.modalCard}>
               <Text style={styles.modalTitle}>Delete Task?</Text>
               <Text style={styles.modalMessage}>
-                Are you sure you want to delete “{taskTitle}”? This action
+                Are you sure you want to delete “{repairTitle}”? This action
                 cannot be undone.
               </Text>
 
@@ -267,9 +248,9 @@ const TaskDetails: React.FC = () => {
           </View>
         </Modal>
       </SafeAreaView>
-      <BottomTabBar activeTab={"tasks"} />
+      <BottomTabBar activeTab={"repair"} />
     </>
   );
 };
 
-export default TaskDetails;
+export default RepairDetails;

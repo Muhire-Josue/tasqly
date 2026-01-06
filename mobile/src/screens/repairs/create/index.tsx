@@ -7,12 +7,12 @@ import Create from "../../../components/Create";
 import { Ionicons } from "@expo/vector-icons";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
 
-const CreateTask: React.FC = () => {
+const CreateRepair: React.FC = () => {
   const navigate = useNavigateTo();
   const [reset, setReset] = useState(false);
 
   const handleCancel = () => {
-    navigate("task-list");
+    navigate("repair-list");
     setReset(true);
   };
 
@@ -27,7 +27,7 @@ const CreateTask: React.FC = () => {
             keyboardShouldPersistTaps="handled"
           >
             <View style={styles.headerRow}>
-              <Text style={styles.title}>Create a Task</Text>
+              <Text style={styles.title}>Create a Repair</Text>
 
               <Pressable
                 style={({ pressed }) => [
@@ -46,13 +46,13 @@ const CreateTask: React.FC = () => {
               </Pressable>
             </View>
 
-            <Create reset={reset} type={"task"} />
+            <Create reset={reset} type={"repair"} />
           </ScrollView>
         </View>
       </SafeAreaView>
-      <BottomTabBar activeTab={"tasks"} />
+      <BottomTabBar activeTab={"repair"} />
     </>
   );
 };
 
-export default CreateTask;
+export default CreateRepair;

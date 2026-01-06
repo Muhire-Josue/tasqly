@@ -3,29 +3,29 @@ import React, { useState } from "react";
 import { View, ScrollView, Pressable, Text } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { RootStackParamList } from "../../../types/navigation";
-import MOCK_TASKS from "../../../mocks/tasks";
 import styles from "./styles";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
 import BottomTabBar from "../../../components/BottomTabBar";
 import { Ionicons } from "@expo/vector-icons";
 import Edit from "../../../components/Edit";
+import MOCK_REPAIRS from "../../../mocks/repairs";
 
-type TaskDetailsRoute = RouteProp<RootStackParamList, "edit-task">;
+type TaskDetailsRoute = RouteProp<RootStackParamList, "edit-repair">;
 
-const EditTask: React.FC = () => {
+const EditRepair: React.FC = () => {
   const navigateTo = useNavigateTo();
 
   const route = useRoute<TaskDetailsRoute>();
-  const { header, taskId } = route.params;
+  const { header, repairId } = route.params;
 
-  const task = MOCK_TASKS.find((t) => t.id === taskId);
+  const repair = MOCK_REPAIRS.find((r) => r.id === repairId);
   const [reset, setReset] = useState(false);
 
   const TAB_BAR_HEIGHT = 32;
 
   const handleCancel = () => {
     setReset(true);
-    navigateTo("task-list");
+    navigateTo("repair-list");
   };
 
   return (
@@ -58,14 +58,14 @@ const EditTask: React.FC = () => {
                   <Text style={styles.cancelText}>Cancel</Text>
                 </Pressable>
               </View>
-              <Edit task={task} reset={reset} />
+              <Edit repair={repair} reset={reset} />
             </View>
           </ScrollView>
         </View>
       </SafeAreaView>
-      <BottomTabBar activeTab={"tasks"} />
+      <BottomTabBar activeTab={"repair"} />
     </>
   );
 };
 
-export default EditTask;
+export default EditRepair;

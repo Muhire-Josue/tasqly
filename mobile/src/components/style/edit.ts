@@ -66,6 +66,7 @@ const style = StyleSheet.create({
     flex: 1,
     position: "relative",
     zIndex: 10,
+    marginBottom: 14,
   },
   statusSelector: {
     flexDirection: "row",

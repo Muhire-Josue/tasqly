@@ -5,7 +5,11 @@ import styles from "./style/headerInfo";
 import ben from "../assets/ben.jpg";
 import { useNavigateTo } from "../navigation/useNavigateTo";
 
-const HeaderInfo: React.FC = () => {
+interface HeaderProps {
+  type: "task" | "repair";
+}
+
+const HeaderInfo: React.FC<HeaderProps> = ({ type }) => {
   const navigateTo = useNavigateTo();
   return (
     <>
@@ -20,7 +24,11 @@ const HeaderInfo: React.FC = () => {
             styles.addButton,
             pressed && styles.addButtonPressed,
           ]}
-          onPress={() => navigateTo("create-task")}
+          onPress={() =>
+            type === "task"
+              ? navigateTo("create-task")
+              : navigateTo("create-repair")
+          }
         >
           <Ionicons name="add" size={36} color="#000" />
         </Pressable>

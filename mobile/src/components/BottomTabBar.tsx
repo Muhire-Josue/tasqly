@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { View, Text, Pressable } from "react-native";
 import { Ionicons, FontAwesome6 } from "@expo/vector-icons";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
@@ -7,6 +7,10 @@ import { PRIMARY_COLOR_BLUE } from "../theme/colors";
 import { useNavigateTo } from "../navigation/useNavigateTo";
 
 type TabKey = "tasks" | "repair" | "notifications" | "profile";
+
+interface BottomTabBarProps {
+  activeTab: TabKey; // ✅ keep it consistent with TabKey
+}
 
 type TabConfig =
   | {
@@ -42,9 +46,8 @@ const TABS: TabConfig[] = [
   },
 ];
 
-const BottomTabBar: React.FC = () => {
+const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
   const navigateTo = useNavigateTo();
-  const [activeTab, setActiveTab] = useState<TabKey>("tasks");
   const insets = useSafeAreaInsets();
 
   return (
@@ -60,7 +63,7 @@ const BottomTabBar: React.FC = () => {
               pressed && styles.tabItemPressed,
             ]}
             onPress={() => {
-              setActiveTab(key);
+              // ✅ no setActiveTab here (parent controls activeTab)
 
               switch (key) {
                 case "tasks":
@@ -68,15 +71,15 @@ const BottomTabBar: React.FC = () => {
                   break;
 
                 case "repair":
-                  navigateTo("task-list");
+                  navigateTo("repair-list");
                   break;
 
                 case "notifications":
-                  navigateTo("task-list");
+                  navigateTo("repair-list");
                   break;
 
                 case "profile":
-                  navigateTo("task-list");
+                  navigateTo("repair-list");
                   break;
               }
             }}

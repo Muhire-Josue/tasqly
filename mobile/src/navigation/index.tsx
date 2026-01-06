@@ -7,10 +7,16 @@ import SignUp from "../screens/auth/signup";
 import SignIn from "../screens/auth/signin";
 import ResetPassword from "../screens/auth/reset-password";
 import OtpCode from "../screens/auth/otp-code";
+
 import TaskList from "../screens/tasks/list";
 import CreateTask from "../screens/tasks/create";
 import TaskDetails from "../screens/tasks/details";
 import EditTask from "../screens/tasks/edit";
+import RepairDetails from "../screens/repairs/details";
+import CreateRepair from "../screens/repairs/create";
+import EditRepair from "../screens/repairs/edit";
+
+import RepairList from "../screens/repairs/list";
 
 import { RootStackParamList } from "../types/navigation";
 
@@ -71,6 +77,26 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="edit-task"
           component={EditTask}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="create-repair"
+          component={CreateRepair}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="repair-list"
+          component={RepairList}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="repair-details"
+          component={RepairDetails}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="edit-repair"
+          component={EditRepair}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
