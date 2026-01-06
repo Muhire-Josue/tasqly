@@ -27,7 +27,7 @@ const HeaderInfo: React.FC<HeaderProps> = ({ type }) => {
           onPress={() =>
             type === "task"
               ? navigateTo("create-task")
-              : navigateTo("create-task")
+              : navigateTo("create-repair")
           }
         >
           <Ionicons name="add" size={36} color="#000" />
