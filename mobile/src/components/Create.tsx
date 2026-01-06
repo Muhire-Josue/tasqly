@@ -155,7 +155,7 @@ const Create: React.FC<CreateProps> = ({ reset, type }) => {
       <TextInput
         value={title ? title : ""}
         onChangeText={setTitle}
-        placeholder="Ex: Groceries"
+        placeholder={isRepair ? "Unclog bathroom drain" : "Ex: Groceries"}
         placeholderTextColor="#A0A0A0"
         style={styles.textInput}
       />
