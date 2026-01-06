@@ -50,7 +50,7 @@ const CreateRepair: React.FC = () => {
           </ScrollView>
         </View>
       </SafeAreaView>
-      <BottomTabBar />
+      <BottomTabBar activeTab={"repair"} />
     </>
   );
 };

@@ -267,7 +267,7 @@ const TaskDetails: React.FC = () => {
           </View>
         </Modal>
       </SafeAreaView>
-      <BottomTabBar />
+      <BottomTabBar activeTab={"tasks"} />
     </>
   );
 };

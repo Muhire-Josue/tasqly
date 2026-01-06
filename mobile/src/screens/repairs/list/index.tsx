@@ -113,7 +113,7 @@ const RepairList: React.FC = () => {
         )}
       </Modal>
 
-      <BottomTabBar />
+      <BottomTabBar activeTab={"repair"} />
     </SafeAreaView>
   );
 };
