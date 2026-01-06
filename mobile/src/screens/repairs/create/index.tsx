@@ -12,7 +12,7 @@ const CreateRepair: React.FC = () => {
   const [reset, setReset] = useState(false);
 
   const handleCancel = () => {
-    navigate("task-list");
+    navigate("repair-list");
     setReset(true);
   };
 
