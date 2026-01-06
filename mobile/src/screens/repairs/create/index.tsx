@@ -46,7 +46,7 @@ const CreateRepair: React.FC = () => {
               </Pressable>
             </View>
 
-            <Create reset={reset} />
+            <Create reset={reset} type={"repair"} />
           </ScrollView>
         </View>
       </SafeAreaView>

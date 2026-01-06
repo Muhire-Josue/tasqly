@@ -46,7 +46,7 @@ const CreateTask: React.FC = () => {
               </Pressable>
             </View>
 
-            <Create reset={reset} />
+            <Create reset={reset} type={"task"} />
           </ScrollView>
         </View>
       </SafeAreaView>

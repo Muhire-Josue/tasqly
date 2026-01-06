@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from "react";
+/* eslint-disable complexity */
+import React, { useEffect, useMemo, useState } from "react";
 import {
   View,
   Text,
@@ -23,9 +24,10 @@ import { STATUS_META } from "../mocks/statusMeta";
 
 interface CreateProps {
   reset: boolean;
+  type: "task" | "repair";
 }
 
-const Create: React.FC<CreateProps> = ({ reset }) => {
+const Create: React.FC<CreateProps> = ({ reset, type }) => {
   const FREQUENCIES: Frequency[] = [
     "None",
     "Daily",
@@ -33,6 +35,13 @@ const Create: React.FC<CreateProps> = ({ reset }) => {
     "Bi-weekly",
     "Monthly",
   ];
+
+  const isRepair = type === "repair";
+
+  const landlordMember = useMemo(
+    () => MEMBERS_MOCK.find((m) => m.name === "Landlord") ?? null,
+    [],
+  );
 
   const [frequency, setFrequency] = useState<Frequency>("None");
   const [showFrequencyMenu, setShowFrequencyMenu] = useState(false);
@@ -44,7 +53,9 @@ const Create: React.FC<CreateProps> = ({ reset }) => {
   const [showStatusMenu, setShowStatusMenu] = useState(false);
   const [dueDate, setDueDate] = useState<string | null>(null);
   const [showCalendar, setShowCalendar] = useState(false);
-  const [selectedAssignee, setSelectedAssignee] = useState<Member | null>(null);
+  const [selectedAssignee, setSelectedAssignee] = useState<Member | null>(
+    isRepair ? landlordMember : null,
+  );
   const [assigneeRotationEnabled, setAssigneeRotationEnabled] = useState(false);
   const [showAssigneeModal, setShowAssigneeModal] = useState(false);
   const [description, setDescription] = useState("");
@@ -76,14 +87,30 @@ const Create: React.FC<CreateProps> = ({ reset }) => {
   };
 
   useEffect(() => {
+    if (isRepair) {
+      setSelectedAssignee(landlordMember);
+      setAssigneeRotationEnabled(false);
+    }
+  }, [isRepair, landlordMember]);
+
+  useEffect(() => {
     if (reset) {
       setTitle(null);
       setIsUrgent(false);
       setStatus("Pending");
       setDueDate(null);
-      setSelectedAssignee(null);
+      setDescription("");
+      setFrequency("None");
+
+      setSelectedAssignee(isRepair ? landlordMember : null);
+
+      setAssigneeRotationEnabled(false);
+      setShowAssigneeModal(false);
+      setShowCalendar(false);
+      setShowStatusMenu(false);
+      setShowFrequencyMenu(false);
     }
-  }, [reset]);
+  }, [reset, isRepair, landlordMember]);
 
   const handleCreate = () => {
     const errors = validateCreateForm(
@@ -101,8 +128,11 @@ const Create: React.FC<CreateProps> = ({ reset }) => {
       });
       return;
     }
+
     showMessage({
-      message: "Task created successfully",
+      message: isRepair
+        ? "Repair request created successfully"
+        : "Task created successfully",
       type: "success",
       icon: "success",
     });
@@ -110,10 +140,13 @@ const Create: React.FC<CreateProps> = ({ reset }) => {
     setTitle("");
     setDescription("");
     setDueDate(null);
-    setSelectedAssignee(null);
     setFrequency("None");
     setIsUrgent(false);
     setStatus("Pending");
+
+    setSelectedAssignee(isRepair ? landlordMember : null);
+
+    setAssigneeRotationEnabled(false);
   };
 
   return (
@@ -274,7 +307,8 @@ const Create: React.FC<CreateProps> = ({ reset }) => {
         <View style={styles.assigneeHeaderRow}>
           <View style={styles.assigneeButtonWrapper}>
             <Pressable
-              style={styles.assigneeButton}
+              style={[styles.assigneeButton, isRepair && { opacity: 0.5 }]}
+              disabled={isRepair}
               onPress={() => setShowAssigneeModal(true)}
             >
               <Ionicons
@@ -283,30 +317,34 @@ const Create: React.FC<CreateProps> = ({ reset }) => {
                 color="#FFFFFF"
                 style={{ marginRight: 8 }}
               />
-              <Text style={styles.assigneeButtonText}>Add Assignee</Text>
+              <Text style={styles.assigneeButtonText}>
+                {isRepair ? "Assigned to Landlord" : "Add Assignee"}
+              </Text>
             </Pressable>
           </View>
 
-          <View style={styles.rotationWrapper}>
-            <Switch
-              value={assigneeRotationEnabled}
-              onValueChange={setAssigneeRotationEnabled}
-              disabled={frequency === "None"}
-              trackColor={{
-                false: "#D1D5DB",
-                true: PRIMARY_COLOR_BLUE,
-              }}
-              thumbColor="#FFFFFF"
-            />
-            <Text
-              style={[
-                styles.rotationLabel,
-                frequency === "None" && { color: "#B3B3B3" },
-              ]}
-            >
-              Assignee Rotation
-            </Text>
-          </View>
+          {!isRepair && (
+            <View style={styles.rotationWrapper}>
+              <Switch
+                value={assigneeRotationEnabled}
+                onValueChange={setAssigneeRotationEnabled}
+                disabled={frequency === "None"}
+                trackColor={{
+                  false: "#D1D5DB",
+                  true: PRIMARY_COLOR_BLUE,
+                }}
+                thumbColor="#FFFFFF"
+              />
+              <Text
+                style={[
+                  styles.rotationLabel,
+                  frequency === "None" && { color: "#B3B3B3" },
+                ]}
+              >
+                Assignee Rotation
+              </Text>
+            </View>
+          )}
         </View>
 
         {selectedAssignee && (
@@ -330,7 +368,7 @@ const Create: React.FC<CreateProps> = ({ reset }) => {
           </View>
         )}
         <Modal
-          visible={showAssigneeModal}
+          visible={showAssigneeModal && !isRepair}
           transparent
           animationType="fade"
           onRequestClose={() => setShowAssigneeModal(false)}

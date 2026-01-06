@@ -2,6 +2,7 @@ import Ben from "../assets/ben.jpg";
 import Micheal from "../assets/michael.jpg";
 import Vince from "../assets/vince.jpg";
 import Well from "../assets/wellington.jpg";
+import LandLord from "../assets/landlord.jpg";
 import { ImageSourcePropType } from "react-native";
 
 export type Member = {
@@ -60,5 +61,10 @@ export const MEMBERS_MOCK: Member[] = [
     id: "10",
     name: "Valerie Smithson",
     avatar: Vince,
+  },
+  {
+    id: "11",
+    name: "Landlord",
+    avatar: LandLord,
   },
 ];
