@@ -9,7 +9,7 @@ const Index: React.FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const navigateTo = useNavigateTo();
   setTimeout(() => {
-    navigateTo("notification");
+    navigateTo("task-list");
     setLoading(false);
   }, 2000);
   return (
