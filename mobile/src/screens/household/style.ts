@@ -39,8 +39,9 @@ const styles = StyleSheet.create({
   headerRow: {
     flexDirection: "row",
     alignItems: "center",
-    justifyContent: "flex-start",
+    justifyContent: "flex-end",
     gap: 12,
+    width: "100%",
     paddingTop: 16,
   },
 
