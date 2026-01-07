@@ -1,7 +1,7 @@
 export type RootStackParamList = {
-  splash: undefined;
-  signup: undefined;
-  signin: undefined;
+  "splash": undefined;
+  "signup": undefined;
+  "signin": undefined;
   "reset-password": undefined;
   "otp-code": undefined;
   "task-list": undefined;
@@ -12,8 +12,8 @@ export type RootStackParamList = {
   "repair-details": { repairId: string };
   "edit-repair": { repairId: string; header: string };
   "create-repair": undefined;
-  notification: undefined;
+  "notification": undefined;
   "no-notification": undefined;
-  profile: undefined;
+  "profile": undefined;
   "house-settings": undefined;
 };
