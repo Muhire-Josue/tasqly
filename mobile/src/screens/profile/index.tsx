@@ -5,6 +5,7 @@ import * as ImagePicker from "expo-image-picker";
 
 import Wellington from "../../assets/wellington.jpg";
 import styles from "./style";
+import BottomTabBar from "../../components/BottomTabBar";
 const Profile: React.FC = () => {
   const [avatar, setAvatar] = useState<string | null>(null);
 
@@ -25,22 +26,25 @@ const Profile: React.FC = () => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Avatar */}
-      <View style={styles.avatarWrapper}>
-        <Image
-          source={avatar ? { uri: avatar } : Wellington}
-          style={styles.avatar}
-        />
+    <>
+      <View style={styles.container}>
+        {/* Avatar */}
+        <View style={styles.avatarWrapper}>
+          <Image
+            source={avatar ? { uri: avatar } : Wellington}
+            style={styles.avatar}
+          />
 
-        <Pressable style={styles.cameraButton} onPress={handleChangePhoto}>
-          <Ionicons name="camera-outline" size={20} color="#111" />
-        </Pressable>
+          <Pressable style={styles.cameraButton} onPress={handleChangePhoto}>
+            <Ionicons name="camera-outline" size={20} color="#111" />
+          </Pressable>
+        </View>
+
+        {/* Name */}
+        <Text style={styles.name}>John Smith</Text>
       </View>
-
-      {/* Name */}
-      <Text style={styles.name}>John Smith</Text>
-    </View>
+      <BottomTabBar activeTab={"profile"} />
+    </>
   );
 };
 
