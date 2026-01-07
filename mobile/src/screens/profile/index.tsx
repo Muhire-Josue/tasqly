@@ -1,13 +1,16 @@
+// screens/profile/index.tsx
 import React, { useState } from "react";
 import { View, Text, Image, Pressable } from "react-native";
-import { Ionicons } from "@expo/vector-icons";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Ionicons, Feather } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 
-import Wellington from "../../assets/wellington.jpg";
 import styles from "./style";
+import Wellington from "../../assets/wellington.jpg";
 import BottomTabBar from "../../components/BottomTabBar";
+
 const Profile: React.FC = () => {
-  const [avatar, setAvatar] = useState<string | null>(null);
+  const [avatarUri, setAvatarUri] = useState<string | null>(null);
 
   const handleChangePhoto = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -21,28 +24,58 @@ const Profile: React.FC = () => {
     });
 
     if (!result.canceled) {
-      setAvatar(result.assets[0].uri);
+      setAvatarUri(result.assets[0].uri);
     }
+  };
+
+  const handleHouseSettingsPress = () => {
+    // TODO: navigate to House Settings screen
   };
 
   return (
     <>
-      <View style={styles.container}>
-        {/* Avatar */}
-        <View style={styles.avatarWrapper}>
-          <Image
-            source={avatar ? { uri: avatar } : Wellington}
-            style={styles.avatar}
-          />
+      <SafeAreaView edges={["top", "left", "right"]} style={styles.safeArea}>
+        <View style={styles.container}>
+          {/* Avatar */}
+          <View style={styles.avatarSection}>
+            <Pressable
+              onPress={handleChangePhoto}
+              style={({ pressed }) => [
+                styles.avatarPressable,
+                pressed && { opacity: 0.9 },
+              ]}
+              hitSlop={10}
+            >
+              <Image
+                source={avatarUri ? { uri: avatarUri } : Wellington}
+                style={styles.avatar}
+              />
+              <View style={styles.cameraBadge}>
+                <Ionicons name="camera" size={18} color="#111" />
+              </View>
+            </Pressable>
+          </View>
 
-          <Pressable style={styles.cameraButton} onPress={handleChangePhoto}>
-            <Ionicons name="camera-outline" size={20} color="#111" />
+          {/* Header */}
+          <Text style={styles.headerTitle}>Profile</Text>
+
+          {/* House Settings row */}
+          <Pressable
+            onPress={handleHouseSettingsPress}
+            style={({ pressed }) => [
+              styles.linkRow,
+              pressed && { opacity: 0.9 },
+            ]}
+          >
+            <View style={styles.linkLeft}>
+              <Feather name="settings" size={24} color="#111" />
+              <Text style={styles.linkLabel}>House Settings</Text>
+            </View>
+
+            <Ionicons name="chevron-forward" size={24} color="#9CA3AF" />
           </Pressable>
         </View>
-
-        {/* Name */}
-        <Text style={styles.name}>John Smith</Text>
-      </View>
+      </SafeAreaView>
       <BottomTabBar activeTab={"profile"} />
     </>
   );
