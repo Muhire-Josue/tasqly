@@ -15,4 +15,5 @@ export type RootStackParamList = {
   notification: undefined;
   "no-notification": undefined;
   profile: undefined;
+  "house-settings": undefined;
 };
