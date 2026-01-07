@@ -91,6 +91,15 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: "#111",
   },
+
+  headerContainer: {
+  paddingHorizontal: 24,
+},
+
+emptyWrap: {
+  flex: 1,
+  paddingHorizontal: 24,
+},
 });
 
 export default styles;

@@ -9,6 +9,13 @@ const styles = StyleSheet.create({
     paddingBottom: 80,
   },
 
+  wrapper: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 24,
+  },
+
   iconCircle: {
     width: 210,
     height: 210,

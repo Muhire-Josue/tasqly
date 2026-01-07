@@ -5,13 +5,13 @@ import styles from "./style";
 
 const NotificationEmptyState: React.FC = () => {
   return (
-    <View style={styles.container}>
+    <View style={styles.wrapper}>
       <View style={styles.iconCircle}>
-        <Ionicons name="notifications-outline" size={96} color="#FFFFFF" />
+        <Ionicons name="notifications-outline" size={64} color="#FFFFFF" />
       </View>
 
       <Text style={styles.title}>
-        You’re all caught up <Text style={styles.emoji}>🎉</Text>
+        You’re all caught up 🎉
       </Text>
     </View>
   );

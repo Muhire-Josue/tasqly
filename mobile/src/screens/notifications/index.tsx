@@ -18,6 +18,7 @@ import { NotificationItem } from "../../types/notifications";
 import MOCK_NOTIFICATIONS from "../../mocks/notifications";
 import NotificationCard from "./card";
 import { showMessage } from "react-native-flash-message";
+import NotificationEmptyState from "./no-content";
 
 type NotificationFilter = "All" | "Mentions";
 
@@ -50,7 +51,7 @@ const Notification: React.FC = () => {
   const groupOrder = useMemo(() => Object.keys(grouped), [grouped]);
   const toggleFilter = (value: NotificationFilter) => {
     setSelectedFilters((prev) =>
-      prev.includes(value) ? prev.filter((f) => f !== value) : [...prev, value],
+      prev.includes(value) ? prev.filter((f) => f !== value) : [...prev, value]
     );
   };
 
@@ -87,70 +88,75 @@ const Notification: React.FC = () => {
   return (
     <>
       <SafeAreaView edges={["top"]} style={styles.safeArea}>
-        <FlatList
-          data={rows}
-          keyExtractor={(row) => row.id}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 40, paddingHorizontal: 24 }}
-          ListHeaderComponent={
-            <View>
-              <View style={styles.headerRow}>
-                <Text style={styles.title}>Notifications</Text>
+        
+        <View style={styles.headerContainer}>
+        <View style={styles.headerRow}>
+          <Text style={styles.title}>Notifications</Text>
 
-                <Pressable
-                  hitSlop={10}
-                  onPress={(e) => {
-                    e.currentTarget?.measure?.((x, y, w, h, pageX, pageY) => {
-                      setMenuTop(pageY + h + 10);
-                      setMenuVisible(true);
-                    });
-                  }}
-                  style={({ pressed }) => [pressed && styles.iconPressed]}
-                >
-                  <Ionicons name="filter-outline" size={32} color="#111" />
-                </Pressable>
-              </View>
+          <Pressable
+            hitSlop={10}
+            onPress={(e) => {
+              e.currentTarget?.measure?.((x, y, w, h, pageX, pageY) => {
+                setMenuTop(pageY + h + 10);
+                setMenuVisible(true);
+              });
+            }}
+            style={({ pressed }) => [pressed && styles.iconPressed]}
+          >
+            <Ionicons name="filter-outline" size={24} color="#111" />
+          </Pressable>
+        </View>
 
-              <View style={styles.actionsRow}>
-                <Pressable
-                  style={({ pressed }) => [
-                    styles.clearAllButton,
-                    pressed && { opacity: 0.85 },
-                  ]}
-                  onPress={handleClearAll}
-                >
-                  <Ionicons name="close-outline" size={18} color="#111" />
-                  <Text style={styles.clearAllText}>Clear All</Text>
-                </Pressable>
-              </View>
-            </View>
-          }
-          renderItem={({ item }) => {
-            if (item.kind === "header") {
-              return <Text style={styles.sectionLabel}>{item.title}</Text>;
-            }
+        <View style={styles.actionsRow}>
+          <Pressable
+            style={({ pressed }) => [
+              styles.clearAllButton,
+              pressed && { opacity: 0.85 },
+            ]}
+            onPress={handleClearAll}
+          >
+            <Ionicons name="close-outline" size={18} color="#111" />
+            <Text style={styles.clearAllText}>Clear All</Text>
+          </Pressable>
+        </View>
+      </View>
+      
+        {rows.length === 0 ? (
+          <NotificationEmptyState />
+        ) : (
+          <FlatList
+            data={rows}
+            keyExtractor={(row) => row.id}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={{ paddingBottom: 40, paddingHorizontal: 24 }}
+            // ListEmptyComponent={<NoNotification />}
+            renderItem={({ item }) => {
+              if (item.kind === "header") {
+                return <Text style={styles.sectionLabel}>{item.title}</Text>;
+              }
 
-            const n = item.item;
+              const n = item.item;
 
-            const isAssignedToMe = n.assignedTo === CURRENT_USER_ID;
-            const isTask = n.taskId !== null;
-            const requiresResponse =
-              n.requiresResponse ?? (isTask && isAssignedToMe);
+              const isAssignedToMe = n.assignedTo === CURRENT_USER_ID;
+              const isTask = n.taskId !== null;
+              const requiresResponse =
+                n.requiresResponse ?? (isTask && isAssignedToMe);
 
-            const decision: Status = statusById[n.id] ?? "pending";
+              const decision: Status = statusById[n.id] ?? "pending";
 
-            return (
-              <NotificationCard
-                item={n}
-                decision={decision}
-                showActions={requiresResponse && decision === "pending"}
-                onAccept={() => handleAccept(n)}
-                onDecline={() => handleDecline(n)}
-                onDelete={() => console.log("delete", n.id)}
-              />
-            );
-          }}
-        />
+              return (
+                <NotificationCard
+                  item={n}
+                  decision={decision}
+                  showActions={requiresResponse && decision === "pending"}
+                  onAccept={() => handleAccept(n)}
+                  onDecline={() => handleDecline(n)}
+                  onDelete={() => console.log("delete", n.id)}
+                />
+              );
+            }}
+          />
+        )}
 
         <Modal
           visible={menuVisible}
