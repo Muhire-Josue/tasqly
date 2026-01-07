@@ -19,10 +19,12 @@ import TaskFilterBar, { Scope } from "../../../components/TaskFilterBar";
 import { Status } from "../../../types/tasks";
 import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import BottomTabBar from "../../../components/BottomTabBar";
+import NoRepairs from "../no-content";
+
+const STATUSES: Status[] = ["Pending", "Completed", "Rejected"];
 
 const RepairList: React.FC = () => {
   const navigateTo = useNavigateTo();
-  const STATUSES: Status[] = ["Pending", "Completed", "Rejected"];
 
   const [scope, setScope] = useState<Scope>("all");
   const [selectedStatuses, setSelectedStatuses] = useState<Status[]>([
@@ -46,6 +48,11 @@ const RepairList: React.FC = () => {
     setMenuTop(pageY + height + 6);
     setMenuVisible(true);
   };
+
+  const handleAddRepair = () => {
+    navigateTo("create-repair"); // <- use your real route name
+  };
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#e7fafeff" }}
@@ -60,15 +67,17 @@ const RepairList: React.FC = () => {
               <Card
                 item={item}
                 onPress={() =>
-                  navigateTo("repair-details", {
-                    repairId: item.id,
+                  navigateTo("task-details", {
+                    taskId: item.id,
                   })
                 }
               />
             )}
+            showsVerticalScrollIndicator={false}
             ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
             contentContainerStyle={{
               paddingBottom: 16,
+              flexGrow: 1,
             }}
             ListHeaderComponent={
               <View style={styles.listHeader}>
@@ -83,10 +92,15 @@ const RepairList: React.FC = () => {
                 />
               </View>
             }
-            showsVerticalScrollIndicator={false}
+            ListEmptyComponent={
+              <View style={{ flex: 1, justifyContent: "center" }}>
+                <NoRepairs onAddRepair={handleAddRepair} />
+              </View>
+            }
           />
         </View>
       </View>
+
       <Modal
         visible={menuVisible}
         transparent
@@ -113,7 +127,7 @@ const RepairList: React.FC = () => {
         )}
       </Modal>
 
-      <BottomTabBar activeTab={"repair"} />
+      <BottomTabBar activeTab="repairs" />
     </SafeAreaView>
   );
 };

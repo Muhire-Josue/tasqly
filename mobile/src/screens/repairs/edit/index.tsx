@@ -63,7 +63,7 @@ const EditRepair: React.FC = () => {
           </ScrollView>
         </View>
       </SafeAreaView>
-      <BottomTabBar activeTab={"repair"} />
+      <BottomTabBar activeTab="repairs" />
     </>
   );
 };

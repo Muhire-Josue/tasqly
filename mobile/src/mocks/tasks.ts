@@ -354,7 +354,6 @@ const TASKS_BASE: CardType[] = [
     frequency: pickFrequency("20"),
     assigneeRotationEnabled: false,
   },
-
   // Repeats mixed with people for realism
   {
     id: "21",
@@ -676,7 +675,6 @@ const TASKS_BASE: CardType[] = [
     frequency: pickFrequency("40"),
     assigneeRotationEnabled: false,
   },
-
   // Final 10
   {
     id: "41",

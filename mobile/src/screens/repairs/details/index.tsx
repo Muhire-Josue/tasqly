@@ -248,7 +248,7 @@ const RepairDetails: React.FC = () => {
           </View>
         </Modal>
       </SafeAreaView>
-      <BottomTabBar activeTab={"repair"} />
+      <BottomTabBar activeTab="repairs" />
     </>
   );
 };

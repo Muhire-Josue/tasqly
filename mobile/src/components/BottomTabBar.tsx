@@ -6,10 +6,10 @@ import styles from "./style/bottomTabBar";
 import { PRIMARY_COLOR_BLUE } from "../theme/colors";
 import { useNavigateTo } from "../navigation/useNavigateTo";
 
-type TabKey = "tasks" | "repair" | "notifications" | "profile";
+type TabKey = "tasks" | "repairs" | "notifications" | "profile";
 
 interface BottomTabBarProps {
-  activeTab: TabKey; // ✅ keep it consistent with TabKey
+  activeTab: TabKey;
 }
 
 type TabConfig =
@@ -30,7 +30,7 @@ type TabConfig =
 
 const TABS: TabConfig[] = [
   { key: "tasks", label: "Tasks", icon: "list-check", library: "fa6" },
-  { key: "repair", label: "Repair", icon: "hammer", library: "fa6" },
+  { key: "repairs", label: "Repair", icon: "hammer", library: "fa6" },
   {
     key: "notifications",
     label: "Notifications",
@@ -63,19 +63,17 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
               pressed && styles.tabItemPressed,
             ]}
             onPress={() => {
-              // ✅ no setActiveTab here (parent controls activeTab)
-
               switch (key) {
                 case "tasks":
                   navigateTo("task-list");
                   break;
 
-                case "repair":
+                case "repairs":
                   navigateTo("repair-list");
                   break;
 
                 case "notifications":
-                  navigateTo("repair-list");
+                  navigateTo("notification");
                   break;
 
                 case "profile":
