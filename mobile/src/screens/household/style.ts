@@ -3,7 +3,9 @@ import { StyleSheet } from "react-native";
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: "#F7FAFB",
+    paddingHorizontal: 24,
+    paddingTop: 16,
+    alignItems: "flex-start", // 🔴 IMPORTANT
   },
   container: {
     flex: 1,
@@ -11,7 +13,7 @@ const styles = StyleSheet.create({
 
   imageWrapper: {
     width: "100%",
-    height: 220,
+    height: 260,
     position: "relative",
     backgroundColor: "#E5E7EB",
   },
@@ -37,15 +39,19 @@ const styles = StyleSheet.create({
   headerRow: {
     flexDirection: "row",
     alignItems: "center",
-    gap: 10,
-    paddingHorizontal: 24,
-    paddingTop: 18,
+    justifyContent: "flex-start",
+    gap: 12,
+    paddingTop: 16,
   },
 
   headerTitle: {
     fontSize: 28,
-    fontWeight: "500",
+    fontWeight: "600",
     color: "#111",
+  },
+  root: {
+    flex: 1,
+    backgroundColor: "#F7FAFB",
   },
 });
 
