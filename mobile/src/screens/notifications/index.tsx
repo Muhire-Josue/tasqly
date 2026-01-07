@@ -101,9 +101,15 @@ const Notification: React.FC = () => {
             <View>
               <View style={styles.headerRow}>
                 <Text style={styles.title}>Notifications</Text>
+
                 <Pressable
                   hitSlop={10}
-                  onPress={() => setMenuVisible(true)}
+                  onPress={(e) => {
+                    e.currentTarget?.measure?.((x, y, w, h, pageX, pageY) => {
+                      setMenuTop(pageY + h + 10);
+                      setMenuVisible(true);
+                    });
+                  }}
                   style={({ pressed }) => [pressed && styles.iconPressed]}
                 >
                   <Ionicons name="filter-outline" size={32} color="#111" />
@@ -149,7 +155,6 @@ const Notification: React.FC = () => {
               />
             );
           }}
-          ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
         />
 
         <Modal
@@ -162,6 +167,7 @@ const Notification: React.FC = () => {
             style={StyleSheet.absoluteFill}
             onPress={() => setMenuVisible(false)}
           />
+
           {menuTop !== null && (
             <View style={[styles.dropdown, { top: menuTop, right: 24 }]}>
               {FILTERS.map((f) => (
