@@ -7,6 +7,7 @@ import {
   Switch,
   TextInput,
   ScrollView,
+  Modal,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, Feather } from "@expo/vector-icons";
@@ -29,6 +30,8 @@ const Profile: React.FC = () => {
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  const [confirmDeleteVisible, setConfirmDeleteVisible] = useState(false);
+
   const handleChangePhoto = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permission.granted) return;
@@ -48,7 +51,12 @@ const Profile: React.FC = () => {
   };
 
   const handleDelete = () => {
-    // TODO
+    setConfirmDeleteVisible(true);
+  };
+
+  const confirmDelete = () => {
+    setConfirmDeleteVisible(false);
+    // TODO: backend call + logout / cleanup
   };
 
   const handleSave = () => {
@@ -99,7 +107,6 @@ const Profile: React.FC = () => {
             <Ionicons name="chevron-forward" size={24} color="#9CA3AF" />
           </Pressable>
 
-          {/* Notification settings */}
           <View style={styles.settingRow}>
             <View style={styles.settingLeft}>
               <Ionicons name="notifications-outline" size={26} color="#111" />
@@ -128,7 +135,6 @@ const Profile: React.FC = () => {
             />
           </View>
 
-          {/* Form */}
           <View style={styles.formSection}>
             <Text style={styles.fieldLabel}>Name</Text>
             <View style={styles.inputRow}>
@@ -207,7 +213,6 @@ const Profile: React.FC = () => {
             </View>
           </View>
 
-          {/* Buttons */}
           <View style={styles.buttonsRow}>
             <Pressable
               onPress={handleDelete}
@@ -236,6 +241,95 @@ const Profile: React.FC = () => {
             </Pressable>
           </View>
         </ScrollView>
+
+        {/* Confirm Delete Modal */}
+        <Modal
+          visible={confirmDeleteVisible}
+          transparent
+          animationType="fade"
+          onRequestClose={() => setConfirmDeleteVisible(false)}
+        >
+          <Pressable
+            style={{
+              flex: 1,
+              backgroundColor: "rgba(0,0,0,0.35)",
+              justifyContent: "center",
+              paddingHorizontal: 24,
+            }}
+            onPress={() => setConfirmDeleteVisible(false)}
+          >
+            <Pressable
+              onPress={() => {}}
+              style={{
+                backgroundColor: "#FFF",
+                borderRadius: 18,
+                padding: 18,
+                borderWidth: 1,
+                borderColor: "#E5E7EB",
+              }}
+            >
+              <Text style={{ fontSize: 18, fontWeight: "700", color: "#111" }}>
+                Confirm deletion
+              </Text>
+              <Text style={{ marginTop: 8, fontSize: 14, color: "#6B7280" }}>
+                Are you sure you want to delete your account? This action cannot
+                be undone.
+              </Text>
+
+              <View style={{ flexDirection: "row", gap: 12, marginTop: 16 }}>
+                <Pressable
+                  onPress={() => setConfirmDeleteVisible(false)}
+                  style={({ pressed }) => [
+                    {
+                      flex: 1,
+                      paddingVertical: 12,
+                      borderRadius: 14,
+                      borderWidth: 1,
+                      borderColor: "#D1D5DB",
+                      backgroundColor: "#FFF",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "row",
+                      gap: 8,
+                    },
+                    pressed && { opacity: 0.9 },
+                  ]}
+                >
+                  <Ionicons name="close" size={18} color="#111" />
+                  <Text
+                    style={{ fontSize: 15, fontWeight: "700", color: "#111" }}
+                  >
+                    Cancel
+                  </Text>
+                </Pressable>
+
+                <Pressable
+                  onPress={confirmDelete}
+                  style={({ pressed }) => [
+                    {
+                      flex: 1,
+                      paddingVertical: 12,
+                      borderRadius: 14,
+                      backgroundColor: "#C0392B",
+                      alignItems: "center",
+                      justifyContent: "center",
+                      flexDirection: "row",
+                      gap: 8,
+                    },
+                    pressed && { opacity: 0.9 },
+                  ]}
+                >
+                  <Ionicons name="trash-outline" size={18} color="#FFF" />
+                  <Text
+                    style={{ fontSize: 15, fontWeight: "800", color: "#FFF" }}
+                  >
+                    Delete
+                  </Text>
+                </Pressable>
+              </View>
+            </Pressable>
+          </Pressable>
+        </Modal>
       </SafeAreaView>
 
       <BottomTabBar activeTab="profile" />
