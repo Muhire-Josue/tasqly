@@ -77,7 +77,7 @@ const BottomTabBar: React.FC<BottomTabBarProps> = ({ activeTab }) => {
                   break;
 
                 case "profile":
-                  navigateTo("repair-list");
+                  navigateTo("profile");
                   break;
               }
             }}
