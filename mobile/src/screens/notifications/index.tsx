@@ -103,9 +103,10 @@ const Notification: React.FC = () => {
                 <Text style={styles.title}>Notifications</Text>
                 <Pressable
                   hitSlop={10}
+                  onPress={() => setMenuVisible(true)}
                   style={({ pressed }) => [pressed && styles.iconPressed]}
                 >
-                  <Ionicons name="filter-outline" size={24} color="#111" />
+                  <Ionicons name="filter-outline" size={32} color="#111" />
                 </Pressable>
               </View>
 

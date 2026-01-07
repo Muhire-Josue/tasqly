@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../../theme/colors";
 
 const styles = StyleSheet.create({
   card: {
@@ -7,27 +8,28 @@ const styles = StyleSheet.create({
 
   row: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     justifyContent: "space-between",
     paddingVertical: 10,
   },
 
   left: {
     flexDirection: "row",
-    alignItems: "center",
+    alignItems: "flex-start",
     flex: 1,
     paddingRight: 12,
   },
 
   avatarWrap: {
-    width: 52,
-    height: 52,
-    borderRadius: 26,
+    width: 46,
+    height: 46,
+    borderRadius: 23,
     overflow: "hidden",
     backgroundColor: "#EFEFEF",
     alignItems: "center",
     justifyContent: "center",
     marginRight: 14,
+    marginTop: 2,
   },
 
   avatar: {
@@ -40,9 +42,9 @@ const styles = StyleSheet.create({
   },
 
   message: {
-    fontSize: 15,
+    fontSize: 16,
     color: "#111",
-    lineHeight: 28,
+    lineHeight: 22,
   },
 
   bold: {
@@ -51,13 +53,14 @@ const styles = StyleSheet.create({
   },
 
   time: {
-    marginTop: 4,
-    fontSize: 13,
+    marginTop: 6,
+    fontSize: 14,
     color: "#111",
   },
 
   deleteBtn: {
     paddingLeft: 8,
+    paddingTop: 6,
   },
 
   divider: {
@@ -65,6 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#C9C9C9",
     marginTop: 14,
   },
+
   decisionText: {
     marginTop: 6,
     fontSize: 14,
@@ -75,34 +79,38 @@ const styles = StyleSheet.create({
   actionsRow: {
     flexDirection: "row",
     justifyContent: "flex-end",
-    gap: 12,
-    marginTop: 12,
+    gap: 14,
+    marginTop: 14,
   },
 
   declineBtn: {
-    paddingVertical: 10,
-    paddingHorizontal: 16,
-    borderRadius: 12,
-    backgroundColor: "#F1F5F9",
-    borderWidth: 1,
-    borderColor: "#D1D5DB",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 22,
+    borderRadius: 14,
+    backgroundColor: PRIMARY_COLOR_RED,
   },
 
   declineText: {
-    fontSize: 15,
-    fontWeight: "600",
-    color: "#111",
+    fontSize: 16,
+    fontWeight: "700",
+    color: "#FFF",
   },
 
   acceptBtn: {
-    paddingVertical: 10,
-    paddingHorizontal: 18,
-    borderRadius: 12,
-    backgroundColor: "#111",
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 14,
+    backgroundColor: PRIMARY_COLOR_BLUE,
   },
 
   acceptText: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: "700",
     color: "#FFF",
   },

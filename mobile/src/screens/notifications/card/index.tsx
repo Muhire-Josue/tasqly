@@ -4,6 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import styles from "./style";
 import { NotificationItem } from "../../../types/notifications";
 import { MEMBERS_MOCK } from "../../../mocks/members";
+import { PRIMARY_COLOR_RED } from "../../../theme/colors";
 
 type Decision = "pending" | "accepted" | "declined";
 
@@ -24,7 +25,7 @@ const NotificationCard: React.FC<Props> = ({
   onDecline,
   onDelete,
 }) => {
-  const actor = MEMBERS_MOCK.find((m) => m.id === item.actorId);
+  const actor = MEMBERS_MOCK.find((m) => m.id === item.createdBy);
 
   return (
     <View style={styles.card}>
@@ -44,12 +45,50 @@ const NotificationCard: React.FC<Props> = ({
               <Text style={styles.bold}>{item.highlight}</Text>
             </Text>
 
-            <Text style={styles.time}>{item.timestamp}</Text>
+            {showActions ? (
+              <View style={styles.actionsRow}>
+                <Pressable
+                  style={({ pressed }) => [
+                    styles.declineBtn,
+                    pressed && { opacity: 0.9 },
+                  ]}
+                  onPress={onDecline}
+                >
+                  <Ionicons
+                    name="close-circle-outline"
+                    size={18}
+                    color="#FFFFFF"
+                    style={{ marginRight: 8 }}
+                  />
+                  <Text style={styles.declineText}>Decline</Text>
+                </Pressable>
 
-            {!showActions && decision !== "pending" && (
-              <Text style={styles.decisionText}>
-                {decision === "accepted" ? "Accepted" : "Declined"}
-              </Text>
+                <Pressable
+                  style={({ pressed }) => [
+                    styles.acceptBtn,
+                    pressed && { opacity: 0.9 },
+                  ]}
+                  onPress={onAccept}
+                >
+                  <Ionicons
+                    name="checkmark-circle-outline"
+                    size={18}
+                    color="#FFFFFF"
+                    style={{ marginRight: 8 }}
+                  />
+                  <Text style={styles.acceptText}>Accept</Text>
+                </Pressable>
+              </View>
+            ) : (
+              <>
+                <Text style={styles.time}>{item.timestamp}</Text>
+
+                {decision !== "pending" && (
+                  <Text style={styles.decisionText}>
+                    {decision === "accepted" ? "Accepted" : "Declined"}
+                  </Text>
+                )}
+              </>
             )}
           </View>
         </View>
@@ -58,24 +97,21 @@ const NotificationCard: React.FC<Props> = ({
           <Pressable
             onPress={onDelete}
             hitSlop={10}
-            style={({ pressed }) => pressed && { opacity: 0.6 }}
+            style={({ pressed }) => [
+              styles.deleteBtn,
+              pressed && { opacity: 0.6 },
+            ]}
           >
-            <Ionicons name="trash-outline" size={20} color="#111" />
+            <Ionicons
+              name="trash-outline"
+              size={22}
+              color={PRIMARY_COLOR_RED}
+            />
           </Pressable>
         )}
       </View>
 
-      {showActions && (
-        <View style={styles.actionsRow}>
-          <Pressable style={styles.declineBtn} onPress={onDecline}>
-            <Text style={styles.declineText}>Decline</Text>
-          </Pressable>
-
-          <Pressable style={styles.acceptBtn} onPress={onAccept}>
-            <Text style={styles.acceptText}>Accept</Text>
-          </Pressable>
-        </View>
-      )}
+      <View style={styles.divider} />
     </View>
   );
 };
