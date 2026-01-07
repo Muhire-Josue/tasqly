@@ -54,11 +54,6 @@ const Notification: React.FC = () => {
     );
   };
 
-  //   const handleFilterIconMeasured = (pageY: number, height: number) => {
-  //     setMenuTop(pageY + height + 10);
-  //     setMenuVisible(true);
-  //   };
-
   const rows: Row[] = useMemo(() => {
     const out: Row[] = [];
     groupOrder.forEach((group) => {
