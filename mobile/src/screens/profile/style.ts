@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../theme/colors";
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -85,6 +86,76 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "500",
     color: "#6B7280",
+  },
+  formSection: {
+    marginTop: 6,
+  },
+
+  fieldLabel: {
+    fontSize: 20,
+    fontWeight: "500",
+    color: "#111",
+    marginTop: 18,
+    marginBottom: 10,
+  },
+
+  inputRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 14,
+    backgroundColor: "#FFFFFF",
+    borderWidth: 1,
+    borderColor: "#D1D5DB",
+    borderRadius: 14,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+  },
+
+  input: {
+    flex: 1,
+    fontSize: 18,
+    color: "#111",
+  },
+
+  buttonsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 16,
+    marginTop: 24,
+  },
+
+  dangerButton: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 10,
+    backgroundColor: PRIMARY_COLOR_RED,
+    borderRadius: 16,
+    paddingVertical: 16,
+  },
+
+  dangerButtonText: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#FFF",
+  },
+
+  primaryButton: {
+    flex: 1,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 10,
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    borderRadius: 16,
+    paddingVertical: 16,
+  },
+
+  primaryButtonText: {
+    fontSize: 20,
+    fontWeight: "700",
+    color: "#FFF",
   },
 });
 
