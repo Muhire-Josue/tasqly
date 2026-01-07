@@ -33,7 +33,6 @@ const FILTERS: NotificationFilter[] = ["All", "Mentions"];
 const DROPDOWN_WIDTH = 260;
 
 const Notification: React.FC = () => {
-  // const [menuTop, setMenuTop] = useState<number | null>(null);
   const [statusById, setStatusById] = useState<Record<string, Status>>({});
   const [menuPos, setMenuPos] = useState<{ top: number; left: number } | null>(
     null,
@@ -132,7 +131,7 @@ const Notification: React.FC = () => {
               ]}
               onPress={handleClearAll}
             >
-              <Ionicons name="close-outline" size={18} color="#111" />
+              <Ionicons name="close-outline" size={24} color="#111" />
               <Text style={styles.clearAllText}>Clear All</Text>
             </Pressable>
           </View>
