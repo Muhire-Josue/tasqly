@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   View,
   Text,
@@ -21,11 +21,13 @@ import { Status } from "../../../types/tasks";
 import MOCK_TASKS from "../../../mocks/tasks";
 import Card from "../../../components/Card";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
+import NoTasks from "../no-content";
 
 const STATUSES: Status[] = ["Pending", "Completed", "Rejected"];
 
 const TaskList: React.FC = () => {
   const navigateTo = useNavigateTo();
+
   const [scope, setScope] = useState<Scope>("all");
   const [selectedStatuses, setSelectedStatuses] = useState<Status[]>([
     "Pending",
@@ -49,6 +51,16 @@ const TaskList: React.FC = () => {
     setMenuVisible(true);
   };
 
+  const data = useMemo(() => {
+    // If you already have filtering logic elsewhere, plug it here.
+    // For now, keep it simple.
+    return MOCK_TASKS;
+  }, []);
+
+  const handleAddTask = () => {
+    navigateTo("create-task"); // <-- use your real route name
+  };
+
   return (
     <SafeAreaView
       style={{ flex: 1, backgroundColor: "#e7fafeff" }}
@@ -57,7 +69,7 @@ const TaskList: React.FC = () => {
       <View style={styles.container}>
         <View style={styles.taskList}>
           <FlatList
-            data={MOCK_TASKS}
+            data={data}
             keyExtractor={(item) => item.id}
             renderItem={({ item }) => (
               <Card
@@ -72,6 +84,7 @@ const TaskList: React.FC = () => {
             ItemSeparatorComponent={() => <View style={{ height: 12 }} />}
             contentContainerStyle={{
               paddingBottom: 16,
+              flexGrow: 1,
             }}
             ListHeaderComponent={
               <View style={styles.listHeader}>
@@ -84,6 +97,11 @@ const TaskList: React.FC = () => {
                   onToggleStatus={toggleStatus}
                   onFilterIconMeasured={handleFilterIconMeasured}
                 />
+              </View>
+            }
+            ListEmptyComponent={
+              <View style={{ flex: 1, justifyContent: "center" }}>
+                <NoTasks onAddTask={handleAddTask} />
               </View>
             }
             showsVerticalScrollIndicator={false}
@@ -116,6 +134,7 @@ const TaskList: React.FC = () => {
           </View>
         )}
       </Modal>
+
       <BottomTabBar activeTab={"tasks"} />
     </SafeAreaView>
   );
