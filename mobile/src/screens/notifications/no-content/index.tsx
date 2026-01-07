@@ -1,8 +1,20 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Text } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+import styles from "./style";
 
-const NoContent = () => {
-  return <View></View>;
+const NotificationEmptyState: React.FC = () => {
+  return (
+    <View style={styles.container}>
+      <View style={styles.iconCircle}>
+        <Ionicons name="notifications-outline" size={96} color="#FFFFFF" />
+      </View>
+
+      <Text style={styles.title}>
+        You’re all caught up <Text style={styles.emoji}>🎉</Text>
+      </Text>
+    </View>
+  );
 };
 
-export default NoContent;
+export default NotificationEmptyState;
