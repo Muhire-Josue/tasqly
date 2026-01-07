@@ -1,4 +1,3 @@
-// screens/profile/styles.ts
 import { StyleSheet } from "react-native";
 
 const styles = StyleSheet.create({
@@ -58,6 +57,7 @@ const styles = StyleSheet.create({
     borderRadius: 16,
     paddingHorizontal: 18,
     paddingVertical: 18,
+    marginBottom: 18,
   },
   linkLeft: {
     flexDirection: "row",
@@ -68,6 +68,23 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "500",
     color: "#111",
+  },
+
+  settingRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 14,
+  },
+  settingLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 14,
+  },
+  settingLabel: {
+    fontSize: 20,
+    fontWeight: "500",
+    color: "#6B7280",
   },
 });
 
