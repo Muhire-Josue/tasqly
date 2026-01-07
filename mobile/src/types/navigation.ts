@@ -14,4 +14,5 @@ export type RootStackParamList = {
   "create-repair": undefined;
   notification: undefined;
   "no-notification": undefined;
+  profile: undefined;
 };
