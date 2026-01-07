@@ -237,6 +237,41 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#111",
   },
+
+  memberDialogOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0,0,0,0.35)",
+  },
+
+  memberDialogSafe: {
+    flex: 1,
+    justifyContent: "flex-end",
+  },
+
+  memberDialogCard: {
+    backgroundColor: "#FFF",
+    borderTopLeftRadius: 22,
+    borderTopRightRadius: 22,
+    paddingHorizontal: 18,
+    paddingTop: 14,
+    paddingBottom: 10,
+    maxHeight: "75%",
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+  },
+
+  memberDialogHeader: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingBottom: 10,
+  },
+
+  memberDialogTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#111",
+  },
 });
 
 export default styles;

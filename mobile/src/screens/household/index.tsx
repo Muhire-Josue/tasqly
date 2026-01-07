@@ -1,4 +1,4 @@
-import React, { useMemo, useRef, useState } from "react";
+import React, { useMemo, useState } from "react";
 import {
   View,
   Text,
@@ -6,8 +6,8 @@ import {
   Pressable,
   TextInput,
   ScrollView,
-  Dimensions,
   Modal,
+  FlatList,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
@@ -19,55 +19,20 @@ import HouseImage from "../../assets/house.jpg";
 import BottomTabBar from "../../components/BottomTabBar";
 import { MEMBERS_MOCK } from "../../mocks/members";
 
-const DROPDOWN_WIDTH = 340;
-
 const HouseSettings: React.FC = () => {
   const [houseImageUri, setHouseImageUri] = useState<string | null>(null);
   const [houseName, setHouseName] = useState("The Smith’s Home");
   const [inviteLink] = useState("tasqly.io/invite/K7P3L");
   const [copied, setCopied] = useState(false);
 
-  const addBtnRef = useRef<View>(null);
-
-  const [memberMenuVisible, setMemberMenuVisible] = useState(false);
-  const [memberMenuPos, setMemberMenuPos] = useState<{
-    top: number;
-    left: number;
-  } | null>(null);
+  const [memberDialogVisible, setMemberDialogVisible] = useState(false);
   const [memberQuery, setMemberQuery] = useState("");
 
   const filteredMembers = useMemo(() => {
     const q = memberQuery.trim().toLowerCase();
     if (!q) return MEMBERS_MOCK;
-
     return MEMBERS_MOCK.filter((m) => m.name.toLowerCase().includes(q));
   }, [memberQuery]);
-
-  const openMemberMenu = () => {
-    addBtnRef.current?.measureInWindow((x, y, w, h) => {
-      const screenW = Dimensions.get("window").width;
-
-      const width = Math.min(DROPDOWN_WIDTH, screenW - 48);
-      const desiredLeft = x + w / 2 - width / 2;
-
-      const left = Math.max(24, Math.min(desiredLeft, screenW - width - 24));
-      const top = y + h + 10;
-
-      setMemberMenuPos({ top, left });
-      setMemberQuery("");
-      setMemberMenuVisible(true);
-    });
-  };
-
-  const closeMemberMenu = () => {
-    setMemberMenuVisible(false);
-    setMemberMenuPos(null);
-  };
-
-  const handleSelectMember = () => {
-    // TODO: add to house members list (backend later)
-    closeMemberMenu();
-  };
 
   const handleChangeHouseImage = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -80,16 +45,27 @@ const HouseSettings: React.FC = () => {
       aspect: [4, 3],
     });
 
-    if (!result.canceled) {
-      setHouseImageUri(result.assets[0].uri);
-    }
+    if (!result.canceled) setHouseImageUri(result.assets[0].uri);
   };
 
   const handleCopyInvite = async () => {
     await Clipboard.setStringAsync(inviteLink);
-
     setCopied(true);
     setTimeout(() => setCopied(false), 5000);
+  };
+
+  const openMemberDialog = () => {
+    setMemberQuery("");
+    setMemberDialogVisible(true);
+  };
+
+  const closeMemberDialog = () => {
+    setMemberDialogVisible(false);
+  };
+
+  const handleSelectMember = () => {
+    // TODO: backend later (add member to house)
+    closeMemberDialog();
   };
 
   return (
@@ -116,7 +92,7 @@ const HouseSettings: React.FC = () => {
         <SafeAreaView edges={["left", "right"]} style={styles.safeArea}>
           <ScrollView
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 40 }}
+            contentContainerStyle={{ paddingBottom: 60 }}
           >
             <View style={styles.headerRow}>
               <Ionicons name="settings-outline" size={26} color="#111" />
@@ -176,41 +152,46 @@ const HouseSettings: React.FC = () => {
                 </Pressable>
               </View>
 
-              <View ref={addBtnRef} collapsable={false}>
-                <Pressable
-                  onPress={openMemberMenu}
-                  style={({ pressed }) => [
-                    styles.addMemberBtn,
-                    pressed && { opacity: 0.9 },
-                  ]}
-                >
-                  <Ionicons name="person-add-outline" size={22} color="#FFF" />
-                  <Text style={styles.addMemberText}>Add Member</Text>
-                </Pressable>
-              </View>
+              <Pressable
+                onPress={openMemberDialog}
+                style={({ pressed }) => [
+                  styles.addMemberBtn,
+                  pressed && { opacity: 0.9 },
+                ]}
+              >
+                <Ionicons name="person-add-outline" size={22} color="#FFF" />
+                <Text style={styles.addMemberText}>Add Member</Text>
+              </Pressable>
             </View>
           </ScrollView>
         </SafeAreaView>
 
-        {/* Add Member Dropdown */}
+        {/* Scrollable Dialog (Modal) */}
         <Modal
-          visible={memberMenuVisible}
+          visible={memberDialogVisible}
           transparent
           animationType="fade"
-          onRequestClose={closeMemberMenu}
+          onRequestClose={closeMemberDialog}
         >
           <Pressable
-            style={styles.memberMenuOverlay}
-            onPress={closeMemberMenu}
+            style={styles.memberDialogOverlay}
+            onPress={closeMemberDialog}
           />
 
-          {memberMenuPos && (
-            <View
-              style={[
-                styles.memberMenu,
-                { top: memberMenuPos.top, left: memberMenuPos.left },
-              ]}
-            >
+          <SafeAreaView edges={["bottom"]} style={styles.memberDialogSafe}>
+            <View style={styles.memberDialogCard}>
+              <View style={styles.memberDialogHeader}>
+                <Text style={styles.memberDialogTitle}>Add Member</Text>
+
+                <Pressable
+                  onPress={closeMemberDialog}
+                  hitSlop={10}
+                  style={({ pressed }) => pressed && { opacity: 0.7 }}
+                >
+                  <Ionicons name="close" size={22} color="#111" />
+                </Pressable>
+              </View>
+
               <View style={styles.memberSearchRow}>
                 <Ionicons name="search-outline" size={22} color="#111" />
                 <TextInput
@@ -224,41 +205,44 @@ const HouseSettings: React.FC = () => {
                 />
               </View>
 
-              <View style={styles.memberResults}>
-                {filteredMembers.length === 0 ? (
+              <FlatList
+                data={filteredMembers}
+                keyExtractor={(item) => item.id}
+                keyboardShouldPersistTaps="handled"
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{ paddingVertical: 10 }}
+                ListEmptyComponent={
                   <Text style={styles.memberNotFound}>User not found</Text>
-                ) : (
-                  filteredMembers.slice(0, 6).map((m) => (
-                    <Pressable
-                      key={m.id}
-                      onPress={() => handleSelectMember()}
-                      style={({ pressed }) => [
-                        styles.memberResultRow,
-                        pressed && { opacity: 0.85 },
-                      ]}
-                    >
-                      <View style={styles.memberAvatarWrap}>
-                        {m.avatar ? (
-                          <Image
-                            source={m.avatar}
-                            style={styles.memberAvatar}
-                          />
-                        ) : (
-                          <Ionicons
-                            name="person-outline"
-                            size={18}
-                            color="#888"
-                          />
-                        )}
-                      </View>
+                }
+                renderItem={({ item }) => (
+                  <Pressable
+                    onPress={() => handleSelectMember()}
+                    style={({ pressed }) => [
+                      styles.memberResultRow,
+                      pressed && { opacity: 0.85 },
+                    ]}
+                  >
+                    <View style={styles.memberAvatarWrap}>
+                      {item.avatar ? (
+                        <Image
+                          source={item.avatar}
+                          style={styles.memberAvatar}
+                        />
+                      ) : (
+                        <Ionicons
+                          name="person-outline"
+                          size={18}
+                          color="#888"
+                        />
+                      )}
+                    </View>
 
-                      <Text style={styles.memberResultName}>{m.name}</Text>
-                    </Pressable>
-                  ))
+                    <Text style={styles.memberResultName}>{item.name}</Text>
+                  </Pressable>
                 )}
-              </View>
+              />
             </View>
-          )}
+          </SafeAreaView>
         </Modal>
       </View>
 
