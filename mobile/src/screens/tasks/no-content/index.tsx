@@ -16,7 +16,7 @@ const NoTasks: React.FC<NoTasksProps> = ({ onAddTask }) => {
 
       <Text style={styles.title}>No tasks to show</Text>
       <Text style={styles.subtitle}>
-        Check back later or create a task now.
+        Check back later or create a new task.
       </Text>
 
       <Pressable

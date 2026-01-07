@@ -16,7 +16,7 @@ const NoRepairs: React.FC<Props> = ({ onAddRepair }) => {
 
       <Text style={styles.noContentTitle}>No Repair to show</Text>
       <Text style={styles.noContentSubtitle}>
-        Check back later or create a task now.
+        Check back later or create a new repair request.
       </Text>
 
       <Pressable
