@@ -28,7 +28,6 @@ const HouseSettings: React.FC = () => {
 
   return (
     <View style={styles.root}>
-      {/* 🔥 Image goes full-bleed to top */}
       <View style={styles.imageWrapper}>
         <Image
           source={houseImageUri ? { uri: houseImageUri } : HouseImage}
@@ -47,15 +46,12 @@ const HouseSettings: React.FC = () => {
         </Pressable>
       </View>
 
-      {/* Safe content below image */}
       <SafeAreaView edges={["left", "right"]} style={styles.safeArea}>
-        {/* Header */}
         <View style={styles.headerRow}>
           <Ionicons name="settings-outline" size={26} color="#111" />
           <Text style={styles.headerTitle}>House Settings</Text>
         </View>
 
-        {/* next sections go here */}
       </SafeAreaView>
     </View>
   );
