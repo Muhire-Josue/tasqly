@@ -56,28 +56,30 @@ const repairTitles = [
   "Replace bathroom fan",
 ];
 
-const MOCK_REPAIRS: CardType[] = Array.from({ length: 50 }).map((_, idx) => {
-  const id = String(idx + 1);
+// const MOCK_REPAIRS: CardType[] = Array.from({ length: 50 }).map((_, idx) => {
+//   const id = String(idx + 1);
 
-  const status: Status = STATUSES[idx % STATUSES.length];
-  const color = colorForStatus(status);
+//   const status: Status = STATUSES[idx % STATUSES.length];
+//   const color = colorForStatus(status);
 
-  return {
-    id,
-    title: repairTitles[idx % repairTitles.length],
-    status,
-    dueDate: `April ${(idx % 28) + 1} - ${9 + (idx % 6)}:00 AM`,
-    sideColor: color,
-    statusColor: color,
-    dateColor: color,
-    urgent: idx % 4 === 0,
-    assignee: LANDLORD.name,
-    avatar: LANDLORD.avatar,
-    commentsCount: idx % 3 === 0 ? 2 : null,
-    description: LOREM,
-    frequency: pickFrequency(id),
-    assigneeRotationEnabled: false,
-  };
-});
+//   return {
+//     id,
+//     title: repairTitles[idx % repairTitles.length],
+//     status,
+//     dueDate: `April ${(idx % 28) + 1} - ${9 + (idx % 6)}:00 AM`,
+//     sideColor: color,
+//     statusColor: color,
+//     dateColor: color,
+//     urgent: idx % 4 === 0,
+//     assignee: LANDLORD.name,
+//     avatar: LANDLORD.avatar,
+//     commentsCount: idx % 3 === 0 ? 2 : null,
+//     description: LOREM,
+//     frequency: pickFrequency(id),
+//     assigneeRotationEnabled: false,
+//   };
+// });
+
+const MOCK_REPAIRS: CardType[] = [];
 
 export default MOCK_REPAIRS;
