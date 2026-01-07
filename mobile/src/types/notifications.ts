@@ -21,4 +21,5 @@ export type NotificationItem = {
 
   actions?: NotificationAction[];
   actorId: string;
+  requiresResponse?: boolean;
 };

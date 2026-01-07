@@ -17,8 +17,11 @@ import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 import { NotificationItem } from "../../types/notifications";
 import MOCK_NOTIFICATIONS from "../../mocks/notifications";
 import NotificationCard from "./card";
+import { showMessage } from "react-native-flash-message";
 
 type NotificationFilter = "All" | "Mentions";
+
+type Status = "pending" | "accepted" | "declined";
 
 type Row =
   | { kind: "header"; id: string; title: string }
@@ -29,58 +32,62 @@ const FILTERS: NotificationFilter[] = ["All", "Mentions"];
 const Notification: React.FC = () => {
   const [menuVisible, setMenuVisible] = useState(false);
   const [menuTop, setMenuTop] = useState<number | null>(null);
+  const [statusById, setStatusById] = useState<Record<string, Status>>({});
 
   const [selectedFilters, setSelectedFilters] = useState<NotificationFilter[]>([
     "All",
     "Mentions",
   ]);
+  const CURRENT_USER_ID = "1"; // TODO: later from auth/user context
+  const grouped = useMemo(() => {
+    const map: Record<string, NotificationItem[]> = {};
+    MOCK_NOTIFICATIONS.forEach((n) => {
+      (map[n.group] ||= []).push(n);
+    });
+    return map;
+  }, []);
 
+  const groupOrder = useMemo(() => Object.keys(grouped), [grouped]);
   const toggleFilter = (value: NotificationFilter) => {
     setSelectedFilters((prev) =>
       prev.includes(value) ? prev.filter((f) => f !== value) : [...prev, value],
     );
   };
 
-  const handleFilterIconMeasured = (pageY: number, height: number) => {
-    setMenuTop(pageY + height + 10);
-    setMenuVisible(true);
+  //   const handleFilterIconMeasured = (pageY: number, height: number) => {
+  //     setMenuTop(pageY + height + 10);
+  //     setMenuVisible(true);
+  //   };
+
+  const rows: Row[] = useMemo(() => {
+    const out: Row[] = [];
+    groupOrder.forEach((group) => {
+      const items = grouped[group] ?? [];
+      if (!items.length) return;
+
+      out.push({ kind: "header", id: `header-${group}`, title: group });
+      items.forEach((n) => out.push({ kind: "item", id: n.id, item: n }));
+    });
+    return out;
+  }, [groupOrder, grouped]);
+
+  const handleAccept = (n: NotificationItem) => {
+    setStatusById((prev) => ({ ...prev, [n.id]: "accepted" }));
+    showMessage({ message: "Task accepted", type: "success", icon: "success" });
+
+    // later: call backend -> acceptTask(n.taskId)
+  };
+
+  const handleDecline = (n: NotificationItem) => {
+    setStatusById((prev) => ({ ...prev, [n.id]: "declined" }));
+    showMessage({ message: "Task declined", type: "danger", icon: "danger" });
+
+    // later: call backend -> declineTask(n.taskId)
   };
 
   const handleClearAll = () => {
     // later: clear notifications state
   };
-
-  const grouped = useMemo(() => {
-    const map: Record<string, NotificationItem[]> = {};
-    MOCK_NOTIFICATIONS.forEach((n) => {
-      if (!map[n.group]) map[n.group] = [];
-      map[n.group].push(n);
-    });
-    return map;
-  }, []);
-
-  const groupOrder = useMemo(() => Object.keys(grouped), [grouped]);
-
-  const rows: Row[] = useMemo(() => {
-    return groupOrder.flatMap((group) => {
-      const items = grouped[group] ?? [];
-      if (items.length === 0) return [];
-
-      const header: Row = {
-        kind: "header",
-        id: `header-${group}`,
-        title: group,
-      };
-
-      const list: Row[] = items.map((n) => ({
-        kind: "item" as const,
-        id: n.id,
-        item: n,
-      }));
-
-      return [header, ...list];
-    });
-  }, [groupOrder, grouped]);
 
   return (
     <>
@@ -91,20 +98,14 @@ const Notification: React.FC = () => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{ paddingBottom: 40, paddingHorizontal: 24 }}
           ListHeaderComponent={
-            <>
+            <View>
               <View style={styles.headerRow}>
                 <Text style={styles.title}>Notifications</Text>
-
                 <Pressable
                   hitSlop={10}
-                  onPress={(e) => {
-                    e.currentTarget?.measure?.((x, y, w, h, pageX, pageY) => {
-                      handleFilterIconMeasured(pageY, h);
-                    });
-                  }}
                   style={({ pressed }) => [pressed && styles.iconPressed]}
                 >
-                  <Ionicons name="filter-outline" size={28} color="#111" />
+                  <Ionicons name="filter-outline" size={24} color="#111" />
                 </Pressable>
               </View>
 
@@ -116,25 +117,34 @@ const Notification: React.FC = () => {
                   ]}
                   onPress={handleClearAll}
                 >
-                  <Ionicons name="close-outline" size={22} color="#111" />
+                  <Ionicons name="close-outline" size={18} color="#111" />
                   <Text style={styles.clearAllText}>Clear All</Text>
                 </Pressable>
               </View>
-            </>
+            </View>
           }
           renderItem={({ item }) => {
             if (item.kind === "header") {
-              return (
-                <View style={{ marginTop: 14 }}>
-                  <Text style={styles.sectionLabel}>{item.title}</Text>
-                </View>
-              );
+              return <Text style={styles.sectionLabel}>{item.title}</Text>;
             }
+
+            const n = item.item;
+
+            const isAssignedToMe = n.assignedTo === CURRENT_USER_ID;
+            const isTask = n.taskId !== null;
+            const requiresResponse =
+              n.requiresResponse ?? (isTask && isAssignedToMe);
+
+            const decision: Status = statusById[n.id] ?? "pending";
 
             return (
               <NotificationCard
-                item={item.item}
-                onDelete={() => console.log("delete", item.item.id)}
+                item={n}
+                decision={decision}
+                showActions={requiresResponse && decision === "pending"}
+                onAccept={() => handleAccept(n)}
+                onDecline={() => handleDecline(n)}
+                onDelete={() => console.log("delete", n.id)}
               />
             );
           }}

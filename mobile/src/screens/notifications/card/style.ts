@@ -65,6 +65,47 @@ const styles = StyleSheet.create({
     backgroundColor: "#C9C9C9",
     marginTop: 14,
   },
+  decisionText: {
+    marginTop: 6,
+    fontSize: 14,
+    fontWeight: "600",
+    color: "#111",
+  },
+
+  actionsRow: {
+    flexDirection: "row",
+    justifyContent: "flex-end",
+    gap: 12,
+    marginTop: 12,
+  },
+
+  declineBtn: {
+    paddingVertical: 10,
+    paddingHorizontal: 16,
+    borderRadius: 12,
+    backgroundColor: "#F1F5F9",
+    borderWidth: 1,
+    borderColor: "#D1D5DB",
+  },
+
+  declineText: {
+    fontSize: 15,
+    fontWeight: "600",
+    color: "#111",
+  },
+
+  acceptBtn: {
+    paddingVertical: 10,
+    paddingHorizontal: 18,
+    borderRadius: 12,
+    backgroundColor: "#111",
+  },
+
+  acceptText: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#FFF",
+  },
 });
 
 export default styles;
