@@ -27,7 +27,7 @@ const NoRepairs: React.FC<Props> = ({ onAddRepair }) => {
         ]}
       >
         <Ionicons name="add" size={22} color="#FFFFFF" />
-        <Text style={styles.noContentButtonText}>Add Task</Text>
+        <Text style={styles.noContentButtonText}>Add Repair</Text>
       </Pressable>
     </View>
   );
