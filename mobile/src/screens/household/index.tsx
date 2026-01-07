@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { View, Text, Image, Pressable } from "react-native";
+import { View, Text, Image, Pressable, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 
 import styles from "./style";
@@ -9,6 +9,7 @@ import HouseImage from "../../assets/house.jpg";
 
 const HouseSettings: React.FC = () => {
   const [houseImageUri, setHouseImageUri] = useState<string | null>(null);
+  const [houseName, setHouseName] = useState("The Smith’s Home");
 
   const handleChangeHouseImage = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -52,6 +53,24 @@ const HouseSettings: React.FC = () => {
           <Text style={styles.headerTitle}>House Settings</Text>
         </View>
 
+        <Text style={styles.sectionTitle}>General</Text>
+
+        <View style={styles.generalCard}>
+          <View style={styles.generalHeaderRow}>
+            <FontAwesome5 name="home" size={28} color="#111" />
+            <Text style={styles.generalHeaderLabel}>House Name</Text>
+          </View>
+
+          <View style={styles.generalInputWrap}>
+            <TextInput
+              value={houseName}
+              onChangeText={setHouseName}
+              placeholder="House Name"
+              placeholderTextColor="#9CA3AF"
+              style={styles.generalInput}
+            />
+          </View>
+        </View>
       </SafeAreaView>
     </View>
   );
