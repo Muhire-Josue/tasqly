@@ -1,11 +1,11 @@
 import { StyleSheet } from "react-native";
+import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
     paddingHorizontal: 24,
     paddingTop: 16,
-    // alignItems: "flex-start", // 🔴 IMPORTANT
   },
   container: {
     flex: 1,
@@ -94,6 +94,72 @@ const styles = StyleSheet.create({
   generalInput: {
     fontSize: 20,
     color: "#111",
+  },
+  inviteCard: {
+    marginTop: 12,
+    backgroundColor: "#ECECEC",
+    borderRadius: 18,
+    padding: 18,
+    width: "100%",
+  },
+
+  inviteHeaderRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    marginBottom: 12,
+  },
+
+  inviteHeaderLabel: {
+    fontSize: 18,
+    fontWeight: "500",
+    color: "#6B7280",
+    flex: 1,
+  },
+
+  inviteRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#FFF",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#D1D5DB",
+    paddingLeft: 18,
+    paddingRight: 10,
+    paddingVertical: 10,
+  },
+
+  inviteInput: {
+    flex: 1,
+    fontSize: 18,
+    color: "#111",
+    paddingVertical: 10,
+  },
+
+  copyButton: {
+    width: 44,
+    height: 44,
+    borderRadius: 12,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  addMemberBtn: {
+    marginTop: 18,
+    alignSelf: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    paddingHorizontal: 28,
+    paddingVertical: 14,
+    borderRadius: 14,
+  },
+
+  addMemberText: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#FFF",
   },
 });
 

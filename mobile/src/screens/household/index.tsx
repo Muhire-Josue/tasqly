@@ -3,6 +3,7 @@ import { View, Text, Image, Pressable, TextInput } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import * as Clipboard from "expo-clipboard";
 
 import styles from "./style";
 import HouseImage from "../../assets/house.jpg";
@@ -10,6 +11,8 @@ import HouseImage from "../../assets/house.jpg";
 const HouseSettings: React.FC = () => {
   const [houseImageUri, setHouseImageUri] = useState<string | null>(null);
   const [houseName, setHouseName] = useState("The Smith’s Home");
+  const [inviteLink] = useState("tasqly.io/invite/K7P3L");
+  const [copied, setCopied] = useState(false);
 
   const handleChangeHouseImage = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -25,6 +28,13 @@ const HouseSettings: React.FC = () => {
     if (!result.canceled) {
       setHouseImageUri(result.assets[0].uri);
     }
+  };
+
+  const handleCopyInvite = async () => {
+    await Clipboard.setStringAsync(inviteLink);
+
+    setCopied(true);
+    setTimeout(() => setCopied(false), 5000);
   };
 
   return (
@@ -70,6 +80,51 @@ const HouseSettings: React.FC = () => {
               style={styles.generalInput}
             />
           </View>
+        </View>
+        <Text style={styles.sectionTitle}>Add New Members</Text>
+
+        <View style={styles.inviteCard}>
+          <View style={styles.inviteHeaderRow}>
+            <Ionicons name="link-outline" size={26} color="#111" />
+            <Text style={styles.inviteHeaderLabel}>
+              Invite a member using group’s link
+            </Text>
+          </View>
+
+          <View style={styles.inviteRow}>
+            <TextInput
+              value={inviteLink}
+              editable={false}
+              style={styles.inviteInput}
+              selectTextOnFocus
+            />
+
+            <Pressable
+              onPress={handleCopyInvite}
+              hitSlop={10}
+              style={({ pressed }) => [
+                styles.copyButton,
+                pressed && { opacity: 0.8 },
+              ]}
+            >
+              <Ionicons
+                name={copied ? "checkmark" : "copy-outline"}
+                size={22}
+                color="#111"
+              />
+            </Pressable>
+          </View>
+
+          <Pressable
+            onPress={() => {}}
+            style={({ pressed }) => [
+              styles.addMemberBtn,
+              pressed && { opacity: 0.9 },
+            ]}
+          >
+            <Ionicons name="person-add-outline" size={22} color="#FFF" />
+            <Text style={styles.addMemberText}>Add Member</Text>
+          </Pressable>
         </View>
       </SafeAreaView>
     </View>
