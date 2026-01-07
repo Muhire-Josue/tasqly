@@ -16,6 +16,7 @@ import RepairDetails from "../screens/repairs/details";
 import CreateRepair from "../screens/repairs/create";
 import EditRepair from "../screens/repairs/edit";
 import Notification from "../screens/notifications";
+import NoNotification from "../screens/notifications/no-content";
 
 import RepairList from "../screens/repairs/list";
 
@@ -103,6 +104,11 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="notification"
           component={Notification}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="no-notification"
+          component={NoNotification}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
