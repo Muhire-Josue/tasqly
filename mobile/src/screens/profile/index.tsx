@@ -26,6 +26,7 @@ const Profile: React.FC = () => {
   const [name, setName] = useState("email@example.com");
   const [email, setEmail] = useState("John Smith");
   const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChangePhoto = async () => {
@@ -161,6 +162,31 @@ const Profile: React.FC = () => {
               <TextInput
                 value={password}
                 onChangeText={setPassword}
+                placeholder="**************"
+                placeholderTextColor="#9CA3AF"
+                secureTextEntry={!showPassword}
+                style={styles.input}
+              />
+
+              <Pressable
+                onPress={() => setShowPassword((p) => !p)}
+                hitSlop={10}
+                style={({ pressed }) => [pressed && { opacity: 0.7 }]}
+              >
+                <Ionicons
+                  name={showPassword ? "eye-off-outline" : "eye-outline"}
+                  size={24}
+                  color="#111"
+                />
+              </Pressable>
+            </View>
+
+            <Text style={styles.fieldLabel}>Confirm Password</Text>
+            <View style={styles.inputRow}>
+              <Ionicons name="lock-closed-outline" size={24} color="#111" />
+              <TextInput
+                value={confirmPassword}
+                onChangeText={setConfirmPassword}
                 placeholder="**************"
                 placeholderTextColor="#9CA3AF"
                 secureTextEntry={!showPassword}
