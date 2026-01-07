@@ -48,7 +48,6 @@ const HouseSettings: React.FC = () => {
   return (
     <>
       <View style={styles.root}>
-        {/* ===== TOP IMAGE (NOT SCROLLING) ===== */}
         <View style={styles.imageWrapper}>
           <Image
             source={houseImageUri ? { uri: houseImageUri } : HouseImage}
@@ -67,19 +66,16 @@ const HouseSettings: React.FC = () => {
           </Pressable>
         </View>
 
-        {/* ===== SCROLLABLE CONTENT ===== */}
         <SafeAreaView edges={["left", "right"]} style={styles.safeArea}>
           <ScrollView
             showsVerticalScrollIndicator={false}
             contentContainerStyle={{ paddingBottom: 40 }}
           >
-            {/* Header */}
             <View style={styles.headerRow}>
               <Ionicons name="settings-outline" size={26} color="#111" />
               <Text style={styles.headerTitle}>House Settings</Text>
             </View>
 
-            {/* General */}
             <Text style={styles.sectionTitle}>General</Text>
 
             <View style={styles.generalCard}>
@@ -99,7 +95,6 @@ const HouseSettings: React.FC = () => {
               </View>
             </View>
 
-            {/* Add Members */}
             <Text style={styles.sectionTitle}>Add New Members</Text>
 
             <View style={styles.inviteCard}>
