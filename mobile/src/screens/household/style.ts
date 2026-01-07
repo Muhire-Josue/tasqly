@@ -161,6 +161,82 @@ const styles = StyleSheet.create({
     fontWeight: "700",
     color: "#FFF",
   },
+  memberMenuOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "transparent",
+  },
+
+  memberMenu: {
+    position: "absolute",
+    width: 340,
+    backgroundColor: "#FFFFFF",
+    borderRadius: 18,
+    overflow: "hidden",
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    shadowColor: "#000",
+    shadowOpacity: 0.18,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 10,
+  },
+
+  memberSearchRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    backgroundColor: "#FFFFFF",
+  },
+
+  memberSearchInput: {
+    flex: 1,
+    fontSize: 18,
+    color: "#111",
+    paddingVertical: 6,
+  },
+
+  memberResults: {
+    backgroundColor: "#ECECEC",
+    paddingVertical: 8,
+  },
+
+  memberNotFound: {
+    paddingHorizontal: 14,
+    paddingVertical: 16,
+    fontSize: 16,
+    color: "#6B7280",
+  },
+
+  memberResultRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+  },
+
+  memberAvatarWrap: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    backgroundColor: "#EFEFEF",
+    overflow: "hidden",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  memberAvatar: {
+    width: "100%",
+    height: "100%",
+  },
+
+  memberResultName: {
+    fontSize: 22,
+    fontWeight: "700",
+    color: "#111",
+  },
 });
 
 export default styles;
