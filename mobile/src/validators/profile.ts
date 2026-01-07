@@ -5,7 +5,7 @@ import {
   validatePassword,
 } from "./auth-forms";
 
-export const validateSignUpForm = (
+export const validateProfileForm = (
   name: string,
   email: string,
   password: string,

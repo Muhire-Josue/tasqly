@@ -17,6 +17,8 @@ import styles from "./style";
 import Wellington from "../../assets/wellington.jpg";
 import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 import BottomTabBar from "../../components/BottomTabBar";
+import { validateProfileForm } from "../../validators/profile";
+import { showMessage } from "react-native-flash-message";
 
 const Profile: React.FC = () => {
   const [avatarUri, setAvatarUri] = useState<string | null>(null);
@@ -24,8 +26,8 @@ const Profile: React.FC = () => {
   const [pushEnabled, setPushEnabled] = useState(true);
   const [emailEnabled, setEmailEnabled] = useState(true);
 
-  const [name, setName] = useState("email@example.com");
-  const [email, setEmail] = useState("John Smith");
+  const [name, setName] = useState("John Smith");
+  const [email, setEmail] = useState("email@example.com");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -61,6 +63,27 @@ const Profile: React.FC = () => {
 
   const handleSave = () => {
     // TODO
+    const errors = validateProfileForm(name, email, password, confirmPassword);
+
+    if (errors.length > 0) {
+      showMessage({
+        message: errors[0],
+        type: "danger",
+        icon: "danger",
+      });
+      return;
+    }
+
+    showMessage({
+      message: "Profile updated successfully",
+      type: "success",
+      icon: "success",
+    });
+    // hard reset
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
   };
 
   return (
