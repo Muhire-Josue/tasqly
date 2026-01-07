@@ -10,9 +10,7 @@ const NotificationEmptyState: React.FC = () => {
         <Ionicons name="notifications-outline" size={64} color="#FFFFFF" />
       </View>
 
-      <Text style={styles.title}>
-        You’re all caught up 🎉
-      </Text>
+      <Text style={styles.title}>You’re all caught up 🎉</Text>
     </View>
   );
 };

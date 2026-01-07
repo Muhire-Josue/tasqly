@@ -40,7 +40,6 @@ const MOCK_NOTIFICATIONS: NotificationItem[] = [
   //   taskId: null,
   //   repairId: "201",
   // },
-
   // {
   //   id: "4",
   //   group: "Yesterday",
@@ -80,7 +79,6 @@ const MOCK_NOTIFICATIONS: NotificationItem[] = [
   //   taskId: null,
   //   repairId: "202",
   // },
-
   // {
   //   id: "7",
   //   group: "5 days ago",

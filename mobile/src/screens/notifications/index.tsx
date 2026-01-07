@@ -1,5 +1,6 @@
 import React, { useMemo, useState } from "react";
 import {
+  Dimensions,
   FlatList,
   Modal,
   Pressable,
@@ -29,11 +30,15 @@ type Row =
   | { kind: "item"; id: string; item: NotificationItem };
 
 const FILTERS: NotificationFilter[] = ["All", "Mentions"];
+const DROPDOWN_WIDTH = 260;
 
 const Notification: React.FC = () => {
-  const [menuVisible, setMenuVisible] = useState(false);
-  const [menuTop, setMenuTop] = useState<number | null>(null);
+  // const [menuTop, setMenuTop] = useState<number | null>(null);
   const [statusById, setStatusById] = useState<Record<string, Status>>({});
+  const [menuPos, setMenuPos] = useState<{ top: number; left: number } | null>(
+    null,
+  );
+  const [menuVisible, setMenuVisible] = useState(false);
 
   const [selectedFilters, setSelectedFilters] = useState<NotificationFilter[]>([
     "All",
@@ -51,7 +56,7 @@ const Notification: React.FC = () => {
   const groupOrder = useMemo(() => Object.keys(grouped), [grouped]);
   const toggleFilter = (value: NotificationFilter) => {
     setSelectedFilters((prev) =>
-      prev.includes(value) ? prev.filter((f) => f !== value) : [...prev, value]
+      prev.includes(value) ? prev.filter((f) => f !== value) : [...prev, value],
     );
   };
 
@@ -85,42 +90,54 @@ const Notification: React.FC = () => {
     // later: clear notifications state
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const openFilterMenu = (ref: any) => {
+    if (!ref?.measureInWindow) return;
+
+    ref.measureInWindow((x: number, y: number, w: number, h: number) => {
+      const screenW = Dimensions.get("window").width;
+
+      const desiredLeft = x + w - DROPDOWN_WIDTH;
+      const left = Math.max(
+        12,
+        Math.min(desiredLeft, screenW - DROPDOWN_WIDTH - 12),
+      );
+      const top = y + h + 10;
+
+      setMenuPos({ top, left });
+      setMenuVisible(true);
+    });
+  };
   return (
     <>
       <SafeAreaView edges={["top"]} style={styles.safeArea}>
-        
         <View style={styles.headerContainer}>
-        <View style={styles.headerRow}>
-          <Text style={styles.title}>Notifications</Text>
+          <View style={styles.headerRow}>
+            <Text style={styles.title}>Notifications</Text>
 
-          <Pressable
-            hitSlop={10}
-            onPress={(e) => {
-              e.currentTarget?.measure?.((x, y, w, h, pageX, pageY) => {
-                setMenuTop(pageY + h + 10);
-                setMenuVisible(true);
-              });
-            }}
-            style={({ pressed }) => [pressed && styles.iconPressed]}
-          >
-            <Ionicons name="filter-outline" size={24} color="#111" />
-          </Pressable>
+            <Pressable
+              hitSlop={10}
+              onPress={(e) => openFilterMenu(e.currentTarget)}
+              style={({ pressed }) => [pressed && styles.iconPressed]}
+            >
+              <Ionicons name="filter-outline" size={24} color="#111" />
+            </Pressable>
+          </View>
+
+          <View style={styles.actionsRow}>
+            <Pressable
+              style={({ pressed }) => [
+                styles.clearAllButton,
+                pressed && { opacity: 0.85 },
+              ]}
+              onPress={handleClearAll}
+            >
+              <Ionicons name="close-outline" size={18} color="#111" />
+              <Text style={styles.clearAllText}>Clear All</Text>
+            </Pressable>
+          </View>
         </View>
 
-        <View style={styles.actionsRow}>
-          <Pressable
-            style={({ pressed }) => [
-              styles.clearAllButton,
-              pressed && { opacity: 0.85 },
-            ]}
-            onPress={handleClearAll}
-          >
-            <Ionicons name="close-outline" size={18} color="#111" />
-            <Text style={styles.clearAllText}>Clear All</Text>
-          </Pressable>
-        </View>
-      </View>
-      
         {rows.length === 0 ? (
           <NotificationEmptyState />
         ) : (
@@ -169,8 +186,13 @@ const Notification: React.FC = () => {
             onPress={() => setMenuVisible(false)}
           />
 
-          {menuTop !== null && (
-            <View style={[styles.dropdown, { top: menuTop, right: 24 }]}>
+          {menuPos && (
+            <View
+              style={[
+                styles.dropdown,
+                { top: menuPos.top, left: menuPos.left, width: DROPDOWN_WIDTH },
+              ]}
+            >
               {FILTERS.map((f) => (
                 <View key={f} style={styles.optionRow}>
                   <Checkbox

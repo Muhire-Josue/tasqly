@@ -93,13 +93,13 @@ const styles = StyleSheet.create({
   },
 
   headerContainer: {
-  paddingHorizontal: 24,
-},
+    paddingHorizontal: 24,
+  },
 
-emptyWrap: {
-  flex: 1,
-  paddingHorizontal: 24,
-},
+  emptyWrap: {
+    flex: 1,
+    paddingHorizontal: 24,
+  },
 });
 
 export default styles;
