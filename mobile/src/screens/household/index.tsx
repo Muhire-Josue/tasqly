@@ -229,7 +229,7 @@ const HouseSettings: React.FC = () => {
                                 style={styles.memberAvatar}
                               />
                             ) : (
-                              <FontAwesome5
+                              <Ionicons
                                 name="person-outline"
                                 size={22}
                                 color="#9CA3AF"
