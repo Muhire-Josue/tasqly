@@ -19,7 +19,7 @@ import HouseImage from "../../assets/house.jpg";
 import BottomTabBar from "../../components/BottomTabBar";
 import { MEMBERS_MOCK } from "../../mocks/members";
 import Spinner from "../../components/Spinner";
-import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
+import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../theme/colors";
 
 const HouseSettings: React.FC = () => {
   const [houseImageUri, setHouseImageUri] = useState<string | null>(null);
@@ -225,8 +225,8 @@ const HouseSettings: React.FC = () => {
                     >
                       <Ionicons
                         name="trash-outline"
-                        size={30}
-                        color="#C0392B"
+                        size={25}
+                        color={PRIMARY_COLOR_RED}
                       />
                     </Pressable>
                   </View>
