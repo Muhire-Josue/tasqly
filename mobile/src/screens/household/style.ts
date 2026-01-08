@@ -1,5 +1,5 @@
 import { StyleSheet } from "react-native";
-import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
+import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../theme/colors";
 
 const styles = StyleSheet.create({
   safeArea: {
@@ -338,6 +338,84 @@ const styles = StyleSheet.create({
   //   fontWeight: "500",
   //   color: "#111",
   // },
+
+  moreInfoCard: {
+    marginTop: 12,
+    backgroundColor: "#ECECEC",
+    borderRadius: 18,
+    padding: 18,
+  },
+
+  moreInfoHeaderRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    marginBottom: 12,
+  },
+
+  moreInfoHeaderLabel: {
+    fontSize: 20,
+    fontWeight: "500",
+    color: "#6B7280",
+  },
+
+  moreInfoInputWrap: {
+    backgroundColor: "#FFF",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#D1D5DB",
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+    minHeight: 170,
+  },
+
+  moreInfoInput: {
+    fontSize: 16,
+    color: "#111",
+    lineHeight: 22,
+  },
+
+  bottomButtonsRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 18,
+    marginTop: 18,
+    marginBottom: 10,
+  },
+
+  dangerButton: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+    paddingVertical: 16,
+    borderRadius: 16,
+    backgroundColor: PRIMARY_COLOR_RED,
+  },
+
+  dangerButtonText: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#FFF",
+  },
+
+  primaryButton: {
+    flex: 1,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    gap: 10,
+    paddingVertical: 16,
+    borderRadius: 16,
+    backgroundColor: PRIMARY_COLOR_BLUE, // use your theme blue if you want
+  },
+
+  primaryButtonText: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#FFF",
+  },
 });
 
 export default styles;
