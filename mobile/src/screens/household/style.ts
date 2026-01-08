@@ -380,7 +380,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     gap: 18,
     marginTop: 18,
-    marginBottom: 10,
+    // marginBottom: 10,
   },
 
   dangerButton: {

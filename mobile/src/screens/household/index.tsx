@@ -32,6 +32,17 @@ const HouseSettings: React.FC = () => {
 
   const [memberDialogVisible, setMemberDialogVisible] = useState(false);
   const [memberQuery, setMemberQuery] = useState("");
+  const [description, setDescription] = useState(
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+  );
+
+  const handleDeleteHouse = () => {
+    // TODO: backend call (delete house)
+  };
+
+  const handleSaveHouse = () => {
+    // TODO: backend call (save house settings)
+  };
 
   const handleChangeHouseImage = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -240,6 +251,58 @@ const HouseSettings: React.FC = () => {
                   );
                 })}
               </View>
+            </View>
+            <Text style={styles.sectionTitle}>More Information</Text>
+
+            <View style={styles.moreInfoCard}>
+              <View style={styles.moreInfoHeaderRow}>
+                <Ionicons
+                  name="information-circle-outline"
+                  size={24}
+                  color="#111"
+                />
+                <Text style={styles.moreInfoHeaderLabel}>Description</Text>
+              </View>
+
+              <View style={styles.moreInfoInputWrap}>
+                <TextInput
+                  value={description}
+                  onChangeText={setDescription}
+                  placeholder="Write something about this house..."
+                  placeholderTextColor="#9CA3AF"
+                  style={styles.moreInfoInput}
+                  multiline
+                  textAlignVertical="top"
+                />
+              </View>
+            </View>
+
+            <View style={styles.bottomButtonsRow}>
+              <Pressable
+                onPress={handleDeleteHouse}
+                style={({ pressed }) => [
+                  styles.dangerButton,
+                  pressed && { opacity: 0.9 },
+                ]}
+              >
+                <Ionicons name="trash-outline" size={22} color="#FFF" />
+                <Text style={styles.dangerButtonText}>Delete</Text>
+              </Pressable>
+
+              <Pressable
+                onPress={handleSaveHouse}
+                style={({ pressed }) => [
+                  styles.primaryButton,
+                  pressed && { opacity: 0.9 },
+                ]}
+              >
+                <Ionicons
+                  name="checkmark-circle-outline"
+                  size={24}
+                  color="#FFF"
+                />
+                <Text style={styles.primaryButtonText}>Save</Text>
+              </Pressable>
             </View>
           </ScrollView>
         </SafeAreaView>
