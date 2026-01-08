@@ -186,7 +186,7 @@ const HouseSettings: React.FC = () => {
                   pressed && { opacity: 0.9 },
                 ]}
               >
-                <Ionicons name="person-add-outline" size={22} color="#FFF" />
+                <FontAwesome5 name="user-plus" size={22} color="#FFF" />
                 <Text style={styles.addMemberText}>Add Member</Text>
               </Pressable>
             </View>
@@ -208,7 +208,7 @@ const HouseSettings: React.FC = () => {
                                 style={styles.memberAvatar}
                               />
                             ) : (
-                              <Ionicons
+                              <FontAwesome5
                                 name="person-outline"
                                 size={22}
                                 color="#9CA3AF"
