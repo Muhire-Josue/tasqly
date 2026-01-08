@@ -327,6 +327,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     gap: 10,
   },
+  memberSeparator: {
+    height: 1,
+    backgroundColor: "#E5E7EB",
+    // marginLeft: 5, // aligns under text, not under avatar
+  },
 
   // removeText: {
   //   fontSize: 18,

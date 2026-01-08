@@ -194,43 +194,51 @@ const HouseSettings: React.FC = () => {
 
             <View style={styles.membersCard}>
               <View style={styles.membersInner}>
-                {members.map((m) => (
-                  <View key={m.id} style={styles.memberRow}>
-                    <View style={styles.memberLeft}>
-                      <View style={styles.memberAvatarWrap}>
-                        {m.avatar ? (
-                          <Image
-                            source={m.avatar}
-                            style={styles.memberAvatar}
-                          />
-                        ) : (
+                {members.map((m, index) => {
+                  const isLast = index === members.length - 1;
+
+                  return (
+                    <View key={m.id}>
+                      <View style={styles.memberRow}>
+                        <View style={styles.memberLeft}>
+                          <View style={styles.memberAvatarWrap}>
+                            {m.avatar ? (
+                              <Image
+                                source={m.avatar}
+                                style={styles.memberAvatar}
+                              />
+                            ) : (
+                              <Ionicons
+                                name="person-outline"
+                                size={22}
+                                color="#9CA3AF"
+                              />
+                            )}
+                          </View>
+
+                          <Text style={styles.memberName}>{m.name}</Text>
+                        </View>
+
+                        <Pressable
+                          onPress={() => handleRemoveMember(m.id)}
+                          hitSlop={10}
+                          style={({ pressed }) => [
+                            styles.removeBtn,
+                            pressed && { opacity: 0.8 },
+                          ]}
+                        >
                           <Ionicons
-                            name="person-outline"
+                            name="trash-outline"
                             size={22}
-                            color="#9CA3AF"
+                            color={PRIMARY_COLOR_RED}
                           />
-                        )}
+                        </Pressable>
                       </View>
 
-                      <Text style={styles.memberName}>{m.name}</Text>
+                      {!isLast && <View style={styles.memberSeparator} />}
                     </View>
-
-                    <Pressable
-                      onPress={() => handleRemoveMember(m.id)}
-                      hitSlop={10}
-                      style={({ pressed }) => [
-                        styles.removeBtn,
-                        pressed && { opacity: 0.8 },
-                      ]}
-                    >
-                      <Ionicons
-                        name="trash-outline"
-                        size={25}
-                        color={PRIMARY_COLOR_RED}
-                      />
-                    </Pressable>
-                  </View>
-                ))}
+                  );
+                })}
               </View>
             </View>
           </ScrollView>
