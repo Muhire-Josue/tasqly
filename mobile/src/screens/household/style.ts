@@ -217,16 +217,6 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
-  //   memberAvatarWrap: {
-  //     width: 48,
-  //     height: 48,
-  //     borderRadius: 24,
-  //     backgroundColor: "#EFEFEF",
-  //     overflow: "hidden",
-  //     alignItems: "center",
-  //     justifyContent: "center",
-  //   },
-
   memberAvatar: {
     width: "100%",
     height: "100%",
@@ -311,15 +301,9 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  // memberAvatar: {
-  //   width: "100%",
-  //   height: "100%",
-  // },
-
   memberName: {
     fontSize: 15,
     color: "#111",
-    //   fontWeight: "500",
   },
 
   removeBtn: {
@@ -330,14 +314,7 @@ const styles = StyleSheet.create({
   memberSeparator: {
     height: 1,
     backgroundColor: "#E5E7EB",
-    // marginLeft: 5, // aligns under text, not under avatar
   },
-
-  // removeText: {
-  //   fontSize: 18,
-  //   fontWeight: "500",
-  //   color: "#111",
-  // },
 
   moreInfoCard: {
     marginTop: 12,
@@ -380,7 +357,6 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     gap: 18,
     marginTop: 18,
-    // marginBottom: 10,
   },
 
   dangerButton: {
@@ -408,7 +384,7 @@ const styles = StyleSheet.create({
     gap: 10,
     paddingVertical: 16,
     borderRadius: 16,
-    backgroundColor: PRIMARY_COLOR_BLUE, // use your theme blue if you want
+    backgroundColor: PRIMARY_COLOR_BLUE,
   },
 
   primaryButtonText: {
