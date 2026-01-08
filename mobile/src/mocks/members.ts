@@ -25,6 +25,7 @@ export const MEMBERS_MOCK: Member[] = [
   {
     id: "3",
     name: "Johnson Smithson",
+    avatar: null,
   },
   {
     id: "4",

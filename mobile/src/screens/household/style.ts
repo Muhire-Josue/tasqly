@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
 
   headerTitle: {
-    fontSize: 28,
+    fontSize: 20,
     fontWeight: "600",
     color: "#111",
   },
@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   },
   sectionTitle: {
     marginTop: 12,
-    fontSize: 26,
+    fontSize: 18,
     fontWeight: "500",
     color: "#111",
   },
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
   },
 
   generalHeaderLabel: {
-    fontSize: 22,
+    fontSize: 15,
     fontWeight: "500",
     color: "#6B7280",
   },
@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
 
   generalInput: {
-    fontSize: 20,
+    fontSize: 18,
     color: "#111",
   },
   inviteCard: {
@@ -111,7 +111,7 @@ const styles = StyleSheet.create({
   },
 
   inviteHeaderLabel: {
-    fontSize: 18,
+    fontSize: 15,
     fontWeight: "500",
     color: "#6B7280",
     flex: 1,
@@ -354,7 +354,7 @@ const styles = StyleSheet.create({
   },
 
   moreInfoHeaderLabel: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: "500",
     color: "#6B7280",
   },
@@ -414,6 +414,75 @@ const styles = StyleSheet.create({
   primaryButtonText: {
     fontSize: 18,
     fontWeight: "700",
+    color: "#FFF",
+  },
+  confirmOverlay: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.35)",
+    justifyContent: "center",
+    paddingHorizontal: 24,
+  },
+
+  confirmCard: {
+    backgroundColor: "#FFF",
+    borderRadius: 18,
+    padding: 18,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+  },
+
+  confirmTitle: {
+    fontSize: 18,
+    fontWeight: "700",
+    color: "#111",
+  },
+
+  confirmBody: {
+    marginTop: 8,
+    fontSize: 14,
+    color: "#6B7280",
+    lineHeight: 20,
+  },
+
+  confirmButtonsRow: {
+    flexDirection: "row",
+    gap: 12,
+    marginTop: 16,
+  },
+
+  confirmCancelBtn: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#D1D5DB",
+    backgroundColor: "#FFF",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    gap: 8,
+  },
+
+  confirmCancelText: {
+    fontSize: 15,
+    fontWeight: "700",
+    color: "#111",
+  },
+
+  confirmDeleteBtn: {
+    flex: 1,
+    paddingVertical: 12,
+    borderRadius: 14,
+    backgroundColor: "#C0392B",
+    alignItems: "center",
+    justifyContent: "center",
+    flexDirection: "row",
+    gap: 8,
+  },
+
+  confirmDeleteText: {
+    fontSize: 15,
+    fontWeight: "800",
     color: "#FFF",
   },
 });

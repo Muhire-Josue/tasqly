@@ -36,9 +36,14 @@ const HouseSettings: React.FC = () => {
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
   );
 
+  const [confirmDeleteVisible, setConfirmDeleteVisible] = useState(false);
   const handleDeleteHouse = () => {
-    // TODO: backend call (delete house)
+    setConfirmDeleteVisible(true);
   };
+
+  //   const handleDeleteHouse = () => {
+  //     // TODO: backend call (delete house)
+  //   };
 
   const handleSaveHouse = () => {
     // TODO: backend call (save house settings)
@@ -82,6 +87,11 @@ const HouseSettings: React.FC = () => {
     // TODO: backend call -> removeMemberFromHouse(memberId)
     // for now, just optimistic UI:
     setMembers((prev) => prev.filter((m) => m.id !== memberId));
+  };
+
+  const confirmDeleteHouse = () => {
+    setConfirmDeleteVisible(false);
+    // TODO: backend call (delete house) + navigate away
   };
 
   useEffect(() => {
@@ -276,6 +286,52 @@ const HouseSettings: React.FC = () => {
                 />
               </View>
             </View>
+
+            <Modal
+              visible={confirmDeleteVisible}
+              transparent
+              animationType="fade"
+              onRequestClose={() => setConfirmDeleteVisible(false)}
+            >
+              {/* Overlay */}
+              <Pressable
+                style={styles.confirmOverlay}
+                onPress={() => setConfirmDeleteVisible(false)}
+              >
+                {/* Card */}
+                <Pressable onPress={() => {}} style={styles.confirmCard}>
+                  <Text style={styles.confirmTitle}>Confirm deletion</Text>
+                  <Text style={styles.confirmBody}>
+                    Are you sure you want to delete this house? This action
+                    cannot be undone.
+                  </Text>
+
+                  <View style={styles.confirmButtonsRow}>
+                    <Pressable
+                      onPress={() => setConfirmDeleteVisible(false)}
+                      style={({ pressed }) => [
+                        styles.confirmCancelBtn,
+                        pressed && { opacity: 0.9 },
+                      ]}
+                    >
+                      <Ionicons name="close" size={18} color="#111" />
+                      <Text style={styles.confirmCancelText}>Cancel</Text>
+                    </Pressable>
+
+                    <Pressable
+                      onPress={confirmDeleteHouse}
+                      style={({ pressed }) => [
+                        styles.confirmDeleteBtn,
+                        pressed && { opacity: 0.9 },
+                      ]}
+                    >
+                      <Ionicons name="trash-outline" size={18} color="#FFF" />
+                      <Text style={styles.confirmDeleteText}>Delete</Text>
+                    </Pressable>
+                  </View>
+                </Pressable>
+              </Pressable>
+            </Modal>
 
             <View style={styles.bottomButtonsRow}>
               <Pressable
