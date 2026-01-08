@@ -20,7 +20,7 @@ const Index: React.FC = () => {
         sqly
       </Text>
       <Text style={styles.subtitle}>Simplify tasks. Amplify life.</Text>
-      {loading && <Spinner />}
+      {loading && <Spinner color="#FFFFFF" />}
     </View>
   );
 };

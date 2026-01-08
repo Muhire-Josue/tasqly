@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   View,
   Text,
@@ -18,21 +18,20 @@ import styles from "./style";
 import HouseImage from "../../assets/house.jpg";
 import BottomTabBar from "../../components/BottomTabBar";
 import { MEMBERS_MOCK } from "../../mocks/members";
+import Spinner from "../../components/Spinner";
+import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 
 const HouseSettings: React.FC = () => {
   const [houseImageUri, setHouseImageUri] = useState<string | null>(null);
   const [houseName, setHouseName] = useState("The Smith’s Home");
   const [inviteLink] = useState("tasqly.io/invite/K7P3L");
   const [copied, setCopied] = useState(false);
+  const [isSearchingMembers, setIsSearchingMembers] = useState(false);
+  const [memberResults, setMemberResults] = useState(MEMBERS_MOCK);
+  const [members, setMembers] = useState(MEMBERS_MOCK);
 
   const [memberDialogVisible, setMemberDialogVisible] = useState(false);
   const [memberQuery, setMemberQuery] = useState("");
-
-  const filteredMembers = useMemo(() => {
-    const q = memberQuery.trim().toLowerCase();
-    if (!q) return MEMBERS_MOCK;
-    return MEMBERS_MOCK.filter((m) => m.name.toLowerCase().includes(q));
-  }, [memberQuery]);
 
   const handleChangeHouseImage = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -68,6 +67,35 @@ const HouseSettings: React.FC = () => {
     closeMemberDialog();
   };
 
+  const handleRemoveMember = (memberId: string) => {
+    // TODO: backend call -> removeMemberFromHouse(memberId)
+    // for now, just optimistic UI:
+    setMembers((prev) => prev.filter((m) => m.id !== memberId));
+  };
+
+  useEffect(() => {
+    if (!memberDialogVisible) return;
+
+    const q = memberQuery.trim();
+    setIsSearchingMembers(true);
+
+    const t = setTimeout(async () => {
+      try {
+        // TODO: replace with real API call later
+        const lowered = q.toLowerCase();
+        const results = !q
+          ? MEMBERS_MOCK
+          : MEMBERS_MOCK.filter((m) => m.name.toLowerCase().includes(lowered));
+
+        setMemberResults(results);
+      } finally {
+        setIsSearchingMembers(false);
+      }
+    }, 300);
+
+    return () => clearTimeout(t);
+  }, [memberQuery, memberDialogVisible]);
+
   return (
     <>
       <View style={styles.root}>
@@ -92,7 +120,7 @@ const HouseSettings: React.FC = () => {
         <SafeAreaView edges={["left", "right"]} style={styles.safeArea}>
           <ScrollView
             showsVerticalScrollIndicator={false}
-            contentContainerStyle={{ paddingBottom: 60 }}
+            contentContainerStyle={{ paddingBottom: 80 }}
           >
             <View style={styles.headerRow}>
               <Ionicons name="settings-outline" size={26} color="#111" />
@@ -119,7 +147,6 @@ const HouseSettings: React.FC = () => {
             </View>
 
             <Text style={styles.sectionTitle}>Add New Members</Text>
-
             <View style={styles.inviteCard}>
               <View style={styles.inviteHeaderRow}>
                 <Ionicons name="link-outline" size={26} color="#111" />
@@ -163,10 +190,52 @@ const HouseSettings: React.FC = () => {
                 <Text style={styles.addMemberText}>Add Member</Text>
               </Pressable>
             </View>
+            <Text style={styles.sectionTitle}>Members</Text>
+
+            <View style={styles.membersCard}>
+              <View style={styles.membersInner}>
+                {members.map((m) => (
+                  <View key={m.id} style={styles.memberRow}>
+                    <View style={styles.memberLeft}>
+                      <View style={styles.memberAvatarWrap}>
+                        {m.avatar ? (
+                          <Image
+                            source={m.avatar}
+                            style={styles.memberAvatar}
+                          />
+                        ) : (
+                          <Ionicons
+                            name="person-outline"
+                            size={22}
+                            color="#9CA3AF"
+                          />
+                        )}
+                      </View>
+
+                      <Text style={styles.memberName}>{m.name}</Text>
+                    </View>
+
+                    <Pressable
+                      onPress={() => handleRemoveMember(m.id)}
+                      hitSlop={10}
+                      style={({ pressed }) => [
+                        styles.removeBtn,
+                        pressed && { opacity: 0.8 },
+                      ]}
+                    >
+                      <Ionicons
+                        name="trash-outline"
+                        size={30}
+                        color="#C0392B"
+                      />
+                    </Pressable>
+                  </View>
+                ))}
+              </View>
+            </View>
           </ScrollView>
         </SafeAreaView>
 
-        {/* Scrollable Dialog (Modal) */}
         <Modal
           visible={memberDialogVisible}
           transparent
@@ -180,6 +249,7 @@ const HouseSettings: React.FC = () => {
 
           <SafeAreaView edges={["bottom"]} style={styles.memberDialogSafe}>
             <View style={styles.memberDialogCard}>
+              {/* Header */}
               <View style={styles.memberDialogHeader}>
                 <Text style={styles.memberDialogTitle}>Add Member</Text>
 
@@ -205,18 +275,22 @@ const HouseSettings: React.FC = () => {
                 />
               </View>
 
+              {isSearchingMembers && <Spinner color={PRIMARY_COLOR_BLUE} />}
+
               <FlatList
-                data={filteredMembers}
+                data={memberResults}
                 keyExtractor={(item) => item.id}
                 keyboardShouldPersistTaps="handled"
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{ paddingVertical: 10 }}
                 ListEmptyComponent={
-                  <Text style={styles.memberNotFound}>User not found</Text>
+                  !isSearchingMembers ? (
+                    <Text style={styles.memberNotFound}>User not found</Text>
+                  ) : null
                 }
                 renderItem={({ item }) => (
                   <Pressable
-                    onPress={() => handleSelectMember()}
+                    onPress={handleSelectMember}
                     style={({ pressed }) => [
                       styles.memberResultRow,
                       pressed && { opacity: 0.85 },
@@ -245,7 +319,6 @@ const HouseSettings: React.FC = () => {
           </SafeAreaView>
         </Modal>
       </View>
-
       <BottomTabBar activeTab="profile" />
     </>
   );

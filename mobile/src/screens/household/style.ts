@@ -217,15 +217,15 @@ const styles = StyleSheet.create({
     paddingVertical: 12,
   },
 
-  memberAvatarWrap: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    backgroundColor: "#EFEFEF",
-    overflow: "hidden",
-    alignItems: "center",
-    justifyContent: "center",
-  },
+  //   memberAvatarWrap: {
+  //     width: 48,
+  //     height: 48,
+  //     borderRadius: 24,
+  //     backgroundColor: "#EFEFEF",
+  //     overflow: "hidden",
+  //     alignItems: "center",
+  //     justifyContent: "center",
+  //   },
 
   memberAvatar: {
     width: "100%",
@@ -270,6 +270,69 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: "#111",
   },
+  membersCard: {
+    marginTop: 12,
+    backgroundColor: "#ECECEC",
+    borderRadius: 18,
+    padding: 16,
+  },
+
+  membersInner: {
+    backgroundColor: "#FFF",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#D1D5DB",
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+  },
+
+  memberRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingVertical: 12,
+  },
+
+  memberLeft: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    flex: 1,
+    paddingRight: 12,
+  },
+
+  memberAvatarWrap: {
+    width: 48,
+    height: 48,
+    borderRadius: 24,
+    overflow: "hidden",
+    backgroundColor: "#EFEFEF",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  // memberAvatar: {
+  //   width: "100%",
+  //   height: "100%",
+  // },
+
+  memberName: {
+    fontSize: 15,
+    color: "#111",
+    //   fontWeight: "500",
+  },
+
+  removeBtn: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+  },
+
+  // removeText: {
+  //   fontSize: 18,
+  //   fontWeight: "500",
+  //   color: "#111",
+  // },
 });
 
 export default styles;
