@@ -233,8 +233,8 @@ const styles = StyleSheet.create({
   },
 
   memberResultName: {
-    fontSize: 22,
-    fontWeight: "700",
+    fontSize: 15,
+    // fontWeight: "700",
     color: "#111",
   },
 
@@ -269,7 +269,7 @@ const styles = StyleSheet.create({
 
   memberDialogTitle: {
     fontSize: 18,
-    fontWeight: "700",
+    // fontWeight: "700",
     color: "#111",
   },
 });
