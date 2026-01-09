@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text, Pressable, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import Ben from "../../../assets/ben.jpg";
 
 import styles from "./style";
@@ -58,7 +58,7 @@ const NoContent: React.FC<Props> = ({
               pressed && { opacity: 0.9 },
             ]}
           >
-            <FontAwesome5 name="user-friends" size={22} color="#FFF" />
+            <MaterialCommunityIcons name="account-group" size={35} color="#FFF" />
             <Text style={styles.noHouseJoinText}>Join</Text>
           </Pressable>
         </View>
