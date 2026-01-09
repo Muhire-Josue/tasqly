@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
   noHouseSubtitle: {
     marginTop: 8,
     fontSize: 18,
-    // fontWeight: "400",
     color: "#111",
     textAlign: "center",
   },

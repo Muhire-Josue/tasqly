@@ -1,5 +1,4 @@
 /* eslint-disable complexity */
-// screens/house-settings/HouseSettings.tsx
 import React from "react";
 import {
   View,
@@ -264,7 +263,6 @@ const HouseSettings: React.FC<Props> = ({
               </View>
             </View>
 
-            {/* Confirm Delete (House) */}
             <Modal
               visible={confirmDeleteVisible}
               transparent
