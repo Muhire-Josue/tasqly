@@ -205,8 +205,9 @@ const styles = StyleSheet.create({
   memberNotFound: {
     paddingHorizontal: 14,
     paddingVertical: 16,
-    fontSize: 16,
+    fontSize: 18,
     color: "#6B7280",
+    textAlign: "center",
   },
 
   memberResultRow: {
