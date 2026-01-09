@@ -181,7 +181,7 @@ const HouseSettings: React.FC<Props> = ({
               <View style={styles.membersInner}>
                 {household.members.length === 0 ? (
                   <View style={styles.emptyMembersState}>
-                    <Ionicons name="people-outline" size={32} color="#9CA3AF" />
+                    <Ionicons name="people" size={40} color="#9CA3AF" />
                     <Text style={styles.emptyMembersTitle}>No members yet</Text>
                     <Text style={styles.emptyMembersSubtitle}>
                       Add members to start sharing tasks and managing your
