@@ -58,7 +58,11 @@ const NoContent: React.FC<Props> = ({
               pressed && { opacity: 0.9 },
             ]}
           >
-            <MaterialCommunityIcons name="account-group" size={35} color="#FFF" />
+            <MaterialCommunityIcons
+              name="account-group"
+              size={35}
+              color="#FFF"
+            />
             <Text style={styles.noHouseJoinText}>Join</Text>
           </Pressable>
         </View>
