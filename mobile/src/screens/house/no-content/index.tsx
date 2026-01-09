@@ -41,7 +41,6 @@ const NoContentHouse: React.FC<Props> = ({
           </Pressable>
         </View>
 
-        {/* Center content */}
         <View style={styles.noHouseCenter}>
           <View style={styles.noHouseIconCircle}>
             <Ionicons name="home" size={90} color="#FFF" />

@@ -184,8 +184,8 @@ const HouseSettings: React.FC<Props> = ({
                     <Ionicons name="people" size={40} color="#9CA3AF" />
                     <Text style={styles.emptyMembersTitle}>No members yet</Text>
                     <Text style={styles.emptyMembersSubtitle}>
-                      Add members to start sharing tasks and managing your
-                      house together.
+                      Add members to start sharing tasks and managing your house
+                      together.
                     </Text>
                   </View>
                 ) : (
