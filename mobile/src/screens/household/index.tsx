@@ -63,7 +63,7 @@ const HouseSettings: React.FC = () => {
   const handleCopyInvite = async () => {
     await Clipboard.setStringAsync(household.inviteLink);
     setCopied(true);
-    setTimeout(() => setCopied(false), 5000);
+    setTimeout(() => setCopied(false), 2000);
   };
 
   const openMemberDialog = () => {
