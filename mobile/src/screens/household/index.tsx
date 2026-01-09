@@ -91,6 +91,12 @@ const HouseSettings: React.FC = () => {
     });
 
     closeMemberDialog();
+
+    showMessage({
+      message: "Member added successfully",
+      type: "success",
+      icon: "success",
+    });
   };
 
   const handleRemoveMember = (memberId: string) => {
