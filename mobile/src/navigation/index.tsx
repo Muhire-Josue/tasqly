@@ -19,6 +19,7 @@ import Notification from "../screens/notifications";
 import NoNotification from "../screens/notifications/no-content";
 import Profile from "../screens/profile";
 import HouseSettings from "../screens/house";
+import JoinHouse from "../screens/house/join";
 
 import RepairList from "../screens/repairs/list";
 
@@ -121,6 +122,11 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="house-settings"
           component={HouseSettings}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="join-house"
+          component={JoinHouse}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
