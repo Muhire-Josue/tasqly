@@ -22,6 +22,7 @@ import Spinner from "../../components/Spinner";
 import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../theme/colors";
 import { HOUSEHOLD_MOCK } from "../../mocks/household";
 import { showMessage } from "react-native-flash-message";
+import { validateHouseholdForm } from "../../validators/household";
 
 const HouseSettings: React.FC = () => {
   const [household, setHousehold] = useState(HOUSEHOLD_MOCK);
@@ -45,6 +46,16 @@ const HouseSettings: React.FC = () => {
 
   const handleSaveHouse = () => {
     // TODO: backend call (save house settings)
+    const errors = validateHouseholdForm(household.name);
+
+    if (errors.length > 0) {
+      showMessage({
+        message: errors[0],
+        type: "danger",
+        icon: "danger",
+      });
+      return;
+    }
   };
 
   const handleChangeHouseImage = async () => {
