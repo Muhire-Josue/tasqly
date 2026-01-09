@@ -12,7 +12,7 @@ import {
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
-import { Household } from "../../../mocks/household";
+import { House } from "../../../mocks/house";
 import { Member } from "../../../mocks/members";
 import styles from "./style";
 import Spinner from "../../../components/Spinner";
@@ -21,7 +21,7 @@ import HouseImage from "../../../assets/house.jpg";
 import BottomTabBar from "../../../components/BottomTabBar";
 
 type Props = {
-  household: Household;
+  house: House;
 
   houseImageUri: string | null;
   copied: boolean;
@@ -53,7 +53,7 @@ type Props = {
 };
 
 const HouseSettings: React.FC<Props> = ({
-  household,
+  house,
   houseImageUri,
   copied,
   memberDialogVisible,
@@ -83,7 +83,7 @@ const HouseSettings: React.FC<Props> = ({
             source={
               houseImageUri
                 ? { uri: houseImageUri }
-                : (household.image ?? HouseImage)
+                : (house.image ?? HouseImage)
             }
             style={styles.houseImage}
           />
@@ -120,7 +120,7 @@ const HouseSettings: React.FC<Props> = ({
 
               <View style={styles.generalInputWrap}>
                 <TextInput
-                  value={household.name}
+                  value={house.name}
                   onChangeText={onChangeHouseName}
                   placeholder="House Name"
                   placeholderTextColor="#9CA3AF"
@@ -141,7 +141,7 @@ const HouseSettings: React.FC<Props> = ({
 
               <View style={styles.inviteRow}>
                 <TextInput
-                  value={household.inviteLink}
+                  value={house.inviteLink}
                   editable={false}
                   style={styles.inviteInput}
                   selectTextOnFocus
@@ -179,18 +179,18 @@ const HouseSettings: React.FC<Props> = ({
 
             <View style={styles.membersCard}>
               <View style={styles.membersInner}>
-                {household.members.length === 0 ? (
+                {house.members.length === 0 ? (
                   <View style={styles.emptyMembersState}>
                     <Ionicons name="people" size={40} color="#9CA3AF" />
                     <Text style={styles.emptyMembersTitle}>No members yet</Text>
                     <Text style={styles.emptyMembersSubtitle}>
                       Add members to start sharing tasks and managing your
-                      household together.
+                      house together.
                     </Text>
                   </View>
                 ) : (
-                  household.members.map((m, index) => {
-                    const isLast = index === household.members.length - 1;
+                  house.members.map((m, index) => {
+                    const isLast = index === house.members.length - 1;
 
                     return (
                       <View key={m.id}>
@@ -252,7 +252,7 @@ const HouseSettings: React.FC<Props> = ({
 
               <View style={styles.moreInfoInputWrap}>
                 <TextInput
-                  value={household.description}
+                  value={house.description}
                   onChangeText={onChangeDescription}
                   placeholder="Write something about this house..."
                   placeholderTextColor="#9CA3AF"

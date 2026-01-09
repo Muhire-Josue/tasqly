@@ -1,9 +1,8 @@
-// src/mocks/household.ts
 import type { ImageSourcePropType } from "react-native";
 import { type Member } from "./members";
 import HouseImage from "../assets/house.jpg";
 
-export type Household = {
+export type House = {
   id?: string;
   name: string;
   inviteLink: string;
@@ -12,7 +11,7 @@ export type Household = {
   members: Member[];
 };
 
-export const HOUSEHOLD_MOCK: Household = {
+export const HOUSE_MOCK: House = {
   id: "house-1",
   name: "The Smith’s Home",
   inviteLink: "tasqly.io/invite/K7P3L",

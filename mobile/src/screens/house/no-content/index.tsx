@@ -12,7 +12,7 @@ type Props = {
   onCreatePress?: () => void;
 };
 
-const NoContentHousehold: React.FC<Props> = ({
+const NoContentHouse: React.FC<Props> = ({
   userName = "John",
   onJoinPress,
   onCreatePress,
@@ -47,9 +47,9 @@ const NoContentHousehold: React.FC<Props> = ({
             <Ionicons name="home" size={90} color="#FFF" />
           </View>
 
-          <Text style={styles.noHouseTitle}>No Household to show</Text>
+          <Text style={styles.noHouseTitle}>No House info to show</Text>
           <Text style={styles.noHouseSubtitle}>
-            Click the button below to join a household
+            Click the button below to join a house info
           </Text>
 
           <Pressable
@@ -68,4 +68,4 @@ const NoContentHousehold: React.FC<Props> = ({
   );
 };
 
-export default NoContentHousehold;
+export default NoContentHouse;

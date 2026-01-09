@@ -5,14 +5,14 @@ import * as Clipboard from "expo-clipboard";
 import { showMessage } from "react-native-flash-message";
 
 import { MEMBERS_MOCK, type Member } from "../../mocks/members";
-import { validateHouseholdForm } from "../../validators/household";
-import type { Household } from "../../mocks/household";
-import { HOUSEHOLD_MOCK } from "../../mocks/household";
+import { validateHouseForm } from "../../validators/house";
+import type { House } from "../../mocks/house";
+import { HOUSE_MOCK } from "../../mocks/house";
 
 import HouseSettings from "./settings";
 
 const HouseSettingsContainer: React.FC = () => {
-  const [household, setHousehold] = useState<Household>(HOUSEHOLD_MOCK);
+  const [house, setHouse] = useState<House>(HOUSE_MOCK);
 
   const [houseImageUri, setHouseImageUri] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -36,7 +36,7 @@ const HouseSettingsContainer: React.FC = () => {
   };
 
   const handleSaveHouse = () => {
-    const errors = validateHouseholdForm(household.name);
+    const errors = validateHouseForm(house.name);
     if (errors.length > 0) {
       showMessage({ message: errors[0], type: "danger", icon: "danger" });
       return;
@@ -65,7 +65,7 @@ const HouseSettingsContainer: React.FC = () => {
   };
 
   const handleCopyInvite = async (): Promise<void> => {
-    await Clipboard.setStringAsync(household.inviteLink);
+    await Clipboard.setStringAsync(house.inviteLink);
 
     setCopied(true);
 
@@ -88,7 +88,7 @@ const HouseSettingsContainer: React.FC = () => {
   };
 
   const handleSelectMember = (memberId: string) => {
-    setHousehold((prev) => {
+    setHouse((prev) => {
       const exists = prev.members.some((m) => m.id === memberId);
       if (exists) return prev;
 
@@ -108,7 +108,7 @@ const HouseSettingsContainer: React.FC = () => {
   };
 
   const handleRemoveMember = (memberId: string) => {
-    setHousehold((prev) => ({
+    setHouse((prev) => ({
       ...prev,
       members: prev.members.filter((m) => m.id !== memberId),
     }));
@@ -121,11 +121,11 @@ const HouseSettingsContainer: React.FC = () => {
   };
 
   const updateHouseName = (name: string) => {
-    setHousehold((prev) => ({ ...prev, name }));
+    setHouse((prev) => ({ ...prev, name }));
   };
 
   const updateDescription = (description: string) => {
-    setHousehold((prev) => ({ ...prev, description }));
+    setHouse((prev) => ({ ...prev, description }));
   };
 
   // cleanup copied timer on unmount
@@ -160,7 +160,7 @@ const HouseSettingsContainer: React.FC = () => {
 
   return (
     <HouseSettings
-      household={household}
+      house={house}
       houseImageUri={houseImageUri}
       copied={copied}
       memberDialogVisible={memberDialogVisible}

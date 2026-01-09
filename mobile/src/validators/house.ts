@@ -1,5 +1,5 @@
 import { validateName } from "./auth-forms";
 
-export const validateHouseholdForm = (name: string): string[] => [
+export const validateHouseForm = (name: string): string[] => [
   ...validateName(name),
 ];

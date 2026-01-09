@@ -18,7 +18,7 @@ import EditRepair from "../screens/repairs/edit";
 import Notification from "../screens/notifications";
 import NoNotification from "../screens/notifications/no-content";
 import Profile from "../screens/profile";
-import HouseHoldSettings from "../screens/household";
+import HouseSettings from "../screens/house";
 
 import RepairList from "../screens/repairs/list";
 
@@ -120,7 +120,7 @@ const Navigation: React.FC = () => {
         />
         <Stack.Screen
           name="house-settings"
-          component={HouseHoldSettings}
+          component={HouseSettings}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
