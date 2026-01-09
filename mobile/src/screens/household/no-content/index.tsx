@@ -4,7 +4,7 @@ import { View, Text } from "react-native";
 const JoinHousehold: React.FC = () => {
   return (
     <View>
-      <Text>Join Household</Text>
+      <Text>No Household</Text>
     </View>
   );
 };
