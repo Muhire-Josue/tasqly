@@ -19,5 +19,8 @@ export const HOUSE_MOCK: House = {
     "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
   image: HouseImage,
   members: [], // or MEMBERS_MOCK slice
-  // members: MEMBERS_MOCK,
+  // members: MEMBERS_MOCK
+  //   // members: MEMBERS_MOCK,
 };
+
+// export const HOUSE_MOCK: House | null = null;

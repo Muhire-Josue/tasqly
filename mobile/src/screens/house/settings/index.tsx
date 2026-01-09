@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 // screens/house-settings/HouseSettings.tsx
 import React from "react";
 import {
@@ -21,7 +22,7 @@ import HouseImage from "../../../assets/house.jpg";
 import BottomTabBar from "../../../components/BottomTabBar";
 
 type Props = {
-  house: House;
+  house: House | null;
 
   houseImageUri: string | null;
   copied: boolean;
@@ -83,7 +84,7 @@ const HouseSettings: React.FC<Props> = ({
             source={
               houseImageUri
                 ? { uri: houseImageUri }
-                : (house.image ?? HouseImage)
+                : (house?.image ?? HouseImage)
             }
             style={styles.houseImage}
           />
@@ -120,7 +121,7 @@ const HouseSettings: React.FC<Props> = ({
 
               <View style={styles.generalInputWrap}>
                 <TextInput
-                  value={house.name}
+                  value={house?.name}
                   onChangeText={onChangeHouseName}
                   placeholder="House Name"
                   placeholderTextColor="#9CA3AF"
@@ -141,7 +142,7 @@ const HouseSettings: React.FC<Props> = ({
 
               <View style={styles.inviteRow}>
                 <TextInput
-                  value={house.inviteLink}
+                  value={house?.inviteLink}
                   editable={false}
                   style={styles.inviteInput}
                   selectTextOnFocus
@@ -179,7 +180,7 @@ const HouseSettings: React.FC<Props> = ({
 
             <View style={styles.membersCard}>
               <View style={styles.membersInner}>
-                {house.members.length === 0 ? (
+                {house?.members.length === 0 ? (
                   <View style={styles.emptyMembersState}>
                     <Ionicons name="people" size={40} color="#9CA3AF" />
                     <Text style={styles.emptyMembersTitle}>No members yet</Text>
@@ -189,7 +190,7 @@ const HouseSettings: React.FC<Props> = ({
                     </Text>
                   </View>
                 ) : (
-                  house.members.map((m, index) => {
+                  house?.members.map((m, index) => {
                     const isLast = index === house.members.length - 1;
 
                     return (
@@ -252,7 +253,7 @@ const HouseSettings: React.FC<Props> = ({
 
               <View style={styles.moreInfoInputWrap}>
                 <TextInput
-                  value={house.description}
+                  value={house?.description}
                   onChangeText={onChangeDescription}
                   placeholder="Write something about this house..."
                   placeholderTextColor="#9CA3AF"

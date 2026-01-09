@@ -12,7 +12,7 @@ type Props = {
   onCreatePress?: () => void;
 };
 
-const NoContentHouse: React.FC<Props> = ({
+const NoContent: React.FC<Props> = ({
   userName = "John",
   onJoinPress,
   onCreatePress,
@@ -67,4 +67,4 @@ const NoContentHouse: React.FC<Props> = ({
   );
 };
 
-export default NoContentHouse;
+export default NoContent;

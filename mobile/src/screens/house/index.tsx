@@ -1,5 +1,4 @@
-// screens/house-settings/HouseSettingsContainer.tsx
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useMemo, useRef, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import * as Clipboard from "expo-clipboard";
 import { showMessage } from "react-native-flash-message";
@@ -10,9 +9,11 @@ import type { House } from "../../mocks/house";
 import { HOUSE_MOCK } from "../../mocks/house";
 
 import HouseSettings from "./settings";
+import NoContent from "./no-content";
+import BottomTabBar from "../../components/BottomTabBar";
 
 const HouseSettingsContainer: React.FC = () => {
-  const [house, setHouse] = useState<House>(HOUSE_MOCK);
+  const [house, setHouse] = useState<House | null>(HOUSE_MOCK);
 
   const [houseImageUri, setHouseImageUri] = useState<string | null>(null);
   const [copied, setCopied] = useState(false);
@@ -24,18 +25,38 @@ const HouseSettingsContainer: React.FC = () => {
 
   const [confirmDeleteVisible, setConfirmDeleteVisible] = useState(false);
 
-  // ✅ fix: keep timer cleanup in parent via ref (no returning cleanup from handler)
   const copiedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  // --- Handlers (stay in parent) ---
+  const isHouseEmpty = useMemo(() => {
+    if (!house) return true;
+
+    const hasAnyCoreInfo =
+      Boolean(house.name?.trim()) ||
+      Boolean(house.inviteLink?.trim()) ||
+      Boolean(house.description?.trim()) ||
+      Boolean(house.members?.length);
+
+    return !hasAnyCoreInfo;
+  }, [house]);
+
   const handleDeleteHouse = () => setConfirmDeleteVisible(true);
 
   const confirmDeleteHouse = () => {
     setConfirmDeleteVisible(false);
+
     // TODO: backend call (delete house) + navigate away
+    showMessage({
+      message: "House deleted (mock)",
+      type: "success",
+      icon: "success",
+    });
+
+    setHouse(null);
   };
 
   const handleSaveHouse = () => {
+    if (!house) return;
+
     const errors = validateHouseForm(house.name);
     if (errors.length > 0) {
       showMessage({ message: errors[0], type: "danger", icon: "danger" });
@@ -50,7 +71,7 @@ const HouseSettingsContainer: React.FC = () => {
     });
   };
 
-  const handleChangeHouseImage = async () => {
+  const handleChangeHouseImage = async (): Promise<void> => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permission.granted) return;
 
@@ -65,6 +86,8 @@ const HouseSettingsContainer: React.FC = () => {
   };
 
   const handleCopyInvite = async (): Promise<void> => {
+    if (!house) return;
+
     await Clipboard.setStringAsync(house.inviteLink);
 
     setCopied(true);
@@ -83,12 +106,12 @@ const HouseSettingsContainer: React.FC = () => {
     setMemberDialogVisible(true);
   };
 
-  const closeMemberDialog = () => {
-    setMemberDialogVisible(false);
-  };
+  const closeMemberDialog = () => setMemberDialogVisible(false);
 
   const handleSelectMember = (memberId: string) => {
     setHouse((prev) => {
+      if (!prev) return prev;
+
       const exists = prev.members.some((m) => m.id === memberId);
       if (exists) return prev;
 
@@ -108,10 +131,13 @@ const HouseSettingsContainer: React.FC = () => {
   };
 
   const handleRemoveMember = (memberId: string) => {
-    setHouse((prev) => ({
-      ...prev,
-      members: prev.members.filter((m) => m.id !== memberId),
-    }));
+    setHouse((prev) => {
+      if (!prev) return prev;
+      return {
+        ...prev,
+        members: prev.members.filter((m) => m.id !== memberId),
+      };
+    });
 
     showMessage({
       message: "Member removed successfully",
@@ -121,21 +147,25 @@ const HouseSettingsContainer: React.FC = () => {
   };
 
   const updateHouseName = (name: string) => {
-    setHouse((prev) => ({ ...prev, name }));
+    setHouse((prev) => {
+      if (!prev) return prev;
+      return { ...prev, name };
+    });
   };
 
   const updateDescription = (description: string) => {
-    setHouse((prev) => ({ ...prev, description }));
+    setHouse((prev) => {
+      if (!prev) return prev;
+      return { ...prev, description };
+    });
   };
 
-  // cleanup copied timer on unmount
   useEffect(() => {
     return () => {
       if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
     };
   }, []);
 
-  // --- Simulated backend search (side-effect stays in parent) ---
   useEffect(() => {
     if (!memberDialogVisible) return;
 
@@ -157,6 +187,26 @@ const HouseSettingsContainer: React.FC = () => {
 
     return () => clearTimeout(t);
   }, [memberQuery, memberDialogVisible]);
+
+  if (isHouseEmpty) {
+    return (
+      <>
+        <NoContent
+          userName="John"
+          onJoinPress={() => {
+            showMessage({
+              message: "Join pressed (TODO)",
+              type: "info",
+              icon: "info",
+            });
+          }}
+          onCreatePress={() => {}}
+        />
+
+        <BottomTabBar activeTab="profile" />
+      </>
+    );
+  }
 
   return (
     <HouseSettings
