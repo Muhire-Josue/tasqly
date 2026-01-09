@@ -21,6 +21,7 @@ import { MEMBERS_MOCK } from "../../mocks/members";
 import Spinner from "../../components/Spinner";
 import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../theme/colors";
 import { HOUSEHOLD_MOCK } from "../../mocks/household";
+import { showMessage } from "react-native-flash-message";
 
 const HouseSettings: React.FC = () => {
   const [household, setHousehold] = useState(HOUSEHOLD_MOCK);
@@ -98,8 +99,12 @@ const HouseSettings: React.FC = () => {
       ...prev,
       members: prev.members.filter((m) => m.id !== memberId),
     }));
+    showMessage({
+      message: "Member removed successfully",
+      type: "success",
+      icon: "success",
+    });
   };
-
   // Simulated “backend search”
   useEffect(() => {
     if (!memberDialogVisible) return;
