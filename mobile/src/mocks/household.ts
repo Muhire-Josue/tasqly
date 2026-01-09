@@ -1,13 +1,14 @@
-import { ImageSourcePropType } from "react-native";
+// src/mocks/household.ts
+import type { ImageSourcePropType } from "react-native";
+import type { Member } from "./members";
 import HouseImage from "../assets/house.jpg";
-import { MEMBERS_MOCK, Member } from "./members";
 
 export type Household = {
-  id: string;
+  id?: string;
   name: string;
   inviteLink: string;
-  image?: ImageSourcePropType; // default/fallback image from assets
   description: string;
+  image?: ImageSourcePropType;
   members: Member[];
 };
 
@@ -15,8 +16,8 @@ export const HOUSEHOLD_MOCK: Household = {
   id: "house-1",
   name: "The Smith’s Home",
   inviteLink: "tasqly.io/invite/K7P3L",
-  image: HouseImage,
   description:
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-  members: MEMBERS_MOCK,
+    "Lorem Ipsum is simply dummy text of the printing and typesetting industry...",
+  image: HouseImage,
+  members: [],
 };

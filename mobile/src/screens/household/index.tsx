@@ -1,24 +1,15 @@
 // screens/house-settings/HouseSettingsContainer.tsx
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import * as ImagePicker from "expo-image-picker";
 import * as Clipboard from "expo-clipboard";
 import { showMessage } from "react-native-flash-message";
 
-import { MEMBERS_MOCK, Member } from "../../mocks/members";
-import { HOUSEHOLD_MOCK } from "../../mocks/household";
+import { MEMBERS_MOCK, type Member } from "../../mocks/members";
 import { validateHouseholdForm } from "../../validators/household";
+import type { Household } from "../../mocks/household";
+import { HOUSEHOLD_MOCK } from "../../mocks/household";
 
 import HouseSettings from "./settings";
-
-export type Household = {
-  id?: string;
-  name: string;
-  inviteLink: string;
-  description: string;
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  image?: any; // keep as-is since you use local asset fallback; you can tighten later
-  members: Member[];
-};
 
 const HouseSettingsContainer: React.FC = () => {
   const [household, setHousehold] = useState<Household>(HOUSEHOLD_MOCK);
@@ -32,6 +23,9 @@ const HouseSettingsContainer: React.FC = () => {
   const [memberResults, setMemberResults] = useState<Member[]>(MEMBERS_MOCK);
 
   const [confirmDeleteVisible, setConfirmDeleteVisible] = useState(false);
+
+  // ✅ fix: keep timer cleanup in parent via ref (no returning cleanup from handler)
+  const copiedTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
 
   // --- Handlers (stay in parent) ---
   const handleDeleteHouse = () => setConfirmDeleteVisible(true);
@@ -70,12 +64,17 @@ const HouseSettingsContainer: React.FC = () => {
     if (!result.canceled) setHouseImageUri(result.assets[0].uri);
   };
 
-  const handleCopyInvite = async () => {
+  const handleCopyInvite = async (): Promise<void> => {
     await Clipboard.setStringAsync(household.inviteLink);
 
     setCopied(true);
-    const t = setTimeout(() => setCopied(false), 2000);
-    return () => clearTimeout(t);
+
+    if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+
+    copiedTimerRef.current = setTimeout(() => {
+      setCopied(false);
+      copiedTimerRef.current = null;
+    }, 2000);
   };
 
   const openMemberDialog = () => {
@@ -128,6 +127,13 @@ const HouseSettingsContainer: React.FC = () => {
   const updateDescription = (description: string) => {
     setHousehold((prev) => ({ ...prev, description }));
   };
+
+  // cleanup copied timer on unmount
+  useEffect(() => {
+    return () => {
+      if (copiedTimerRef.current) clearTimeout(copiedTimerRef.current);
+    };
+  }, []);
 
   // --- Simulated backend search (side-effect stays in parent) ---
   useEffect(() => {
