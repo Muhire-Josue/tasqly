@@ -20,30 +20,27 @@ import BottomTabBar from "../../components/BottomTabBar";
 import { MEMBERS_MOCK } from "../../mocks/members";
 import Spinner from "../../components/Spinner";
 import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../theme/colors";
+import { HOUSEHOLD_MOCK } from "../../mocks/household";
 
 const HouseSettings: React.FC = () => {
+  const [household, setHousehold] = useState(HOUSEHOLD_MOCK);
+
   const [houseImageUri, setHouseImageUri] = useState<string | null>(null);
-  const [houseName, setHouseName] = useState("The Smith’s Home");
-  const [inviteLink] = useState("tasqly.io/invite/K7P3L");
   const [copied, setCopied] = useState(false);
-  const [isSearchingMembers, setIsSearchingMembers] = useState(false);
-  const [memberResults, setMemberResults] = useState(MEMBERS_MOCK);
-  const [members, setMembers] = useState(MEMBERS_MOCK);
 
   const [memberDialogVisible, setMemberDialogVisible] = useState(false);
   const [memberQuery, setMemberQuery] = useState("");
-  const [description, setDescription] = useState(
-    "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
-  );
+  const [isSearchingMembers, setIsSearchingMembers] = useState(false);
+  const [memberResults, setMemberResults] = useState(MEMBERS_MOCK);
 
   const [confirmDeleteVisible, setConfirmDeleteVisible] = useState(false);
-  const handleDeleteHouse = () => {
-    setConfirmDeleteVisible(true);
-  };
 
-  //   const handleDeleteHouse = () => {
-  //     // TODO: backend call (delete house)
-  //   };
+  const handleDeleteHouse = () => setConfirmDeleteVisible(true);
+
+  const confirmDeleteHouse = () => {
+    setConfirmDeleteVisible(false);
+    // TODO: backend call (delete house) + navigate away
+  };
 
   const handleSaveHouse = () => {
     // TODO: backend call (save house settings)
@@ -64,13 +61,14 @@ const HouseSettings: React.FC = () => {
   };
 
   const handleCopyInvite = async () => {
-    await Clipboard.setStringAsync(inviteLink);
+    await Clipboard.setStringAsync(household.inviteLink);
     setCopied(true);
     setTimeout(() => setCopied(false), 5000);
   };
 
   const openMemberDialog = () => {
     setMemberQuery("");
+    setMemberResults(MEMBERS_MOCK);
     setMemberDialogVisible(true);
   };
 
@@ -78,31 +76,39 @@ const HouseSettings: React.FC = () => {
     setMemberDialogVisible(false);
   };
 
-  const handleSelectMember = () => {
+  const handleSelectMember = (memberId: string) => {
     // TODO: backend later (add member to house)
+    // for now, optimistic UI: add if not already present
+    setHousehold((prev) => {
+      const exists = prev.members.some((m) => m.id === memberId);
+      if (exists) return prev;
+
+      const picked = MEMBERS_MOCK.find((m) => m.id === memberId);
+      if (!picked) return prev;
+
+      return { ...prev, members: [...prev.members, picked] };
+    });
+
     closeMemberDialog();
   };
 
   const handleRemoveMember = (memberId: string) => {
     // TODO: backend call -> removeMemberFromHouse(memberId)
-    // for now, just optimistic UI:
-    setMembers((prev) => prev.filter((m) => m.id !== memberId));
+    setHousehold((prev) => ({
+      ...prev,
+      members: prev.members.filter((m) => m.id !== memberId),
+    }));
   };
 
-  const confirmDeleteHouse = () => {
-    setConfirmDeleteVisible(false);
-    // TODO: backend call (delete house) + navigate away
-  };
-
+  // Simulated “backend search”
   useEffect(() => {
     if (!memberDialogVisible) return;
 
     const q = memberQuery.trim();
     setIsSearchingMembers(true);
 
-    const t = setTimeout(async () => {
+    const t = setTimeout(() => {
       try {
-        // TODO: replace with real API call later
         const lowered = q.toLowerCase();
         const results = !q
           ? MEMBERS_MOCK
@@ -122,7 +128,11 @@ const HouseSettings: React.FC = () => {
       <View style={styles.root}>
         <View style={styles.imageWrapper}>
           <Image
-            source={houseImageUri ? { uri: houseImageUri } : HouseImage}
+            source={
+              houseImageUri
+                ? { uri: houseImageUri }
+                : (household.image ?? HouseImage)
+            }
             style={styles.houseImage}
           />
 
@@ -158,8 +168,10 @@ const HouseSettings: React.FC = () => {
 
               <View style={styles.generalInputWrap}>
                 <TextInput
-                  value={houseName}
-                  onChangeText={setHouseName}
+                  value={household.name}
+                  onChangeText={(text) =>
+                    setHousehold((prev) => ({ ...prev, name: text }))
+                  }
                   placeholder="House Name"
                   placeholderTextColor="#9CA3AF"
                   style={styles.generalInput}
@@ -168,6 +180,7 @@ const HouseSettings: React.FC = () => {
             </View>
 
             <Text style={styles.sectionTitle}>Add New Members</Text>
+
             <View style={styles.inviteCard}>
               <View style={styles.inviteHeaderRow}>
                 <Ionicons name="link-outline" size={26} color="#111" />
@@ -178,7 +191,7 @@ const HouseSettings: React.FC = () => {
 
               <View style={styles.inviteRow}>
                 <TextInput
-                  value={inviteLink}
+                  value={household.inviteLink}
                   editable={false}
                   style={styles.inviteInput}
                   selectTextOnFocus
@@ -211,12 +224,13 @@ const HouseSettings: React.FC = () => {
                 <Text style={styles.addMemberText}>Add Member</Text>
               </Pressable>
             </View>
+
             <Text style={styles.sectionTitle}>Members</Text>
 
             <View style={styles.membersCard}>
               <View style={styles.membersInner}>
-                {members.map((m, index) => {
-                  const isLast = index === members.length - 1;
+                {household.members.map((m, index) => {
+                  const isLast = index === household.members.length - 1;
 
                   return (
                     <View key={m.id}>
@@ -262,6 +276,7 @@ const HouseSettings: React.FC = () => {
                 })}
               </View>
             </View>
+
             <Text style={styles.sectionTitle}>More Information</Text>
 
             <View style={styles.moreInfoCard}>
@@ -276,8 +291,10 @@ const HouseSettings: React.FC = () => {
 
               <View style={styles.moreInfoInputWrap}>
                 <TextInput
-                  value={description}
-                  onChangeText={setDescription}
+                  value={household.description}
+                  onChangeText={(text) =>
+                    setHousehold((prev) => ({ ...prev, description: text }))
+                  }
                   placeholder="Write something about this house..."
                   placeholderTextColor="#9CA3AF"
                   style={styles.moreInfoInput}
@@ -287,18 +304,17 @@ const HouseSettings: React.FC = () => {
               </View>
             </View>
 
+            {/* Confirm Delete (House) */}
             <Modal
               visible={confirmDeleteVisible}
               transparent
               animationType="fade"
               onRequestClose={() => setConfirmDeleteVisible(false)}
             >
-              {/* Overlay */}
               <Pressable
                 style={styles.confirmOverlay}
                 onPress={() => setConfirmDeleteVisible(false)}
               >
-                {/* Card */}
                 <Pressable onPress={() => {}} style={styles.confirmCard}>
                   <Text style={styles.confirmTitle}>Confirm deletion</Text>
                   <Text style={styles.confirmBody}>
@@ -363,6 +379,7 @@ const HouseSettings: React.FC = () => {
           </ScrollView>
         </SafeAreaView>
 
+        {/* Add Member Dialog */}
         <Modal
           visible={memberDialogVisible}
           transparent
@@ -376,7 +393,6 @@ const HouseSettings: React.FC = () => {
 
           <SafeAreaView edges={["bottom"]} style={styles.memberDialogSafe}>
             <View style={styles.memberDialogCard}>
-              {/* Header */}
               <View style={styles.memberDialogHeader}>
                 <Text style={styles.memberDialogTitle}>Add Member</Text>
 
@@ -417,7 +433,7 @@ const HouseSettings: React.FC = () => {
                 }
                 renderItem={({ item }) => (
                   <Pressable
-                    onPress={handleSelectMember}
+                    onPress={() => handleSelectMember(item.id)}
                     style={({ pressed }) => [
                       styles.memberResultRow,
                       pressed && { opacity: 0.85 },
@@ -446,6 +462,7 @@ const HouseSettings: React.FC = () => {
           </SafeAreaView>
         </Modal>
       </View>
+
       <BottomTabBar activeTab="profile" />
     </>
   );
