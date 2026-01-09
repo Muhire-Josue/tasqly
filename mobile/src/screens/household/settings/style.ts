@@ -462,6 +462,26 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     color: "#FFF",
   },
+  emptyMembersState: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 28,
+    paddingHorizontal: 20,
+  },
+
+  emptyMembersTitle: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: "500",
+    color: "#111",
+  },
+
+  emptyMembersSubtitle: {
+    marginTop: 4,
+    fontSize: 14,
+    color: "#6B7280",
+    textAlign: "center",
+  },
 });
 
 export default styles;

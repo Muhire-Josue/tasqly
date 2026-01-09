@@ -179,51 +179,62 @@ const HouseSettings: React.FC<Props> = ({
 
             <View style={styles.membersCard}>
               <View style={styles.membersInner}>
-                {household.members.map((m, index) => {
-                  const isLast = index === household.members.length - 1;
+                {household.members.length === 0 ? (
+                  <View style={styles.emptyMembersState}>
+                    <Ionicons name="people-outline" size={32} color="#9CA3AF" />
+                    <Text style={styles.emptyMembersTitle}>No members yet</Text>
+                    <Text style={styles.emptyMembersSubtitle}>
+                      Add members to start sharing tasks and managing your
+                      household together.
+                    </Text>
+                  </View>
+                ) : (
+                  household.members.map((m, index) => {
+                    const isLast = index === household.members.length - 1;
 
-                  return (
-                    <View key={m.id}>
-                      <View style={styles.memberRow}>
-                        <View style={styles.memberLeft}>
-                          <View style={styles.memberAvatarWrap}>
-                            {m.avatar ? (
-                              <Image
-                                source={m.avatar}
-                                style={styles.memberAvatar}
-                              />
-                            ) : (
-                              <Ionicons
-                                name="person-outline"
-                                size={22}
-                                color="#9CA3AF"
-                              />
-                            )}
+                    return (
+                      <View key={m.id}>
+                        <View style={styles.memberRow}>
+                          <View style={styles.memberLeft}>
+                            <View style={styles.memberAvatarWrap}>
+                              {m.avatar ? (
+                                <Image
+                                  source={m.avatar}
+                                  style={styles.memberAvatar}
+                                />
+                              ) : (
+                                <Ionicons
+                                  name="person-outline"
+                                  size={22}
+                                  color="#9CA3AF"
+                                />
+                              )}
+                            </View>
+
+                            <Text style={styles.memberName}>{m.name}</Text>
                           </View>
 
-                          <Text style={styles.memberName}>{m.name}</Text>
+                          <Pressable
+                            onPress={() => onRemoveMember(m.id)}
+                            hitSlop={10}
+                            style={({ pressed }) => [
+                              styles.removeBtn,
+                              pressed && { opacity: 0.8 },
+                            ]}
+                          >
+                            <Ionicons
+                              name="trash-outline"
+                              size={22}
+                              color={PRIMARY_COLOR_RED}
+                            />
+                          </Pressable>
                         </View>
 
-                        <Pressable
-                          onPress={() => onRemoveMember(m.id)}
-                          hitSlop={10}
-                          style={({ pressed }) => [
-                            styles.removeBtn,
-                            pressed && { opacity: 0.8 },
-                          ]}
-                        >
-                          <Ionicons
-                            name="trash-outline"
-                            size={22}
-                            color={PRIMARY_COLOR_RED}
-                          />
-                        </Pressable>
+                        {!isLast && <View style={styles.memberSeparator} />}
                       </View>
-
-                      {!isLast && <View style={styles.memberSeparator} />}
-                    </View>
-                  );
-                })}
+                    );
+                  })
+                )}
               </View>
             </View>
 
