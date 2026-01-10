@@ -3,20 +3,17 @@ import { View, Text, Pressable, Image } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import Ben from "../../../assets/ben.jpg";
+import { useNavigateTo } from "../../../navigation/useNavigateTo";
 
 import styles from "./style";
 
 type Props = {
   userName?: string;
   onJoinPress?: () => void;
-  onCreatePress?: () => void;
 };
 
-const NoContent: React.FC<Props> = ({
-  userName = "John",
-  onJoinPress,
-  onCreatePress,
-}) => {
+const NoContent: React.FC<Props> = ({ userName = "John", onJoinPress }) => {
+  const navigateTo = useNavigateTo();
   return (
     <SafeAreaView style={styles.noHouseSafe} edges={["top", "left", "right"]}>
       <View style={styles.noHouseRoot}>
@@ -30,7 +27,9 @@ const NoContent: React.FC<Props> = ({
           </View>
 
           <Pressable
-            onPress={onCreatePress}
+            onPress={() => {
+              navigateTo("create-house");
+            }}
             hitSlop={10}
             style={({ pressed }) => [
               styles.noHousePlusBtn,
