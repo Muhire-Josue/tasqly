@@ -3,11 +3,12 @@ import { StyleSheet } from "react-native";
 export default StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: "#F7FAFB",
+    backgroundColor: "#FFFFFF",
   },
 
   headerSafe: {
-    backgroundColor: "#EFFFFF", // 👈 this is the key line
+    // backgroundColor: "#FFFFFF", // 👈 this is the key line
+    backgroundColor: "#eef5f5", // 👈 this is the key line
   },
 
   headerRoot: {
@@ -102,12 +103,12 @@ export default StyleSheet.create({
     marginBottom: 8,
   },
   authorName: {
-    fontSize: 24,
+    fontSize: 15,
     fontWeight: "700",
-    color: "#8B8B8B",
+    // color: "#8B8B8B",
   },
   timeText: {
-    fontSize: 18,
+    fontSize: 15,
     color: "#111",
   },
 
@@ -117,14 +118,18 @@ export default StyleSheet.create({
     gap: 12,
   },
   bubble: {
-    flex: 1,
-    backgroundColor: "#F1F1F1",
-    borderRadius: 16,
+    backgroundColor: "#ecebeb",
     paddingHorizontal: 16,
-    paddingVertical: 14,
+    paddingVertical: 12,
+    maxWidth: "85%",
+
+    borderTopRightRadius: 18,
+    borderBottomRightRadius: 18,
+    borderBottomLeftRadius: 18,
+    borderTopLeftRadius: 4,
   },
   bubbleText: {
-    fontSize: 20,
+    fontSize: 15,
     color: "#111",
     lineHeight: 26,
   },
