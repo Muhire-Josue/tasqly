@@ -3,9 +3,13 @@ import Micheal from "../assets/michael.jpg";
 import Vince from "../assets/vince.jpg";
 import Well from "../assets/wellington.jpg";
 import LandLord from "../assets/landlord.jpg";
-import { Comment } from "../types/comments";
+import { CommentsThread } from "../types/comments";
 
-export const COMMENTS_MOCK: Comment[] = [
+export const COMMENTS_MOCK: CommentsThread = 
+{
+  id: "1",
+  comments: 
+ [
   {
     id: "1",
     author: {
@@ -32,7 +36,7 @@ export const COMMENTS_MOCK: Comment[] = [
     author: {
       id: "3",
       name: "Johnson Smithson",
-      role: "landlord",
+      // role: "landlord",
     },
     message: "Correct, this task is for plastic waste only.",
     createdAt: "9:16 AM",
@@ -68,4 +72,13 @@ export const COMMENTS_MOCK: Comment[] = [
     message: "Pickup is tomorrow morning 🗓️",
     createdAt: "9:17 AM",
   },
-];
+],
+notes: [
+    {
+      id: "n1",
+      text: "Task marked as Completed by Henry",
+      createdAt: "10:17 AM",
+    },
+  ],
+}
+  
