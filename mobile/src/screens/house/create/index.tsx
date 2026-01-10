@@ -15,11 +15,12 @@ import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { showMessage } from "react-native-flash-message";
 
-import { PRIMARY_COLOR_RED } from "../../../theme/colors";
+import { PRIMARY_COLOR_BLUE, PRIMARY_COLOR_RED } from "../../../theme/colors";
 import { MEMBERS_MOCK, type Member } from "../../../mocks/members";
 import BgImage from "../../../assets/Image-Icon.jpg";
 import styles from "./style";
 import BottomTabBar from "../../../components/BottomTabBar";
+import Spinner from "../../../components/Spinner";
 
 type CreateHouseForm = {
   name: string;
@@ -51,12 +52,51 @@ const CreateHouse: React.FC = () => {
   }, [memberResults, form.members]);
 
   const isCreateDisabled = useMemo(() => {
-    // tweak rules as you like
     if (!form.name.trim()) return true;
-    if (form.description.trim().length < 5) return true; // optional
-    if (form.members.length === 0) return true; // optional
+    if (form.description.trim().length < 5) return true;
+    if (form.members.length === 0) return true;
     return false;
   }, [form.name, form.description, form.members.length]);
+
+  const handleCreateHouse = () => {
+    if (!form.name.trim()) {
+      showMessage({
+        message: "House name is required",
+        type: "danger",
+        icon: "danger",
+      });
+      return;
+    }
+
+    if (form.description.trim().length < 5) {
+      showMessage({
+        message: "Please add a short description",
+        type: "danger",
+        icon: "danger",
+      });
+      return;
+    }
+
+    if (form.members.length === 0) {
+      showMessage({
+        message: "Add at least one member",
+        type: "danger",
+        icon: "danger",
+      });
+      return;
+    }
+
+    // TODO: backend call
+    showMessage({
+      message: "House created successfully",
+      type: "success",
+      icon: "success",
+    });
+
+    // Optional reset
+    // setForm({ name:"", description:"", inviteLink:"", image: BgImage, members: [] });
+    // setHouseImageUri(null);
+  };
 
   const handleChangeHouseImage = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -269,9 +309,31 @@ const CreateHouse: React.FC = () => {
                 )}
               </View>
             </View>
+
+            {/* ✅ Create button belongs HERE (not inside the modal) */}
+            <View style={styles.createButtonWrapper}>
+              <Pressable
+                onPress={handleCreateHouse}
+                disabled={isCreateDisabled}
+                style={({ pressed }) => [
+                  styles.createButton,
+                  isCreateDisabled && { opacity: 0.45 },
+                  pressed && !isCreateDisabled && { opacity: 0.9 },
+                ]}
+              >
+                <Ionicons
+                  name="add"
+                  size={34}
+                  color="#FFFFFF"
+                  style={{ marginRight: 14 }}
+                />
+                <Text style={styles.createButtonText}>Create</Text>
+              </Pressable>
+            </View>
           </ScrollView>
         </SafeAreaView>
 
+        {/* Add Member Dialog */}
         <Modal
           visible={memberDialogVisible}
           transparent
@@ -310,9 +372,7 @@ const CreateHouse: React.FC = () => {
                 />
               </View>
 
-              {isSearchingMembers && (
-                <Text style={styles.memberNotFound}>Searching…</Text>
-              )}
+              {isSearchingMembers && <Spinner color={PRIMARY_COLOR_BLUE} />}
 
               <FlatList
                 data={selectableMemberResults}
@@ -356,29 +416,11 @@ const CreateHouse: React.FC = () => {
                   </Pressable>
                 )}
               />
-              <View style={styles.createButtonWrapper}>
-                <Pressable
-                  onPress={() => {}}
-                  disabled={isCreateDisabled}
-                  style={({ pressed }) => [
-                    styles.createButton,
-                    isCreateDisabled && { opacity: 0.45 },
-                    pressed && !isCreateDisabled && { opacity: 0.9 },
-                  ]}
-                >
-                  <Ionicons
-                    name="add"
-                    size={34}
-                    color="#FFFFFF"
-                    style={{ marginRight: 14 }}
-                  />
-                  <Text style={styles.createButtonText}>Create</Text>
-                </Pressable>
-              </View>
             </View>
           </SafeAreaView>
         </Modal>
       </View>
+
       <BottomTabBar activeTab="profile" />
     </>
   );
