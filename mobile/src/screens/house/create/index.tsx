@@ -50,6 +50,14 @@ const CreateHouse: React.FC = () => {
     return memberResults.filter((m) => !picked.has(m.id));
   }, [memberResults, form.members]);
 
+  const isCreateDisabled = useMemo(() => {
+    // tweak rules as you like
+    if (!form.name.trim()) return true;
+    if (form.description.trim().length < 5) return true; // optional
+    if (form.members.length === 0) return true; // optional
+    return false;
+  }, [form.name, form.description, form.members.length]);
+
   const handleChangeHouseImage = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permission.granted) return;
@@ -348,6 +356,25 @@ const CreateHouse: React.FC = () => {
                   </Pressable>
                 )}
               />
+              <View style={styles.createButtonWrapper}>
+                <Pressable
+                  onPress={() => {}}
+                  disabled={isCreateDisabled}
+                  style={({ pressed }) => [
+                    styles.createButton,
+                    isCreateDisabled && { opacity: 0.45 },
+                    pressed && !isCreateDisabled && { opacity: 0.9 },
+                  ]}
+                >
+                  <Ionicons
+                    name="add"
+                    size={34}
+                    color="#FFFFFF"
+                    style={{ marginRight: 14 }}
+                  />
+                  <Text style={styles.createButtonText}>Create</Text>
+                </Pressable>
+              </View>
             </View>
           </SafeAreaView>
         </Modal>

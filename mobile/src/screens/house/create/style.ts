@@ -272,4 +272,33 @@ export default StyleSheet.create({
     fontWeight: "500",
     color: "#111",
   },
+  createButtonWrapper: {
+    marginTop: 26,
+    paddingBottom: 30,
+    alignItems: "center",
+  },
+
+  createButton: {
+    width: "100%",
+    maxWidth: 520,
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    borderRadius: 40,
+    paddingVertical: 18,
+    paddingHorizontal: 26,
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+
+    shadowColor: "#000",
+    shadowOpacity: 0.22,
+    shadowRadius: 10,
+    shadowOffset: { width: 0, height: 6 },
+    elevation: 10,
+  },
+
+  createButtonText: {
+    color: "#FFF",
+    fontSize: 30,
+    fontWeight: "600",
+  },
 });
