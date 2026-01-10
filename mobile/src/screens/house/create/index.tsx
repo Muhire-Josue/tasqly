@@ -27,7 +27,6 @@ const CreateHouse: React.FC = () => {
 
   return (
     <View style={styles.root}>
-      {/* Image area (touch-safe, full width, top of screen) */}
       <View style={styles.imageArea}>
         {houseImageUri ? (
           <Image source={{ uri: houseImageUri }} style={styles.houseImage} />
