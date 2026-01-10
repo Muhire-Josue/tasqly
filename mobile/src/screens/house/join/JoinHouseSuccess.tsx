@@ -10,6 +10,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { HOUSE_MOCK } from "../../../mocks/house";
 import styles from "./joinHouseSuccessStyle";
+import BottomTabBar from "../../../components/BottomTabBar";
 
 type Props = {
   houseName?: string;
@@ -23,6 +24,7 @@ const JoinHouseSuccess: React.FC<Props> = ({
   onGoHome,
 }) => {
   return (
+    <>
     <View style={styles.root}>
       <View style={styles.imageWrapper}>
         <Image source={houseImage} style={styles.houseImage} />
@@ -52,12 +54,14 @@ const JoinHouseSuccess: React.FC<Props> = ({
               pressed && { opacity: 0.9 },
             ]}
           >
-            <Ionicons name="home-outline" size={22} color="#FFF" />
+            <Ionicons name="home" size={22} color="#FFF" />
             <Text style={styles.goHomeText}>Go to Home</Text>
           </Pressable>
         </View>
       </SafeAreaView>
     </View>
+    <BottomTabBar activeTab="profile" />
+    </>
   );
 };
 
