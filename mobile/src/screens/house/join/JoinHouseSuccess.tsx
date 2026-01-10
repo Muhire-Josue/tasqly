@@ -24,16 +24,13 @@ const JoinHouseSuccess: React.FC<Props> = ({
 }) => {
   return (
     <View style={styles.root}>
-      {/* Top image reaches top */}
       <View style={styles.imageWrapper}>
         <Image source={houseImage} style={styles.houseImage} />
       </View>
 
       <SafeAreaView edges={["left", "right"]} style={styles.safeArea}>
-        {/* House name */}
         <Text style={styles.houseName}>{houseName}</Text>
 
-        {/* Success card */}
         <View style={styles.successCard}>
           <View style={styles.checkCircle}>
             <Ionicons name="checkmark" size={44} color="#FFF" />
