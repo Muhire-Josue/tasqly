@@ -92,10 +92,6 @@ const CreateHouse: React.FC = () => {
       type: "success",
       icon: "success",
     });
-
-    // Optional reset
-    // setForm({ name:"", description:"", inviteLink:"", image: BgImage, members: [] });
-    // setHouseImageUri(null);
   };
 
   const handleChangeHouseImage = async () => {
@@ -310,7 +306,6 @@ const CreateHouse: React.FC = () => {
               </View>
             </View>
 
-            {/* ✅ Create button belongs HERE (not inside the modal) */}
             <View style={styles.createButtonWrapper}>
               <Pressable
                 onPress={handleCreateHouse}

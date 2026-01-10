@@ -4,7 +4,6 @@ import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 export default StyleSheet.create({
   root: { flex: 1, backgroundColor: "#F7FAFB" },
 
-  // top image
   imageWrapper: {
     width: "100%",
     height: 360,
@@ -13,7 +12,6 @@ export default StyleSheet.create({
   },
   houseImage: { width: "100%", height: "100%", resizeMode: "cover" },
 
-  // ✅ full overlay shade
   imageShade: {
     position: "absolute",
     top: 0,
@@ -100,7 +98,6 @@ export default StyleSheet.create({
   },
   addMemberText: { color: "#FFF", fontSize: 24, fontWeight: "500" },
 
-  // members list card
   membersCard: {
     marginTop: 22,
     backgroundColor: "#ECECEC",
@@ -115,12 +112,10 @@ export default StyleSheet.create({
     paddingVertical: 6,
   },
 
-  // ✅ you already had these (keep them if you want)
   membersEmptyWrap: { paddingVertical: 20, paddingHorizontal: 16 },
   membersEmptyTitle: { fontSize: 18, fontWeight: "600", color: "#111" },
   membersEmptySub: { marginTop: 6, fontSize: 15, color: "#6B7280" },
 
-  // ✅ add these 3 to match your component usage
   emptyMembersState: {
     alignItems: "center",
     justifyContent: "center",
@@ -169,7 +164,6 @@ export default StyleSheet.create({
     marginRight: 14,
   },
 
-  // modal (reuse)
   memberDialogOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.25)" },
   memberDialogSafe: { position: "absolute", left: 0, right: 0, bottom: 0 },
   memberDialogCard: {
@@ -210,7 +204,6 @@ export default StyleSheet.create({
   },
   memberResultName: { fontSize: 18, color: "#111", fontWeight: "500" },
 
-  // leftovers you had (kept as-is)
   addMemberButtonWrapper: {
     marginTop: 26,
     alignItems: "center",
@@ -272,35 +265,6 @@ export default StyleSheet.create({
     fontWeight: "500",
     color: "#111",
   },
-  // createButtonWrapper: {
-  //   marginTop: 26,
-  //   paddingBottom: 30,
-  //   alignItems: "center",
-  // },
-
-  // createButton: {
-  //   width: "100%",
-  //   maxWidth: 520,
-  //   backgroundColor: PRIMARY_COLOR_BLUE,
-  //   borderRadius: 40,
-  //   paddingVertical: 18,
-  //   paddingHorizontal: 26,
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-
-  //   shadowColor: "#000",
-  //   shadowOpacity: 0.22,
-  //   shadowRadius: 10,
-  //   shadowOffset: { width: 0, height: 6 },
-  //   elevation: 10,
-  // },
-
-  // createButtonText: {
-  //   color: "#FFF",
-  //   fontSize: 30,
-  //   fontWeight: "600",
-  // },
   createButtonWrapper: {
     marginTop: 26,
     paddingBottom: 30,
