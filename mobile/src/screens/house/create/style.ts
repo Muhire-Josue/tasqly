@@ -1,160 +1,56 @@
 import { StyleSheet } from "react-native";
-// import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
+import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 
 export default StyleSheet.create({
-  // root: {
-  //   flex: 1,
-  //   backgroundColor: "#F7FAFB",
-  // },
+  root: { flex: 1, backgroundColor: "#F7FAFB" },
 
-  // imageArea: {
-  //   width: "100%",
-  //   height: 340,
-  //   backgroundColor: "#D6D6D6",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   position: "relative",
-  // },
-
-  houseImage: {
+  // top image
+  imageWrapper: {
     width: "100%",
-    height: "100%",
-    resizeMode: "cover",
-  },
-
-  imagePlaceholder: {
-    width: 170,
-    height: 170,
-    borderRadius: 22,
-    backgroundColor: "#2F3B46",
-  },
-
-  // uploadBtn: {
-  //   position: "absolute",
-  //   top: "50%",
-  //   transform: [{ translateY: -22 }],
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   gap: 10,
-  //   backgroundColor: PRIMARY_COLOR_BLUE,
-  //   paddingHorizontal: 26,
-  //   height: 44,
-  //   borderRadius: 22,
-  // },
-
-  // uploadText: {
-  //   color: "#FFF",
-  //   fontSize: 18,
-  //   fontWeight: "600",
-  // },
-
-  // safeArea: {
-  //   paddingHorizontal: 24,
-  //   paddingTop: 18,
-  // },
-
-  // title: {
-  //   fontSize: 34,
-  //   fontWeight: "400",
-  //   color: "#111",
-  //   textAlign: "center",
-  // },
-
-  root: {
-    flex: 1,
-    backgroundColor: "#F7FAFB",
-  },
-
-  imageArea: {
-    width: "100%",
-    height: 340,
-    justifyContent: "center",
-    alignItems: "center",
+    height: 360,
     position: "relative",
+    backgroundColor: "#D1D5DB",
   },
+  houseImage: { width: "100%", height: "100%", resizeMode: "cover" },
 
-  imageAreaImg: {
-    // optional: soften edges if you want
-  },
-
-  // subtle dark oval behind the upload button
-  uploadShade: {
+  // ✅ full overlay shade
+  imageShade: {
     position: "absolute",
-    width: 220,
-    height: 64,
-    borderRadius: 32,
-    backgroundColor: "rgba(0,0,0,0.25)",
+    top: 0,
+    left: 0,
+    right: 0,
+    bottom: 0,
+    backgroundColor: "rgba(0,0,0,0.18)",
   },
 
-  // uploadBtn: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  //   gap: 10,
-  //   backgroundColor: PRIMARY_COLOR_BLUE,
-  //   paddingHorizontal: 26,
-  //   height: 44,
-  //   borderRadius: 22,
-  // },
-
-  // uploadText: {
-  //   color: "#FFF",
-  //   fontSize: 18,
-  //   fontWeight: "600",
-  // },
-
-  safeArea: {
-    paddingHorizontal: 24,
-    paddingTop: 18,
+  uploadBtn: {
+    position: "absolute",
+    alignSelf: "center",
+    top: "42%",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    paddingHorizontal: 28,
+    paddingVertical: 14,
+    borderRadius: 28,
   },
+  uploadBtnText: { color: "#FFF", fontSize: 22, fontWeight: "500" },
 
-  title: {
-    fontSize: 34,
+  safeArea: { flex: 1, paddingHorizontal: 24 },
+
+  createTitle: {
+    marginTop: 18,
+    fontSize: 38,
     fontWeight: "400",
     color: "#111",
     textAlign: "center",
   },
 
-  imageSection: {
-    width: "100%",
-    height: 260,
-    overflow: "hidden",
-    backgroundColor: "#E5E7EB",
-  },
-
-  imageBackground: {
-    flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
-  },
-
-  imageOverlay: {
-    ...StyleSheet.absoluteFillObject,
-    backgroundColor: "rgba(0,0,0,0.35)", // 👈 this is the dark shade
-  },
-
-  uploadBtn: {
-    flexDirection: "row",
-    alignItems: "center",
-    gap: 10,
-    backgroundColor: "#38BDF8", // your blue
-    paddingHorizontal: 28,
-    paddingVertical: 12,
-    borderRadius: 999,
-    zIndex: 2,
-  },
-
-  uploadText: {
-    color: "#FFF",
-    fontSize: 18,
-    fontWeight: "600",
-  },
-
-  formLabel: {
-    marginTop: 18,
+  fieldLabel: {
+    marginTop: 22,
     marginBottom: 10,
-    fontSize: 20,
+    fontSize: 24,
     fontWeight: "500",
     color: "#6B7280",
   },
@@ -163,50 +59,255 @@ export default StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     gap: 14,
-    width: "100%",
     backgroundColor: "#FFF",
     borderWidth: 1,
     borderColor: "#D1D5DB",
-    borderRadius: 14,
+    borderRadius: 16,
     paddingHorizontal: 18,
-    paddingVertical: 16,
+    paddingVertical: 14,
   },
-
-  input: {
-    flex: 1,
-    fontSize: 20,
-    color: "#111",
-  },
+  input: { flex: 1, fontSize: 22, color: "#111" },
 
   descHeaderRow: {
+    marginTop: 18,
     flexDirection: "row",
     alignItems: "center",
     gap: 12,
-    marginTop: 20,
-    marginBottom: 12,
   },
+  descLabel: { fontSize: 24, fontWeight: "500", color: "#6B7280" },
 
-  descLabel: {
-    fontSize: 22,
-    fontWeight: "500",
-    color: "#6B7280",
-  },
-
-  textareaWrap: {
-    width: "100%",
+  textAreaWrap: {
+    marginTop: 12,
     backgroundColor: "#FFF",
     borderWidth: 1,
     borderColor: "#D1D5DB",
-    borderRadius: 14,
-    paddingHorizontal: 18,
+    borderRadius: 18,
+    height: 220,
+    padding: 16,
+  },
+  textArea: { fontSize: 20, color: "#111", height: "100%" },
+
+  addMemberBtn: {
+    marginTop: 26,
+    alignSelf: "center",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    paddingHorizontal: 26,
     paddingVertical: 16,
-    minHeight: 220,
+    borderRadius: 12,
+  },
+  addMemberText: { color: "#FFF", fontSize: 24, fontWeight: "500" },
+
+  // members list card
+  membersCard: {
+    marginTop: 22,
+    backgroundColor: "#ECECEC",
+    borderRadius: 18,
+    padding: 16,
+  },
+  membersInner: {
+    backgroundColor: "#FFF",
+    borderRadius: 14,
+    borderWidth: 1,
+    borderColor: "#D1D5DB",
+    paddingVertical: 6,
   },
 
-  textarea: {
+  membersEmptyWrap: { paddingVertical: 20, paddingHorizontal: 16 },
+  membersEmptyTitle: { fontSize: 18, fontWeight: "600", color: "#111" },
+  membersEmptySub: { marginTop: 6, fontSize: 15, color: "#6B7280" },
+
+  memberRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    paddingHorizontal: 14,
+    paddingVertical: 14,
+  },
+  memberLeft: { flexDirection: "row", alignItems: "center", gap: 12 },
+
+  memberAvatarWrap: {
+    width: 46,
+    height: 46,
+    borderRadius: 23,
+    backgroundColor: "#E5E7EB",
+    alignItems: "center",
+    justifyContent: "center",
+    overflow: "hidden",
+  },
+  memberAvatar: { width: "100%", height: "100%" },
+  memberName: { fontSize: 20, color: "#111", fontWeight: "500" },
+  removeBtn: { padding: 6 },
+
+  memberSeparator: {
+    height: 1,
+    backgroundColor: "#E5E7EB",
+    marginLeft: 72,
+    marginRight: 14,
+  },
+
+  // modal (reuse)
+  memberDialogOverlay: { flex: 1, backgroundColor: "rgba(0,0,0,0.25)" },
+  memberDialogSafe: { position: "absolute", left: 0, right: 0, bottom: 0 },
+  memberDialogCard: {
+    backgroundColor: "#FFF",
+    borderTopLeftRadius: 22,
+    borderTopRightRadius: 22,
+    padding: 16,
+    maxHeight: "75%",
+  },
+  memberDialogHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingBottom: 10,
+  },
+  memberDialogTitle: { fontSize: 20, fontWeight: "600", color: "#111" },
+
+  memberSearchRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    borderWidth: 1,
+    borderColor: "#D1D5DB",
+    borderRadius: 14,
+    paddingHorizontal: 14,
+    paddingVertical: 12,
+  },
+  memberSearchInput: { flex: 1, fontSize: 18, color: "#111" },
+
+  memberNotFound: { paddingTop: 14, textAlign: "center", color: "#6B7280" },
+
+  memberResultRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 12,
+    paddingHorizontal: 10,
+    paddingVertical: 12,
+  },
+  memberResultName: { fontSize: 18, color: "#111", fontWeight: "500" },
+  //   addMemberButtonWrapper: {
+  //   marginTop: 26,
+  //   alignItems: "center",
+  // },
+
+  // assigneeOverlay: {
+  //   flex: 1,
+  //   backgroundColor: "rgba(0,0,0,0.25)",
+  //   justifyContent: "center",
+  //   paddingHorizontal: 26,
+  // },
+
+  // assigneeCard: {
+  //   backgroundColor: "#FFF",
+  //   borderRadius: 18,
+  //   padding: 16,
+  //   maxHeight: "70%",
+  // },
+
+  // assigneeHeader: {
+  //   flexDirection: "row",
+  //   justifyContent: "space-between",
+  //   alignItems: "center",
+  //   paddingBottom: 10,
+  // },
+
+  // assigneeTitle: {
+  //   fontSize: 20,
+  //   fontWeight: "600",
+  //   color: "#111",
+  // },
+
+  // assigneeRow: {
+  //   flexDirection: "row",
+  //   alignItems: "center",
+  //   paddingVertical: 12,
+  //   paddingHorizontal: 10,
+  // },
+
+  // assigneeAvatar: {
+  //   width: 42,
+  //   height: 42,
+  //   borderRadius: 21,
+  //   marginRight: 12,
+  // },
+
+  // assigneeAvatarPlaceholder: {
+  //   width: 42,
+  //   height: 42,
+  //   borderRadius: 21,
+  //   marginRight: 12,
+  //   backgroundColor: "#E5E7EB",
+  //   alignItems: "center",
+  //   justifyContent: "center",
+  // },
+
+  // assigneeName: {
+  //   fontSize: 18,
+  //   fontWeight: "500",
+  //   color: "#111",
+  // },
+  addMemberButtonWrapper: {
+    marginTop: 26,
+    alignItems: "center",
+  },
+
+  assigneeOverlay: {
     flex: 1,
-    fontSize: 18,
+    backgroundColor: "rgba(0,0,0,0.25)",
+    justifyContent: "center",
+    paddingHorizontal: 26,
+  },
+
+  assigneeCard: {
+    backgroundColor: "#FFF",
+    borderRadius: 18,
+    padding: 16,
+    maxHeight: "70%",
+  },
+
+  assigneeHeader: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    paddingBottom: 10,
+  },
+
+  assigneeTitle: {
+    fontSize: 20,
+    fontWeight: "600",
     color: "#111",
-    lineHeight: 24,
+  },
+
+  assigneeRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    paddingVertical: 12,
+    paddingHorizontal: 10,
+  },
+
+  assigneeAvatar: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    marginRight: 12,
+  },
+
+  assigneeAvatarPlaceholder: {
+    width: 42,
+    height: 42,
+    borderRadius: 21,
+    marginRight: 12,
+    backgroundColor: "#E5E7EB",
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  assigneeName: {
+    fontSize: 18,
+    fontWeight: "500",
+    color: "#111",
   },
 });
