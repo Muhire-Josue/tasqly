@@ -11,8 +11,9 @@ import { HOUSE_MOCK } from "../../mocks/house";
 import HouseSettings from "./settings";
 import NoContent from "./no-content";
 import BottomTabBar from "../../components/BottomTabBar";
-
+import { useNavigateTo } from "../../navigation/useNavigateTo";
 const HouseSettingsContainer: React.FC = () => {
+  const navigateTo = useNavigateTo();
   const [house, setHouse] = useState<House | null>(HOUSE_MOCK);
 
   const [houseImageUri, setHouseImageUri] = useState<string | null>(null);
@@ -194,11 +195,7 @@ const HouseSettingsContainer: React.FC = () => {
         <NoContent
           userName="John"
           onJoinPress={() => {
-            showMessage({
-              message: "Join pressed (TODO)",
-              type: "info",
-              icon: "info",
-            });
+            navigateTo("join-house");
           }}
           onCreatePress={() => {}}
         />
