@@ -14,7 +14,7 @@ type Props = {
 };
 
 const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
-  const commentCount = useMemo(() => COMMENTS_MOCK.length, []);
+  const commentCount = useMemo(() => COMMENTS_MOCK.comments.length, []);
 
   return (
     <>
@@ -44,7 +44,7 @@ const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
         </SafeAreaView>
 
         <FlatList
-          data={COMMENTS_MOCK as CommentItem[]}
+          data={COMMENTS_MOCK.comments as CommentItem[]}
           keyExtractor={(item) => item.id}
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.listContent}
