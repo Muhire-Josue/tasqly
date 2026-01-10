@@ -47,7 +47,6 @@ const CreateHouse: React.FC = () => {
         </Pressable>
       </View>
 
-      {/* Header */}
       <SafeAreaView edges={["left", "right"]} style={styles.safeArea}>
         <Text style={styles.title}>Create new House</Text>
       </SafeAreaView>
