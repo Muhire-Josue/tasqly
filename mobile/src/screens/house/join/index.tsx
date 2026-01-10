@@ -10,6 +10,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
 import { showMessage } from "react-native-flash-message";
+import { useNavigateTo } from "../../../navigation/useNavigateTo";
 
 import styles from "./style";
 import BottomTabBar from "../../../components/BottomTabBar";
@@ -19,6 +20,7 @@ type Props = {
 };
 
 const JoinHouse: React.FC<Props> = ({ onJoinSuccess }) => {
+  const navigateTo = useNavigateTo();
   const [inviteLink, setInviteLink] = useState("");
   const [loading, setLoading] = useState(false);
 
@@ -46,6 +48,7 @@ const JoinHouse: React.FC<Props> = ({ onJoinSuccess }) => {
       });
 
       onJoinSuccess?.("mock-house-id");
+      navigateTo("join-house-success");
     } catch {
       showMessage({
         message: "Invalid or expired invite link",
