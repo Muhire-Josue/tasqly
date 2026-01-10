@@ -1,14 +1,27 @@
-import { ImageSourcePropType } from "react-native";
+import type { ImageSourcePropType } from "react-native";
 
-export type Comment = {
+export type CommentAuthor = {
   id: string;
-  author: {
-    id: string;
-    name: string;
-    avatar?: ImageSourcePropType;
-    role?: "landlord" | "member";
-  };
-  message: string;
+  name: string;
+  avatar?: ImageSourcePropType;
+};
+
+export type CommentMessage = {
+  id: string;
+  author: CommentAuthor;
   createdAt: string;
+  message: string;
   isEditable?: boolean;
+};
+
+export type CommentNote = {
+  id: string;
+  text: string;
+  createdAt: string;
+};
+
+export type CommentsThread = {
+  id: string;
+  comments: CommentMessage[];
+  notes?: CommentNote[];
 };
