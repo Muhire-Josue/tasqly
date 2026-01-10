@@ -197,7 +197,6 @@ const HouseSettingsContainer: React.FC = () => {
           onJoinPress={() => {
             navigateTo("join-house");
           }}
-          onCreatePress={() => {}}
         />
 
         <BottomTabBar activeTab="profile" />
