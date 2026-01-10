@@ -9,7 +9,7 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons } from "@expo/vector-icons";
 import { HOUSE_MOCK } from "../../../mocks/house";
-import styles from "./joinHouseSuccess";
+import styles from "./joinHouseSuccessStyle";
 
 type Props = {
   houseName?: string;
