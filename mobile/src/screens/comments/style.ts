@@ -1,4 +1,5 @@
 import { StyleSheet } from "react-native";
+import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 
 export default StyleSheet.create({
   root: {
@@ -141,5 +142,113 @@ export default StyleSheet.create({
   editBtnSpacer: {
     width: 44,
     height: 44,
+  },
+  notesWrap: {
+    paddingTop: 18,
+    paddingBottom: 20,
+    alignItems: "center",
+  },
+
+  noteRow: {
+    paddingHorizontal: 18,
+    paddingVertical: 6,
+  },
+
+  noteText: {
+    fontSize: 15,
+    color: "#8B8B8B",
+    textAlign: "center",
+  },
+
+  noteTime: {
+    color: "#6B7280",
+  },
+
+  notesSpacer: {
+    height: 18,
+  },
+  composerSafe: {
+    backgroundColor: "#FFFFFF",
+    paddingHorizontal: 18,
+    paddingTop: 10,
+    borderTopWidth: 1,
+    borderTopColor: "#E5E7EB",
+  },
+
+  composerRow: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 14,
+    paddingBottom: 10,
+  },
+
+  inputWrap: {
+    flex: 1,
+    height: 56,
+    flexDirection: "row",
+    alignItems: "center",
+    backgroundColor: "#F3F4F6",
+    borderRadius: 18,
+    paddingLeft: 18,
+    paddingRight: 12,
+  },
+
+  input: {
+    flex: 1,
+    fontSize: 18,
+    color: "#111",
+    paddingVertical: 12,
+  },
+
+  clipBtn: {
+    width: 44,
+    height: 44,
+    borderRadius: 14,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  sendBtn: {
+    width: 58,
+    height: 58,
+    borderRadius: 29,
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  attachmentRow: {
+    paddingBottom: 10,
+  },
+
+  attachmentChip: {
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    backgroundColor: "#F3F4F6",
+    borderRadius: 14,
+    paddingVertical: 10,
+    paddingHorizontal: 12,
+  },
+
+  attachmentThumb: {
+    width: 28,
+    height: 28,
+    borderRadius: 6,
+    backgroundColor: "#E5E7EB",
+  },
+
+  attachmentText: {
+    flex: 1,
+    fontSize: 14,
+    color: "#111",
+  },
+
+  attachmentRemoveBtn: {
+    width: 30,
+    height: 30,
+    borderRadius: 10,
+    alignItems: "center",
+    justifyContent: "center",
   },
 });

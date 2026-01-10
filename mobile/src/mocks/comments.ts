@@ -73,6 +73,11 @@ export const COMMENTS_MOCK: CommentsThread = {
   ],
   notes: [
     {
+      id: "1",
+      text: "Task Updated by Johnson",
+      createdAt: "10:17 AM",
+    },
+    {
       id: "n1",
       text: "Task marked as Completed by Henry",
       createdAt: "10:17 AM",
