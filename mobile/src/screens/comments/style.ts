@@ -7,17 +7,16 @@ export default StyleSheet.create({
   },
 
   headerSafe: {
-    backgroundColor: "#F7FAFB",
+    backgroundColor: "#EFFFFF", // 👈 this is the key line
   },
 
   headerRoot: {
-    height: 56,
+    height: 60,
     flexDirection: "row",
     alignItems: "center",
-    paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: "#E5E7EB",
-    backgroundColor: "#F7FAFB",
+    backgroundColor: "#EFFFFF",
   },
 
   backButton: {
@@ -33,6 +32,7 @@ export default StyleSheet.create({
     fontSize: 22,
     fontWeight: "600",
     color: "#111",
+    marginTop: 15,
   },
 
   rightSpacer: {
