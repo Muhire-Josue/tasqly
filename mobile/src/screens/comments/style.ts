@@ -7,7 +7,6 @@ export default StyleSheet.create({
   },
 
   headerSafe: {
-    // backgroundColor: "#FFFFFF", // 👈 this is the key line
     backgroundColor: "#eef5f5", // 👈 this is the key line
   },
 
@@ -105,7 +104,6 @@ export default StyleSheet.create({
   authorName: {
     fontSize: 15,
     fontWeight: "700",
-    // color: "#8B8B8B",
   },
   timeText: {
     fontSize: 15,
