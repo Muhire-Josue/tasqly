@@ -51,11 +51,6 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  //   headerTitle: {
-  //     fontSize: 32,
-  //     fontWeight: "700",
-  //     color: "#111",
-  //   },
   headerRightSpacer: {
     width: 44,
     height: 44,
@@ -109,7 +104,7 @@ export default StyleSheet.create({
   authorName: {
     fontSize: 24,
     fontWeight: "700",
-    color: "#8B8B8B", // grey name like screenshot
+    color: "#8B8B8B",
   },
   timeText: {
     fontSize: 18,

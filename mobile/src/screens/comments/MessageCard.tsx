@@ -14,7 +14,7 @@ export type CommentItem = {
   id: string;
   author: {
     name: string;
-    avatar?: ImageSourcePropType; // or ImageSourcePropType if you prefer
+    avatar?: ImageSourcePropType;
   };
   createdAt: string;
   message: string;
@@ -35,7 +35,6 @@ const MessageCard: React.FC<Props> = ({
 }) => {
   return (
     <View style={styles.commentRow}>
-      {/* Avatar */}
       <View style={styles.avatarWrap}>
         {author.avatar ? (
           <Image source={author.avatar} style={styles.avatarImg} />
@@ -46,7 +45,6 @@ const MessageCard: React.FC<Props> = ({
         )}
       </View>
 
-      {/* Main */}
       <View style={styles.commentMain}>
         <View style={styles.nameTimeRow}>
           <Text style={styles.authorName}>{author.name}</Text>
