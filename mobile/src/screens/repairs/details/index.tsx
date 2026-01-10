@@ -170,6 +170,7 @@ const RepairDetails: React.FC = () => {
                 ]}
                 onPress={() => {
                   // TODO: navigate to comments screen later
+                  navigateTo("comments");
                 }}
               >
                 <Ionicons
