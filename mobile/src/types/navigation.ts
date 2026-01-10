@@ -15,4 +15,8 @@ export type RootStackParamList = {
   notification: undefined;
   "no-notification": undefined;
   profile: undefined;
+  "house-settings": undefined;
+  "join-house": undefined;
+  "join-house-success": undefined;
+  "create-house": undefined;
 };

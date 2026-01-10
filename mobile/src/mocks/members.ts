@@ -25,7 +25,7 @@ export const MEMBERS_MOCK: Member[] = [
   {
     id: "3",
     name: "Johnson Smithson",
-    // no avatar -> will show placeholder
+    avatar: null,
   },
   {
     id: "4",
@@ -39,31 +39,6 @@ export const MEMBERS_MOCK: Member[] = [
   },
   {
     id: "6",
-    name: "Henry Smithson",
-    avatar: Ben,
-  },
-  {
-    id: "7",
-    name: "Jane Smithson",
-    avatar: Micheal,
-  },
-  {
-    id: "8",
-    name: "Johnson Smithson",
-    // no avatar -> will show placeholder
-  },
-  {
-    id: "9",
-    name: "Diego Smithson",
-    avatar: Well,
-  },
-  {
-    id: "10",
-    name: "Valerie Smithson",
-    avatar: Vince,
-  },
-  {
-    id: "11",
     name: "Landlord",
     avatar: LandLord,
   },

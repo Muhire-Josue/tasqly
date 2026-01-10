@@ -1,0 +1,73 @@
+import React from "react";
+import { View, Text, Pressable, Image } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
+import { Ionicons, MaterialCommunityIcons } from "@expo/vector-icons";
+import Ben from "../../../assets/ben.jpg";
+import { useNavigateTo } from "../../../navigation/useNavigateTo";
+
+import styles from "./style";
+
+type Props = {
+  userName?: string;
+  onJoinPress?: () => void;
+};
+
+const NoContent: React.FC<Props> = ({ userName = "John", onJoinPress }) => {
+  const navigateTo = useNavigateTo();
+  return (
+    <SafeAreaView style={styles.noHouseSafe} edges={["top", "left", "right"]}>
+      <View style={styles.noHouseRoot}>
+        <View style={styles.noHouseTopRow}>
+          <View style={styles.noHouseTopLeft}>
+            <View style={styles.noHouseAvatarCircle}>
+              <Image source={Ben} style={styles.noHouseAvatarImage} />
+            </View>
+
+            <Text style={styles.noHouseGreeting}>Hi {userName}</Text>
+          </View>
+
+          <Pressable
+            onPress={() => {
+              navigateTo("create-house");
+            }}
+            hitSlop={10}
+            style={({ pressed }) => [
+              styles.noHousePlusBtn,
+              pressed && { opacity: 0.85 },
+            ]}
+          >
+            <Ionicons name="add" size={26} color="#111" />
+          </Pressable>
+        </View>
+
+        <View style={styles.noHouseCenter}>
+          <View style={styles.noHouseIconCircle}>
+            <Ionicons name="home" size={90} color="#FFF" />
+          </View>
+
+          <Text style={styles.noHouseTitle}>No House info to show</Text>
+          <Text style={styles.noHouseSubtitle}>
+            Click the button below to join a house info
+          </Text>
+
+          <Pressable
+            onPress={onJoinPress}
+            style={({ pressed }) => [
+              styles.noHouseJoinBtn,
+              pressed && { opacity: 0.9 },
+            ]}
+          >
+            <MaterialCommunityIcons
+              name="account-group"
+              size={35}
+              color="#FFF"
+            />
+            <Text style={styles.noHouseJoinText}>Join</Text>
+          </Pressable>
+        </View>
+      </View>
+    </SafeAreaView>
+  );
+};
+
+export default NoContent;

@@ -12,15 +12,17 @@ import {
 import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, Feather } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
+import { showMessage } from "react-native-flash-message";
 
 import styles from "./style";
 import Wellington from "../../assets/wellington.jpg";
 import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 import BottomTabBar from "../../components/BottomTabBar";
 import { validateProfileForm } from "../../validators/profile";
-import { showMessage } from "react-native-flash-message";
+import { useNavigateTo } from "../../navigation/useNavigateTo";
 
 const Profile: React.FC = () => {
+  const navigateTo = useNavigateTo();
   const [avatarUri, setAvatarUri] = useState<string | null>(null);
 
   const [pushEnabled, setPushEnabled] = useState(true);
@@ -49,7 +51,7 @@ const Profile: React.FC = () => {
   };
 
   const handleHouseSettingsPress = () => {
-    // TODO: navigate to House Settings screen
+    navigateTo("house-settings");
   };
 
   const handleDelete = () => {
