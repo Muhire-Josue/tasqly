@@ -115,9 +115,30 @@ export default StyleSheet.create({
     paddingVertical: 6,
   },
 
+  // ✅ you already had these (keep them if you want)
   membersEmptyWrap: { paddingVertical: 20, paddingHorizontal: 16 },
   membersEmptyTitle: { fontSize: 18, fontWeight: "600", color: "#111" },
   membersEmptySub: { marginTop: 6, fontSize: 15, color: "#6B7280" },
+
+  // ✅ add these 3 to match your component usage
+  emptyMembersState: {
+    alignItems: "center",
+    justifyContent: "center",
+    paddingVertical: 28,
+    paddingHorizontal: 20,
+  },
+  emptyMembersTitle: {
+    marginTop: 8,
+    fontSize: 18,
+    fontWeight: "600",
+    color: "#111",
+  },
+  emptyMembersSubtitle: {
+    marginTop: 6,
+    fontSize: 15,
+    color: "#6B7280",
+    textAlign: "center",
+  },
 
   memberRow: {
     flexDirection: "row",
@@ -188,67 +209,8 @@ export default StyleSheet.create({
     paddingVertical: 12,
   },
   memberResultName: { fontSize: 18, color: "#111", fontWeight: "500" },
-  //   addMemberButtonWrapper: {
-  //   marginTop: 26,
-  //   alignItems: "center",
-  // },
 
-  // assigneeOverlay: {
-  //   flex: 1,
-  //   backgroundColor: "rgba(0,0,0,0.25)",
-  //   justifyContent: "center",
-  //   paddingHorizontal: 26,
-  // },
-
-  // assigneeCard: {
-  //   backgroundColor: "#FFF",
-  //   borderRadius: 18,
-  //   padding: 16,
-  //   maxHeight: "70%",
-  // },
-
-  // assigneeHeader: {
-  //   flexDirection: "row",
-  //   justifyContent: "space-between",
-  //   alignItems: "center",
-  //   paddingBottom: 10,
-  // },
-
-  // assigneeTitle: {
-  //   fontSize: 20,
-  //   fontWeight: "600",
-  //   color: "#111",
-  // },
-
-  // assigneeRow: {
-  //   flexDirection: "row",
-  //   alignItems: "center",
-  //   paddingVertical: 12,
-  //   paddingHorizontal: 10,
-  // },
-
-  // assigneeAvatar: {
-  //   width: 42,
-  //   height: 42,
-  //   borderRadius: 21,
-  //   marginRight: 12,
-  // },
-
-  // assigneeAvatarPlaceholder: {
-  //   width: 42,
-  //   height: 42,
-  //   borderRadius: 21,
-  //   marginRight: 12,
-  //   backgroundColor: "#E5E7EB",
-  //   alignItems: "center",
-  //   justifyContent: "center",
-  // },
-
-  // assigneeName: {
-  //   fontSize: 18,
-  //   fontWeight: "500",
-  //   color: "#111",
-  // },
+  // leftovers you had (kept as-is)
   addMemberButtonWrapper: {
     marginTop: 26,
     alignItems: "center",

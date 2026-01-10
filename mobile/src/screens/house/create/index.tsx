@@ -1,30 +1,30 @@
-import React, { useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import {
   View,
   Text,
+  Image,
   Pressable,
   TextInput,
-  Modal,
-  Image,
   ScrollView,
+  Modal,
+  FlatList,
+  ImageSourcePropType,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
-import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { showMessage } from "react-native-flash-message";
 
-import styles from "./style";
 import { PRIMARY_COLOR_RED } from "../../../theme/colors";
-import { type Member, MEMBERS_MOCK } from "../../../mocks/members";
+import { MEMBERS_MOCK, type Member } from "../../../mocks/members";
 import BgImage from "../../../assets/Image-Icon.jpg";
+import styles from "./style";
 
 type CreateHouseForm = {
   name: string;
   description: string;
-  // keep loose (you already use local assets + uri fallback)
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  image?: any;
+  inviteLink: string;
+  image?: ImageSourcePropType;
   members: Member[];
 };
 
@@ -32,22 +32,26 @@ const CreateHouse: React.FC = () => {
   const [form, setForm] = useState<CreateHouseForm>({
     name: "",
     description: "",
+    inviteLink: "",
     image: BgImage,
     members: [],
   });
 
   const [houseImageUri, setHouseImageUri] = useState<string | null>(null);
 
-  // ✅ reuse the same modal approach as your Create screen
-  const [showMemberModal, setShowMemberModal] = useState(false);
+  // --- HouseSettings-style member dialog state ---
+  const [memberDialogVisible, setMemberDialogVisible] = useState(false);
+  const [memberQuery, setMemberQuery] = useState("");
+  const [isSearchingMembers, setIsSearchingMembers] = useState(false);
+  const [memberResults, setMemberResults] = useState<Member[]>(MEMBERS_MOCK);
 
-  // optional: don’t show already added members inside the modal
-  const selectableMembers = useMemo(() => {
-    const selected = new Set(form.members.map((m) => m.id));
-    return MEMBERS_MOCK.filter((m) => !selected.has(m.id));
-  }, [form.members]);
+  const selectableMemberResults = useMemo(() => {
+    // optional polish: hide members already added
+    const picked = new Set(form.members.map((m) => m.id));
+    return memberResults.filter((m) => !picked.has(m.id));
+  }, [memberResults, form.members]);
 
-  const handlePickHouseImage = async () => {
+  const handleChangeHouseImage = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
     if (!permission.granted) return;
 
@@ -61,14 +65,25 @@ const CreateHouse: React.FC = () => {
     if (!result.canceled) setHouseImageUri(result.assets[0].uri);
   };
 
-  const handleAddMember = (member: Member) => {
+  const openMemberDialog = () => {
+    setMemberQuery("");
+    setMemberResults(MEMBERS_MOCK);
+    setMemberDialogVisible(true);
+  };
+
+  const closeMemberDialog = () => setMemberDialogVisible(false);
+
+  const handleSelectMember = (memberId: string) => {
+    const picked = MEMBERS_MOCK.find((m) => m.id === memberId);
+    if (!picked) return;
+
     setForm((prev) => {
-      const exists = prev.members.some((m) => m.id === member.id);
+      const exists = prev.members.some((m) => m.id === memberId);
       if (exists) return prev;
-      return { ...prev, members: [...prev.members, member] };
+      return { ...prev, members: [...prev.members, picked] };
     });
 
-    setShowMemberModal(false);
+    closeMemberDialog();
 
     showMessage({
       message: "Member added successfully",
@@ -90,9 +105,32 @@ const CreateHouse: React.FC = () => {
     });
   };
 
+  // Simulated “backend search” (same pattern as HouseSettingsContainer)
+  useEffect(() => {
+    if (!memberDialogVisible) return;
+
+    const q = memberQuery.trim();
+    setIsSearchingMembers(true);
+
+    const t = setTimeout(() => {
+      try {
+        const lowered = q.toLowerCase();
+        const results = !q
+          ? MEMBERS_MOCK
+          : MEMBERS_MOCK.filter((m) => m.name.toLowerCase().includes(lowered));
+
+        setMemberResults(results);
+      } finally {
+        setIsSearchingMembers(false);
+      }
+    }, 300);
+
+    return () => clearTimeout(t);
+  }, [memberQuery, memberDialogVisible]);
+
   return (
     <View style={styles.root}>
-      {/* Image area */}
+      {/* Top image area */}
       <View style={styles.imageWrapper}>
         <Image
           source={
@@ -101,11 +139,11 @@ const CreateHouse: React.FC = () => {
           style={styles.houseImage}
         />
 
-        {/* ✅ full overlay shade */}
+        {/* ✅ Full shade covering the entire image area */}
         <View style={styles.imageShade} />
 
         <Pressable
-          onPress={handlePickHouseImage}
+          onPress={handleChangeHouseImage}
           style={({ pressed }) => [
             styles.uploadBtn,
             pressed && { opacity: 0.9 },
@@ -117,16 +155,13 @@ const CreateHouse: React.FC = () => {
       </View>
 
       <SafeAreaView edges={["left", "right"]} style={styles.safeArea}>
-        <ScrollView
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={{ paddingBottom: 80 }}
-        >
+        <ScrollView showsVerticalScrollIndicator={false} bounces={false}>
           <Text style={styles.createTitle}>Create new House</Text>
 
           {/* House Name */}
           <Text style={styles.fieldLabel}>House Name</Text>
           <View style={styles.inputRow}>
-            <FontAwesome5 name="home" size={26} color="#111" />
+            <FontAwesome5 name="home" size={28} color="#111" />
             <TextInput
               value={form.name}
               onChangeText={(name) => setForm((p) => ({ ...p, name }))}
@@ -140,7 +175,7 @@ const CreateHouse: React.FC = () => {
           <View style={styles.descHeaderRow}>
             <Ionicons
               name="information-circle-outline"
-              size={26}
+              size={28}
               color="#111"
             />
             <Text style={styles.descLabel}>Description</Text>
@@ -160,30 +195,28 @@ const CreateHouse: React.FC = () => {
             />
           </View>
 
-          {/* ✅ Borrow the same modal trigger pattern (button opens modal) */}
-          <View style={styles.addMemberButtonWrapper}>
-            <Pressable
-              style={styles.addMemberBtn}
-              onPress={() => setShowMemberModal(true)}
-            >
-              <Ionicons
-                name="person-add-outline"
-                size={22}
-                color="#FFFFFF"
-                style={{ marginRight: 10 }}
-              />
-              <Text style={styles.addMemberText}>Add Member</Text>
-            </Pressable>
-          </View>
+          {/* Add Member button (same as HouseSettings) */}
+          <Pressable
+            onPress={openMemberDialog}
+            style={({ pressed }) => [
+              styles.addMemberBtn,
+              pressed && { opacity: 0.9 },
+            ]}
+          >
+            <FontAwesome5 name="user-plus" size={26} color="#FFF" />
+            <Text style={styles.addMemberText}>Add Member</Text>
+          </Pressable>
 
-          {/* Members List */}
+          {/* Members list (starts empty) */}
           <View style={styles.membersCard}>
             <View style={styles.membersInner}>
               {form.members.length === 0 ? (
-                <View style={styles.membersEmptyWrap}>
-                  <Text style={styles.membersEmptyTitle}>No members yet</Text>
-                  <Text style={styles.membersEmptySub}>
-                    Tap “Add Member” to start adding people to this house.
+                <View style={styles.emptyMembersState}>
+                  <Ionicons name="people" size={40} color="#9CA3AF" />
+                  <Text style={styles.emptyMembersTitle}>No members yet</Text>
+                  <Text style={styles.emptyMembersSubtitle}>
+                    Add members to start sharing tasks and managing your house
+                    together.
                   </Text>
                 </View>
               ) : (
@@ -235,63 +268,90 @@ const CreateHouse: React.FC = () => {
               )}
             </View>
           </View>
-
-          {/* ✅ Members Modal (same structure as your Create screen) */}
-          <Modal
-            visible={showMemberModal}
-            transparent
-            animationType="fade"
-            onRequestClose={() => setShowMemberModal(false)}
-          >
-            <View style={styles.assigneeOverlay}>
-              <View style={styles.assigneeCard}>
-                <View style={styles.assigneeHeader}>
-                  <Text style={styles.assigneeTitle}>Select Member</Text>
-                  <Pressable onPress={() => setShowMemberModal(false)}>
-                    <Ionicons name="close" size={22} color="#111" />
-                  </Pressable>
-                </View>
-
-                <ScrollView
-                  showsVerticalScrollIndicator={false}
-                  bounces={false}
-                >
-                  {selectableMembers.length === 0 ? (
-                    <Text style={styles.memberNotFound}>
-                      All members already added
-                    </Text>
-                  ) : (
-                    selectableMembers.map((member) => (
-                      <Pressable
-                        key={member.id}
-                        style={styles.assigneeRow}
-                        onPress={() => handleAddMember(member)}
-                      >
-                        {member.avatar ? (
-                          <Image
-                            source={member.avatar}
-                            style={styles.assigneeAvatar}
-                          />
-                        ) : (
-                          <View style={styles.assigneeAvatarPlaceholder}>
-                            <Ionicons
-                              name="person-outline"
-                              size={18}
-                              color="#9CA3AF"
-                            />
-                          </View>
-                        )}
-
-                        <Text style={styles.assigneeName}>{member.name}</Text>
-                      </Pressable>
-                    ))
-                  )}
-                </ScrollView>
-              </View>
-            </View>
-          </Modal>
         </ScrollView>
       </SafeAreaView>
+
+      {/* ✅ Add Member Dialog (same as House Settings) */}
+      <Modal
+        visible={memberDialogVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={closeMemberDialog}
+      >
+        <Pressable
+          style={styles.memberDialogOverlay}
+          onPress={closeMemberDialog}
+        />
+
+        <SafeAreaView edges={["bottom"]} style={styles.memberDialogSafe}>
+          <View style={styles.memberDialogCard}>
+            <View style={styles.memberDialogHeader}>
+              <Text style={styles.memberDialogTitle}>Add Member</Text>
+
+              <Pressable
+                onPress={closeMemberDialog}
+                hitSlop={10}
+                style={({ pressed }) => pressed && { opacity: 0.7 }}
+              >
+                <Ionicons name="close" size={22} color="#111" />
+              </Pressable>
+            </View>
+
+            <View style={styles.memberSearchRow}>
+              <Ionicons name="search-outline" size={22} color="#111" />
+              <TextInput
+                value={memberQuery}
+                onChangeText={setMemberQuery}
+                placeholder="Search member"
+                placeholderTextColor="#9CA3AF"
+                style={styles.memberSearchInput}
+                autoCorrect={false}
+                autoCapitalize="none"
+              />
+            </View>
+
+            {isSearchingMembers && (
+              <Text style={styles.memberNotFound}>Searching…</Text>
+            )}
+
+            <FlatList
+              data={selectableMemberResults}
+              keyExtractor={(item) => item.id}
+              keyboardShouldPersistTaps="handled"
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{ paddingVertical: 10 }}
+              ListEmptyComponent={
+                !isSearchingMembers ? (
+                  <Text style={styles.memberNotFound}>
+                    {memberResults.length === 0
+                      ? "User not found"
+                      : "No more users to add"}
+                  </Text>
+                ) : null
+              }
+              renderItem={({ item }) => (
+                <Pressable
+                  onPress={() => handleSelectMember(item.id)}
+                  style={({ pressed }) => [
+                    styles.memberResultRow,
+                    pressed && { opacity: 0.85 },
+                  ]}
+                >
+                  <View style={styles.memberAvatarWrap}>
+                    {item.avatar ? (
+                      <Image source={item.avatar} style={styles.memberAvatar} />
+                    ) : (
+                      <Ionicons name="person-outline" size={18} color="#888" />
+                    )}
+                  </View>
+
+                  <Text style={styles.memberResultName}>{item.name}</Text>
+                </Pressable>
+              )}
+            />
+          </View>
+        </SafeAreaView>
+      </Modal>
     </View>
   );
 };
