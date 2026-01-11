@@ -33,13 +33,10 @@ type QueuedSend = {
 };
 
 const Comments: React.FC<Props> = ({ onBack }) => {
-  // ✅ keep thread in state so UI updates
   const [thread, setThread] = useState<CommentsThread>(COMMENTS_MOCK);
 
-  // ✅ keep queued payloads without unused state warning
   const [queuedSends, setQueuedSends] = useState<QueuedSend[]>([]);
   // If eslint complains, we "use" it (dev only)
-  // You can remove this later once you implement backend sync
   const queuedCount = queuedSends.length;
 
   const commentCount = useMemo(() => thread.comments.length, [thread.comments]);
@@ -48,15 +45,12 @@ const Comments: React.FC<Props> = ({ onBack }) => {
   const [commentText, setCommentText] = useState("");
   const [pickedImageUri, setPickedImageUri] = useState<string | null>(null);
 
-  // ----------------------------
-  // Edit modal state
-  // ----------------------------
   const [editVisible, setEditVisible] = useState(false);
   const [editCommentId, setEditCommentId] = useState<string | null>(null);
   const [editText, setEditText] = useState("");
 
   const canSend = commentText.trim().length > 0 || Boolean(pickedImageUri);
-  const canSaveEdit = editText.trim().length > 0; // keep UX simple (no empty saves)
+  const canSaveEdit = editText.trim().length > 0;
 
   const formatTime = (d: Date) =>
     d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
@@ -237,7 +231,6 @@ const Comments: React.FC<Props> = ({ onBack }) => {
                 <View style={styles.notesSpacer} />
               )}
 
-              {/* dev-only usage to silence unused warning if needed */}
               {queuedCount >= 999999 ? (
                 <Text style={{ fontSize: 1 }}>{queuedCount}</Text>
               ) : null}
@@ -311,9 +304,6 @@ const Comments: React.FC<Props> = ({ onBack }) => {
         </SafeAreaView>
       </KeyboardAvoidingView>
 
-      {/* ---------------------------- */}
-      {/* Edit Comment Modal */}
-      {/* ---------------------------- */}
       <Modal
         visible={editVisible}
         transparent
