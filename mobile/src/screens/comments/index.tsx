@@ -1,4 +1,3 @@
-// screens/comments/index.tsx
 import React, { useMemo, useState } from "react";
 import {
   View,
@@ -33,10 +32,9 @@ type QueuedSend = {
 };
 
 const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
-  // ✅ keep thread in state so we can append comments locally
   const [thread, setThread] = useState<CommentsThread>(COMMENTS_MOCK);
 
-  // ✅ keep queued payloads for later backend call
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [queuedSends, setQueuedSends] = useState<QueuedSend[]>([]);
 
   const commentCount = useMemo(
@@ -86,27 +84,23 @@ const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
     const now = new Date();
     const createdAt = formatTime(now);
 
-    // ✅ build new comment for local UI
     const newComment: CommentMessage = {
       id: `local-${now.getTime()}`,
       author: {
         id: "me",
         name: "Henry Smithson", // TODO: replace with logged-in user
-        // avatar: ... (optional)
       },
       message: commentText.trim() || (pickedImageUri ? "📷" : ""),
       createdAt,
       isEditable: true,
-      image: pickedImageUri ? { uri: pickedImageUri } : undefined, // ✅ matches ImageSourcePropType
+      image: pickedImageUri ? { uri: pickedImageUri } : undefined,
     };
 
-    // ✅ append to UI
     setThread((prev) => ({
       ...prev,
       comments: [...prev.comments, newComment],
     }));
 
-    // ✅ store payload for backend later
     setQueuedSends((prev) => [
       ...prev,
       {
@@ -117,7 +111,6 @@ const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
       },
     ]);
 
-    // reset input
     setCommentText("");
     setPickedImageUri(null);
 

@@ -8,7 +8,7 @@ export default StyleSheet.create({
   },
 
   headerSafe: {
-    backgroundColor: "#eef5f5", // 👈 this is the key line
+    backgroundColor: "#eef5f5",
   },
 
   headerRoot: {
@@ -116,17 +116,6 @@ export default StyleSheet.create({
     alignItems: "center",
     gap: 12,
   },
-  // bubble: {
-  //   backgroundColor: "#ecebeb",
-  //   paddingHorizontal: 16,
-  //   paddingVertical: 12,
-  //   maxWidth: "85%",
-
-  //   borderTopRightRadius: 18,
-  //   borderBottomRightRadius: 18,
-  //   borderBottomLeftRadius: 18,
-  //   borderTopLeftRadius: 4,
-  // },
   bubbleText: {
     fontSize: 15,
     color: "#111",
@@ -251,45 +240,23 @@ export default StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
-  // screens/comments/style.ts (add/adjust these)
-  // bubble: {
-  //   backgroundColor: "#ecebeb",
-  //   paddingHorizontal: 16,
-  //   paddingVertical: 12,
-  //   maxWidth: "85%",
-
-  //   borderTopRightRadius: 18,
-  //   borderBottomRightRadius: 18,
-  //   borderBottomLeftRadius: 18,
-  //   borderTopLeftRadius: 18, // ✅ make it round
-  // },
-
-  // bubbleImage: {
-  //   marginTop: 10,
-  //   width: "100%",
-  //   height: 170,
-  //   borderRadius: 14,
-  //   backgroundColor: "#E5E7EB",
-  // },
-  // screens/comments/style.ts
 
   bubble: {
     backgroundColor: "#ecebeb",
     paddingHorizontal: 16,
     paddingVertical: 12,
-    maxWidth: "85%", // keep as-is for normal messages
+    maxWidth: "85%",
     borderRadius: 18,
   },
 
-  // ✅ when there is an image, we want a predictable wide bubble
   bubbleWithImage: {
-    width: "85%", // 👈 force bubble width even if no text
+    width: "85%",
     maxWidth: "85%",
   },
 
   bubbleImage: {
     marginTop: 10,
-    width: "100%", // 👈 now this actually becomes wide
+    width: "100%",
     height: 210,
     borderRadius: 14,
     backgroundColor: "#E5E7EB",

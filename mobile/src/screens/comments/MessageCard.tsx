@@ -1,4 +1,3 @@
-// screens/comments/MessageCard.tsx
 import React from "react";
 import { View, Text, Pressable, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
@@ -41,12 +40,7 @@ const MessageCard: React.FC<Props> = ({
         </View>
 
         <View style={styles.bubbleRow}>
-          <View
-            style={[
-              styles.bubble,
-              hasImage && styles.bubbleWithImage, // ✅ key fix
-            ]}
-          >
+          <View style={[styles.bubble, hasImage && styles.bubbleWithImage]}>
             {hasText && <Text style={styles.bubbleText}>{message}</Text>}
 
             {hasImage && <Image source={image} style={styles.bubbleImage} />}
