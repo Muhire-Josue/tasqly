@@ -1,4 +1,3 @@
-// screens/comments/index.tsx
 import React, { useMemo, useState } from "react";
 import {
   View,
@@ -36,7 +35,6 @@ const Comments: React.FC<Props> = ({ onBack }) => {
   const [thread, setThread] = useState<CommentsThread>(COMMENTS_MOCK);
 
   const [queuedSends, setQueuedSends] = useState<QueuedSend[]>([]);
-  // If eslint complains, we "use" it (dev only)
   const queuedCount = queuedSends.length;
 
   const commentCount = useMemo(() => thread.comments.length, [thread.comments]);
@@ -125,9 +123,6 @@ const Comments: React.FC<Props> = ({ onBack }) => {
     });
   };
 
-  // ----------------------------
-  // Edit handlers
-  // ----------------------------
   const openEditModal = (commentId: string) => {
     const target = thread.comments.find((c) => c.id === commentId);
     if (!target) return;
@@ -151,8 +146,6 @@ const Comments: React.FC<Props> = ({ onBack }) => {
 
     const nextText = editText.trim();
 
-    // If you want to allow "delete", change this behavior:
-    // - allow empty -> remove message or set to ""
     if (!nextText) {
       showMessage({
         message: "Message cannot be empty",
