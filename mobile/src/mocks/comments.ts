@@ -3,6 +3,7 @@ import Micheal from "../assets/michael.jpg";
 import Vince from "../assets/vince.jpg";
 import Well from "../assets/wellington.jpg";
 import LandLord from "../assets/landlord.jpg";
+import Trash from "../assets/"
 import { CommentsThread } from "../types/comments";
 
 export const COMMENTS_MOCK: CommentsThread = {
@@ -69,6 +70,7 @@ export const COMMENTS_MOCK: CommentsThread = {
       },
       message: "Pickup is tomorrow morning 🗓️",
       createdAt: "9:17 AM",
+      image: Trash,
     },
   ],
   notes: [
