@@ -241,15 +241,113 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
 
+  // bubble: {
+  //   backgroundColor: "#ecebeb",
+  //   paddingHorizontal: 16,
+  //   paddingVertical: 12,
+  //   maxWidth: "85%",
+  //   borderRadius: 18,
+  // },
+
+  bubbleWithImage: {
+    width: "85%",
+    maxWidth: "85%",
+  },
+
+  // bubbleImage: {
+  //   marginTop: 10,
+  //   width: "100%",
+  //   height: 210,
+  //   borderRadius: 14,
+  //   backgroundColor: "#E5E7EB",
+  // },
+  // ----------------------------
+  // Edit modal
+  // ----------------------------
+  editOverlay: {
+    ...StyleSheet.absoluteFillObject,
+    backgroundColor: "rgba(0,0,0,0.35)",
+  },
+
+  editCardWrap: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingHorizontal: 22,
+  },
+
+  editCard: {
+    width: "100%",
+    backgroundColor: "#FFF",
+    borderRadius: 18,
+    padding: 18,
+  },
+
+  editCloseBtn: {
+    position: "absolute",
+    top: 14,
+    right: 14,
+    width: 44,
+    height: 44,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+
+  editInputWrap: {
+    marginTop: 46,
+    backgroundColor: "#F3F4F6",
+    borderRadius: 18,
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    borderWidth: 1,
+    borderColor: "#E5E7EB",
+    minHeight: 110,
+  },
+
+  editInput: {
+    fontSize: 16,
+    color: "#111",
+    minHeight: 86,
+  },
+
+  editSaveBtn: {
+    marginTop: 18,
+    alignSelf: "flex-end",
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 10,
+    backgroundColor: PRIMARY_COLOR_BLUE,
+    paddingHorizontal: 18,
+    paddingVertical: 12,
+    borderRadius: 12,
+  },
+
+  editSaveText: {
+    color: "#FFF",
+    fontSize: 18,
+    fontWeight: "700",
+    textTransform: "lowercase",
+  },
   bubble: {
     backgroundColor: "#ecebeb",
     paddingHorizontal: 16,
     paddingVertical: 12,
+
+    // keep your "linked to avatar" corner
+    borderTopRightRadius: 18,
+    borderBottomRightRadius: 18,
+    borderBottomLeftRadius: 18,
+    borderTopLeftRadius: 4,
+
+    // ✅ important: let the bubble size sensibly
+    alignSelf: "flex-start",
     maxWidth: "85%",
-    borderRadius: 18,
   },
 
-  bubbleWithImage: {
+  // ✅ image-only message should be wider
+  bubbleImageOnly: {
+    paddingVertical: 10,
+    paddingHorizontal: 10,
     width: "85%",
     maxWidth: "85%",
   },
@@ -257,8 +355,8 @@ export default StyleSheet.create({
   bubbleImage: {
     marginTop: 10,
     width: "100%",
-    height: 210,
-    borderRadius: 14,
-    backgroundColor: "#E5E7EB",
+    height: 180,
+    borderRadius: 16,
+    backgroundColor: "#D1D5DB",
   },
 });

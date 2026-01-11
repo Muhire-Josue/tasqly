@@ -1,9 +1,10 @@
+// screens/comments/MessageCard.tsx
 import React from "react";
 import { View, Text, Pressable, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
-import type { CommentMessage } from "../../types/comments";
 import styles from "./style";
+import type { CommentMessage } from "../../types/comments";
 
 type Props = CommentMessage & {
   onEditComment?: (commentId: string) => void;
@@ -18,11 +19,12 @@ const MessageCard: React.FC<Props> = ({
   image,
   onEditComment,
 }) => {
-  const hasImage = !!image;
-  const hasText = message.trim().length > 0;
+  const hasText = Boolean(message && message.trim().length > 0);
+  const hasImage = Boolean(image);
 
   return (
     <View style={styles.commentRow}>
+      {/* Avatar */}
       <View style={styles.avatarWrap}>
         {author.avatar ? (
           <Image source={author.avatar} style={styles.avatarImg} />
@@ -33,6 +35,7 @@ const MessageCard: React.FC<Props> = ({
         )}
       </View>
 
+      {/* Main */}
       <View style={styles.commentMain}>
         <View style={styles.nameTimeRow}>
           <Text style={styles.authorName}>{author.name}</Text>
@@ -40,10 +43,22 @@ const MessageCard: React.FC<Props> = ({
         </View>
 
         <View style={styles.bubbleRow}>
-          <View style={[styles.bubble, hasImage && styles.bubbleWithImage]}>
-            {hasText && <Text style={styles.bubbleText}>{message}</Text>}
+          <View
+            style={[
+              styles.bubble,
+              // ✅ if image-only, make bubble wider so image doesn’t become a thin strip
+              !hasText && hasImage && styles.bubbleImageOnly,
+            ]}
+          >
+            {hasText ? <Text style={styles.bubbleText}>{message}</Text> : null}
 
-            {hasImage && <Image source={image} style={styles.bubbleImage} />}
+            {hasImage ? (
+              <Image
+                source={image}
+                style={styles.bubbleImage}
+                resizeMode="cover"
+              />
+            ) : null}
           </View>
 
           {isEditable ? (
