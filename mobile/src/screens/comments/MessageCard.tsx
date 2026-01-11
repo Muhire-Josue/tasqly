@@ -1,27 +1,12 @@
+// screens/comments/MessageCard.tsx
 import React from "react";
-import {
-  View,
-  Text,
-  Pressable,
-  Image,
-  ImageSourcePropType,
-} from "react-native";
+import { View, Text, Pressable, Image } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
+import type { CommentMessage } from "../../types/comments";
 import styles from "./style";
 
-export type CommentItem = {
-  id: string;
-  author: {
-    name: string;
-    avatar?: ImageSourcePropType;
-  };
-  createdAt: string;
-  message: string;
-  isEditable?: boolean;
-};
-
-type Props = CommentItem & {
+type Props = CommentMessage & {
   onEditComment?: (commentId: string) => void;
 };
 
@@ -31,10 +16,12 @@ const MessageCard: React.FC<Props> = ({
   createdAt,
   message,
   isEditable,
+  image,
   onEditComment,
 }) => {
   return (
     <View style={styles.commentRow}>
+      {/* Avatar */}
       <View style={styles.avatarWrap}>
         {author.avatar ? (
           <Image source={author.avatar} style={styles.avatarImg} />
@@ -45,6 +32,7 @@ const MessageCard: React.FC<Props> = ({
         )}
       </View>
 
+      {/* Main */}
       <View style={styles.commentMain}>
         <View style={styles.nameTimeRow}>
           <Text style={styles.authorName}>{author.name}</Text>
@@ -54,6 +42,8 @@ const MessageCard: React.FC<Props> = ({
         <View style={styles.bubbleRow}>
           <View style={styles.bubble}>
             <Text style={styles.bubbleText}>{message}</Text>
+
+            {!!image && <Image source={image} style={styles.bubbleImage} />}
           </View>
 
           {isEditable ? (

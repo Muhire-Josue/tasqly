@@ -116,17 +116,17 @@ export default StyleSheet.create({
     alignItems: "center",
     gap: 12,
   },
-  bubble: {
-    backgroundColor: "#ecebeb",
-    paddingHorizontal: 16,
-    paddingVertical: 12,
-    maxWidth: "85%",
+  // bubble: {
+  //   backgroundColor: "#ecebeb",
+  //   paddingHorizontal: 16,
+  //   paddingVertical: 12,
+  //   maxWidth: "85%",
 
-    borderTopRightRadius: 18,
-    borderBottomRightRadius: 18,
-    borderBottomLeftRadius: 18,
-    borderTopLeftRadius: 4,
-  },
+  //   borderTopRightRadius: 18,
+  //   borderBottomRightRadius: 18,
+  //   borderBottomLeftRadius: 18,
+  //   borderTopLeftRadius: 4,
+  // },
   bubbleText: {
     fontSize: 15,
     color: "#111",
@@ -250,5 +250,25 @@ export default StyleSheet.create({
     borderRadius: 10,
     alignItems: "center",
     justifyContent: "center",
+  },
+  // screens/comments/style.ts (add/adjust these)
+  bubble: {
+    backgroundColor: "#ecebeb",
+    paddingHorizontal: 16,
+    paddingVertical: 12,
+    maxWidth: "85%",
+
+    borderTopRightRadius: 18,
+    borderBottomRightRadius: 18,
+    borderBottomLeftRadius: 18,
+    borderTopLeftRadius: 18, // ✅ make it round
+  },
+
+  bubbleImage: {
+    marginTop: 10,
+    width: "100%",
+    height: 170,
+    borderRadius: 14,
+    backgroundColor: "#E5E7EB",
   },
 });
