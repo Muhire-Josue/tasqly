@@ -22,6 +22,7 @@ import HouseSettings from "../screens/house";
 import JoinHouse from "../screens/house/join";
 import JoinHouseSuccess from "../screens/house/join/JoinHouseSuccess";
 import CreateHouse from "../screens/house/create";
+import Comments from "../screens/comments";
 
 import RepairList from "../screens/repairs/list";
 
@@ -139,6 +140,11 @@ const Navigation: React.FC = () => {
         <Stack.Screen
           name="create-house"
           component={CreateHouse}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="comments"
+          component={Comments}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

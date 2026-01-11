@@ -19,4 +19,5 @@ export type RootStackParamList = {
   "join-house": undefined;
   "join-house-success": undefined;
   "create-house": undefined;
+  comments: undefined;
 };
