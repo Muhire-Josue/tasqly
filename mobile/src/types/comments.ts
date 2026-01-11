@@ -12,6 +12,7 @@ export type CommentMessage = {
   createdAt: string;
   message: string;
   isEditable?: boolean;
+  image?: ImageSourcePropType;
 };
 
 export type CommentNote = {

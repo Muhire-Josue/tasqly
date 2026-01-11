@@ -1,4 +1,3 @@
-// screens/comments/index.tsx
 import React, { useMemo, useState } from "react";
 import {
   View,
@@ -18,7 +17,6 @@ import { showMessage } from "react-native-flash-message";
 import styles from "./style";
 import MessageCard from "./MessageCard";
 import { COMMENTS_MOCK } from "../../mocks/comments";
-// import { PRIMARY_COLOR_BLUE } from "../../theme/colors";
 
 type Props = {
   onBack?: () => void;
@@ -34,7 +32,6 @@ const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
   );
   const hasNotes = Boolean(thread.notes && thread.notes.length > 0);
 
-  // ✅ input state
   const [commentText, setCommentText] = useState("");
   const [pickedImageUri, setPickedImageUri] = useState<string | null>(null);
 
@@ -136,15 +133,12 @@ const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
                 <View style={styles.notesSpacer} />
               )}
 
-              {/* extra space so last message isn't hidden behind input */}
               <View style={{ height: 90 }} />
             </>
           }
         />
 
-        {/* ✅ Bottom input bar */}
         <SafeAreaView edges={["bottom"]} style={styles.composerSafe}>
-          {/* Optional tiny preview indicator (no UI change if you don't want it) */}
           {pickedImageUri ? (
             <View style={styles.attachmentRow}>
               <View style={styles.attachmentChip}>
