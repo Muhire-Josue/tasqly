@@ -241,29 +241,11 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
 
-  // bubble: {
-  //   backgroundColor: "#ecebeb",
-  //   paddingHorizontal: 16,
-  //   paddingVertical: 12,
-  //   maxWidth: "85%",
-  //   borderRadius: 18,
-  // },
-
   bubbleWithImage: {
     width: "85%",
     maxWidth: "85%",
   },
 
-  // bubbleImage: {
-  //   marginTop: 10,
-  //   width: "100%",
-  //   height: 210,
-  //   borderRadius: 14,
-  //   backgroundColor: "#E5E7EB",
-  // },
-  // ----------------------------
-  // Edit modal
-  // ----------------------------
   editOverlay: {
     ...StyleSheet.absoluteFillObject,
     backgroundColor: "rgba(0,0,0,0.35)",

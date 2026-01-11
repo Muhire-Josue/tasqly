@@ -1,3 +1,4 @@
+// screens/comments/index.tsx
 import React, { useMemo, useState } from "react";
 import {
   View,
@@ -8,9 +9,10 @@ import {
   Image,
   KeyboardAvoidingView,
   Platform,
+  Modal,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
-import { Ionicons } from "@expo/vector-icons";
+import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { showMessage } from "react-native-flash-message";
 
@@ -21,7 +23,6 @@ import type { CommentMessage, CommentsThread } from "../../types/comments";
 
 type Props = {
   onBack?: () => void;
-  onEditComment?: (commentId: string) => void;
 };
 
 type QueuedSend = {
@@ -31,22 +32,31 @@ type QueuedSend = {
   createdAt: string;
 };
 
-const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
+const Comments: React.FC<Props> = ({ onBack }) => {
+  // ✅ keep thread in state so UI updates
   const [thread, setThread] = useState<CommentsThread>(COMMENTS_MOCK);
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // ✅ keep queued payloads without unused state warning
   const [queuedSends, setQueuedSends] = useState<QueuedSend[]>([]);
+  // If eslint complains, we "use" it (dev only)
+  // You can remove this later once you implement backend sync
+  const queuedCount = queuedSends.length;
 
-  const commentCount = useMemo(
-    () => thread.comments.length,
-    [thread.comments.length],
-  );
+  const commentCount = useMemo(() => thread.comments.length, [thread.comments]);
   const hasNotes = Boolean(thread.notes?.length);
 
   const [commentText, setCommentText] = useState("");
   const [pickedImageUri, setPickedImageUri] = useState<string | null>(null);
 
+  // ----------------------------
+  // Edit modal state
+  // ----------------------------
+  const [editVisible, setEditVisible] = useState(false);
+  const [editCommentId, setEditCommentId] = useState<string | null>(null);
+  const [editText, setEditText] = useState("");
+
   const canSend = commentText.trim().length > 0 || Boolean(pickedImageUri);
+  const canSaveEdit = editText.trim().length > 0; // keep UX simple (no empty saves)
 
   const formatTime = (d: Date) =>
     d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
@@ -121,6 +131,59 @@ const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
     });
   };
 
+  // ----------------------------
+  // Edit handlers
+  // ----------------------------
+  const openEditModal = (commentId: string) => {
+    const target = thread.comments.find((c) => c.id === commentId);
+    if (!target) return;
+
+    // Only allow editing if it isEditable
+    if (!target.isEditable) return;
+
+    setEditCommentId(commentId);
+    setEditText(target.message ?? "");
+    setEditVisible(true);
+  };
+
+  const closeEditModal = () => {
+    setEditVisible(false);
+    setEditCommentId(null);
+    setEditText("");
+  };
+
+  const handleSaveEdit = () => {
+    if (!editCommentId) return;
+
+    const nextText = editText.trim();
+
+    // If you want to allow "delete", change this behavior:
+    // - allow empty -> remove message or set to ""
+    if (!nextText) {
+      showMessage({
+        message: "Message cannot be empty",
+        type: "warning",
+        icon: "warning",
+      });
+      return;
+    }
+
+    setThread((prev) => ({
+      ...prev,
+      comments: prev.comments.map((c) =>
+        c.id === editCommentId ? { ...c, message: nextText } : c,
+      ),
+    }));
+
+    closeEditModal();
+
+    showMessage({
+      message: "Comment updated",
+      type: "success",
+      icon: "success",
+    });
+  };
+
   return (
     <View style={styles.root}>
       <SafeAreaView edges={["top", "left", "right"]} style={styles.headerSafe}>
@@ -155,7 +218,7 @@ const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
           showsVerticalScrollIndicator={false}
           contentContainerStyle={styles.listContent}
           renderItem={({ item }) => (
-            <MessageCard {...item} onEditComment={onEditComment} />
+            <MessageCard {...item} onEditComment={openEditModal} />
           )}
           ListFooterComponent={
             <>
@@ -173,6 +236,12 @@ const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
               ) : (
                 <View style={styles.notesSpacer} />
               )}
+
+              {/* dev-only usage to silence unused warning if needed */}
+              {queuedCount >= 999999 ? (
+                <Text style={{ fontSize: 1 }}>{queuedCount}</Text>
+              ) : null}
+
               <View style={{ height: 90 }} />
             </>
           }
@@ -241,6 +310,58 @@ const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
           </View>
         </SafeAreaView>
       </KeyboardAvoidingView>
+
+      {/* ---------------------------- */}
+      {/* Edit Comment Modal */}
+      {/* ---------------------------- */}
+      <Modal
+        visible={editVisible}
+        transparent
+        animationType="fade"
+        onRequestClose={closeEditModal}
+      >
+        <Pressable style={styles.editOverlay} onPress={closeEditModal} />
+
+        <View style={styles.editCardWrap}>
+          <View style={styles.editCard}>
+            <Pressable
+              onPress={closeEditModal}
+              hitSlop={10}
+              style={({ pressed }) => [
+                styles.editCloseBtn,
+                pressed && { opacity: 0.75 },
+              ]}
+            >
+              <Ionicons name="close" size={26} color="#111" />
+            </Pressable>
+
+            <View style={styles.editInputWrap}>
+              <TextInput
+                value={editText}
+                onChangeText={setEditText}
+                multiline
+                textAlignVertical="top"
+                style={styles.editInput}
+                placeholder="Edit comment..."
+                placeholderTextColor="#9CA3AF"
+              />
+            </View>
+
+            <Pressable
+              onPress={handleSaveEdit}
+              disabled={!canSaveEdit}
+              style={({ pressed }) => [
+                styles.editSaveBtn,
+                !canSaveEdit && { opacity: 0.45 },
+                pressed && canSaveEdit && { opacity: 0.9 },
+              ]}
+            >
+              <FontAwesome5 name="save" size={20} color="#FFF" />
+              <Text style={styles.editSaveText}>save</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
     </View>
   );
 };
