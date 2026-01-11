@@ -3,7 +3,8 @@ import Micheal from "../assets/michael.jpg";
 import Vince from "../assets/vince.jpg";
 import Well from "../assets/wellington.jpg";
 import LandLord from "../assets/landlord.jpg";
-import Trash from "../assets/"
+import Trash from "../assets/trash.jpg";
+import Trashes from "../assets/trashes.jpg";
 import { CommentsThread } from "../types/comments";
 
 export const COMMENTS_MOCK: CommentsThread = {
@@ -39,6 +40,7 @@ export const COMMENTS_MOCK: CommentsThread = {
       },
       message: "Correct, this task is for plastic waste only.",
       createdAt: "9:16 AM",
+      image: Trashes,
     },
     {
       id: "4",
