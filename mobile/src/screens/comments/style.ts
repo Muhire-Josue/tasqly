@@ -252,22 +252,45 @@ export default StyleSheet.create({
     justifyContent: "center",
   },
   // screens/comments/style.ts (add/adjust these)
+  // bubble: {
+  //   backgroundColor: "#ecebeb",
+  //   paddingHorizontal: 16,
+  //   paddingVertical: 12,
+  //   maxWidth: "85%",
+
+  //   borderTopRightRadius: 18,
+  //   borderBottomRightRadius: 18,
+  //   borderBottomLeftRadius: 18,
+  //   borderTopLeftRadius: 18, // ✅ make it round
+  // },
+
+  // bubbleImage: {
+  //   marginTop: 10,
+  //   width: "100%",
+  //   height: 170,
+  //   borderRadius: 14,
+  //   backgroundColor: "#E5E7EB",
+  // },
+  // screens/comments/style.ts
+
   bubble: {
     backgroundColor: "#ecebeb",
     paddingHorizontal: 16,
     paddingVertical: 12,
-    maxWidth: "85%",
+    maxWidth: "85%", // keep as-is for normal messages
+    borderRadius: 18,
+  },
 
-    borderTopRightRadius: 18,
-    borderBottomRightRadius: 18,
-    borderBottomLeftRadius: 18,
-    borderTopLeftRadius: 18, // ✅ make it round
+  // ✅ when there is an image, we want a predictable wide bubble
+  bubbleWithImage: {
+    width: "85%", // 👈 force bubble width even if no text
+    maxWidth: "85%",
   },
 
   bubbleImage: {
     marginTop: 10,
-    width: "100%",
-    height: 170,
+    width: "100%", // 👈 now this actually becomes wide
+    height: 210,
     borderRadius: 14,
     backgroundColor: "#E5E7EB",
   },

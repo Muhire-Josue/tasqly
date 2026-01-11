@@ -1,3 +1,4 @@
+// screens/comments/index.tsx
 import React, { useMemo, useState } from "react";
 import {
   View,
@@ -17,25 +18,40 @@ import { showMessage } from "react-native-flash-message";
 import styles from "./style";
 import MessageCard from "./MessageCard";
 import { COMMENTS_MOCK } from "../../mocks/comments";
+import type { CommentMessage, CommentsThread } from "../../types/comments";
 
 type Props = {
   onBack?: () => void;
   onEditComment?: (commentId: string) => void;
 };
 
+type QueuedSend = {
+  threadId: string;
+  text: string;
+  imageUri: string | null;
+  createdAt: string;
+};
+
 const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
-  const thread = COMMENTS_MOCK;
+  // ✅ keep thread in state so we can append comments locally
+  const [thread, setThread] = useState<CommentsThread>(COMMENTS_MOCK);
+
+  // ✅ keep queued payloads for later backend call
+  const [queuedSends, setQueuedSends] = useState<QueuedSend[]>([]);
 
   const commentCount = useMemo(
     () => thread.comments.length,
     [thread.comments.length],
   );
-  const hasNotes = Boolean(thread.notes && thread.notes.length > 0);
+  const hasNotes = Boolean(thread.notes?.length);
 
   const [commentText, setCommentText] = useState("");
   const [pickedImageUri, setPickedImageUri] = useState<string | null>(null);
 
   const canSend = commentText.trim().length > 0 || Boolean(pickedImageUri);
+
+  const formatTime = (d: Date) =>
+    d.toLocaleTimeString([], { hour: "numeric", minute: "2-digit" });
 
   const handlePickImage = async () => {
     const permission = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -67,17 +83,49 @@ const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
   const handleSend = () => {
     if (!canSend) return;
 
-    // TODO: send to backend later (include pickedImageUri in payload if present)
+    const now = new Date();
+    const createdAt = formatTime(now);
+
+    // ✅ build new comment for local UI
+    const newComment: CommentMessage = {
+      id: `local-${now.getTime()}`,
+      author: {
+        id: "me",
+        name: "Henry Smithson", // TODO: replace with logged-in user
+        // avatar: ... (optional)
+      },
+      message: commentText.trim() || (pickedImageUri ? "📷" : ""),
+      createdAt,
+      isEditable: true,
+      image: pickedImageUri ? { uri: pickedImageUri } : undefined, // ✅ matches ImageSourcePropType
+    };
+
+    // ✅ append to UI
+    setThread((prev) => ({
+      ...prev,
+      comments: [...prev.comments, newComment],
+    }));
+
+    // ✅ store payload for backend later
+    setQueuedSends((prev) => [
+      ...prev,
+      {
+        threadId: thread.id,
+        text: commentText.trim(),
+        imageUri: pickedImageUri,
+        createdAt,
+      },
+    ]);
+
+    // reset input
+    setCommentText("");
+    setPickedImageUri(null);
+
     showMessage({
-      message: pickedImageUri
-        ? "Comment + image sent (TODO)"
-        : "Comment sent (TODO)",
+      message: newComment.image ? "Comment + image added" : "Comment added",
       type: "success",
       icon: "success",
     });
-
-    setCommentText("");
-    setPickedImageUri(null);
   };
 
   return (
@@ -132,7 +180,6 @@ const Comments: React.FC<Props> = ({ onBack, onEditComment }) => {
               ) : (
                 <View style={styles.notesSpacer} />
               )}
-
               <View style={{ height: 90 }} />
             </>
           }
