@@ -28,7 +28,6 @@ const styles = StyleSheet.create({
     marginHorizontal: 24,
   },
 
-  // Delete / Edit row
   actionRow: {
     flexDirection: "row",
     justifyContent: "space-between",
@@ -77,8 +76,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "600",
   },
-
-  /* --- Responsible / Deadline section --- */
 
   infoRow: {
     flexDirection: "row",
@@ -144,8 +141,6 @@ const styles = StyleSheet.create({
     fontWeight: "600",
     textAlign: "left",
   },
-
-  /* --- Modal styles (unchanged) --- */
 
   modalOverlay: {
     flex: 1,
@@ -241,10 +236,6 @@ const styles = StyleSheet.create({
     marginRight: 8,
   },
 
-  // statusIcon: {
-  //   marginTop: 1,
-  // },
-
   urgentPill: {
     flexDirection: "row",
     alignItems: "center",
@@ -294,9 +285,7 @@ const styles = StyleSheet.create({
   statusIcon: {
     marginTop: 1,
   },
-  scrollContent: {
-    // paddingBottom: 120, // keeps content above bottom tab bar
-  },
+  scrollContent: {},
 
   descriptionSection: {
     marginTop: 26,
@@ -337,7 +326,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
 
-    // shadow
     shadowColor: "#000",
     shadowOpacity: 0.22,
     shadowRadius: 10,
