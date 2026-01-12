@@ -1,3 +1,5 @@
+import { TabKey } from "./bottomTabBar";
+
 export type RootStackParamList = {
   splash: undefined;
   signup: undefined;
@@ -19,5 +21,5 @@ export type RootStackParamList = {
   "join-house": undefined;
   "join-house-success": undefined;
   "create-house": undefined;
-  comments: undefined;
+  comments: { repairId?: string; taskId?: string; prevTab: TabKey };
 };

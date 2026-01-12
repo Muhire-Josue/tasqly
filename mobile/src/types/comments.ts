@@ -23,6 +23,10 @@ export type CommentNote = {
 
 export type CommentsThread = {
   id: string;
+
+  taskId?: string;
+  repairId?: string;
+
   comments: CommentMessage[];
   notes?: CommentNote[];
 };

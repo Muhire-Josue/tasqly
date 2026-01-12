@@ -14,25 +14,50 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { showMessage } from "react-native-flash-message";
+import { RouteProp, useRoute } from "@react-navigation/native";
 
 import styles from "./style";
 import MessageCard from "./MessageCard";
-import { COMMENTS_MOCK } from "../../mocks/comments";
+import { COMMENTS_THREADS_MOCK } from "../../mocks/comments";
 import type { CommentMessage, CommentsThread } from "../../types/comments";
+import BottomTabBar from "../../components/BottomTabBar";
+import type { RootStackParamList } from "../../types/navigation";
 
-type Props = {
-  onBack?: () => void;
-};
+type CommentsRoute = RouteProp<RootStackParamList, "comments">;
 
 type QueuedSend = {
   threadId: string;
   text: string;
   imageUri: string | null;
   createdAt: string;
+
+  taskId?: string;
+  repairId?: string;
 };
 
-const Comments: React.FC<Props> = ({ onBack }) => {
-  const [thread, setThread] = useState<CommentsThread>(COMMENTS_MOCK);
+const Comments: React.FC = () => {
+  const route = useRoute<CommentsRoute>();
+  const { taskId, repairId, prevTab } = route.params;
+
+  const initialThread = useMemo<CommentsThread>(() => {
+    const found = COMMENTS_THREADS_MOCK.find((t) => {
+      if (taskId) return t.taskId === taskId;
+      if (repairId) return t.repairId === repairId;
+      return false;
+    });
+
+    return (
+      found ?? {
+        id: "thread-empty",
+        taskId,
+        repairId,
+        comments: [],
+        notes: [],
+      }
+    );
+  }, [taskId, repairId]);
+
+  const [thread, setThread] = useState<CommentsThread>(initialThread);
 
   const [queuedSends, setQueuedSends] = useState<QueuedSend[]>([]);
   const queuedCount = queuedSends.length;
@@ -88,10 +113,7 @@ const Comments: React.FC<Props> = ({ onBack }) => {
 
     const newComment: CommentMessage = {
       id: `local-${now.getTime()}`,
-      author: {
-        id: "me",
-        name: "Henry Smithson", // TODO: replace with logged-in user
-      },
+      author: { id: "me", name: "Henry Smithson" }, // TODO: logged-in user
       message: commentText.trim() || (pickedImageUri ? "📷" : ""),
       createdAt,
       isEditable: true,
@@ -110,6 +132,8 @@ const Comments: React.FC<Props> = ({ onBack }) => {
         text: commentText.trim(),
         imageUri: pickedImageUri,
         createdAt,
+        taskId: thread.taskId,
+        repairId: thread.repairId,
       },
     ]);
 
@@ -125,10 +149,7 @@ const Comments: React.FC<Props> = ({ onBack }) => {
 
   const openEditModal = (commentId: string) => {
     const target = thread.comments.find((c) => c.id === commentId);
-    if (!target) return;
-
-    // Only allow editing if it isEditable
-    if (!target.isEditable) return;
+    if (!target || !target.isEditable) return;
 
     setEditCommentId(commentId);
     setEditText(target.message ?? "");
@@ -145,7 +166,6 @@ const Comments: React.FC<Props> = ({ onBack }) => {
     if (!editCommentId) return;
 
     const nextText = editText.trim();
-
     if (!nextText) {
       showMessage({
         message: "Message cannot be empty",
@@ -172,180 +192,188 @@ const Comments: React.FC<Props> = ({ onBack }) => {
   };
 
   return (
-    <View style={styles.root}>
-      <SafeAreaView edges={["top", "left", "right"]} style={styles.headerSafe}>
-        <View style={styles.header}>
-          <Pressable
-            onPress={onBack}
-            hitSlop={10}
-            style={({ pressed }) => [
-              styles.backBtn,
-              pressed && { opacity: 0.7 },
-            ]}
-          >
-            <Ionicons name="chevron-back" size={28} color="#111" />
-          </Pressable>
+    <>
+      <View style={styles.root}>
+        <SafeAreaView
+          edges={["top", "left", "right"]}
+          style={styles.headerSafe}
+        >
+          <View style={styles.header}>
+            <Pressable
+              onPress={() => {
+                // TODO: wire this to navigation.goBack()
+              }}
+              hitSlop={10}
+              style={({ pressed }) => [
+                styles.backBtn,
+                pressed && { opacity: 0.7 },
+              ]}
+            >
+              <Ionicons name="chevron-back" size={28} color="#111" />
+            </Pressable>
 
-          <Text style={styles.headerTitle}>{commentCount} comments</Text>
+            <Text style={styles.headerTitle}>{commentCount} comments</Text>
+            <View style={styles.headerRightSpacer} />
+          </View>
 
-          <View style={styles.headerRightSpacer} />
-        </View>
+          <View style={styles.headerDivider} />
+        </SafeAreaView>
 
-        <View style={styles.headerDivider} />
-      </SafeAreaView>
+        <KeyboardAvoidingView
+          style={{ flex: 1 }}
+          behavior={Platform.OS === "ios" ? "padding" : undefined}
+          keyboardVerticalOffset={Platform.OS === "ios" ? 10 : 0}
+        >
+          <FlatList
+            data={thread.comments}
+            keyExtractor={(item) => item.id}
+            showsVerticalScrollIndicator={false}
+            contentContainerStyle={styles.listContent}
+            renderItem={({ item }) => (
+              <MessageCard {...item} onEditComment={openEditModal} />
+            )}
+            ListFooterComponent={
+              <>
+                {hasNotes ? (
+                  <View style={styles.notesWrap}>
+                    {thread.notes!.map((note) => (
+                      <View key={note.id} style={styles.noteRow}>
+                        <Text style={styles.noteText}>
+                          {note.text}{" "}
+                          <Text style={styles.noteTime}>{note.createdAt}</Text>
+                        </Text>
+                      </View>
+                    ))}
+                  </View>
+                ) : (
+                  <View style={styles.notesSpacer} />
+                )}
 
-      <KeyboardAvoidingView
-        style={{ flex: 1 }}
-        behavior={Platform.OS === "ios" ? "padding" : undefined}
-        keyboardVerticalOffset={Platform.OS === "ios" ? 10 : 0}
-      >
-        <FlatList
-          data={thread.comments}
-          keyExtractor={(item) => item.id}
-          showsVerticalScrollIndicator={false}
-          contentContainerStyle={styles.listContent}
-          renderItem={({ item }) => (
-            <MessageCard {...item} onEditComment={openEditModal} />
-          )}
-          ListFooterComponent={
-            <>
-              {hasNotes ? (
-                <View style={styles.notesWrap}>
-                  {thread.notes!.map((note) => (
-                    <View key={note.id} style={styles.noteRow}>
-                      <Text style={styles.noteText}>
-                        {note.text}{" "}
-                        <Text style={styles.noteTime}>{note.createdAt}</Text>
-                      </Text>
-                    </View>
-                  ))}
+                {queuedCount >= 999999 ? (
+                  <Text style={{ fontSize: 1 }}>{queuedCount}</Text>
+                ) : null}
+
+                <View style={{ height: 90 }} />
+              </>
+            }
+          />
+
+          <SafeAreaView edges={["bottom"]} style={styles.composerSafe}>
+            {pickedImageUri ? (
+              <View style={styles.attachmentRow}>
+                <View style={styles.attachmentChip}>
+                  <Image
+                    source={{ uri: pickedImageUri }}
+                    style={styles.attachmentThumb}
+                  />
+                  <Text style={styles.attachmentText}>1 image attached</Text>
+                  <Pressable
+                    onPress={() => setPickedImageUri(null)}
+                    hitSlop={10}
+                    style={({ pressed }) => [
+                      styles.attachmentRemoveBtn,
+                      pressed && { opacity: 0.7 },
+                    ]}
+                  >
+                    <Ionicons name="close" size={18} color="#111" />
+                  </Pressable>
                 </View>
-              ) : (
-                <View style={styles.notesSpacer} />
-              )}
+              </View>
+            ) : null}
 
-              {queuedCount >= 999999 ? (
-                <Text style={{ fontSize: 1 }}>{queuedCount}</Text>
-              ) : null}
-
-              <View style={{ height: 90 }} />
-            </>
-          }
-        />
-
-        <SafeAreaView edges={["bottom"]} style={styles.composerSafe}>
-          {pickedImageUri ? (
-            <View style={styles.attachmentRow}>
-              <View style={styles.attachmentChip}>
-                <Image
-                  source={{ uri: pickedImageUri }}
-                  style={styles.attachmentThumb}
+            <View style={styles.composerRow}>
+              <View style={styles.inputWrap}>
+                <TextInput
+                  value={commentText}
+                  onChangeText={setCommentText}
+                  placeholder="Add comment…"
+                  placeholderTextColor="#9CA3AF"
+                  style={styles.input}
+                  multiline={false}
+                  returnKeyType="send"
+                  onSubmitEditing={handleSend}
                 />
-                <Text style={styles.attachmentText}>1 image attached</Text>
+
                 <Pressable
-                  onPress={() => setPickedImageUri(null)}
+                  onPress={handlePickImage}
                   hitSlop={10}
                   style={({ pressed }) => [
-                    styles.attachmentRemoveBtn,
+                    styles.clipBtn,
                     pressed && { opacity: 0.7 },
                   ]}
                 >
-                  <Ionicons name="close" size={18} color="#111" />
+                  <Ionicons name="attach" size={26} color="#111" />
                 </Pressable>
               </View>
-            </View>
-          ) : null}
-
-          <View style={styles.composerRow}>
-            <View style={styles.inputWrap}>
-              <TextInput
-                value={commentText}
-                onChangeText={setCommentText}
-                placeholder="Add comment…"
-                placeholderTextColor="#9CA3AF"
-                style={styles.input}
-                multiline={false}
-                returnKeyType="send"
-                onSubmitEditing={handleSend}
-              />
 
               <Pressable
-                onPress={handlePickImage}
+                onPress={handleSend}
+                disabled={!canSend}
                 hitSlop={10}
                 style={({ pressed }) => [
-                  styles.clipBtn,
-                  pressed && { opacity: 0.7 },
+                  styles.sendBtn,
+                  !canSend && { opacity: 0.35 },
+                  pressed && canSend && { opacity: 0.9 },
                 ]}
               >
-                <Ionicons name="attach" size={26} color="#111" />
+                <Ionicons name="paper-plane" size={26} color="#FFF" />
               </Pressable>
             </View>
+          </SafeAreaView>
+        </KeyboardAvoidingView>
 
-            <Pressable
-              onPress={handleSend}
-              disabled={!canSend}
-              hitSlop={10}
-              style={({ pressed }) => [
-                styles.sendBtn,
-                !canSend && { opacity: 0.35 },
-                pressed && canSend && { opacity: 0.9 },
-              ]}
-            >
-              <Ionicons name="paper-plane" size={26} color="#FFF" />
-            </Pressable>
-          </View>
-        </SafeAreaView>
-      </KeyboardAvoidingView>
+        <Modal
+          visible={editVisible}
+          transparent
+          animationType="fade"
+          onRequestClose={closeEditModal}
+        >
+          <Pressable style={styles.editOverlay} onPress={closeEditModal} />
 
-      <Modal
-        visible={editVisible}
-        transparent
-        animationType="fade"
-        onRequestClose={closeEditModal}
-      >
-        <Pressable style={styles.editOverlay} onPress={closeEditModal} />
+          <View style={styles.editCardWrap}>
+            <View style={styles.editCard}>
+              <Pressable
+                onPress={closeEditModal}
+                hitSlop={10}
+                style={({ pressed }) => [
+                  styles.editCloseBtn,
+                  pressed && { opacity: 0.75 },
+                ]}
+              >
+                <Ionicons name="close" size={26} color="#111" />
+              </Pressable>
 
-        <View style={styles.editCardWrap}>
-          <View style={styles.editCard}>
-            <Pressable
-              onPress={closeEditModal}
-              hitSlop={10}
-              style={({ pressed }) => [
-                styles.editCloseBtn,
-                pressed && { opacity: 0.75 },
-              ]}
-            >
-              <Ionicons name="close" size={26} color="#111" />
-            </Pressable>
+              <View style={styles.editInputWrap}>
+                <TextInput
+                  value={editText}
+                  onChangeText={setEditText}
+                  multiline
+                  textAlignVertical="top"
+                  style={styles.editInput}
+                  placeholder="Edit comment..."
+                  placeholderTextColor="#9CA3AF"
+                />
+              </View>
 
-            <View style={styles.editInputWrap}>
-              <TextInput
-                value={editText}
-                onChangeText={setEditText}
-                multiline
-                textAlignVertical="top"
-                style={styles.editInput}
-                placeholder="Edit comment..."
-                placeholderTextColor="#9CA3AF"
-              />
+              <Pressable
+                onPress={handleSaveEdit}
+                disabled={!canSaveEdit}
+                style={({ pressed }) => [
+                  styles.editSaveBtn,
+                  !canSaveEdit && { opacity: 0.45 },
+                  pressed && canSaveEdit && { opacity: 0.9 },
+                ]}
+              >
+                <FontAwesome5 name="save" size={20} color="#FFF" />
+                <Text style={styles.editSaveText}>Save</Text>
+              </Pressable>
             </View>
-
-            <Pressable
-              onPress={handleSaveEdit}
-              disabled={!canSaveEdit}
-              style={({ pressed }) => [
-                styles.editSaveBtn,
-                !canSaveEdit && { opacity: 0.45 },
-                pressed && canSaveEdit && { opacity: 0.9 },
-              ]}
-            >
-              <FontAwesome5 name="save" size={20} color="#FFF" />
-              <Text style={styles.editSaveText}>save</Text>
-            </Pressable>
           </View>
-        </View>
-      </Modal>
-    </View>
+        </Modal>
+      </View>
+
+      <BottomTabBar activeTab={prevTab} />
+    </>
   );
 };
 
