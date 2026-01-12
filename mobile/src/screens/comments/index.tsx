@@ -15,6 +15,7 @@ import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { showMessage } from "react-native-flash-message";
 import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 import styles from "./style";
 import MessageCard from "./MessageCard";
@@ -22,7 +23,6 @@ import { COMMENTS_THREADS_MOCK } from "../../mocks/comments";
 import type { CommentMessage, CommentsThread } from "../../types/comments";
 import BottomTabBar from "../../components/BottomTabBar";
 import type { RootStackParamList } from "../../types/navigation";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type CommentsRoute = RouteProp<RootStackParamList, "comments">;
 
