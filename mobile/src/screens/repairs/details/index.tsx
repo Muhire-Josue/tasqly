@@ -11,6 +11,7 @@ import { useNavigateTo } from "../../../navigation/useNavigateTo";
 import { STATUS_META } from "../../../mocks/statusMeta";
 import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import BottomTabBar from "../../../components/BottomTabBar";
+import { COMMENTS_THREADS_MOCK } from "../../../mocks/comments";
 
 type TaskDetailsRoute = RouteProp<RootStackParamList, "repair-details">;
 
@@ -19,12 +20,13 @@ const RepairDetails: React.FC = () => {
   const navigateTo = useNavigateTo();
   const { repairId } = route.params;
   const repair = MOCK_REPAIRS.find((R) => R.id === repairId);
+  const thread = COMMENTS_THREADS_MOCK.find((t) => t.repairId === repairId);
+  const commentsCount = thread?.comments.length ?? 0;
   const repairTitle = repair?.title ?? "Task not found";
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   const statusMeta = STATUS_META[repair?.status ?? "Pending"];
   const isUrgent = !!repair?.urgent;
-  const commentsCount = repair?.commentsCount ?? 7;
 
   const handleDeletePress = () => {
     setShowDeleteModal(true);
