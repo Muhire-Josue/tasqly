@@ -24,7 +24,6 @@ export type RootStackParamList = {
   comments: {
     repairId?: string;
     taskId?: string;
-    prevTab: keyof RootStackParamList;
     activeTab: TabKey;
   };
 };
