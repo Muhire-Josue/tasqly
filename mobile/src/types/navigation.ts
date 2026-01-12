@@ -21,5 +21,10 @@ export type RootStackParamList = {
   "join-house": undefined;
   "join-house-success": undefined;
   "create-house": undefined;
-  comments: { repairId?: string; taskId?: string; prevTab: TabKey };
+  comments: {
+    repairId?: string;
+    taskId?: string;
+    prevTab: keyof RootStackParamList;
+    activeTab: TabKey;
+  };
 };

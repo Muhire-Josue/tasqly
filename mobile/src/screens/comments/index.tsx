@@ -14,7 +14,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { Ionicons, FontAwesome5 } from "@expo/vector-icons";
 import * as ImagePicker from "expo-image-picker";
 import { showMessage } from "react-native-flash-message";
-import { RouteProp, useRoute } from "@react-navigation/native";
+import { RouteProp, useNavigation, useRoute } from "@react-navigation/native";
 
 import styles from "./style";
 import MessageCard from "./MessageCard";
@@ -22,6 +22,7 @@ import { COMMENTS_THREADS_MOCK } from "../../mocks/comments";
 import type { CommentMessage, CommentsThread } from "../../types/comments";
 import BottomTabBar from "../../components/BottomTabBar";
 import type { RootStackParamList } from "../../types/navigation";
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
 
 type CommentsRoute = RouteProp<RootStackParamList, "comments">;
 
@@ -37,7 +38,9 @@ type QueuedSend = {
 
 const Comments: React.FC = () => {
   const route = useRoute<CommentsRoute>();
-  const { taskId, repairId, prevTab } = route.params;
+  const { taskId, repairId, activeTab } = route.params;
+  const navigation =
+    useNavigation<NativeStackNavigationProp<RootStackParamList>>();
 
   const initialThread = useMemo<CommentsThread>(() => {
     const found = COMMENTS_THREADS_MOCK.find((t) => {
@@ -191,6 +194,10 @@ const Comments: React.FC = () => {
     });
   };
 
+  const handleOnBack = () => {
+    navigation.goBack();
+  };
+
   return (
     <>
       <View style={styles.root}>
@@ -200,9 +207,7 @@ const Comments: React.FC = () => {
         >
           <View style={styles.header}>
             <Pressable
-              onPress={() => {
-                // TODO: wire this to navigation.goBack()
-              }}
+              onPress={handleOnBack}
               hitSlop={10}
               style={({ pressed }) => [
                 styles.backBtn,
@@ -372,7 +377,7 @@ const Comments: React.FC = () => {
         </Modal>
       </View>
 
-      <BottomTabBar activeTab={prevTab} />
+      <BottomTabBar activeTab={activeTab} />
     </>
   );
 };

@@ -172,7 +172,8 @@ const RepairDetails: React.FC = () => {
                   // TODO: navigate to comments screen later
                   navigateTo("comments", {
                     repairId: repairId,
-                    prevTab: "tasks",
+                    prevTab: "repair-details",
+                    activeTab: "repairs",
                   });
                 }}
               >
