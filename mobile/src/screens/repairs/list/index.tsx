@@ -50,7 +50,7 @@ const RepairList: React.FC = () => {
   };
 
   const handleAddRepair = () => {
-    navigateTo("create-repair"); // <- use your real route name
+    navigateTo("create-repair");
   };
 
   return (
@@ -67,8 +67,8 @@ const RepairList: React.FC = () => {
               <Card
                 item={item}
                 onPress={() =>
-                  navigateTo("task-details", {
-                    taskId: item.id,
+                  navigateTo("repair-details", {
+                    repairId: item.id,
                   })
                 }
               />

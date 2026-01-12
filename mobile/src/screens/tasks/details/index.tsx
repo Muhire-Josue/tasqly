@@ -12,6 +12,7 @@ import BottomTabBar from "../../../components/BottomTabBar";
 import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import { STATUS_META } from "../../../mocks/statusMeta";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
+import { COMMENTS_THREADS_MOCK } from "../../../mocks/comments";
 
 type TaskDetailsRoute = RouteProp<RootStackParamList, "task-details">;
 
@@ -22,10 +23,11 @@ const TaskDetails: React.FC = () => {
   const { taskId } = route.params;
 
   const task = MOCK_TASKS.find((t) => t.id === taskId);
+  const thread = COMMENTS_THREADS_MOCK.find((t) => t.taskId === taskId);
   const taskTitle = task?.title ?? "Task not found";
 
   const isUrgent = !!task?.urgent;
-  const commentsCount = task?.commentsCount ?? 7;
+  const commentsCount = thread?.comments.length ?? 0;
 
   const [showDeleteModal, setShowDeleteModal] = useState(false);
 
@@ -188,6 +190,10 @@ const TaskDetails: React.FC = () => {
                 ]}
                 onPress={() => {
                   // TODO: navigate to comments screen later
+                  navigateTo("comments", {
+                    repairId: taskId,
+                    activeTab: "tasks",
+                  });
                 }}
               >
                 <Ionicons
