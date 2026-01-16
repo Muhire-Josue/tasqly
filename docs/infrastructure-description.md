@@ -122,3 +122,69 @@ This project prioritizes:
 - Clear separation of concerns between infrastructure, platform, and application layers
 
 The goal is to make the system easy to reason about, easy to explain in interviews, and easy to maintain long-term.
+
+## 3. High-Level Architecture Overview
+
+Tasqly follows a cloud-native, container-based architecture designed to be simple, scalable, and cost-efficient. The system is composed of a mobile client, a containerized backend running on Kubernetes, and a set of managed AWS services.
+
+At a high level, the architecture looks like this:
+
+- **Mobile Application (Client)**
+  - React Native mobile app
+  - Communicates with the backend over HTTPS
+  - Does not directly access any cloud resources
+
+- **Backend API**
+  - Spring Boot application
+  - Exposes REST and/or GraphQL APIs
+  - Packaged as a Docker container
+  - Deployed on Kubernetes
+
+- **Kubernetes Cluster**
+  - Self-managed Kubernetes using **K3s** on a single EC2 instance (initial phase)
+  - Runs backend application pods
+  - Handles pod lifecycle, restarts, and rolling deployments
+  - Designed to later migrate to **Amazon EKS** without major changes
+
+- **Database**
+  - **Amazon RDS (PostgreSQL)**
+  - Stores application data (users, tasks, groups, comments, etc.)
+  - Accessed only by the backend service
+  - Managed backups and reliability provided by AWS
+
+- **Object Storage**
+  - **Amazon S3**
+  - Stores user-uploaded media such as:
+    - Profile avatars
+    - Images attached to comments
+    - Photos uploaded for landlord or maintenance requests
+  - Backend stores metadata and object references, not binary files
+
+- **Email & Notifications**
+  - **AWS Lambda** functions for asynchronous tasks
+  - **Amazon SES** for sending transactional emails
+  - Used for notifications such as:
+    - Task updates
+    - Group events
+    - Maintenance or service requests
+
+- **Secrets & Configuration**
+  - **AWS Secrets Manager** for sensitive configuration
+  - Secrets injected into the application at runtime
+  - No secrets stored in source control
+
+- **CI/CD Pipeline**
+  - **GitHub Actions**
+  - Builds and tests the backend
+  - Builds Docker images and pushes them to **Amazon ECR**
+  - Deploys updated manifests to Kubernetes
+
+- **Infrastructure as Code**
+  - **Terraform** used to provision:
+    - EC2 instances
+    - Networking resources
+    - RDS
+    - S3 buckets
+    - IAM roles and policies
+
+This architecture intentionally separates concerns between application logic, infrastructure, and operational tooling. Each component can evolve independently while remaining cohesive as a system.
