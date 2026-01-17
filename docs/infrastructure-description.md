@@ -1008,3 +1008,76 @@ Security decisions follow a pragmatic approach:
 - Favor clarity and auditability over complexity
 
 The goal is to achieve strong security guarantees without over-engineering the system.
+
+ ## 15. Logging, Monitoring & Observability
+
+Tasqly implements a lightweight observability strategy that provides sufficient visibility into system behavior while keeping operational costs under control.
+
+The goal is to capture meaningful signals (errors and warnings) without generating excessive logs or metrics.
+
+---
+
+### 15.1 Logging Strategy
+
+Logging is intentionally minimal and focused.
+
+Principles:
+- Log only **warnings and errors** by default
+- Avoid verbose or debug-level logging in production
+- Ensure logs provide actionable information
+
+Sources of logs include:
+- Backend application logs
+- Kubernetes pod and container logs
+- AWS Lambda execution logs
+
+This approach reduces noise and limits CloudWatch ingestion costs.
+
+---
+
+### 15.2 Log Retention and Cost Control
+
+To prevent unnecessary spending:
+
+- CloudWatch log retention is configured with a **short retention period**
+- Logs are reviewed during development and troubleshooting only
+- Long-term log storage is not enabled by default
+
+If long-term analysis becomes necessary, logs can be exported to S3 at a later stage.
+
+---
+
+### 15.3 Monitoring and Health Checks
+
+Basic monitoring is provided through:
+
+- Kubernetes readiness and liveness probes
+- Pod status and restart metrics
+- Application-level health endpoints
+
+These signals are sufficient to detect common failure scenarios without introducing heavy monitoring tooling.
+
+---
+
+### 15.4 Alerts and Notifications
+
+Alerting is kept intentionally minimal:
+
+- Alerts focus on service availability and critical failures
+- No high-frequency or noisy alerts are configured
+- Manual inspection is preferred during early project stages
+
+This avoids alert fatigue and additional monitoring costs.
+
+---
+
+### 15.5 Observability Philosophy
+
+The observability approach follows a pragmatic philosophy:
+
+- Prioritize signal over volume
+- Scale observability as usage grows
+- Avoid premature optimization or over-instrumentation
+
+This ensures the system remains observable without becoming expensive or complex to operate.
+
