@@ -924,3 +924,87 @@ This approach is cost-efficient because:
 - No persistent infrastructure is required
 
 As a result, email notifications introduce minimal additional cost to the system.
+
+## 14. Networking & Security
+
+Tasqly uses a simple and secure networking model that prioritizes clarity, least privilege, and cost efficiency. The design avoids unnecessary complexity while following AWS and cloud-native best practices.
+
+---
+
+### 14.1 Virtual Private Cloud (VPC)
+
+All infrastructure is deployed inside a dedicated **AWS VPC**.
+
+The VPC provides:
+- Network isolation from other AWS accounts and projects
+- Control over inbound and outbound traffic
+- A foundation for future expansion if needed
+
+The initial setup uses a minimal VPC configuration appropriate for a single-developer project.
+
+---
+
+### 14.2 Subnet Strategy
+
+The network uses a small number of subnets:
+
+- Public subnet for the Kubernetes node (EC2)
+- Managed services (RDS) are placed in private subnets where applicable
+
+This setup keeps routing simple while maintaining reasonable security boundaries.
+
+---
+
+### 14.3 Security Groups
+
+Security Groups are used as the primary network firewall mechanism.
+
+Rules are defined to:
+- Allow inbound HTTPS traffic to the backend
+- Allow backend access to the database
+- Restrict database access to backend resources only
+- Allow necessary outbound traffic for updates and external APIs
+
+No wide-open or overly permissive rules are used.
+
+---
+
+### 14.4 IAM and Least Privilege
+
+Identity and access management is a core security pillar.
+
+Key principles:
+- Each component has a dedicated IAM role
+- Permissions are scoped to the minimum required actions
+- No shared credentials between services
+- No long-lived credentials stored on disk
+
+IAM roles are used for:
+- Kubernetes node access
+- CI/CD pipelines
+- Lambda functions
+- Terraform provisioning
+
+---
+
+### 14.5 Network Exposure and Access Control
+
+The system exposes only what is required:
+
+- The backend API is exposed over HTTPS
+- Internal services are not publicly accessible
+- The database is never exposed to the public internet
+
+This minimizes the attack surface and reduces risk.
+
+---
+
+### 14.6 Security Philosophy
+
+Security decisions follow a pragmatic approach:
+
+- Prefer managed AWS security mechanisms
+- Avoid unnecessary tools or services
+- Favor clarity and auditability over complexity
+
+The goal is to achieve strong security guarantees without over-engineering the system.
