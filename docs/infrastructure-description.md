@@ -712,3 +712,76 @@ GitHub Actions is used instead of cloud-native CI/CD services to:
 - Align with commonly used industry tooling
 
 This approach balances DevOps best practices with budget constraints.
+
+## 11. Infrastructure as Code (Terraform)
+
+Tasqly uses **Terraform** to provision and manage all cloud infrastructure. Infrastructure as Code (IaC) ensures that the environment is reproducible, version-controlled, and easy to evolve over time.
+
+Terraform was chosen to align with industry standards and to support long-term learning goals, including Terraform certification.
+
+---
+
+### 11.1 Scope of Terraform
+
+Terraform is responsible for provisioning and managing:
+
+- EC2 instances (Kubernetes node)
+- Networking resources (VPC, subnets, security groups)
+- Amazon RDS (PostgreSQL)
+- Amazon S3 buckets
+- Amazon ECR repositories
+- IAM roles and policies
+- Supporting infrastructure required by the platform
+
+Application-level Kubernetes resources (Deployments, Services, etc.) are managed separately from Terraform.
+
+---
+
+### 11.2 State Management
+
+Terraform state is managed carefully to ensure safety and consistency:
+
+- State is stored remotely (e.g. S3 backend) to prevent loss
+- State locking is enabled to avoid concurrent modifications
+- Sensitive values are never stored in plaintext configuration files
+
+This setup prevents accidental drift and supports safe iteration.
+
+---
+
+### 11.3 Environment Management
+
+The project uses a **single environment** in the early stages.
+
+Environment considerations:
+- No separate staging or test environment initially
+- Infrastructure can be recreated or modified safely using Terraform
+- Additional environments can be introduced later if needed
+
+This approach balances simplicity with future extensibility.
+
+---
+
+### 11.4 Change Management
+
+All infrastructure changes follow a controlled workflow:
+
+1. Modify Terraform configuration
+2. Review the planned changes (`terraform plan`)
+3. Apply changes intentionally (`terraform apply`)
+4. Commit changes to version control
+
+This ensures infrastructure changes are deliberate and traceable.
+
+---
+
+### 11.5 Security and Best Practices
+
+Terraform configurations follow best practices:
+
+- Least-privilege IAM policies
+- Clear module boundaries (when applicable)
+- Use of variables for environment-specific values
+- No secrets committed to version control
+
+Terraform acts as the single source of truth for infrastructure.
