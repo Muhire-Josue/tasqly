@@ -488,3 +488,72 @@ ECR costs are expected to be minimal for this project:
 
 ECR is therefore well-suited for a cost-conscious, student-led project.
 
+## 8. Database (Amazon RDS – PostgreSQL)
+
+Tasqly uses **PostgreSQL** as its primary relational database. PostgreSQL was selected due to its robustness, strong ecosystem, and suitability for transactional application workloads.
+
+The database is hosted on **Amazon RDS**, allowing the project to leverage a managed service while avoiding the operational complexity of running a database inside Kubernetes.
+
+---
+
+### 8.1 Database Role in the System
+
+The database is responsible for storing all core application data, including:
+
+- Users and authentication-related data
+- Groups and shared living entities
+- Tasks, assignments, and completion states
+- Comments and activity history
+- References to user-uploaded media stored in S3
+
+Only the backend application has direct access to the database.
+
+---
+
+### 8.2 Managed Database Strategy
+
+Amazon RDS is used instead of a self-hosted PostgreSQL instance to:
+
+- Reduce operational overhead
+- Benefit from automated backups
+- Improve reliability and stability
+- Avoid running stateful workloads inside Kubernetes
+
+This aligns with best practices for cloud-native architectures.
+
+---
+
+### 8.3 Cost-Aware Configuration
+
+The RDS instance is configured with cost efficiency in mind:
+
+- Small instance class suitable for low traffic
+- Minimal allocated storage
+- No unnecessary read replicas or multi-cluster setups
+- Automated backups enabled with conservative retention
+
+The database can be resized or upgraded later if needed.
+
+---
+
+### 8.4 Connectivity and Security
+
+Database access is restricted through:
+
+- Private networking within the AWS VPC
+- Security groups allowing access only from the backend
+- Credentials stored securely in **AWS Secrets Manager**
+
+No database credentials are stored in source control or container images.
+
+---
+
+### 8.5 Data Lifecycle and Reset Strategy
+
+During early development and testing phases:
+
+- The database may be reset or recreated as needed
+- Schema migrations are managed at the application level
+- Data persistence becomes more critical once the application is publicly available
+
+This approach supports rapid iteration while keeping the production setup clean when the project goes live.
