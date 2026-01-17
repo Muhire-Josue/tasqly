@@ -253,12 +253,13 @@ These measures ensure the project remains financially sustainable while still en
 
 ### 4.5 Resource Tagging Strategy
 
-A simple tagging strategy is applied to all supported resources to improve clarity and cost tracking.
+A simple and consistent tagging strategy is applied to all supported AWS resources to improve clarity, ownership tracking, and cost visibility.
 
-Example tags:
-- `Project = Tasqly`
-- `Owner = personal`
-- `Environment = dev`
+The following tags are used:
+
+- `Project = Tasqly-backend`
+- `Environment = prod`
+- `Owner = josue`
 - `ManagedBy = terraform`
 
-This makes it easier to understand resource ownership and usage as the infrastructure grows.
+This tagging approach keeps resource ownership clear, simplifies cost tracking, and aligns with common industry practices without introducing unnecessary complexity.
