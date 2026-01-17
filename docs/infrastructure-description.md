@@ -263,3 +263,93 @@ The following tags are used:
 - `ManagedBy = terraform`
 
 This tagging approach keeps resource ownership clear, simplifies cost tracking, and aligns with common industry practices without introducing unnecessary complexity.
+
+## 5. Free Credits & Cost Strategy
+
+Tasqly is developed as a student-led, portfolio-focused project. As such, managing cloud costs is a critical requirement. The infrastructure and service choices are intentionally designed to maximize learning value while minimizing financial risk.
+
+---
+
+### 5.1 Eligible Credit Programs
+
+Tasqly applies to all AWS credit programs for which it is eligible in order to minimize out-of-pocket cloud costs during development.
+
+The following programs are considered:
+
+#### AWS Free Tier
+- Automatically available for new AWS accounts
+- Includes limited free usage for services such as EC2, RDS, and S3
+- Used as the baseline cost-reduction mechanism
+
+#### AWS Educate
+- Educational program for students
+- Provides learning resources and, depending on eligibility, promotional AWS credits
+- Supports experimentation and early infrastructure setup
+
+#### AWS Promotional Credits (Student / New Account Offers)
+- Periodic promotional credits offered by AWS to new users
+- Typically time-bound and subject to specific eligibility criteria
+
+#### GitHub Student Developer Pack
+- Provides access to development tools and cloud-related offers
+- Complements CI/CD and development workflows
+- May include indirect cloud credits or tooling benefits
+
+#### AWS Activate (If Eligible)
+- Startup-oriented program that may provide AWS credits
+- Eligibility depends on project status and affiliation
+- Considered as a potential future option
+
+Credits from different programs may have different expiration dates and usage rules. The project does not assume that all credits are cumulative, but applies to all eligible programs to maximize available cost coverage.
+
+---
+
+### 5.2 Cost-Aware Service Selection
+
+Service choices are driven by both technical relevance and cost efficiency:
+
+- **Self-managed Kubernetes (K3s on EC2)** is used initially to avoid fixed control-plane costs
+- **Managed services** (RDS, S3, Secrets Manager) are preferred over self-hosted alternatives
+- **GitHub Actions** is used for CI/CD instead of paid cloud-native pipelines
+- **Serverless components** (Lambda) are used only for low-frequency, event-driven workloads
+
+This ensures the project remains affordable without sacrificing real-world relevance.
+
+---
+
+### 5.3 Minimal Resource Footprint
+
+To control costs, the infrastructure follows a minimal baseline:
+
+- Single Kubernetes node in the initial phase
+- Low replica counts for backend services
+- Single environment (production only)
+- Short log retention periods
+- No always-on, non-essential services
+
+Resources can be scaled up only when justified by usage or learning goals.
+
+---
+
+### 5.4 Cost Monitoring and Guardrails
+
+Basic guardrails are applied to prevent unexpected charges:
+
+- AWS billing alerts enabled
+- Regular review of active resources
+- Explicit teardown of unused infrastructure during inactive periods
+- Terraform used to ensure infrastructure is intentional and reproducible
+
+These measures ensure cloud spending remains predictable and manageable.
+
+---
+
+### 5.5 Future Cost Evolution
+
+As the project matures and additional credits or budget become available, the infrastructure can evolve to include:
+
+- Migration to **Amazon EKS** for managed Kubernetes
+- Multi-node clusters
+- Additional environments (e.g., staging)
+
+These changes are deferred intentionally to maintain cost efficiency in the early stages.
