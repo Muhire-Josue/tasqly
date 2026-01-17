@@ -856,3 +856,71 @@ Secrets management follows these principles:
 - No plaintext secrets in logs or error messages
 
 This approach provides strong security while remaining simple to operate.
+
+## 13. Email & Notifications (AWS Lambda + Amazon SES)
+
+Tasqly uses an event-driven approach for sending email notifications. This functionality is implemented using **AWS Lambda** in combination with **Amazon Simple Email Service (SES)**.
+
+This design avoids running always-on services for infrequent tasks and keeps operational costs low.
+
+---
+
+### 13.1 Use Cases
+
+Email notifications are used for:
+
+- Task assignments or updates
+- Group-related events
+- Maintenance or landlord service requests
+- Other low-frequency, user-facing notifications
+
+Email delivery is asynchronous and does not block core application flows.
+
+---
+
+### 13.2 Event-Driven Design
+
+The notification system follows an event-driven pattern:
+
+- The backend emits an event when a notification is required
+- A Lambda function is triggered to handle the notification
+- The Lambda function formats and sends the email using Amazon SES
+
+This ensures notification logic is isolated from the core application.
+
+---
+
+### 13.3 Email Templating
+
+Email content is generated within the Lambda function using HTML-based templates.
+
+Characteristics:
+- Templates are defined using HTML and inline CSS
+- Dynamic values (user name, task details, links) are injected at runtime
+- Templates are version-controlled with the Lambda code
+
+This allows consistent branding and flexible message formatting.
+
+---
+
+### 13.4 Security and Access Control
+
+Security is enforced through:
+
+- IAM roles granting Lambda permission to send emails via SES
+- Least-privilege permissions for all components
+- No hardcoded credentials in Lambda code
+
+SES configuration is restricted to approved sender identities.
+
+---
+
+### 13.5 Cost Considerations
+
+This approach is cost-efficient because:
+
+- Lambda is billed only per invocation
+- Email volume is expected to be low
+- No persistent infrastructure is required
+
+As a result, email notifications introduce minimal additional cost to the system.
