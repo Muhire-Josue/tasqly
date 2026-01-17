@@ -785,3 +785,74 @@ Terraform configurations follow best practices:
 - No secrets committed to version control
 
 Terraform acts as the single source of truth for infrastructure.
+
+## 12. Secrets Management (AWS Secrets Manager)
+
+Tasqly uses **AWS Secrets Manager** to securely store and manage sensitive configuration values. This prevents secrets from being hardcoded in source code, container images, or configuration files.
+
+Secrets Manager is used instead of self-hosted solutions to reduce operational overhead and align with AWS-native security best practices.
+
+---
+
+### 12.1 Types of Secrets Managed
+
+The following sensitive values are managed using AWS Secrets Manager:
+
+- Database credentials (username, password)
+- Application secrets and tokens
+- Third-party API keys (if any)
+- Any future sensitive configuration values
+
+No secrets are committed to version control at any time.
+
+---
+
+### 12.2 Secret Access Pattern
+
+Secrets are accessed at runtime by the backend application.
+
+Access pattern:
+- Secrets are stored centrally in AWS Secrets Manager
+- IAM roles grant the backend permission to read only required secrets
+- Secrets are retrieved at application startup or on demand
+- Secrets are injected as environment variables or application configuration values
+
+This ensures secrets remain protected while being accessible to authorized components.
+
+---
+
+### 12.3 Integration with Kubernetes
+
+Secrets are integrated with Kubernetes in a controlled manner:
+
+- The Kubernetes node (EC2) assumes an IAM role with permission to read secrets
+- The backend application retrieves secrets using the AWS SDK
+- Secrets are never stored in Kubernetes manifests or ConfigMaps
+
+This avoids duplicating secrets across systems and reduces exposure.
+
+---
+
+### 12.4 CI/CD Considerations
+
+CI/CD pipelines do not store or hardcode secrets.
+
+Instead:
+- GitHub Actions uses encrypted secrets for authentication
+- AWS credentials used by CI/CD are scoped and short-lived where possible
+- Secrets Manager remains the source of truth for runtime secrets
+
+This separation reduces risk and limits blast radius.
+
+---
+
+### 12.5 Security Best Practices
+
+Secrets management follows these principles:
+
+- Least-privilege access via IAM
+- Centralized secret storage
+- Regular review of stored secrets
+- No plaintext secrets in logs or error messages
+
+This approach provides strong security while remaining simple to operate.
