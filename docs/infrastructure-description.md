@@ -558,3 +558,70 @@ During early development and testing phases:
 
 This approach supports rapid iteration while keeping the production setup clean when the project goes live.
 
+## 9. Object Storage (Amazon S3)
+
+Tasqly uses **Amazon S3** for object storage. S3 is used to store user-uploaded media and other binary assets that do not belong in the relational database.
+
+This approach keeps the database lightweight and allows the system to scale media storage independently of application logic.
+
+---
+
+### 9.1 Use Cases
+
+Amazon S3 is used to store:
+
+- User profile avatars
+- Images attached to comments or activity threads
+- Photos uploaded for maintenance or landlord-related requests
+- Any future binary assets associated with the application
+
+The backend stores only metadata and object references, not the files themselves.
+
+---
+
+### 9.2 Access Pattern
+
+Media uploads and access follow a controlled flow:
+
+- The mobile client uploads media through the backend
+- The backend validates and processes requests
+- Files are stored in S3 under structured object keys
+- The backend returns references or pre-signed URLs when appropriate
+
+Direct public access to the S3 bucket is avoided.
+
+---
+
+### 9.3 Security and Permissions
+
+S3 access is secured using:
+
+- Private buckets with no public access
+- IAM policies granting access only to the backend
+- Optional use of pre-signed URLs for controlled, time-limited access
+
+This ensures media files are protected while remaining accessible to authorized users.
+
+---
+
+### 9.4 Cost Management
+
+S3 costs are expected to remain low:
+
+- Small file sizes (primarily images)
+- Low initial user volume
+- Standard storage class used initially
+
+Lifecycle policies can be introduced later to transition older objects to cheaper storage classes if needed.
+
+---
+
+### 9.5 Benefits of Using Object Storage
+
+Using S3 provides:
+
+- High durability and availability
+- Simple scalability without infrastructure management
+- Clear separation between application data and binary assets
+- Cost-efficient storage for a media-heavy use case
+- 
