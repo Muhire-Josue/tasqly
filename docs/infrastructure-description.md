@@ -353,3 +353,79 @@ As the project matures and additional credits or budget become available, the in
 - Additional environments (e.g., staging)
 
 These changes are deferred intentionally to maintain cost efficiency in the early stages.
+
+## 6. Compute (Kubernetes & EC2)
+
+Tasqly uses container-based compute to ensure portability, scalability, and alignment with modern DevOps practices. Compute resources are intentionally kept minimal in the early stages and can scale as the project evolves.
+
+---
+
+### 6.1 Containerization Strategy
+
+The backend application is packaged as a Docker container.
+
+Key characteristics:
+- A single container image for the modular monolithic backend
+- Clear internal module boundaries within the application
+- Images are built via CI/CD pipelines
+- Images are stored in **Amazon ECR**
+- Containers are immutable and versioned
+
+This approach ensures consistent behavior across environments and simplifies deployment.
+
+---
+
+### 6.2 Initial Kubernetes Setup (Self-Managed)
+
+In the initial phase, Kubernetes is self-managed using **K3s** on a single EC2 instance.
+
+Reasons for this choice:
+- Avoids fixed control-plane costs associated with managed Kubernetes
+- Provides real Kubernetes experience (pods, deployments, services, rollouts)
+- Keeps operational and financial overhead low
+- Easy to migrate to managed Kubernetes later
+
+The cluster runs:
+- One Kubernetes node (single EC2 instance)
+- One backend application deployment
+- One application replica by default
+
+This setup is sufficient for early development and demonstration purposes.
+
+---
+
+### 6.3 EC2 Instance Strategy
+
+The Kubernetes node runs on a small, cost-effective EC2 instance.
+
+Design considerations:
+- Burstable instance type (e.g., `t3.small` or equivalent)
+- Sized to handle light traffic and development workloads
+- Can be replaced or resized with minimal effort
+
+The instance is provisioned and managed using **Terraform** to ensure reproducibility.
+
+---
+
+### 6.4 Scaling Strategy
+
+Although the initial setup uses minimal compute, scaling is supported:
+
+- Kubernetes supports horizontal scaling of application pods
+- Replica count can be increased from 1 to multiple instances when needed
+- Node-level scaling can be introduced later if traffic grows
+
+Scaling is configured but not aggressively used to control costs.
+
+---
+
+### 6.5 Future Migration to Managed Kubernetes (EKS)
+
+When sufficient AWS credits or budget become available, the project can migrate to **Amazon EKS**.
+
+Expected benefits:
+- Managed Kubernetes control plane
+- Simplified upgrades and maintenance
+- Deeper AWS service integrations
+
+The current architecture ensures this migration can happen without major changes to application code or deployment manifests.
