@@ -624,4 +624,91 @@ Using S3 provides:
 - Simple scalability without infrastructure management
 - Clear separation between application data and binary assets
 - Cost-efficient storage for a media-heavy use case
-- 
+
+## 10. CI/CD Pipeline (GitHub Actions)
+
+Tasqly uses **GitHub Actions** for Continuous Integration and Continuous Deployment (CI/CD). GitHub Actions was chosen due to its tight integration with the source repository, ease of use, and cost-effectiveness for a student-led project.
+
+The pipeline is designed to catch issues early, protect the main branch from breaking changes, and automate deployments to Kubernetes.
+
+---
+
+### 10.1 CI/CD Workflow Overview
+
+The CI/CD workflow is split into two distinct phases:
+
+- **Continuous Integration (CI)** – validation and quality checks
+- **Continuous Deployment (CD)** – build and deployment to the cloud
+
+This separation ensures code quality while keeping deployments predictable.
+
+---
+
+### 10.2 Continuous Integration (CI)
+
+The CI pipeline runs on:
+
+- Every push to any branch
+- Every pull request targeting the `main` branch
+
+CI performs the following checks:
+
+1. Check out the source code
+2. Run automated tests
+3. Validate application build
+4. Build the Docker image (without pushing)
+
+If any step fails, the pipeline stops and the change is rejected.
+
+---
+
+### 10.3 Branch Protection and Merge Safety
+
+To prevent broken code from reaching production, the repository enforces branch protection rules on the `main` branch:
+
+- CI checks must pass before merging
+- Pull requests are required (no direct pushes to `main`)
+- Only validated code can be merged
+
+This ensures that merges into `main` are safe, reproducible, and production-ready.
+
+---
+
+### 10.4 Continuous Deployment (CD)
+
+The CD pipeline runs only when changes are merged into the `main` branch.
+
+Deployment steps include:
+
+1. Build the backend application
+2. Build the Docker image
+3. Tag the image using a unique identifier (e.g. commit SHA)
+4. Push the image to **Amazon ECR**
+5. Deploy updated manifests to Kubernetes using `kubectl apply`
+
+Kubernetes performs a rolling update to deploy the new version without downtime.
+
+---
+
+### 10.5 Security Considerations
+
+CI/CD security is enforced through:
+
+- IAM credentials with least-privilege access
+- Secrets injected securely via GitHub Actions secrets
+- No credentials committed to source control
+- Restricted permissions for image publishing and cluster access
+
+This minimizes the blast radius of CI/CD credentials.
+
+---
+
+### 10.6 Cost Awareness
+
+GitHub Actions is used instead of cloud-native CI/CD services to:
+
+- Avoid additional AWS service costs
+- Keep the pipeline simple and maintainable
+- Align with commonly used industry tooling
+
+This approach balances DevOps best practices with budget constraints.
