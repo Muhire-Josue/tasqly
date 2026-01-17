@@ -429,3 +429,62 @@ Expected benefits:
 - Deeper AWS service integrations
 
 The current architecture ensures this migration can happen without major changes to application code or deployment manifests.
+
+## 7. Container Registry (Amazon ECR)
+
+Tasqly uses **Amazon Elastic Container Registry (ECR)** to store and manage Docker images for the backend application.
+
+ECR is tightly integrated with AWS services, supports fine-grained access control via IAM, and fits well within a Kubernetes-based deployment workflow.
+
+---
+
+### 7.1 Image Strategy
+
+The backend is deployed as a **single container image** representing a **modular monolithic application**.
+
+Characteristics:
+- One Docker image for the entire backend
+- Internal modules are managed within the application codebase
+- Image versioning is tied to Git commits and CI/CD runs
+- Images are immutable once pushed to the registry
+
+This approach keeps deployments simple while still allowing internal modularity.
+
+---
+
+### 7.2 CI/CD Integration
+
+Docker images are built and pushed to Amazon ECR using **GitHub Actions**.
+
+The CI/CD pipeline performs the following steps:
+1. Build the Docker image
+2. Tag the image using a meaningful identifier (e.g. commit SHA)
+3. Authenticate to Amazon ECR using IAM credentials
+4. Push the image to the ECR repository
+
+Kubernetes deployments reference the image stored in ECR when rolling out new versions.
+
+---
+
+### 7.3 Access Control
+
+Access to the ECR repository is restricted using IAM:
+
+- CI/CD pipelines have permission to push images
+- Kubernetes nodes have permission to pull images
+- No public access to the repository
+
+This ensures that only authorized components can interact with container images.
+
+---
+
+### 7.4 Cost Considerations
+
+ECR costs are expected to be minimal for this project:
+
+- A small number of images stored at any given time
+- Old images can be cleaned up periodically
+- Storage usage remains low due to the single-image strategy
+
+ECR is therefore well-suited for a cost-conscious, student-led project.
+
