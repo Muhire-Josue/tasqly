@@ -188,3 +188,77 @@ At a high level, the architecture looks like this:
     - IAM roles and policies
 
 This architecture intentionally separates concerns between application logic, infrastructure, and operational tooling. Each component can evolve independently while remaining cohesive as a system.
+
+## 4. Cloud Provider & Account Setup
+
+Tasqly is hosted on **Amazon Web Services (AWS)**. AWS was selected due to its wide industry adoption, rich managed service ecosystem, and strong alignment with cloud-native and DevOps best practices.
+
+### 4.1 AWS Account Strategy
+
+This project uses a **single AWS account**.
+
+Reasons for this choice:
+- The project is developed and maintained by a single developer
+- Multiple accounts (dev/prod/security) would introduce unnecessary complexity
+- Cost visibility and control are simpler in a single-account setup
+- The architecture can evolve to multi-account if needed in the future
+
+This approach is intentional and appropriate for a student-led, portfolio-focused project.
+
+---
+
+### 4.2 Region Selection
+
+All AWS resources are deployed in a single AWS region.
+
+The selected region is **ca-central-1 (Canada Central – Montreal)**.
+
+This region was chosen because:
+- It is geographically closest to the primary development location (Ottawa, Canada)
+- It provides low-latency access for Canadian users
+- It supports all required AWS services used in this project
+- It keeps data residency within Canada
+
+Availability Zones are managed automatically by AWS within the selected region, and services are designed to leverage multiple zones where applicable.  
+This regional choice also avoids cross-region data transfer costs and keeps network traffic simple and cost-efficient for a side project.
+
+---
+
+### 4.3 Account Security Baseline
+
+A minimal but effective security baseline is applied at the account level:
+
+- Root account access is restricted and not used for daily operations
+- Multi-Factor Authentication (MFA) enabled on the root account
+- IAM users and roles are used instead of long-lived credentials
+- Access is granted using least-privilege principles
+
+This provides a secure foundation without introducing enterprise-level overhead.
+
+---
+
+### 4.4 Billing, Budgets, and Cost Awareness
+
+Cost visibility and control are critical for this project.
+
+The following practices are used:
+- AWS billing alerts to detect unexpected spend
+- Awareness of free-tier and student credit usage
+- Regular review of active resources
+- Intentional avoidance of always-on, high-cost services unless justified
+
+These measures ensure the project remains financially sustainable while still enabling real-world experimentation and learning.
+
+---
+
+### 4.5 Resource Tagging Strategy
+
+A simple tagging strategy is applied to all supported resources to improve clarity and cost tracking.
+
+Example tags:
+- `Project = Tasqly`
+- `Owner = personal`
+- `Environment = dev`
+- `ManagedBy = terraform`
+
+This makes it easier to understand resource ownership and usage as the infrastructure grows.
