@@ -175,7 +175,31 @@ If the new deployment fails:
 
 ---
 
-## 7) Architecture Summary
+## 7) Terraform in CI/CD
+
+The CI/CD pipeline will use **Terraform** for infrastructure changes.
+
+Terraform state will be stored in an **S3 bucket** so the pipeline can use a shared remote state instead of relying on local state files.
+
+This supports:
+
+- consistent infrastructure state across runs
+- cleaner automation through GitHub Actions
+- reduced risk of local state drift
+
+To keep the setup maintainable, the Terraform codebase will be organized into separate files by responsibility, such as:
+
+- networking
+- security
+- compute
+- database
+- storage
+- IAM
+- budgets
+
+Automated Terraform validation and testing will be added later as a future improvement.
+
+## 8) Architecture Summary
 
 The Tasqly CI/CD architecture works as follows:
 
