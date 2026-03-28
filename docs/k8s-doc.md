@@ -2,6 +2,10 @@
 
 ![alt text](logo.png)
 
+# Architecture Diagram
+
+![alt text](k8s-diagram_final.png)
+
 
 ## 1) Overview
 
