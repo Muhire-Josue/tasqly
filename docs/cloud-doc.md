@@ -2,32 +2,9 @@
 
 ![alt text](logo.png)
 
-## 📌 Cloud Diagram (TODO)
+## 📌 Cloud Diagram
 
-**Status:** Not created yet
-
-**Next step:** Create a high-level system diagram showing:
-
-- Mobile client
-- IAM user
-- Amazon VPC
-- Public subnet
-- Private subnets
-- Internet Gateway
-- Security groups
-- EC2 Linux instance
-- Custom AMI
-- Amazon ECR
-- Amazon RDS for PostgreSQL
-- Amazon S3
-- AWS Secrets Manager
-- AWS Lambda
-- Amazon CloudWatch
-- AWS Budgets
-
-_Once available, replace this block with:_
-
-`![Tasqly Architecture Diagram](architecture/diagram.png)`
+![alt text](image.png)
 
 ---
 
