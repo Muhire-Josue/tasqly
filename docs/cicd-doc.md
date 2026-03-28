@@ -2,6 +2,10 @@
 
 ![alt text](logo.png)
 
+# Architecture Diagram
+
+![alt text](image-1.png)
+
 ## 1) Overview
 
 Tasqly uses **GitHub Actions** for CI/CD.
