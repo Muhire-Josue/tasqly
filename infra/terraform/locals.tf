@@ -5,4 +5,5 @@ locals {
     Owner       = "josue"
     ManagedBy   = "terraform"
   }
+  name_prefix = "tasqly-prod"
 }
