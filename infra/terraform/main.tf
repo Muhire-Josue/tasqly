@@ -154,3 +154,39 @@ resource "aws_vpc_security_group_ingress_rule" "db_postgres_from_app" {
   description = "Allow PostgreSQL from application security group"
 }
 
+resource "aws_iam_role" "ec2_app" {
+  name = "${local.name_prefix}-ec2-app-role"
+
+  assume_role_policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Principal = {
+          Service = "ec2.amazonaws.com"
+        }
+        Action = "sts:AssumeRole"
+      }
+    ]
+  })
+
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "${local.name_prefix}-ec2-app-role"
+    }
+  )
+}
+
+resource "aws_iam_instance_profile" "ec2_app" {
+  name = "${local.name_prefix}-ec2-app-profile"
+  role = aws_iam_role.ec2_app.name
+
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "${local.name_prefix}-ec2-app-profile"
+    }
+  )
+}
+
