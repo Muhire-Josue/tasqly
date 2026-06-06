@@ -359,3 +359,44 @@ resource "aws_ecr_lifecycle_policy" "backend" {
     ]
   })
 }
+
+resource "aws_iam_policy" "ec2_ecr_pull_access" {
+  name        = "${local.name_prefix}-ec2-ecr-pull-access"
+  description = "Allow EC2 application role to pull backend images from Tasqly ECR"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid    = "GetECRAuthorizationToken"
+        Effect = "Allow"
+        Action = [
+          "ecr:GetAuthorizationToken"
+        ]
+        Resource = "*"
+      },
+      {
+        Sid    = "PullBackendImages"
+        Effect = "Allow"
+        Action = [
+          "ecr:BatchGetImage",
+          "ecr:GetDownloadUrlForLayer",
+          "ecr:BatchCheckLayerAvailability"
+        ]
+        Resource = aws_ecr_repository.backend.arn
+      }
+    ]
+  })
+
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "${local.name_prefix}-ec2-ecr-pull-access"
+    }
+  )
+}
+
+resource "aws_iam_role_policy_attachment" "ec2_ecr_pull_access" {
+  role       = aws_iam_role.ec2_app.name
+  policy_arn = aws_iam_policy.ec2_ecr_pull_access.arn
+}
