@@ -51,3 +51,13 @@ output "app_public_ip" {
   description = "Public IP of the Tasqly application EC2 instance"
   value       = aws_instance.app.public_ip
 }
+
+output "db_instance_endpoint" {
+  description = "RDS PostgreSQL endpoint"
+  value       = aws_db_instance.postgres.endpoint
+}
+
+output "db_instance_name" {
+  description = "RDS PostgreSQL database name"
+  value       = aws_db_instance.postgres.db_name
+}
