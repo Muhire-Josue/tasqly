@@ -21,3 +21,15 @@ variable "private_subnet_cidrs" {
   type        = list(string)
   default     = ["10.0.2.0/24", "10.0.3.0/24"]
 }
+
+variable "app_ami_id" {
+  description = "Custom AMI ID for the Tasqly application EC2 instance"
+  type        = string
+}
+
+variable "app_instance_type" {
+  description = "EC2 instance type for the Tasqly application host"
+  type        = string
+  default     = "t3.micro"
+}
+
