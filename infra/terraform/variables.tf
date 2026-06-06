@@ -56,3 +56,10 @@ variable "db_instance_class" {
   type        = string
   default     = "db.t3.micro"
 }
+
+variable "uploads_bucket_name" {
+  description = "S3 bucket name for Tasqly application uploads"
+  type        = string
+  default     = "tasqly-prod-uploads"
+}
+
