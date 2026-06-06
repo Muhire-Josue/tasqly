@@ -76,3 +76,13 @@ output "ec2_uploads_s3_policy_arn" {
   description = "ARN of the EC2 uploads S3 access policy"
   value       = aws_iam_policy.ec2_uploads_s3_access.arn
 }
+
+output "backend_ecr_repository_url" {
+  description = "URL of the Tasqly backend ECR repository"
+  value       = aws_ecr_repository.backend.repository_url
+}
+
+output "backend_ecr_repository_arn" {
+  description = "ARN of the Tasqly backend ECR repository"
+  value       = aws_ecr_repository.backend.arn
+}
