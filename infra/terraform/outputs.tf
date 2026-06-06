@@ -86,3 +86,8 @@ output "backend_ecr_repository_arn" {
   description = "ARN of the Tasqly backend ECR repository"
   value       = aws_ecr_repository.backend.arn
 }
+
+output "ec2_ecr_pull_policy_arn" {
+  description = "ARN of the EC2 ECR pull access policy"
+  value       = aws_iam_policy.ec2_ecr_pull_access.arn
+}
