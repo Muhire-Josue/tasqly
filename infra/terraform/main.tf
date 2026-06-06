@@ -322,3 +322,40 @@ resource "aws_iam_role_policy_attachment" "ec2_uploads_s3_access" {
   role       = aws_iam_role.ec2_app.name
   policy_arn = aws_iam_policy.ec2_uploads_s3_access.arn
 }
+
+resource "aws_ecr_repository" "backend" {
+  name                 = var.backend_ecr_repository_name
+  image_tag_mutability = "MUTABLE"
+
+  image_scanning_configuration {
+    scan_on_push = true
+  }
+
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "${local.name_prefix}-backend-ecr"
+    }
+  )
+}
+
+resource "aws_ecr_lifecycle_policy" "backend" {
+  repository = aws_ecr_repository.backend.name
+
+  policy = jsonencode({
+    rules = [
+      {
+        rulePriority = 1
+        description  = "Keep last 10 images"
+        selection = {
+          tagStatus   = "any"
+          countType   = "imageCountMoreThan"
+          countNumber = 10
+        }
+        action = {
+          type = "expire"
+        }
+      }
+    ]
+  })
+}

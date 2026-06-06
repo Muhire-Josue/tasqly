@@ -63,3 +63,8 @@ variable "uploads_bucket_name" {
   default     = "tasqly-prod-uploads"
 }
 
+variable "backend_ecr_repository_name" {
+  description = "ECR repository name for Tasqly backend images"
+  type        = string
+  default     = "tasqly-prod-backend"
+}
