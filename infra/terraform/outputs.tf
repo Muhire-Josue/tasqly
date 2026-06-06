@@ -71,3 +71,8 @@ output "uploads_bucket_arn" {
   description = "ARN of the Tasqly uploads S3 bucket"
   value       = aws_s3_bucket.uploads.arn
 }
+
+output "ec2_uploads_s3_policy_arn" {
+  description = "ARN of the EC2 uploads S3 access policy"
+  value       = aws_iam_policy.ec2_uploads_s3_access.arn
+}
