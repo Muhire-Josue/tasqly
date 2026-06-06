@@ -61,3 +61,13 @@ output "db_instance_name" {
   description = "RDS PostgreSQL database name"
   value       = aws_db_instance.postgres.db_name
 }
+
+output "uploads_bucket_name" {
+  description = "Name of the Tasqly uploads S3 bucket"
+  value       = aws_s3_bucket.uploads.bucket
+}
+
+output "uploads_bucket_arn" {
+  description = "ARN of the Tasqly uploads S3 bucket"
+  value       = aws_s3_bucket.uploads.arn
+}
