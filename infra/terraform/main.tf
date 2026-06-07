@@ -468,3 +468,39 @@ resource "aws_cloudwatch_log_group" "k3s" {
     }
   )
 }
+
+resource "aws_iam_policy" "ec2_cloudwatch_logs_access" {
+  name        = "${local.name_prefix}-ec2-cloudwatch-logs-access"
+  description = "Allow EC2 application role to write logs to Tasqly CloudWatch log groups"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid    = "WriteTasqlyLogs"
+        Effect = "Allow"
+        Action = [
+          "logs:CreateLogStream",
+          "logs:PutLogEvents",
+          "logs:DescribeLogStreams"
+        ]
+        Resource = [
+          "${aws_cloudwatch_log_group.app.arn}:*",
+          "${aws_cloudwatch_log_group.k3s.arn}:*"
+        ]
+      }
+    ]
+  })
+
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "${local.name_prefix}-ec2-cloudwatch-logs-access"
+    }
+  )
+}
+
+resource "aws_iam_role_policy_attachment" "ec2_cloudwatch_logs_access" {
+  role       = aws_iam_role.ec2_app.name
+  policy_arn = aws_iam_policy.ec2_cloudwatch_logs_access.arn
+}
