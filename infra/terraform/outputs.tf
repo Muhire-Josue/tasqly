@@ -101,3 +101,8 @@ output "app_secrets_arn" {
   description = "ARN of the Tasqly application secrets entry"
   value       = aws_secretsmanager_secret.app_secrets.arn
 }
+
+output "ec2_secrets_read_policy_arn" {
+  description = "ARN of the EC2 Secrets Manager read access policy"
+  value       = aws_iam_policy.ec2_secrets_read_access.arn
+}
