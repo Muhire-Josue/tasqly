@@ -412,3 +412,36 @@ resource "aws_secretsmanager_secret" "app_secrets" {
     }
   )
 }
+
+resource "aws_iam_policy" "ec2_secrets_read_access" {
+  name        = "${local.name_prefix}-ec2-secrets-read-access"
+  description = "Allow EC2 application role to read Tasqly application secrets"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Sid    = "ReadTasqlyApplicationSecrets"
+        Effect = "Allow"
+        Action = [
+          "secretsmanager:GetSecretValue",
+          "secretsmanager:DescribeSecret"
+        ]
+        Resource = aws_secretsmanager_secret.app_secrets.arn
+      }
+    ]
+  })
+
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "${local.name_prefix}-ec2-secrets-read-access"
+    }
+  )
+}
+
+resource "aws_iam_role_policy_attachment" "ec2_secrets_read_access" {
+  role       = aws_iam_role.ec2_app.name
+  policy_arn = aws_iam_policy.ec2_secrets_read_access.arn
+}
+
