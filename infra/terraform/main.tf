@@ -400,3 +400,15 @@ resource "aws_iam_role_policy_attachment" "ec2_ecr_pull_access" {
   role       = aws_iam_role.ec2_app.name
   policy_arn = aws_iam_policy.ec2_ecr_pull_access.arn
 }
+
+resource "aws_secretsmanager_secret" "app_secrets" {
+  name        = "${local.name_prefix}/application/secrets"
+  description = "Application secrets for Tasqly backend"
+
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "${local.name_prefix}-application-secrets"
+    }
+  )
+}

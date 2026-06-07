@@ -91,3 +91,13 @@ output "ec2_ecr_pull_policy_arn" {
   description = "ARN of the EC2 ECR pull access policy"
   value       = aws_iam_policy.ec2_ecr_pull_access.arn
 }
+
+output "app_secrets_name" {
+  description = "Name of the Tasqly application secrets entry"
+  value       = aws_secretsmanager_secret.app_secrets.name
+}
+
+output "app_secrets_arn" {
+  description = "ARN of the Tasqly application secrets entry"
+  value       = aws_secretsmanager_secret.app_secrets.arn
+}
