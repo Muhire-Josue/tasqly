@@ -68,3 +68,9 @@ variable "backend_ecr_repository_name" {
   type        = string
   default     = "tasqly-prod-backend"
 }
+
+variable "cloudwatch_log_retention_days" {
+  description = "Number of days to retain CloudWatch logs"
+  type        = number
+  default     = 14
+}
