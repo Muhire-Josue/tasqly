@@ -106,3 +106,13 @@ output "ec2_secrets_read_policy_arn" {
   description = "ARN of the EC2 Secrets Manager read access policy"
   value       = aws_iam_policy.ec2_secrets_read_access.arn
 }
+
+output "app_log_group_name" {
+  description = "Name of the Tasqly application CloudWatch log group"
+  value       = aws_cloudwatch_log_group.app.name
+}
+
+output "k3s_log_group_name" {
+  description = "Name of the Tasqly K3s CloudWatch log group"
+  value       = aws_cloudwatch_log_group.k3s.name
+}

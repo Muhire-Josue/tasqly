@@ -445,3 +445,26 @@ resource "aws_iam_role_policy_attachment" "ec2_secrets_read_access" {
   policy_arn = aws_iam_policy.ec2_secrets_read_access.arn
 }
 
+resource "aws_cloudwatch_log_group" "app" {
+  name              = "/tasqly/prod/application"
+  retention_in_days = var.cloudwatch_log_retention_days
+
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "${local.name_prefix}-application-logs"
+    }
+  )
+}
+
+resource "aws_cloudwatch_log_group" "k3s" {
+  name              = "/tasqly/prod/k3s"
+  retention_in_days = var.cloudwatch_log_retention_days
+
+  tags = merge(
+    local.common_tags,
+    {
+      Name = "${local.name_prefix}-k3s-logs"
+    }
+  )
+}
