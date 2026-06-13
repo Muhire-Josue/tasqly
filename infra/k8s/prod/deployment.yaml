@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: tasqly-backend
+  namespace: tasqly-prod
+  labels:
+    app.kubernetes.io/name: tasqly
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/environment: prod
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: tasqly
+      app.kubernetes.io/component: backend
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: tasqly
+        app.kubernetes.io/component: backend
+        app.kubernetes.io/environment: prod
+    spec:
+      containers:
+        - name: tasqly-backend
+          image: 222907083284.dkr.ecr.ca-central-1.amazonaws.com/tasqly-prod-backend:hello
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
