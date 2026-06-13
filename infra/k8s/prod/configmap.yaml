@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: tasqly-backend-config
+  namespace: tasqly-prod
+  labels:
+    app.kubernetes.io/name: tasqly
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/environment: prod
+data:
+  SPRING_PROFILES_ACTIVE: "prod"
+  SERVER_PORT: "8080"
+  SPRING_JPA_OPEN_IN_VIEW: "false"
