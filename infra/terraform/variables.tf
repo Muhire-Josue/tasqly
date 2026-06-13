@@ -30,7 +30,7 @@ variable "app_ami_id" {
 variable "app_instance_type" {
   description = "EC2 instance type for the Tasqly application host"
   type        = string
-  default     = "t3.micro"
+  default     = "t3.small"
 }
 
 variable "db_name" {
@@ -54,7 +54,7 @@ variable "db_password" {
 variable "db_instance_class" {
   description = "RDS instance class"
   type        = string
-  default     = "db.t3.micro"
+  default     = "db.t3.small"
 }
 
 variable "uploads_bucket_name" {

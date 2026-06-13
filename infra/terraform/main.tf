@@ -197,6 +197,7 @@ resource "aws_instance" "app" {
   instance_type = var.app_instance_type
 
   subnet_id                   = aws_subnet.public.id
+  key_name = "tasqly-ami-builder"
   vpc_security_group_ids      = [aws_security_group.app.id]
   iam_instance_profile        = aws_iam_instance_profile.ec2_app.name
   associate_public_ip_address = true
