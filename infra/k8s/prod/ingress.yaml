@@ -1,0 +1,21 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: tasqly-backend
+  namespace: tasqly-prod
+  labels:
+    app.kubernetes.io/name: tasqly
+    app.kubernetes.io/component: backend
+    app.kubernetes.io/environment: prod
+spec:
+  ingressClassName: traefik
+  rules:
+    - http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: tasqly-backend
+                port:
+                  number: 8080
