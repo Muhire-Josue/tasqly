@@ -1,0 +1,8 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tasqly_test
+    username: tasqly_admin
+    password: tasqly_password
+
+  jpa:
+    open-in-view: false
