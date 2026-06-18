@@ -48,7 +48,7 @@ jobs:
       postgres:
         image: postgres:16
         env:
-          POSTGRES_DB: tasqly
+          POSTGRES_DB: tasqly_test
           POSTGRES_USER: tasqly_admin
           POSTGRES_PASSWORD: tasqly_password
         ports:
