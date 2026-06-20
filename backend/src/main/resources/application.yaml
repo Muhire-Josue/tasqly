@@ -20,3 +20,10 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migrations
+
+  tasqly:
+    security:
+      jwt:
+        secret: "jwt_secret"
+        issuer: tasqly
+        expiration-minutes: 1200
