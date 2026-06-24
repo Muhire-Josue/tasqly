@@ -1,0 +1,10 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tasqly
+    username: tasqly_admin
+    password: tasqly_password
+
+tasqly:
+  security:
+    jwt:
+      secret: "local-secret"
