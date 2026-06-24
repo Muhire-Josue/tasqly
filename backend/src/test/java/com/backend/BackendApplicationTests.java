@@ -37,12 +37,12 @@ class BackendApplicationTests {
 	}
 
 	@Test
-	void unknownEndpointShouldReturnNotFound() throws Exception {
+	void unknownProtectedEndpointShouldReturnUnauthorized() throws Exception {
 		mockMvc.perform(get("/api/does-not-exist"))
-				.andExpect(status().isNotFound())
-				.andExpect(jsonPath("$.status").value(404))
-				.andExpect(jsonPath("$.error").value("Not Found"))
-				.andExpect(jsonPath("$.message").value("Endpoint not found"))
+				.andExpect(status().isUnauthorized())
+				.andExpect(jsonPath("$.status").value(401))
+				.andExpect(jsonPath("$.error").value("Unauthorized"))
+				.andExpect(jsonPath("$.message").value("Authentication is required to access this resource"))
 				.andExpect(jsonPath("$.path").value("/api/does-not-exist"));
 	}
 }
