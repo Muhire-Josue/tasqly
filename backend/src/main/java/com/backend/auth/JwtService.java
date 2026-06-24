@@ -25,28 +25,21 @@ public class JwtService {
         this.jwtProperties = jwtProperties;
     }
 
-    public String generateAccessToken(UUID userId, String email) {
+    public String generateAccessToken(Long userId, String email) {
 
         Instant now = Instant.now();
-
         Instant expiresAt = now.plus(jwtProperties.expirationMinutes(), ChronoUnit.MINUTES);
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
 
                 .issuer(jwtProperties.issuer())
-
                 .issuedAt(now)
-
                 .expiresAt(expiresAt)
-
                 .subject(userId.toString())
-
                 .claim("email", email)
-
                 .build();
 
         return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
 
     }
-
 }
