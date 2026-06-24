@@ -1,5 +1,5 @@
 package com.backend.common.exceptions;
-import com.backend.common.dtos.ApiErrorResponse;
+import com.backend.common.error.ApiErrorResponse;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

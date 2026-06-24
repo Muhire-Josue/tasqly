@@ -1,6 +1,6 @@
 package com.backend.common.exceptions;
 
-import com.backend.common.dtos.ApiErrorResponse;
+import com.backend.common.error.ApiErrorResponse;
 
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;

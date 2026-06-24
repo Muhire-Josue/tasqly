@@ -1,4 +1,4 @@
-package com.backend.common.dtos;
+package com.backend.common.error;
 
 import java.time.Instant;
 
