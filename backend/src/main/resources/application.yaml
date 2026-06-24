@@ -1,22 +1,24 @@
 spring:
-  mvc:
-    throw-exception-if-no-handler-found: true
-    web:
-      resources:
-        add-mappings: false
   application:
     name: backend
-  datasource:
-    url: jdbc:postgresql://localhost:5432/tasqly
-    username: tasqly_admin
-    password: tasqly_password
-    driver-class-name: org.postgresql.Driver
-    jpa:
-      hibernate:
-        ddl-auto: validate
-      database-platform: org.hibernate.dialect.PostgreSQLDialect
-      open-in-view: false
+
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
 
   flyway:
     enabled: true
-    locations: classpath:db/migrations
+    locations: classpath:db/migration
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+
+tasqly:
+  security:
+    jwt:
+      issuer: tasqly
+      expiration-minutes: 60
