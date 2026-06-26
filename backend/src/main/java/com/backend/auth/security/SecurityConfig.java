@@ -21,6 +21,8 @@ import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import com.nimbusds.jose.jwk.source.ImmutableSecret;
 
+import java.nio.charset.StandardCharsets;
+
 
 @Configuration
 @EnableConfigurationProperties(JwtProperties.class)
@@ -47,6 +49,7 @@ public class SecurityConfig {
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/api/auth/**").permitAll()
                         .requestMatchers("/public/**").permitAll()
+                        .requestMatchers("/error").permitAll()
                         .anyRequest().authenticated()
 
                 )
@@ -83,8 +86,7 @@ public class SecurityConfig {
     }
 
     private SecretKey secretKey(JwtProperties properties) {
-        byte[] secretBytes = properties.secret().getBytes();
+        byte[] secretBytes = properties.secret().getBytes(StandardCharsets.UTF_8);
         return new SecretKeySpec(secretBytes, "HmacSHA256");
-
     }
 }
