@@ -17,7 +17,7 @@ import java.time.Instant;
 @Entity
 @Table(name = "users")
 @Getter
-public class SignupEntity {
+public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -35,7 +35,7 @@ public class SignupEntity {
     @Column(name = "updated_at", nullable = false)
     private Instant updatedAt;
 
-    public SignupEntity(Long id, String name, String email, String password, Roles role, Instant createdAt, Instant updatedAt) {
+    public UserEntity(Long id, String name, String email, String password, Roles role, Instant createdAt, Instant updatedAt) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -45,7 +45,7 @@ public class SignupEntity {
         this.updatedAt = updatedAt;
     }
 
-    public SignupEntity() {
+    public UserEntity() {
     }
 
     @PrePersist

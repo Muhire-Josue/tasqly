@@ -1,7 +1,8 @@
 package com.backend.auth;
 
 import com.backend.auth.dto.SignupDto;
-import com.backend.auth.entity.SignupEntity;
+import com.backend.auth.dto.SignupResponse;
+import com.backend.auth.entity.UserEntity;
 import com.backend.auth.repository.SignupRepository;
 import com.backend.common.Roles;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -19,11 +20,11 @@ public class SignupService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public String save(SignupDto dto) {
+    public SignupResponse save(SignupDto dto) {
         String passwordHash = passwordEncoder.encode(dto.password());
         Roles role = Roles.valueOf(dto.role().toString());
 
-        SignupEntity signupEntity =  new SignupEntity(
+        UserEntity userEntity =  new UserEntity(
                 null,
                 dto.name(),
                 dto.email(),
@@ -33,8 +34,8 @@ public class SignupService {
                 null
         );
 
-        repository.save(signupEntity);
-
-        return jwtService.generateAccessToken(signupEntity.getId(), signupEntity.getEmail());
+        UserEntity savedUser = repository.save(userEntity);
+        String jwtToken = jwtService.generateAccessToken(savedUser.getId(), savedUser.getEmail());
+        return new SignupResponse(savedUser.getId(), savedUser.getName(), savedUser.getEmail(), jwtToken, userEntity.getRole());
     }
 }

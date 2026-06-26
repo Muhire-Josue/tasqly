@@ -13,11 +13,11 @@ spring:
 
   flyway:
     enabled: true
-    locations: classpath:db/migration
+    locations: classpath:db/migrations
 
 tasqly:
   security:
     jwt:
-      secret: "test-secret"
+      secret: "local-secret-local-secret-local-secret-123456"
       issuer: tasqly-test
       expiration-minutes: 60

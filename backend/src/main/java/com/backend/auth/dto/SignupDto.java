@@ -9,7 +9,6 @@ import jakarta.validation.constraints.Size;
 import java.time.Instant;
 
 public record SignupDto(
-        Long id,
         @NotBlank
         @Size(max = 150)
         String name,
@@ -21,8 +20,6 @@ public record SignupDto(
         @Size(min = 8, max = 100)
         String password,
         @NotNull
-        Roles role,
-        Instant createdAt,
-        Instant updatedAt
+        Roles role
 ) {
 }
