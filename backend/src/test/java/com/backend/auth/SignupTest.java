@@ -11,6 +11,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import com.backend.TestcontainersConfiguration;
+import static org.assertj.core.api.Assertions.assertThat;
 @SpringBootTest
 @ActiveProfiles("test")
 @Import(TestcontainersConfiguration.class)
@@ -33,6 +34,13 @@ public class SignupTest {
                 "password1234",
                 Roles.TENANT
                 );
+
         SignupResponse response = service.save(dto);
+
+        assertThat(response.name()).isEqualTo("John Doe");
+        assertThat(response.email()).isEqualTo("example@email.com");
+        assertThat(response.role()).isEqualTo(Roles.TENANT);
+        assertThat(response.token()).isNotNull();
+        assertThat(response.id()).isNotNull();
     }
 }
