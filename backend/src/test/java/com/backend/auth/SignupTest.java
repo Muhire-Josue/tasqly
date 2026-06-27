@@ -2,7 +2,7 @@ package com.backend.auth;
 
 import com.backend.BaseIntegrationTest;
 import com.backend.auth.dto.SignupDto;
-import com.backend.auth.dto.SignupResponse;
+import com.backend.auth.dto.SignupResponseDto;
 import com.backend.auth.repository.SignupRepository;
 import com.backend.common.Roles;
 import com.backend.common.exceptions.ConflictException;
@@ -32,7 +32,7 @@ public class SignupTest extends BaseIntegrationTest {
                 Roles.TENANT
                 );
 
-        SignupResponse response = service.save(dto);
+        SignupResponseDto response = service.save(dto);
 
         assertThat(response.name()).isEqualTo("John Doe");
         assertThat(response.email()).isEqualTo("example@email.com");

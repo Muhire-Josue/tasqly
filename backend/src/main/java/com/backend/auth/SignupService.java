@@ -1,7 +1,7 @@
 package com.backend.auth;
 
 import com.backend.auth.dto.SignupDto;
-import com.backend.auth.dto.SignupResponse;
+import com.backend.auth.dto.SignupResponseDto;
 import com.backend.auth.entity.UserEntity;
 import com.backend.auth.repository.SignupRepository;
 import com.backend.common.Roles;
@@ -23,7 +23,7 @@ public class SignupService {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public SignupResponse save(SignupDto dto) {
+    public SignupResponseDto save(SignupDto dto) {
         Optional<UserEntity> user = repository.findByEmail(dto.email());
         if (user.isPresent()) {
             throw new ConflictException("Email is already registered");
@@ -43,6 +43,6 @@ public class SignupService {
 
         UserEntity savedUser = repository.save(userEntity);
         String jwtToken = jwtService.generateAccessToken(savedUser.getId(), savedUser.getEmail());
-        return new SignupResponse(savedUser.getId(), savedUser.getName(), savedUser.getEmail(), jwtToken, userEntity.getRole());
+        return new SignupResponseDto(savedUser.getId(), savedUser.getName(), savedUser.getEmail(), jwtToken, userEntity.getRole());
     }
 }

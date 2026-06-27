@@ -3,7 +3,7 @@ package com.backend.auth.controller;
 
 import com.backend.auth.SignupService;
 import com.backend.auth.dto.SignupDto;
-import com.backend.auth.dto.SignupResponse;
+import com.backend.auth.dto.SignupResponseDto;
 import com.backend.common.error.ApiErrorResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -72,8 +72,8 @@ public class SignupController {
             )
     )
     @PostMapping("/signup")
-    public ResponseEntity<SignupResponse> signup(@Valid @RequestBody SignupDto formData) {
-        SignupResponse response = service.save(formData);
+    public ResponseEntity<SignupResponseDto> signup(@Valid @RequestBody SignupDto formData) {
+        SignupResponseDto response = service.save(formData);
 
         return ResponseEntity.status(HttpStatus.CREATED).body(response);
     }
