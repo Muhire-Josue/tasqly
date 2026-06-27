@@ -8,6 +8,7 @@ import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import GoogleLogo from "../../../assets/google.png";
 import { validateSignUpForm } from "../../../validators/signup";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
+import { signup } from "./service";
 
 const SignUp: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState(true);
@@ -22,7 +23,7 @@ const SignUp: React.FC = () => {
 
   const navigateTo = useNavigateTo();
 
-  const handleSignUp = (): void => {
+  const handleSignUp = async (): Promise<void> => {
     const errors = validateSignUpForm(
       name,
       email,
@@ -39,6 +40,14 @@ const SignUp: React.FC = () => {
       });
       return;
     }
+
+    const signupResponse = await signup({
+      email,
+      password,
+      role: "TENANT", // or "LANDLORD" based on your logic
+    });
+
+    console.log("Signup successful:", signupResponse);
 
     showMessage({
       message: "Account created successfully",
