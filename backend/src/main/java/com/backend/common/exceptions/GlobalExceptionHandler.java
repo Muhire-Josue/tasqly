@@ -7,6 +7,7 @@ import com.backend.common.error.ValidationErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.http.converter.HttpMessageNotReadableException;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -60,36 +61,40 @@ public class GlobalExceptionHandler {
         List<FieldErrorResponse> fields = exception.getBindingResult()
 
                 .getFieldErrors()
-
                 .stream()
-
                 .map(error -> new FieldErrorResponse(
-
                         error.getField(),
-
                         error.getDefaultMessage()
-
                 ))
-
                 .toList();
 
         ValidationErrorResponse response = new ValidationErrorResponse(
 
                 Instant.now(),
-
                 HttpStatus.BAD_REQUEST.value(),
-
                 HttpStatus.BAD_REQUEST.getReasonPhrase(),
-
                 "Request validation failed",
-
                 request.getRequestURI(),
-
                 fields
 
         );
 
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+    }
 
+    @ExceptionHandler(HttpMessageNotReadableException.class)
+    public ResponseEntity<ApiErrorResponse> handleUnreadableMessage(
+            HttpMessageNotReadableException exception,
+            HttpServletRequest request
+    ) {
+        ApiErrorResponse response = new ApiErrorResponse(
+                Instant.now(),
+                HttpStatus.BAD_REQUEST.value(),
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+                "Invalid request body",
+                request.getRequestURI()
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
     }
 }
