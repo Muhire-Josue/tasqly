@@ -5,8 +5,11 @@ import com.backend.auth.dto.SignupResponse;
 import com.backend.auth.entity.UserEntity;
 import com.backend.auth.repository.SignupRepository;
 import com.backend.common.Roles;
+import com.backend.common.exceptions.ConflictException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.util.Optional;
 
 @Service
 public class SignupService {
@@ -21,6 +24,10 @@ public class SignupService {
     }
 
     public SignupResponse save(SignupDto dto) {
+        Optional<UserEntity> user = repository.findByEmail(dto.email());
+        if (user.isPresent()) {
+            throw new ConflictException("Email is already registered");
+        }
         String passwordHash = passwordEncoder.encode(dto.password());
         Roles role = Roles.valueOf(dto.role().toString());
 
