@@ -51,7 +51,7 @@ public class SignupTest extends BaseIntegrationTest {
         );
 
         service.save(dto);
-        
+
         assertThatThrownBy(() -> service.save(dto))
                 .isInstanceOf(ConflictException.class)
                 .hasMessage("Email is already registered");

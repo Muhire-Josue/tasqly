@@ -2,13 +2,17 @@ package com.backend.common.exceptions;
 
 import com.backend.common.error.ApiErrorResponse;
 
+import com.backend.common.error.FieldErrorResponse;
+import com.backend.common.error.ValidationErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.servlet.NoHandlerFoundException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import java.time.Instant;
+import java.util.List;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
@@ -42,5 +46,50 @@ public class GlobalExceptionHandler {
         );
 
         return ResponseEntity.status(HttpStatus.CONFLICT).body(response);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<ValidationErrorResponse> handleValidationException(
+
+            MethodArgumentNotValidException exception,
+
+            HttpServletRequest request
+
+    ) {
+
+        List<FieldErrorResponse> fields = exception.getBindingResult()
+
+                .getFieldErrors()
+
+                .stream()
+
+                .map(error -> new FieldErrorResponse(
+
+                        error.getField(),
+
+                        error.getDefaultMessage()
+
+                ))
+
+                .toList();
+
+        ValidationErrorResponse response = new ValidationErrorResponse(
+
+                Instant.now(),
+
+                HttpStatus.BAD_REQUEST.value(),
+
+                HttpStatus.BAD_REQUEST.getReasonPhrase(),
+
+                "Request validation failed",
+
+                request.getRequestURI(),
+
+                fields
+
+        );
+
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
+
     }
 }
