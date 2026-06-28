@@ -8,7 +8,7 @@ import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import GoogleLogo from "../../../assets/google.png";
 import { validateSignUpForm } from "../../../validators/signup";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
-import { signup } from "./service";
+import { ApiRequestError, signup } from "./service";
 
 const SignUp: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState(true);
@@ -41,26 +41,47 @@ const SignUp: React.FC = () => {
       return;
     }
 
-    const signupResponse = await signup({
-      email,
-      password,
-      role: "TENANT", // or "LANDLORD" based on your logic
-    });
+    console.log("Form is valid. Proceeding with signup...");
 
-    console.log("Signup successful:", signupResponse);
+    try {
+      const signupResponse = await signup({
+        name,
+        email,
+        password,
+        role: "TENANT", // or "LANDLORD" based on your logic
+      });
+  
+      console.log("Signup successful:", signupResponse);
+  
+      showMessage({
+        message: "Account created successfully",
+        type: "success",
+        icon: "success",
+      });
+      // hard reset
+      setName("");
+      setEmail("");
+      setPassword("");
+      setConfirmPassword("");
+      setAgreed(false);
+    } catch (error) {
+      if (error instanceof ApiRequestError) {
+    if (error.status === 409) {
+      console.log("Conflict:", error.message);
 
-    showMessage({
-      message: "Account created successfully",
-      type: "success",
-      icon: "success",
-    });
-    // hard reset
-    setName("");
-    setEmail("");
-    setPassword("");
-    setConfirmPassword("");
-    setAgreed(false);
+    }
+
+    if (error.status === 400) {
+      console.log("Bad request:", error.message);
+      console.log("Field errors:", error.fields);
+    }
+
+  } else {
+    console.log("Unexpected error:", error);
+  }
+    }
   };
+
 
   return (
     <View style={styles.container}>
