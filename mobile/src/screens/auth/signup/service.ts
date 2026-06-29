@@ -49,7 +49,7 @@ export async function signup(payload: SignupRequest): Promise<SignupResult> {
   try {
     const response = await apiClient.post<SignupResponse>(
       "/api/auth/signup",
-      payload
+      payload,
     );
 
     return {
