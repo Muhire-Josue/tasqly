@@ -41,18 +41,23 @@ const SignUp: React.FC = () => {
       return;
     }
 
-    console.log("Form is valid. Proceeding with signup...");
-
     try {
-      const signupResponse = await signup({
+      // const signupResponse = await signup({
+      //   name,
+      //   email,
+      //   password,
+      //   role: "TENANT", // or "LANDLORD" based on your logic
+      // });
+
+      await signup({
         name,
         email,
         password,
         role: "TENANT", // or "LANDLORD" based on your logic
       });
-  
-      console.log("Signup successful:", signupResponse);
-  
+
+      // console.log("Signup successful:", signupResponse);
+
       showMessage({
         message: "Account created successfully",
         type: "success",
@@ -66,22 +71,46 @@ const SignUp: React.FC = () => {
       setAgreed(false);
     } catch (error) {
       if (error instanceof ApiRequestError) {
-    if (error.status === 409) {
-      console.log("Conflict:", error.message);
+        if (error.status === 409) {
+          showMessage({
+            message: error.message,
+            type: "danger",
+            icon: "danger",
+          });
+          return;
+        }
 
-    }
+        if (error.status === 400) {
+          const firstFieldError = error.fields?.[0];
 
-    if (error.status === 400) {
-      console.log("Bad request:", error.message);
-      console.log("Field errors:", error.fields);
-    }
+          showMessage({
+            message: firstFieldError
+              ? `${firstFieldError.field}: ${firstFieldError.message}`
+              : error.message,
+            type: "danger",
+            icon: "danger",
+          });
+          return;
+        }
 
-  } else {
-    console.log("Unexpected error:", error);
-  }
+        showMessage({
+          message: error.message,
+          type: "danger",
+          icon: "danger",
+        });
+        return;
+      }
+
+      showMessage({
+        message:
+          error instanceof Error
+            ? error.message
+            : "Something went wrong. Please try again.",
+        type: "danger",
+        icon: "danger",
+      });
     }
   };
-
 
   return (
     <View style={styles.container}>

@@ -7,6 +7,3 @@ export const apiClient = axios.create({
     Accept: "application/json",
   },
 });
-console.log("Axios baseURL:", apiClient.defaults.baseURL);
-console.log("Axios timeout:", apiClient.defaults.timeout);
-console.log("Axios headers:", apiClient.defaults.headers);
