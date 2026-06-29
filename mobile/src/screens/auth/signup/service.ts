@@ -71,7 +71,7 @@ export async function signup(payload: SignupRequest): Promise<SignupResult> {
           timestamp: new Date().toISOString(),
           status: 0,
           error: "Network Error",
-          message: "Unable to connect to the server",
+          message: "Service not available. Please check your internet connection.",
           path: "/api/auth/signup",
         },
       };
