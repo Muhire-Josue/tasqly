@@ -8,7 +8,7 @@ import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import GoogleLogo from "../../../assets/google.png";
 import { validateSignUpForm } from "../../../validators/signup";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
-import { ApiRequestError, signup } from "./service";
+import { signup } from "./service";
 
 const SignUp: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState(true);
@@ -41,75 +41,58 @@ const SignUp: React.FC = () => {
       return;
     }
 
-    try {
-      // const signupResponse = await signup({
-      //   name,
-      //   email,
-      //   password,
-      //   role: "TENANT", // or "LANDLORD" based on your logic
-      // });
+    const result = await signup({
+      name,
+      email,
+      password,
+      role: "TENANT",
+    });
 
-      await signup({
-        name,
-        email,
-        password,
-        role: "TENANT", // or "LANDLORD" based on your logic
-      });
-
-      // console.log("Signup successful:", signupResponse);
-
-      showMessage({
-        message: "Account created successfully",
-        type: "success",
-        icon: "success",
-      });
-      // hard reset
-      setName("");
-      setEmail("");
-      setPassword("");
-      setConfirmPassword("");
-      setAgreed(false);
-    } catch (error) {
-      if (error instanceof ApiRequestError) {
-        if (error.status === 409) {
-          showMessage({
-            message: error.message,
-            type: "danger",
-            icon: "danger",
-          });
-          return;
-        }
-
-        if (error.status === 400) {
-          const firstFieldError = error.fields?.[0];
-
-          showMessage({
-            message: firstFieldError
-              ? `${firstFieldError.field}: ${firstFieldError.message}`
-              : error.message,
-            type: "danger",
-            icon: "danger",
-          });
-          return;
-        }
+    if (!result.success) {
+      if (result.error.status === 400) {
+        const firstFieldError = result.error.fields?.[0];
 
         showMessage({
-          message: error.message,
+          message: firstFieldError
+            ? `${firstFieldError.field}: ${firstFieldError.message}`
+            : result.error.message,
           type: "danger",
           icon: "danger",
         });
+
+        return;
+      }
+
+      if (result.error.status === 409) {
+        showMessage({
+          message: result.error.message,
+          type: "danger",
+          icon: "danger",
+        });
+
         return;
       }
 
       showMessage({
-        message:
-          error instanceof Error
-            ? error.message
-            : "Something went wrong. Please try again.",
+        message: result.error.message,
         type: "danger",
         icon: "danger",
       });
+
+      return;
     }
+
+    showMessage({
+      message: "Account created successfully",
+      type: "success",
+      icon: "success",
+    });
+
+    setName("");
+    setEmail("");
+    setPassword("");
+    setConfirmPassword("");
+    setAgreed(false);
   };
 
   return (
