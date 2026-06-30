@@ -7,4 +7,4 @@ spring:
 tasqly:
   security:
     jwt:
-      secret: "local-secret"
+      secret: "local-secret-local-secret-local-secret-123456"

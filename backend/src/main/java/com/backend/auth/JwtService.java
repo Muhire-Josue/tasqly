@@ -7,6 +7,8 @@ import java.time.temporal.ChronoUnit;
 import java.util.UUID;
 
 import com.backend.auth.security.JwtProperties;
+import org.springframework.security.oauth2.jose.jws.MacAlgorithm;
+import org.springframework.security.oauth2.jwt.JwsHeader;
 import org.springframework.security.oauth2.jwt.JwtClaimsSet;
 
 import org.springframework.security.oauth2.jwt.JwtEncoder;
@@ -25,28 +27,23 @@ public class JwtService {
         this.jwtProperties = jwtProperties;
     }
 
-    public String generateAccessToken(UUID userId, String email) {
+    public String generateAccessToken(Long userId, String email) {
 
         Instant now = Instant.now();
-
         Instant expiresAt = now.plus(jwtProperties.expirationMinutes(), ChronoUnit.MINUTES);
 
         JwtClaimsSet claims = JwtClaimsSet.builder()
 
                 .issuer(jwtProperties.issuer())
-
                 .issuedAt(now)
-
                 .expiresAt(expiresAt)
-
                 .subject(userId.toString())
-
                 .claim("email", email)
-
                 .build();
 
-        return jwtEncoder.encode(JwtEncoderParameters.from(claims)).getTokenValue();
-
+        JwsHeader header = JwsHeader.with(MacAlgorithm.HS256).build();
+        return jwtEncoder
+                .encode(JwtEncoderParameters.from(header, claims))
+                .getTokenValue();
     }
-
 }

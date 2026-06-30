@@ -12,12 +12,7 @@ import static org.hamcrest.Matchers.is;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
-
-@SpringBootTest
-@AutoConfigureMockMvc
-@ActiveProfiles("test")
-@Import(TestcontainersConfiguration.class)
-class BackendApplicationTests {
+class BackendApplicationTests extends BaseIntegrationTest{
 
 	@Autowired
 	private MockMvc mockMvc;

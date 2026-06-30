@@ -8,6 +8,7 @@ import { PRIMARY_COLOR_BLUE } from "../../../theme/colors";
 import GoogleLogo from "../../../assets/google.png";
 import { validateSignUpForm } from "../../../validators/signup";
 import { useNavigateTo } from "../../../navigation/useNavigateTo";
+import { signup } from "./service";
 
 const SignUp: React.FC = () => {
   const [hiddenPassword, setHiddenPassword] = useState(true);
@@ -22,7 +23,7 @@ const SignUp: React.FC = () => {
 
   const navigateTo = useNavigateTo();
 
-  const handleSignUp = (): void => {
+  const handleSignUp = async (): Promise<void> => {
     const errors = validateSignUpForm(
       name,
       email,
@@ -40,17 +41,60 @@ const SignUp: React.FC = () => {
       return;
     }
 
+    const result = await signup({
+      name,
+      email,
+      password,
+      role: "TENANT",
+    });
+
+    if (!result.success) {
+      if (result.error.status === 400) {
+        const firstFieldError = result.error.fields?.[0];
+
+        showMessage({
+          message: firstFieldError
+            ? `${firstFieldError.field}: ${firstFieldError.message}`
+            : result.error.message,
+          type: "danger",
+          icon: "danger",
+        });
+
+        return;
+      }
+
+      if (result.error.status === 409) {
+        showMessage({
+          message: result.error.message,
+          type: "danger",
+          icon: "danger",
+        });
+
+        return;
+      }
+
+      showMessage({
+        message: result.error.message,
+        type: "danger",
+        icon: "danger",
+      });
+
+      return;
+    }
+
     showMessage({
       message: "Account created successfully",
       type: "success",
       icon: "success",
     });
-    // hard reset
+
     setName("");
     setEmail("");
     setPassword("");
     setConfirmPassword("");
     setAgreed(false);
+
+    navigateTo("task-list");
   };
 
   return (
