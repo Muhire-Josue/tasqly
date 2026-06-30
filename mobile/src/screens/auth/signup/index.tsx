@@ -93,6 +93,8 @@ const SignUp: React.FC = () => {
     setPassword("");
     setConfirmPassword("");
     setAgreed(false);
+
+    navigateTo("task-list");
   };
 
   return (
